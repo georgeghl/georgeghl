@@ -603,6 +603,39 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#code-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      code-server
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="code-server">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#coderconcode-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      codercon/code-server
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#linuxservercode-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      linuxserver/code-server
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#mysql8" class="md-nav__link">
     <span class="md-ellipsis">
       mysql8部署
@@ -1693,6 +1726,39 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#code-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      code-server
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="code-server">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#coderconcode-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      codercon/code-server
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#linuxservercode-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      linuxserver/code-server
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#mysql8" class="md-nav__link">
     <span class="md-ellipsis">
       mysql8部署
@@ -2601,6 +2667,30 @@ services:
     labels:  
       createdBy: &quot;Apps&quot;
 #然后docker-compose up -d运行
+</code></pre>
+<h4 id="code-server">code-server</h4>
+<h5 id="coderconcode-server">codercon/code-server</h5>
+<pre><code class="language-bash">#sudo docker pull codercom/code-server:4.89.1-39
+sudo docker pull codercom/code-server:latest
+sudo mkdir -p /home/ubuntu/docker/code-server/project/
+sudo mkdir -p /home/ubuntu/docker/code-server/.config/
+
+#sudo docker run -itd --name code-server-default -p 8240:8080 -v &quot;/home/ubuntu/docker/code-server/.config:/home/coder/.config&quot; -v &quot;/home/ubuntu/docker/code-server/project:/home/coder/project&quot; -u &quot;$(id -u):$(id -g)&quot; -e &quot;DOCKER_USER=$USER&quot; codercom/code-server:4.89.1-39
+
+sudo docker run -itd --name code-server-default -p 8240:8080 -v &quot;/home/ubuntu/docker/code-server/.config:/home/coder/.config&quot; -v &quot;/home/ubuntu/docker/code-server/project:/home/coder/project&quot; -u &quot;$(id -u):$(id -g)&quot; -e &quot;DOCKER_USER=$USER&quot; codercom/code-server:latest
+
+#sudo docker run -itd --name code-server-default -p 8240:8080 -v &quot;/home/ubuntu/docker/code-server/.config:/home/coder/.config&quot; -v &quot;/home/ubuntu/docker/code-server/project:/home/coder/project&quot; -u &quot;$(id -u):$(id -g)&quot; -e &quot;DOCKER_USER=$USER&quot; -e PASSWORD=123456 codercom/code-server:latest
+</code></pre>
+<p>密码在<code>.config/code-server/config.yaml</code>中。</p>
+<h5 id="linuxservercode-server">linuxserver/code-server</h5>
+<pre><code class="language-bash">#docker pull linuxserver/code-server:4.89.1
+docker pull linuxserver/code-server:latest
+sudo mkdir -p /home/ubuntu/docker/code-server/project/
+sudo mkdir -p /home/ubuntu/docker/code-server/config/
+
+#docker run -d --name=code-server -e PUID=1000 -e PGID=1000 -e TZ=Etc/UTC -e PASSWORD=password -e SUDO_PASSWORD=password -e DEFAULT_WORKSPACE=/config/workspace -p 8240:8443 -v /home/ubuntu/docker/code-server/config:/config --restart unless-stopped linuxserver/code-server:4.89.1
+
+docker run -d --name=code-server -e PUID=1000 -e PGID=1000 -e TZ=Etc/UTC -e PASSWORD=password -e SUDO_PASSWORD=password -e DEFAULT_WORKSPACE=/config/workspace -p 8240:8443 -v /home/ubuntu/docker/code-server/config:/config --restart unless-stopped linuxserver/code-server:latest
 </code></pre>
 <h4 id="mysql8">mysql8部署</h4>
 <h5 id="_2">部署命令</h5>
