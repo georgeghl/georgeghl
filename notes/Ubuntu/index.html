@@ -413,6 +413,57 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#ubuntu_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ubuntu代理服务器
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ubuntu代理服务器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#clash-for-windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      Clash for Windows
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clash-for-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      √Clash for Linux
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker-clash" class="md-nav__link">
+    <span class="md-ellipsis">
+      docker-clash
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wsl2-clash-for-windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      在 WSL2 中使用 Clash for Windows 代理连接
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#ubuntuntfs" class="md-nav__link">
     <span class="md-ellipsis">
       Ubuntu自动挂载磁盘分区(NTFS)
@@ -455,7 +506,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#ubuntu_1" class="md-nav__link">
+  <a href="#ubuntu_2" class="md-nav__link">
     <span class="md-ellipsis">
       ubuntu 如何放开端口
     </span>
@@ -524,7 +575,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#ubuntu_2" class="md-nav__link">
+  <a href="#ubuntu_3" class="md-nav__link">
     <span class="md-ellipsis">
       Ubuntu关闭盖子/按电源键/按休眠键功能，关闭盖子不休眠
     </span>
@@ -1286,6 +1337,57 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#ubuntu_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ubuntu代理服务器
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ubuntu代理服务器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#clash-for-windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      Clash for Windows
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clash-for-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      √Clash for Linux
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker-clash" class="md-nav__link">
+    <span class="md-ellipsis">
+      docker-clash
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wsl2-clash-for-windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      在 WSL2 中使用 Clash for Windows 代理连接
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#ubuntuntfs" class="md-nav__link">
     <span class="md-ellipsis">
       Ubuntu自动挂载磁盘分区(NTFS)
@@ -1328,7 +1430,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#ubuntu_1" class="md-nav__link">
+  <a href="#ubuntu_2" class="md-nav__link">
     <span class="md-ellipsis">
       ubuntu 如何放开端口
     </span>
@@ -1397,7 +1499,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#ubuntu_2" class="md-nav__link">
+  <a href="#ubuntu_3" class="md-nav__link">
     <span class="md-ellipsis">
       Ubuntu关闭盖子/按电源键/按休眠键功能，关闭盖子不休眠
     </span>
@@ -1555,7 +1657,7 @@
 sudo gedit /etc/default/grub
 </code></pre>
 <p>出现以下界面</p>
-<p><img alt="在这里插入图片描述" src="../img/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTkwODIyNQ==,size_16,color_FFFFFF,t_70" /></p>
+<p><img alt="在这里插入图片描述" src=".\img\watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTkwODIyNQ==,size_16,color_FFFFFF,t_70" /></p>
 <p>3.假设我的Windows boot处于步骤1中第三行（项），所以对应的GRUB_DEFAULT应改为2。（以0开始算）
 GRUB_TIMEOUT为在页面停留时间，根据自己的需要更改。</p>
 <p>4.最后在终端执行：</p>
@@ -1727,6 +1829,113 @@ set prefix=(hd0,gpt8)/boot/grub
 insmod normal
 normal
 </code></pre>
+<h4 id="ubuntu_1">Ubuntu代理服务器</h4>
+<h5 id="clash-for-windows">Clash for Windows</h5>
+<p>直接下载解压即可。记得sudo chmod +x cfw。</p>
+<h5 id="clash-for-linux">√Clash for Linux</h5>
+<pre><code class="language-bash">wget https://git.opclash.com/kehuduan/clash/clash-linux-amd64-v1.18.0.gz
+sudo gzip -d clash-linux-amd64-v1.18.0.gz
+sudo chmod +x clash-linux-amd64-v1.18.0
+sudo mv clash-linux-amd64-v1.18.0 /usr/bin/clash
+
+clash -v
+</code></pre>
+<p>需要注意：</p>
+<p>1：clash 默认会在 ~/.config/clash 目录下生成两个配置文件 config.yaml 和 Country.mmdb。
+2：如果提示 Country.mmdb invalid (即Country.mmdb配置无效)，可下载示例文件替换：<a href="https://cdn.hftech.ltd/download/clash/Country.mmdb">Country.mmdb示例文件下载</a>。
+3：在其他平台获取可用的 config.yaml 配置文件后，可替换原来 ~/.config/clash 目录下的配置文件，也可以在运行clash时，使用 -f 指定配置文件，示例：<em>clash -f config.yaml</em> (运行clash并指定配置文件为./config.yaml)
+4: clash成功运行后，使用浏览器访问 <a href="http://127.0.0.1:9090/">http://127.0.0.1:9090</a> 会出现 “hello clash”, 7890: http代理端口, 7891: socket代理端口。</p>
+<ul>
+<li>将clash命令设置为系统命令</li>
+</ul>
+<pre><code class="language-bash"># 创建clash.service文件，并编辑该文件
+sudo vi /etc/systemd/system/clash.service
+# 按i进入编辑模式，粘贴以下内容
+[Unit]
+Description=clash
+[Service]
+Type=simple
+ExecStart=/usr/bin/clash -f config.yaml
+# 按ESC 然后：wq保存退出。
+</code></pre>
+<p>在/目录下的.config/clash/下，创建config.yml和Country.mmdb。可以直接复制以上下载的mmdb。yml配置文件内容从windows下的文件中直接复制。</p>
+<pre><code class="language-bash"># 依次执行如下命令(reload: 刷新守护进程, enable: 开启自启动, start: 启动, status: 查看状态)
+sudo systemctl daemon-reload
+sudo systemctl enable clash
+sudo systemctl start clash
+sudo systemctl status clash
+# 访问localhost:9090查看clash是否正确运行。
+</code></pre>
+<ul>
+<li>设置clash界面</li>
+</ul>
+<p>下载yacd，解压到httpd-default。</p>
+<p>配置完毕后，即可使用。</p>
+<p>浏览器访问：http://127.0.0.1:8234/yacd，即可看到界面。</p>
+<p>（或者直接使用网络上的：https://clash.razord.top/#/proxies。）</p>
+<p>5、为确保万无一失，打开 Ubuntu 的“设置”管理，在“网络”内将“网络代理”的“自动”改为“手动”，根据以下内容进行填写 HTTP、HTTPS 和 Socks 地址</p>
+<h5 id="docker-clash">docker-clash</h5>
+<ul>
+<li>
+<p>下载 <a href="https://hub.docker.com/r/dreamacro/clash">docker-clash</a> 镜像</p>
+</li>
+<li>
+<p><code>bash
+  sudo docker pull dreamacro/clash
+  # 启动 docker-clash (-p: 设置端口映射; -v: 设置目录/文件映射)
+  sudo docker run -d --name clash -p 7890:7890 -p 7891:7891 -p 9090:9090 -v ~/.config/clash/config.yaml:/root/.config/clash/config.yaml -v ~/.config/clash/clash-ui:/opt/clash/ui dreamacro/clash</code></p>
+</li>
+</ul>
+<h5 id="wsl2-clash-for-windows">在 WSL2 中使用 Clash for Windows 代理连接</h5>
+<p>https://eastmonster.github.io/2022/10/05/clash-config-in-wsl/#</p>
+<p>因为网络问题，在 WSL2 中配环境时通常会非常缓慢甚至失败。在整合了各方资料及个人实践后，我总结了在 WSL2 中通过 Clash for Windows 连接代理的方法，供大家参考。</p>
+<p>1.在 Clash 客户端内的操作</p>
+<p>打开客户端的允许局域网连接 (Allow LAN) 开关，如图 1 所示。
+记录下客户端内的端口 (Port)，如这里是 <code>16514</code>. 一般默认端口为 <code>7890</code>.
+<a href="https://s2.loli.net/2024/01/22/sla3HO9UVu4wozn.png"><img alt="图 1" src="https://s2.loli.net/2024/01/22/sla3HO9UVu4wozn.png" /></a></p>
+<p>2.配置</p>
+<p>方法一</p>
+<p>这个方法需要 Windows 10/11 22H2 和 WSL 2.0.5 及以上版本，如果你不满足版本要求，请参考<a href="https://eastmonster.github.io/2022/10/05/clash-config-in-wsl/#方法二">方法二</a>。
+你可以使用 <code>winver</code> 和 <code>wsl -v</code> 查看你的 Windows 和 WSL 版本。</p>
+<p>如果你使用这个方法，你需要确保 Clash 客户端中设置的系统代理类型为 HTTP 而不是 PAC，否则无法代理 HTTPS 请求:
+<a href="https://s2.loli.net/2024/01/24/Y9DhxRw47tzlWIH.png"><img alt="img" src="https://s2.loli.net/2024/01/24/Y9DhxRw47tzlWIH.png" /></a>
+如果你确实需要使用 PAC 模式，请参考方法二，在 shell 的配置文件中添加:</p>
+<pre><code class="language-bash">export https_proxy=$http_proxy
+</code></pre>
+<p>在 WSL <a href="https://github.com/microsoft/WSL/releases/tag/2.0.5">2.0.5 版本</a>后，一些特性得以稳定，这里要用到的是<a href="https://learn.microsoft.com/zh-cn/windows/wsl/networking#mirrored-mode-networking">镜像模式网络</a>。</p>
+<p>在 <code>C:\Users\&lt;UserName&gt;\.wslconfig</code> 文件中 (如果不存在就手动创建一个) 加入以下内容:</p>
+<pre><code class="language-config">[wsl2]
+networkingMode=mirrored
+</code></pre>
+<p>不过需要注意，shell 的配置文件中<strong>不能</strong>再 <code>export http_proxy=...</code>.</p>
+<p>方法二</p>
+<p>WSL <a href="https://github.com/microsoft/WSL/releases/tag/2.2.1">2.2.1 版本</a>默认启用了 DNS 隧道, 会导致<strong>该方法</strong>失效。如果你正在使用<strong>该版本</strong>可以参照<a href="https://learn.microsoft.com/zh-cn/windows/wsl/wsl-config#wslconfig">官方文档</a>配置，在 <code>C:\Users\&lt;UserName&gt;\.wslconfig</code> 文件中 (如果不存在就手动创建一个) 加入以下内容以关闭 DNS 隧道:</p>
+<pre><code class="language-config">[wsl2]
+dnsTunneling=false
+</code></pre>
+<p>你可以执行 <code>wsl -v</code> 查看你的 WSL 版本。</p>
+<p>这里默认你使用 bash, 如果你使用其他的 shell, 我相信你知道该改哪里。</p>
+<p>编辑 <code>.bashrc</code>，在文件末尾根据第 1 步记录的数据，加入三行内容：</p>
+<pre><code class="language-bash">host_ip=$(cat /etc/resolv.conf |grep &quot;nameserver&quot; |cut -f 2 -d &quot; &quot;)
+export http_proxy=&quot;http://$host_ip:[端口]&quot;
+export https_proxy=&quot;http://$host_ip:[端口]&quot;
+</code></pre>
+<p>如图 2 所示，修改完后保存即可。
+<a href="https://s2.loli.net/2022/10/05/qWgwrFU7OMupiH2.png"><img alt="图 2" src="https://s2.loli.net/2022/10/05/qWgwrFU7OMupiH2.png" /></a></p>
+<p>输入 <code>source ~/.bashrc</code> 使文件修改生效，可以通过输入 <code>echo $http_proxy</code> 验证修改是否成功。</p>
+<p>3.使 root 用户保留先前设置的环境变量</p>
+<p>在使用 <code>sudo</code> 执行命令时，之前设置的环境变量并不会生效，需要进一步设置。
+输入 <code>sudo visudo</code>, 加入以下内容并保存，如图 3-1 所示。</p>
+<pre><code class="language-bash">Defaults env_keep=&quot;http_proxy https_proxy&quot;
+</code></pre>
+<p><a href="https://s2.loli.net/2022/10/05/z4Q9PwhFmgRLG8d.png"><img alt="图 3-1" src="https://s2.loli.net/2022/10/05/z4Q9PwhFmgRLG8d.png" /></a></p>
+<p><strong>如果你使用 Ubuntu 22.04</strong>, 则你看到的内容应与图 3-1 不同。如下图所示，取消相应行的注释 (删除行首的 <code>#</code>) 即可.
+<a href="https://s2.loli.net/2023/10/13/Dp628PahyF1jOVl.png"><img alt="图 3-2" src="https://s2.loli.net/2023/10/13/Dp628PahyF1jOVl.png" /></a></p>
+<ol>
+<li>测试</li>
+</ol>
+<p>输入 <code>wget www.google.com</code>, 可以发现连接成功，至此大功告成，如图 4 所示。
+<a href="https://s2.loli.net/2022/10/05/UIQ8LhuROaXq6S2.png"><img alt="图 4" src="https://s2.loli.net/2022/10/05/UIQ8LhuROaXq6S2.png" /></a></p>
 <h4 id="ubuntuntfs">Ubuntu自动挂载磁盘分区(NTFS)</h4>
 <h5 id="_1">方式一</h5>
 <p>安装ubuntu后才发现分配给ubuntu系统的磁盘容量根本不够，打算将windows的磁盘空间挤出来给ubuntu用，或者后续添加硬盘，挂载到ubuntu.</p>
@@ -1879,7 +2088,7 @@ sudo vi ./blacklist.conf
 
 sudo reboot
 </code></pre>
-<h4 id="ubuntu_1">ubuntu 如何放开端口</h4>
+<h4 id="ubuntu_2">ubuntu 如何放开端口</h4>
 <p>在 Ubuntu 上放开端口，可以通过以下步骤进行操作：</p>
 <ol>
 <li>使用 root 用户或具有管理员权限的用户登录到 Ubuntu 系统。</li>
@@ -2079,7 +2288,7 @@ Failed to connect to bus: Host is down</p>
 <p>也可以使用 service 命令</p>
 <pre><code class="language-bash">sudo service docker status
 </code></pre>
-<h4 id="ubuntu_2">Ubuntu关闭盖子/按电源键/按休眠键功能，关闭盖子不休眠</h4>
+<h4 id="ubuntu_3">Ubuntu关闭盖子/按电源键/按休眠键功能，关闭盖子不休眠</h4>
 <p><code>HandlePowerKey</code>: 按下电源键后的行为，默认power off</p>
 <p><code>HandleSleepKey</code>: 按下挂起键后的行为，默认suspend</p>
 <p><code>HandleHibernateKey</code>: 按下休眠键后的行为，默认hibernate</p>

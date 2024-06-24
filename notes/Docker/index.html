@@ -558,6 +558,24 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#docker_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      docker走代理
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wsldocker" class="md-nav__link">
+    <span class="md-ellipsis">
+      WSL设置docker代理
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#portainerdocker" class="md-nav__link">
     <span class="md-ellipsis">
       Portainer(docker面板)
@@ -1681,6 +1699,24 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#docker_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      docker走代理
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wsldocker" class="md-nav__link">
+    <span class="md-ellipsis">
+      WSL设置docker代理
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#portainerdocker" class="md-nav__link">
     <span class="md-ellipsis">
       Portainer(docker面板)
@@ -2593,6 +2629,37 @@ sudo yum install docker-ce
 <p>直接使用apt-get install</p>
 <pre><code class="language-bash">sudo apt-get install docker-compose
 </code></pre>
+<h4 id="docker_1">docker走代理</h4>
+<pre><code class="language-bash">sudo cd /etc/systemd/system/
+#创建配置文件
+sudo mkdir docker.service.d
+cd docker.service.d
+sudo vim proxy.conf
+
+#切换到插入模式，插入以下内容
+[Service]
+Environment=&quot;HTTP_PROXY=127.0.0.1:7890&quot;
+Environment=&quot;HTTPS_PROXY=127.0.0.1:7890&quot;
+#保存退出
+
+#重启docker
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+
+#最后我们仍然是验证一下是否修改成功，运行
+sudo docker info
+#在长串info信息中如果出现类似下文的内容：
+# HTTP Proxy: 代理服务器ip:port
+# HTTPS Proxy: 代理服务器ip:port
+</code></pre>
+<h4 id="wsldocker">WSL设置docker代理</h4>
+<p>当启动docker服务时，后调用<code>/etc/init.d/docker</code>脚本，而此脚本会执行<code>/etc/default/docker</code>脚本，因此可在后者设置代理的环境变量，由此docker拉取镜像时便会使用代理。</p>
+<p>修改<code>/etc/default/docker</code>文件，加入以下内容:</p>
+<pre><code class="language-bash">export http_proxy=&quot;127.0.0.1:7890&quot;
+export https_proxy=&quot;127.0.0.1:7890&quot;
+# 注意：https代理链接为http，Windows IP即为宿主机IP
+</code></pre>
+<p>重启docker：sudo service docker restart</p>
 <h4 id="portainerdocker">Portainer(docker面板)</h4>
 <pre><code class="language-bash">#拉取镜像
 sudo docker pull portainer/portainer-ce:latest
@@ -4319,10 +4386,10 @@ services:
 </code></pre>
 <p>用浏览器查看hdfs，如下图，可见有三个DataNode
 地址是：http://centos机器的ip:50070，e.g.: 127.0.0.1:50070</p>
-<p><img alt="2" src="../../img/2.png" /></p>
+<p><img alt="2" src=".\img\2.png" /></p>
 <p>浏览器查看spark，如下图，可见有六个worker
 地址是：http://centos机器的ip:8080，e.g.: 127.0.0.1:8080</p>
-<p><img alt="3" src="../../img/3.png" /></p>
+<p><img alt="3" src=".\img\3.png" /></p>
 <p><strong>在CentOS机器的命令行输入以下命令，即可创建一个spark_shell：</strong></p>
 <pre><code class="language-bash">sudo docker exec -it master spark-shell --executor-memory 512M --total-executor-cores 2
 </code></pre>
