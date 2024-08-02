@@ -12,7 +12,7 @@
         <link rel="prev" href="../Maven/">
       
       
-        <link rel="next" href="../Acrobat/">
+        <link rel="next" href="../Java/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -62,7 +62,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#requests-cannot-connect-to-proxyfilenotfounderror2-no-such-file-or-directory" class="md-skip">
+        <a href="#pythonanaconda" class="md-skip">
           Skip to content
         </a>
       
@@ -558,6 +558,39 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#pythonanaconda" class="md-nav__link">
+    <span class="md-ellipsis">
+      安装（python）注：更推荐直接安装使用anaconda
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#anaconda" class="md-nav__link">
+    <span class="md-ellipsis">
+      安装（anaconda）
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="安装（anaconda）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      对于Windows用户：
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#requests-cannot-connect-to-proxyfilenotfounderror2-no-such-file-or-directory" class="md-nav__link">
     <span class="md-ellipsis">
       requests 使用代理报错 Cannot connect to proxy.‘,FileNotFoundError(2, ‘No such file or directory问题解决
@@ -597,6 +630,27 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Java/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Java
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -895,6 +949,39 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#pythonanaconda" class="md-nav__link">
+    <span class="md-ellipsis">
+      安装（python）注：更推荐直接安装使用anaconda
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#anaconda" class="md-nav__link">
+    <span class="md-ellipsis">
+      安装（anaconda）
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="安装（anaconda）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      对于Windows用户：
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#requests-cannot-connect-to-proxyfilenotfounderror2-no-such-file-or-directory" class="md-nav__link">
     <span class="md-ellipsis">
       requests 使用代理报错 Cannot connect to proxy.‘,FileNotFoundError(2, ‘No such file or directory问题解决
@@ -947,6 +1034,25 @@
 
   <h1>Python</h1>
 
+<h4 id="pythonanaconda">安装（python）<strong>注：更推荐直接安装使用anaconda</strong></h4>
+<p>请到官网下载Python安装包：https://www.python.org/downloads/windows/</p>
+<p>下载完毕后，右键-&gt;以管理员身份运行-&gt;是。</p>
+<p><img alt="1722589272240" src="../../img/1722589272240-1722589281866-2.png" /></p>
+<p><strong>如果你不想手动配置环境变量，请勾选上图中的“添加python.exe到环境变量”。</strong></p>
+<p>其他步骤没啥技术含量。</p>
+<h4 id="anaconda">安装（anaconda）</h4>
+<p>完整conda：</p>
+<p>建议使用清华镜像站：https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/</p>
+<p><strong>请下载最新安装包！</strong></p>
+<p>miniconda：</p>
+<p>建议使用清华镜像站：https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/</p>
+<p><strong>请下载最新安装包！</strong></p>
+<h5 id="windows">对于Windows用户：</h5>
+<p>安装时直接右键-&gt;以管理员身份运行-&gt;是。</p>
+<p><img alt="1722589401701" src="../../img/1722589401701.png" /></p>
+<p><strong>如果你不想手动配置环境变量，请勾选上图中的“添加python.exe到环境变量”。</strong></p>
+<p>其他步骤没啥技术含量。</p>
+<p>如果安装完毕使用出现错误，请参照下文“conda在windows Terminal中提示报错无法加载文件C:\XXX\WindowsPowerShell\profile.ps1”。笔者曾在2023年版本的anaconda遇到过这个问题。</p>
 <h4 id="requests-cannot-connect-to-proxyfilenotfounderror2-no-such-file-or-directory">requests 使用代理报错 Cannot connect to proxy.‘,FileNotFoundError(2, ‘No such file or directory问题解决</h4>
 <p>如题，使用代理报错,降级urllib3
 不要使用1.26.0版本，安装低版本。</p>
