@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Your Name">
+    <title>目录索引</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+        }
+        html, body {
+            width: 100%;
+            height: 100%;
+            color: #333;
+            background-color: #f0f4f8;
+            overflow-x: hidden;
+            font-size: 16px;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            margin: 40px 0;
+            justify-content: center;
+        }
+        h1 {
+            font-size: 2.5rem;
+            color: #007bff;
+            font-weight: bold;
+            margin: 0;
+        }
+        ul {
+            list-style-type: none;
+            padding: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        li {
+            line-height: 1.6;
+            font-size: 1.1rem;
+            padding: 10px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        li:last-child {
+            border-bottom: none;
+        }
+        a {
+            display: block;
+            padding: 10px;
+            border-radius: 8px;
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+            color: #007bff;
+            text-decoration: none;
+        }
+        a.file {
+            background: #fafafa;
+        }
+        a.file:hover {
+            background: #e3f2fd;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+        a.folder {
+            background: #e0f7fa;
+            font-weight: bold;
+        }
+        a.folder:hover {
+            background: #b2ebf2;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .parent-dir {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .parent-dir a {
+            font-size: 1.2rem;
+            color: #007bff;
+            text-decoration: none;
+            padding: 10px;
+            border-radius: 8px;
+            background: #e9ecef;
+            display: inline-block;
+            transition: background-color 0.3s;
+        }
+
+        .parent-dir a:hover {
+            background: #d0d0d0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>当前目录: notes</h1>
+    </div>
+            <div class="parent-dir">
+            <a href="/">返回首页</a>
+        </div>
+    <ul>
+        <li><a class="folder" href="Acrobat/">Acrobat</a></li>
+        <li><a class="folder" href="Android/">Android</a></li>
+        <li><a class="folder" href="Chrome/">Chrome</a></li>
+        <li><a class="folder" href="CQU_openwrt教程/">CQU_openwrt教程</a></li>
+        <li><a class="folder" href="Docker/">Docker</a></li>
+        <li><a class="folder" href="ffmpeg/">ffmpeg</a></li>
+        <li><a class="folder" href="Git/">Git</a></li>
+        <li><a class="file" href="index.html">index.html</a></li>
+        <li><a class="folder" href="Java/">Java</a></li>
+        <li><a class="folder" href="k8s/">k8s</a></li>
+        <li><a class="folder" href="Maintenance/">Maintenance</a></li>
+        <li><a class="folder" href="Maven/">Maven</a></li>
+        <li><a class="file" href="mirrors.html">mirrors.html</a></li>
+        <li><a class="file" href="mirrors_0.html">mirrors_0.html</a></li>
+        <li><a class="file" href="msdn.json">msdn.json</a></li>
+        <li><a class="folder" href="OfficeWPS/">OfficeWPS</a></li>
+        <li><a class="folder" href="Openwrt/">Openwrt</a></li>
+        <li><a class="folder" href="OtherApplication/">OtherApplication</a></li>
+        <li><a class="folder" href="Printer/">Printer</a></li>
+        <li><a class="folder" href="Python/">Python</a></li>
+        <li><a class="folder" href="Ubuntu/">Ubuntu</a></li>
+        <li><a class="folder" href="VR/">VR</a></li>
+        <li><a class="folder" href="Windows/">Windows</a></li>
+    </ul>
+</body>
+</html>

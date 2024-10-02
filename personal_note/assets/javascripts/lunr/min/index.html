@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Your Name">
+    <title>目录索引</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+        }
+        html, body {
+            width: 100%;
+            height: 100%;
+            color: #333;
+            background-color: #f0f4f8;
+            overflow-x: hidden;
+            font-size: 16px;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            margin: 40px 0;
+            justify-content: center;
+        }
+        h1 {
+            font-size: 2.5rem;
+            color: #007bff;
+            font-weight: bold;
+            margin: 0;
+        }
+        ul {
+            list-style-type: none;
+            padding: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        li {
+            line-height: 1.6;
+            font-size: 1.1rem;
+            padding: 10px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        li:last-child {
+            border-bottom: none;
+        }
+        a {
+            display: block;
+            padding: 10px;
+            border-radius: 8px;
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+            color: #007bff;
+            text-decoration: none;
+        }
+        a.file {
+            background: #fafafa;
+        }
+        a.file:hover {
+            background: #e3f2fd;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+        a.folder {
+            background: #e0f7fa;
+            font-weight: bold;
+        }
+        a.folder:hover {
+            background: #b2ebf2;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .parent-dir {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .parent-dir a {
+            font-size: 1.2rem;
+            color: #007bff;
+            text-decoration: none;
+            padding: 10px;
+            border-radius: 8px;
+            background: #e9ecef;
+            display: inline-block;
+            transition: background-color 0.3s;
+        }
+
+        .parent-dir a:hover {
+            background: #d0d0d0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>当前目录: min</h1>
+    </div>
+            <div class="parent-dir">
+            <a href="/">返回首页</a>
+        </div>
+    <ul>
+        <li><a class="file" href="index.html">index.html</a></li>
+        <li><a class="file" href="lunr.ar.min.js">lunr.ar.min.js</a></li>
+        <li><a class="file" href="lunr.da.min.js">lunr.da.min.js</a></li>
+        <li><a class="file" href="lunr.de.min.js">lunr.de.min.js</a></li>
+        <li><a class="file" href="lunr.du.min.js">lunr.du.min.js</a></li>
+        <li><a class="file" href="lunr.el.min.js">lunr.el.min.js</a></li>
+        <li><a class="file" href="lunr.es.min.js">lunr.es.min.js</a></li>
+        <li><a class="file" href="lunr.fi.min.js">lunr.fi.min.js</a></li>
+        <li><a class="file" href="lunr.fr.min.js">lunr.fr.min.js</a></li>
+        <li><a class="file" href="lunr.he.min.js">lunr.he.min.js</a></li>
+        <li><a class="file" href="lunr.hi.min.js">lunr.hi.min.js</a></li>
+        <li><a class="file" href="lunr.hu.min.js">lunr.hu.min.js</a></li>
+        <li><a class="file" href="lunr.hy.min.js">lunr.hy.min.js</a></li>
+        <li><a class="file" href="lunr.it.min.js">lunr.it.min.js</a></li>
+        <li><a class="file" href="lunr.ja.min.js">lunr.ja.min.js</a></li>
+        <li><a class="file" href="lunr.jp.min.js">lunr.jp.min.js</a></li>
+        <li><a class="file" href="lunr.kn.min.js">lunr.kn.min.js</a></li>
+        <li><a class="file" href="lunr.ko.min.js">lunr.ko.min.js</a></li>
+        <li><a class="file" href="lunr.multi.min.js">lunr.multi.min.js</a></li>
+        <li><a class="file" href="lunr.nl.min.js">lunr.nl.min.js</a></li>
+        <li><a class="file" href="lunr.no.min.js">lunr.no.min.js</a></li>
+        <li><a class="file" href="lunr.pt.min.js">lunr.pt.min.js</a></li>
+        <li><a class="file" href="lunr.ro.min.js">lunr.ro.min.js</a></li>
+        <li><a class="file" href="lunr.ru.min.js">lunr.ru.min.js</a></li>
+        <li><a class="file" href="lunr.sa.min.js">lunr.sa.min.js</a></li>
+        <li><a class="file" href="lunr.stemmer.support.min.js">lunr.stemmer.support.min.js</a></li>
+        <li><a class="file" href="lunr.sv.min.js">lunr.sv.min.js</a></li>
+        <li><a class="file" href="lunr.ta.min.js">lunr.ta.min.js</a></li>
+        <li><a class="file" href="lunr.te.min.js">lunr.te.min.js</a></li>
+        <li><a class="file" href="lunr.th.min.js">lunr.th.min.js</a></li>
+        <li><a class="file" href="lunr.tr.min.js">lunr.tr.min.js</a></li>
+        <li><a class="file" href="lunr.vi.min.js">lunr.vi.min.js</a></li>
+        <li><a class="file" href="lunr.zh.min.js">lunr.zh.min.js</a></li>
+    </ul>
+</body>
+</html>
