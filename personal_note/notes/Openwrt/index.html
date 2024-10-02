@@ -1,111 +1,1343 @@
+
 <!doctype html>
-<html lang="zh">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="Your Name">
-    <title>目录索引</title>
-    <link rel="shortcut icon" href="favicon.ico">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            border: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
-        }
-        html, body {
-            width: 100%;
-            height: 100%;
-            color: #333;
-            background-color: #f0f4f8;
-            overflow-x: hidden;
-            font-size: 16px;
-        }
-        .header {
-            display: flex;
-            align-items: center;
-            margin: 40px 0;
-            justify-content: center;
-        }
-        h1 {
-            font-size: 2.5rem;
-            color: #007bff;
-            font-weight: bold;
-            margin: 0;
-        }
-        ul {
-            list-style-type: none;
-            padding: 20px;
-            max-width: 900px;
-            margin: 0 auto;
-            background: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        li {
-            line-height: 1.6;
-            font-size: 1.1rem;
-            padding: 10px 0;
-            border-bottom: 1px solid #e0e0e0;
-        }
-        li:last-child {
-            border-bottom: none;
-        }
-        a {
-            display: block;
-            padding: 10px;
-            border-radius: 8px;
-            transition: background 0.3s ease, box-shadow 0.3s ease;
-            color: #007bff;
-            text-decoration: none;
-        }
-        a.file {
-            background: #fafafa;
-        }
-        a.file:hover {
-            background: #e3f2fd;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-        }
-        a.folder {
-            background: #e0f7fa;
-            font-weight: bold;
-        }
-        a.folder:hover {
-            background: #b2ebf2;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-        }
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../Windows/">
+      
+      
+        <link rel="next" href="../CQU_openwrt%E6%95%99%E7%A8%8B/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.18">
+    
+    
+      
+        <title>Openwrt - 个人笔记教程</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.66ac8b77.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
         
-        .parent-dir {
-            text-align: center;
-            margin-bottom: 20px;
-        }
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
 
-        .parent-dir a {
-            font-size: 1.2rem;
-            color: #007bff;
-            text-decoration: none;
-            padding: 10px;
-            border-radius: 8px;
-            background: #e9ecef;
-            display: inline-block;
-            transition: background-color 0.3s;
-        }
-
-        .parent-dir a:hover {
-            background: #d0d0d0;
-        }
-    </style>
-</head>
-<body>
-    <div class="header">
-        <h1>当前目录: Openwrt</h1>
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#mi-router-3g" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
-            <div class="parent-dir">
-            <a href="/">返回首页</a>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="个人笔记教程" class="md-header__button md-logo" aria-label="个人笔记教程" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            个人笔记教程
+          </span>
         </div>
-    <ul>
-        <li><a class="file" href="index.html">index.html</a></li>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Openwrt
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="个人笔记教程" class="md-nav__button md-logo" aria-label="个人笔记教程" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    个人笔记教程
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    资源查找
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            资源查找
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mirrors.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    点击进入
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    操作系统
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            操作系统
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Android/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Andorid
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Ubuntu/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ubuntu
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Windows/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Windows
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Openwrt
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Openwrt
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#mi-router-3g" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mi Router 3G 刷固件
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      修改主题
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wanlanmac" class="md-nav__link">
+    <span class="md-ellipsis">
+      修改wan和lan的mac
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cups" class="md-nav__link">
+    <span class="md-ellipsis">
+      CUPS
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ipk" class="md-nav__link">
+    <span class="md-ellipsis">
+      安装ipk包
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
-</body>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CQU_openwrt%E6%95%99%E7%A8%8B/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    CQU_openwrt教程
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    软件
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            软件
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    开发工具/容器
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            开发工具/容器
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Docker/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Docker
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../k8s/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    k8s
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Git/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Git
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Maven/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Maven
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Python/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Python
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Java/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Java
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    应用软件
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            应用软件
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Acrobat/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Acrobat
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chrome/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chrome
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ffmpeg/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ffmpeg
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../OfficeWPS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    OfficeWPS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    其他
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            其他
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Printer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Printer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../OtherApplication/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    OtherApplication
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Maintenance/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Maintenance
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../VR/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    VR
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#mi-router-3g" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mi Router 3G 刷固件
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      修改主题
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wanlanmac" class="md-nav__link">
+    <span class="md-ellipsis">
+      修改wan和lan的mac
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cups" class="md-nav__link">
+    <span class="md-ellipsis">
+      CUPS
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ipk" class="md-nav__link">
+    <span class="md-ellipsis">
+      安装ipk包
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  <h1>Openwrt</h1>
+
+<h4 id="mi-router-3g">Mi Router 3G 刷固件</h4>
+<p>先刷breed。</p>
+<pre><code class="language-bash">mtd -r write /tmp/breed-mt7621-xiaomi-r3g-r3p.bin Bootloader
+</code></pre>
+<p>然后断电后按住reset，接电源，当蓝色灯闪烁时即进入breed。
+进入breed：192.168.1.1。
+删除normal_firmware_md5。
+添加环境变量xiaomi.r3g.bootfw, 值为2
+更新固件，选择小米r3g第二个。先刷initramfs。然后进入openwrt后，更新固件，再刷squahfs。</p>
+<p><strong>root密码password</strong></p>
+<h4 id="_1">修改主题</h4>
+<pre><code class="language-bash">#
+opkg install luci-theme-infinityfreedom_1.5.20201213-1_all.ipk
+#猫羽雫
+opkg install luci-theme-ifit_2021-5-29.ipk
+#
+opkg install luci-theme-neobird_1.99-202201272020_all.ipk
+</code></pre>
+<h4 id="wanlanmac">修改wan和lan的mac</h4>
+<p>mac地址查询：<a href="oui.txt">oui</a></p>
+<pre><code class="language-bash">cd /etc/config
+cp network network.BAK
+vi network
+#修改所有lan的mac为(Apple Inc)：
+#60:8B:0E:DB:C5:03
+#修改所有wan的mac为(Apple Inc)：
+#60:8B:0E:DB:C5:02
+#ESC
+#:wq
+cat network
+sync
+#重启
+
+#注：各公司MAC前缀
+#Apple Inc
+60:8B:0E
+90:2C:09
+A0:B4:0F
+EC:0D:51
+AC:DF:A1
+D8:E5:93
+CC:68:E0
+#Fujitsu Limited/FUJITSU LIMITED
+34:FE:9E
+68:84:7E
+A8:B2:DA
+B0:AC:FA
+B0:99:28
+EC:79:49
+00:E0:00
+38:AF:D7
+00:23:26
+74:2B:62
+#Fujitsu General Limited
+00:02:DC
+#FUJITSU DENSO LTD.
+00:A0:CA
+#LEXMARK INTERNATIONAL, INC.
+00:21:B7
+#CHONGQING FUGUI ELECTRONICS CO.,LTD.
+40:23:43
+#Xiaomi Communications Co Ltd
+68:C4:4C
+E4:AA:E4
+A8:6A:86
+FC:A9:F5
+#New H3C Technologies Co., Ltd
+6C:87:20
+#Google, Inc.
+FC:91:5D
+#Dell Inc.
+10:98:19
+#LG Electronics
+74:C1:7E
+#Cisco Systems, Inc
+10:E3:76
+C4:AB:4D
+48:74:10
+#Palo Alto Networks
+7C:C0:25
+#Huawei Device Co., Ltd.
+70:66:B9
+C4:A1:AE
+38:FC:34
+3C:F6:92
+C0:BF:AC
+44:27:2E
+E4:54:E5
+D8:54:F2
+8C:C9:E9
+D8:9E:61
+34:7E:00
+#HUAWEI TECHNOLOGIES CO.,LTD
+00:E0:FC #Use this one
+34:83:D5
+7C:0C:FA
+54:44:3B
+5C:70:75
+#LCFC(HeFei) Electronics Technology co., ltd
+FC:5C:EE
+74:5D:22
+E8:80:88
+#Hangzhou Hikvision Digital Technology Co.,Ltd.
+0C:75:D2
+54:8C:81
+24:48:45
+24:32:AE
+#Zhejiang Dahua Technology Co., Ltd.
+74:C9:29
+6C:1C:71
+08:ED:ED
+#Samsung Electronics Co.,Ltd
+C0:48:E6
+CC:6E:A4
+A8:16:D0
+A4:6C:F1
+08:AE:D6
+#Sony Corporation
+D4:38:9C
+00:19:63
+00:1F:E4
+00:23:45
+6C:0E:0D
+#Sony Interactive Entertainment Inc.
+00:1F:A7
+#Hewlett Packard
+9C:7B:EF
+10:E7:C6
+#Intel Corporate
+7C:CC:B8
+F4:06:69
+00:1D:E1
+00:1F:3B
+E0:94:67
+#Advanced Micro Devices, Inc./ADVANCED MICRO DEVICES
+74:27:2C
+00:00:1A
+#Xilinx, Inc/Xilinx
+00:5D:03
+00:0A:35
+#Luxshare Precision Industry CO., LTD./Luxshare Precision Industry Co.,Ltd/Luxshare Precision Industry Company Limited
+E8:95:26
+60:7D:09
+10:82:86
+60:6D:3C
+3C:18:A0
+#Nintendo Co.,Ltd
+60:1A:C7
+BC:9E:BB
+CC:5B:31
+1C:45:86
+E8:A0:CD
+#Hitachi, Ltd.
+68:69:CA
+#WINBOND ELECTRONICS CORP.
+00:10:1D
+#SK hynix
+AC:E4:2E
+#Sumitomo Electric Industries, Ltd
+00:08:F6
+00:0B:A2
+00:00:5F
+08:4E:BF
+#Panasonic Corporation
+00:12:67
+#NIKON CORPORATION
+3C:BE:E1
+00:90:B5
+#CANON INC.
+00:00:85
+2C:9E:FC
+18:0C:AC
+74:BF:C0
+#Brother industries, LTD.
+00:80:77
+B4:22:00
+94:DD:F8
+30:05:5C
+#FUJIFILM Business Innovation Corp.
+08:00:37
+1C:7D:22
+</code></pre>
+<h4 id="cups">CUPS</h4>
+<p>下载ipk文件：</p>
+<p><a href="./cups_mipsel.zip">ipk包,点此下载</a></p>
+<p><strong>一、下载安装CUPS</strong></p>
+<ul>
+<li>
+<p>看了别人的资料后，原本以为可以直接在opkg中安装使用。但我的源里却没有这个包。无奈之下，一番搜索，发现有大佬提供<a href="https://gitee.com/ytwl333/openwrt-musl-cups/tree/master">ipk包。点此下载</a>，有能力的大佬也可以自己编译，<a href="https://github.com/wgedu/cups-for-openwrt">源码地址</a>。</p>
+</li>
+<li>
+<p>根据自己平台下载好相应的包（有十多个都是）后，上传到LEDE的tmp目录下，（其中cups-filters这个包好像和cups不太兼容，我选择删去cups-filters这个包，不安装它），在ssh下输入命令opkg install /tmp/*.ipk --force-depends来安装这些包。
+  注：如果安装了kmod-usb-printer，该模块可能与cups存在兼容问题，请使用下面命令卸载opkg remove kmod-usb-printer</p>
+</li>
+<li>
+<p>安装完成后，打开/etc/cups/cupsd.conf文件。对应更改下方配置。</p>
+</li>
+<li>
+<p>```conf
+  这个配置打开网页配置，和配置中文
+  WebInterface Yes +DefaultLanguage zh</p>
+</li>
+</ul>
+<p>下方是设置允许访问的IP地址范围，根据自己情况配置，如你LAN_IP为192.168.1.1，则改成如下方所示
+  <Location />
+    Order Allow,Deny
+    Allow From 127.0.0.1
+    Allow From 192.168.1.0/24 
+  </Location></p>
+<p>下方是设置允许访问使用admin账户的IP地址范围，如下设置即可
+  <Location /admin>
+    AuthType Basic
+    AuthClass Anonymous
+    Order Allow,Deny
+    Allow From 127.0.0.1
+    Allow From 192.168.1.0/24
+  </Location>
+  ```</p>
+<p>然后，输入ssh命令/etc/init.d/cupsd restart重启CUPS服务。</p>
+<p><strong>二、在CUPS上添加打印机</strong></p>
+<ul>
+<li>使用http://lan_ip:631/admin登陆CUPS管理页面。
+  如果需要登录，则用户名：root 密码：你配置的路由器的登陆密码。</li>
+<li>添加打印机</li>
+<li>一般来说，接上打印机后应当能在此看到，选中后继续。</li>
+<li>写一个简单的名字，选择上共享这台打印机</li>
+<li>这里默认没有驱动，选择Raw，然后点击Add Printer添加打印机即可。</li>
+<li>添加成功后，应该会跳转到打印机信息界面。这里，我们复制这个网页链接。应如：http://lan_ip:631/printers/你前面设定的打印机名</li>
+</ul>
+<p><strong>三、WIN系统上添加该打印机</strong></p>
+<ul>
+<li>点击微软图标，点击设置后再进入设备</li>
+<li>进入打印机和扫描仪，点击添加打印机或和扫描仪，等一段时间后会出现下图选项，点它</li>
+<li>然后点按名称选择选择打印机，输入你刚复制的地址 ，点击下一步</li>
+<li>如果连接成功会让你选择打印机驱动。</li>
+<li>然后下一步，完成即可</li>
+<li>此时，打印机应当能正常工作了。</li>
+</ul>
+<h4 id="ipk">安装ipk包</h4>
+<p>opkg install *.ipk</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.3220b9d7.min.js"></script>
+      
+    
+  </body>
 </html>

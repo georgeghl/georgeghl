@@ -1,111 +1,1435 @@
+
 <!doctype html>
-<html lang="zh">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="Your Name">
-    <title>目录索引</title>
-    <link rel="shortcut icon" href="favicon.ico">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            border: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
-        }
-        html, body {
-            width: 100%;
-            height: 100%;
-            color: #333;
-            background-color: #f0f4f8;
-            overflow-x: hidden;
-            font-size: 16px;
-        }
-        .header {
-            display: flex;
-            align-items: center;
-            margin: 40px 0;
-            justify-content: center;
-        }
-        h1 {
-            font-size: 2.5rem;
-            color: #007bff;
-            font-weight: bold;
-            margin: 0;
-        }
-        ul {
-            list-style-type: none;
-            padding: 20px;
-            max-width: 900px;
-            margin: 0 auto;
-            background: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        li {
-            line-height: 1.6;
-            font-size: 1.1rem;
-            padding: 10px 0;
-            border-bottom: 1px solid #e0e0e0;
-        }
-        li:last-child {
-            border-bottom: none;
-        }
-        a {
-            display: block;
-            padding: 10px;
-            border-radius: 8px;
-            transition: background 0.3s ease, box-shadow 0.3s ease;
-            color: #007bff;
-            text-decoration: none;
-        }
-        a.file {
-            background: #fafafa;
-        }
-        a.file:hover {
-            background: #e3f2fd;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-        }
-        a.folder {
-            background: #e0f7fa;
-            font-weight: bold;
-        }
-        a.folder:hover {
-            background: #b2ebf2;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-        }
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../Maven/">
+      
+      
+        <link rel="next" href="../Java/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.18">
+    
+    
+      
+        <title>Python - 个人笔记教程</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.66ac8b77.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
         
-        .parent-dir {
-            text-align: center;
-            margin-bottom: 20px;
-        }
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
 
-        .parent-dir a {
-            font-size: 1.2rem;
-            color: #007bff;
-            text-decoration: none;
-            padding: 10px;
-            border-radius: 8px;
-            background: #e9ecef;
-            display: inline-block;
-            transition: background-color 0.3s;
-        }
-
-        .parent-dir a:hover {
-            background: #d0d0d0;
-        }
-    </style>
-</head>
-<body>
-    <div class="header">
-        <h1>当前目录: Python</h1>
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#pythonanaconda" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
-            <div class="parent-dir">
-            <a href="/">返回首页</a>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="个人笔记教程" class="md-header__button md-logo" aria-label="个人笔记教程" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            个人笔记教程
+          </span>
         </div>
-    <ul>
-        <li><a class="file" href="index.html">index.html</a></li>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Python
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="个人笔记教程" class="md-nav__button md-logo" aria-label="个人笔记教程" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    个人笔记教程
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    资源查找
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            资源查找
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mirrors.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    点击进入
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    操作系统
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            操作系统
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Android/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Andorid
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Ubuntu/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ubuntu
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Windows/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Windows
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Openwrt/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Openwrt
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CQU_openwrt%E6%95%99%E7%A8%8B/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    CQU_openwrt教程
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    软件
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            软件
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    开发工具/容器
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            开发工具/容器
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Docker/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Docker
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../k8s/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    k8s
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Git/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Git
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Maven/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Maven
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Python
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Python
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#pythonanaconda" class="md-nav__link">
+    <span class="md-ellipsis">
+      安装（python）注：更推荐直接安装使用anaconda
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#anaconda" class="md-nav__link">
+    <span class="md-ellipsis">
+      安装（anaconda）
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="安装（anaconda）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      对于Windows用户：
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#requests-cannot-connect-to-proxyfilenotfounderror2-no-such-file-or-directory" class="md-nav__link">
+    <span class="md-ellipsis">
+      requests 使用代理报错 Cannot connect to proxy.‘,FileNotFoundError(2, ‘No such file or directory问题解决
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#requests" class="md-nav__link">
+    <span class="md-ellipsis">
+      requests 代理设置
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#condawindows-terminalcxxxwindowspowershellprofileps1" class="md-nav__link">
+    <span class="md-ellipsis">
+      conda在windows Terminal中提示报错无法加载文件C:\XXX\WindowsPowerShell\profile.ps1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#python-sql" class="md-nav__link">
+    <span class="md-ellipsis">
+      python sql多线程
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
-</body>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Java/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Java
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    应用软件
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            应用软件
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Acrobat/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Acrobat
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chrome/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chrome
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ffmpeg/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ffmpeg
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../OfficeWPS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    OfficeWPS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    其他
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            其他
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Printer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Printer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../OtherApplication/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    OtherApplication
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Maintenance/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Maintenance
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../VR/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    VR
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#pythonanaconda" class="md-nav__link">
+    <span class="md-ellipsis">
+      安装（python）注：更推荐直接安装使用anaconda
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#anaconda" class="md-nav__link">
+    <span class="md-ellipsis">
+      安装（anaconda）
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="安装（anaconda）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      对于Windows用户：
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#requests-cannot-connect-to-proxyfilenotfounderror2-no-such-file-or-directory" class="md-nav__link">
+    <span class="md-ellipsis">
+      requests 使用代理报错 Cannot connect to proxy.‘,FileNotFoundError(2, ‘No such file or directory问题解决
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#requests" class="md-nav__link">
+    <span class="md-ellipsis">
+      requests 代理设置
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#condawindows-terminalcxxxwindowspowershellprofileps1" class="md-nav__link">
+    <span class="md-ellipsis">
+      conda在windows Terminal中提示报错无法加载文件C:\XXX\WindowsPowerShell\profile.ps1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#python-sql" class="md-nav__link">
+    <span class="md-ellipsis">
+      python sql多线程
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  <h1>Python</h1>
+
+<h4 id="pythonanaconda">安装（python）<strong>注：更推荐直接安装使用anaconda</strong></h4>
+<p>请到官网下载Python安装包：https://www.python.org/downloads/windows/</p>
+<p>下载完毕后，右键-&gt;以管理员身份运行-&gt;是。</p>
+<p><img alt="1722589272240" src="../../img/1722589272240-1722589281866-2.png" /></p>
+<p><strong>如果你不想手动配置环境变量，请勾选上图中的“添加python.exe到环境变量”。</strong></p>
+<p>其他步骤没啥技术含量。</p>
+<h4 id="anaconda">安装（anaconda）</h4>
+<p>完整conda：</p>
+<p>建议使用清华镜像站：https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/</p>
+<p><strong>请下载最新安装包！</strong></p>
+<p>miniconda：</p>
+<p>建议使用清华镜像站：https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/</p>
+<p><strong>请下载最新安装包！</strong></p>
+<h5 id="windows">对于Windows用户：</h5>
+<p>安装时直接右键-&gt;以管理员身份运行-&gt;是。</p>
+<p><img alt="1722589401701" src="../../img/1722589401701.png" /></p>
+<p><strong>如果你不想手动配置环境变量，请勾选上图中的“添加python.exe到环境变量”。</strong></p>
+<p>其他步骤没啥技术含量。</p>
+<p>如果安装完毕使用出现错误，请参照下文“conda在windows Terminal中提示报错无法加载文件C:\XXX\WindowsPowerShell\profile.ps1”。笔者曾在2023年版本的anaconda遇到过这个问题。</p>
+<h4 id="requests-cannot-connect-to-proxyfilenotfounderror2-no-such-file-or-directory">requests 使用代理报错 Cannot connect to proxy.‘,FileNotFoundError(2, ‘No such file or directory问题解决</h4>
+<p>如题，使用代理报错,降级urllib3
+不要使用1.26.0版本，安装低版本。</p>
+<pre><code class="language-shell">pip install urllib3==1.25.11
+</code></pre>
+<h4 id="requests">requests 代理设置</h4>
+<pre><code class="language-python">import urllib3
+urllib3.disable_warnings()
+
+proxies={
+'http': 'http://127.0.0.1:7890',
+'https': 'https://127.0.0.1:7890'
+}
+
+result0=requests.get(url=url,proxies=proxies,verify=False)
+</code></pre>
+<h4 id="condawindows-terminalcxxxwindowspowershellprofileps1">conda在windows Terminal中提示报错无法加载文件C:\XXX\WindowsPowerShell\profile.ps1</h4>
+<p>提示 “<code>无法加载文件C:\XXX\WindowsPowerShell\profile.ps1，因为在此系统上禁止运行脚本</code>” 的错误。</p>
+<ol>
+<li>
+<p>以管理员身份运行<code>PowerShell</code>；</p>
+</li>
+<li>
+<p>执行：<code>get-ExecutionPolicy</code>，回复<code>Restricted</code>，表示状态是<code>禁止</code>的；</p>
+</li>
+<li>
+<p>执行：<code>set-ExecutionPolicy RemoteSigned</code>，选择<code>A</code>即可。</p>
+</li>
+<li>
+<p>```powershell
+   PS C:\WINDOWS\system32&gt; get-ExecutionPolicy
+   Restricted
+   PS C:\WINDOWS\system32&gt; set-ExecutionPolicy RemoteSigned</p>
+</li>
+</ol>
+<p>执行策略更改
+   执行策略可帮助你防止执行不信任的脚本。更改执行策略可能会产生安全风险，如 https:/go.microsoft.com/fwlink/?LinkID=135170
+   中的 about_Execution_Policies 帮助主题所述。是否要更改执行策略?
+   [Y] 是(Y)  [A] 全是(A)  [N] 否(N)  [L] 全否(L)  [S] 暂停(S)  [?] 帮助 (默认值为“N”): A
+   PS C:\WINDOWS\system32&gt;
+   ```</p>
+<h4 id="python-sql">python sql多线程</h4>
+<p>python中执行mysql查询时，需要使用线程池管理，不能直接使用pymysql，否则会报错。</p>
+<pre><code class="language-bash">conda activate py37
+cd d:\d\code\github
+git clone https://github.com/luvvien/pymysqlpool.git
+cd pymysqlpool
+python setup.py install
+</code></pre>
+<p>示例代码如下：</p>
+<pre><code class="language-python">from concurrent.futures import ThreadPoolExecutor
+import json
+from pymysqlpool import ConnectionPool
+import os
+import logging
+logging.basicConfig(format='%(asctime)s - %(pathname)s[line:%(lineno)d] - %(levelname)s: %(message)s', level=logging.INFO)
+
+# 连接池配置
+config = {
+    'pool_name': 'test',
+    'host':'127.0.0.1',
+    'port':3306,
+    'user':'root',
+    'password':'10203090',
+    'database':'tmp'
+}
+
+# 建立连接池
+def connection_pool():
+    # Return a connection pool instance
+    pool = ConnectionPool(**config)
+    return pool
+
+
+# 自定义的处理函数
+def processFile(filepath):
+    logging.info(&quot;Current file: &quot;+filepath)
+    with open(filepath,mode=&quot;r&quot;,encoding=&quot;utf-8&quot;) as f:
+        data=json.load(f)
+    for i in data:
+        tmp=i.keys()
+        try:
+            if &quot;GH&quot; in tmp:
+                GH=str(i[&quot;GH&quot;])
+            else:
+                GH=&quot;NULL&quot;
+            if &quot;ZHZT&quot; in tmp:
+                ZHZT=str(i[&quot;ZHZT&quot;])
+            else:
+                ZHZT=&quot;NULL&quot;
+            if &quot;GJ&quot; in tmp:
+                GJ=str(i[&quot;GJ&quot;])
+            else:
+                GJ=&quot;NULL&quot;
+            if &quot;IDCARD&quot; in tmp:
+                IDCARD=str(i[&quot;IDCARD&quot;])
+            else:
+                IDCARD=&quot;NULL&quot;
+            if &quot;RYZT&quot; in tmp:
+                RYZT=str(i[&quot;RYZT&quot;])
+            else:
+                RYZT=&quot;NULL&quot;
+            if &quot;XB&quot; in tmp:
+                XB=str(i[&quot;XB&quot;])
+            else:
+                XB=&quot;NULL&quot;
+            if &quot;ZHJHZT&quot; in tmp:
+                ZHJHZT=str(i[&quot;ZHJHZT&quot;])
+            else:
+                ZHJHZT=&quot;NULL&quot;
+            if &quot;pageId&quot; in tmp:
+                pageId=str(i[&quot;pageId&quot;])
+            else:
+                pageId=&quot;NULL&quot;
+            if &quot;userId&quot; in tmp:
+                userId=str(i[&quot;userId&quot;])
+            else:
+                userId=&quot;NULL&quot;
+            if &quot;SFZJLXM&quot; in tmp:
+                SFZJLXM=str(i[&quot;SFZJLXM&quot;])
+            else:
+                SFZJLXM=&quot;NULL&quot;
+            if &quot;SFLBDM&quot; in tmp:
+                SFLBDM=str(i[&quot;SFLBDM&quot;])
+            else:
+                SFLBDM=&quot;NULL&quot;
+            if &quot;BMJZRYZT&quot; in tmp:
+                BMJZRYZT=str(i[&quot;BMJZRYZT&quot;])
+            else:
+                BMJZRYZT=&quot;NULL&quot;
+            if &quot;SMZT&quot; in tmp:
+                SMZT=str(i[&quot;SMZT&quot;])
+            else:
+                SMZT=&quot;NULL&quot;
+            if &quot;XM&quot; in tmp:
+                XM=str(i[&quot;XM&quot;])
+            else:
+                XM=&quot;NULL&quot;
+            if &quot;TYSFRZH&quot; in tmp:
+                TYSFRZH=str(i[&quot;TYSFRZH&quot;])
+            else:
+                TYSFRZH=&quot;NULL&quot;
+            if &quot;USERID_1&quot; in tmp:
+                USERID_1=str(i[&quot;USERID_1&quot;])
+            else:
+                USERID_1=&quot;NULL&quot;
+            if &quot;orgInfo&quot; in tmp:
+                orgInfo=str(i[&quot;orgInfo&quot;])
+            else:
+                orgInfo=&quot;NULL&quot;
+            if &quot;personId&quot; in tmp:
+                personId=str(i[&quot;personId&quot;])
+            else:
+                personId=&quot;NULL&quot;
+            if &quot;objectId&quot; in tmp:
+                objectId=str(i[&quot;objectId&quot;])
+            else:
+                objectId=&quot;NULL&quot;
+            if &quot;CQUBM&quot; in tmp:
+                CQUBM=str(i[&quot;CQUBM&quot;])
+            else:
+                CQUBM=&quot;NULL&quot;
+            if &quot;BMPYRYZT&quot; in tmp:
+                BMPYRYZT=str(i[&quot;BMPYRYZT&quot;])
+            else:
+                BMPYRYZT=&quot;NULL&quot;
+            if &quot;CSRQ&quot; in tmp:
+                CSRQ=str(i[&quot;CSRQ&quot;])
+            else:
+                CSRQ=&quot;NULL&quot;
+            if &quot;JZBM&quot; in tmp:
+                JZBM=str(i[&quot;JZBM&quot;])
+            else:
+                JZBM=&quot;NULL&quot;
+            if &quot;SFYDK&quot; in tmp:
+                SFYDK=str(i[&quot;SFYDK&quot;])
+            else:
+                SFYDK=&quot;NULL&quot;
+            if &quot;ZHJHSMZT&quot; in tmp:
+                ZHJHSMZT=str(i[&quot;ZHJHSMZT&quot;])
+            else:
+                ZHJHSMZT=&quot;NULL&quot;
+            if &quot;DQFWRYZT&quot; in tmp:
+                DQFWRYZT=str(i[&quot;DQFWRYZT&quot;])
+            else:
+                DQFWRYZT=&quot;NULL&quot;
+            if &quot;TEL&quot; in tmp:
+                TEL=str(i[&quot;TEL&quot;])
+            else:
+                TEL=&quot;NULL&quot;
+            if &quot;JZXGH&quot; in tmp:
+                JZXGH=str(i[&quot;JZXGH&quot;])
+            else:
+                JZXGH=&quot;NULL&quot;
+            if &quot;JZORACLECOLLECT&quot; in tmp:
+                JZORACLECOLLECT=str(i[&quot;JZORACLECOLLECT&quot;])
+            else:
+                JZORACLECOLLECT=&quot;NULL&quot;
+            if &quot;USERTYPE&quot; in tmp:
+                USERTYPE=str(i[&quot;USERTYPE&quot;])
+            else:
+                USERTYPE=&quot;NULL&quot;
+            if &quot;LASTLOGINTIME&quot; in tmp:
+                LASTLOGINTIME=str(i[&quot;LASTLOGINTIME&quot;])
+            else:
+                LASTLOGINTIME=&quot;NULL&quot;
+            if &quot;QYPYRYAZT&quot; in tmp:
+                QYPYRYAZT=str(i[&quot;QYPYRYAZT&quot;])
+            else:
+                QYPYRYAZT=&quot;NULL&quot;
+            if &quot;SFYXQJZ&quot; in tmp:
+                SFYXQJZ=str(i[&quot;SFYXQJZ&quot;])
+            else:
+                SFYXQJZ=&quot;NULL&quot;
+            if &quot;RSZPRYZT&quot; in tmp:
+                RSZPRYZT=str(i[&quot;RSZPRYZT&quot;])
+            else:
+                RSZPRYZT=&quot;NULL&quot;
+            try:
+                with connection_pool().connection() as conn:
+                    cursor = conn.cursor()
+                    SQL=&quot;INSERT INTO `sso_v2` VALUES(\&quot;&quot;+GH+&quot;\&quot;,\&quot;&quot;+ZHZT+&quot;\&quot;,\&quot;&quot;+GJ+&quot;\&quot;,\&quot;&quot;+IDCARD+&quot;\&quot;,\&quot;&quot;+RYZT+&quot;\&quot;,\&quot;&quot;+XB+&quot;\&quot;,\&quot;&quot;+ZHJHZT+&quot;\&quot;,\&quot;&quot;+pageId+&quot;\&quot;,\&quot;&quot;+userId+&quot;\&quot;,\&quot;&quot;+SFZJLXM+&quot;\&quot;,\&quot;&quot;+SFLBDM+&quot;\&quot;,\&quot;&quot;+BMJZRYZT+&quot;\&quot;,\&quot;&quot;+SMZT+&quot;\&quot;,\&quot;&quot;+XM+&quot;\&quot;,\&quot;&quot;+TYSFRZH+&quot;\&quot;,\&quot;&quot;+USERID_1+&quot;\&quot;,\&quot;&quot;+orgInfo+&quot;\&quot;,\&quot;&quot;+personId+&quot;\&quot;,\&quot;&quot;+objectId+&quot;\&quot;,\&quot;&quot;+CQUBM+&quot;\&quot;,\&quot;&quot;+BMPYRYZT+&quot;\&quot;,\&quot;&quot;+CSRQ+&quot;\&quot;,\&quot;&quot;+JZBM+&quot;\&quot;,\&quot;&quot;+SFYDK+&quot;\&quot;,\&quot;&quot;+ZHJHSMZT+&quot;\&quot;,\&quot;&quot;+DQFWRYZT+&quot;\&quot;,\&quot;&quot;+TEL+&quot;\&quot;,\&quot;&quot;+JZXGH+&quot;\&quot;,\&quot;&quot;+JZORACLECOLLECT+&quot;\&quot;,\&quot;&quot;+USERTYPE+&quot;\&quot;,\&quot;&quot;+LASTLOGINTIME+&quot;\&quot;,\&quot;&quot;+QYPYRYAZT+&quot;\&quot;,\&quot;&quot;+SFYXQJZ+&quot;\&quot;,\&quot;&quot;+RSZPRYZT+&quot;\&quot;);&quot;
+                    logging.debug(SQL)
+                    cursor.execute(SQL)
+                    conn.commit()
+            except Exception as e:
+                logging.exception(e)
+        except Exception as e:
+            logging.exception(e)
+
+
+#这里开到4线程，可以自行修改     
+MAX_THREAD_NUM = 4
+threadCnt = 0
+
+
+def processFilesInThreadPool():
+    jsonFiles = os.listdir(&quot;./data/&quot;)
+    logging.info(&quot;Json Files: &quot; + str(jsonFiles))
+
+    #以下是多线程执行代码
+    global threadCnt
+    with ThreadPoolExecutor(max_workers=MAX_THREAD_NUM) as executor:
+        futures = []
+        for jsonFile in jsonFiles:
+            if threadCnt &lt; MAX_THREAD_NUM:
+                threadCnt += 1
+                # 这里调用自定义的处理函数
+                future = executor.submit(processFile, &quot;./data/&quot; + jsonFile)
+                futures.append(future)
+            else:
+                # 等待当前所有线程完成
+                for future in futures:
+                    future.result()
+                futures = []
+                threadCnt = 0
+        # 确保所有线程都完成
+        for future in futures:
+            future.result()
+
+
+processFilesInThreadPool()
+</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.3220b9d7.min.js"></script>
+      
+    
+  </body>
 </html>
