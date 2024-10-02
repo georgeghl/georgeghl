@@ -1,0 +1,2451 @@
+
+
+	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+	<html>
+
+	<head>
+		<!-- 支持中文 -->
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="google-site-verification" content="vgiOidXHUdMydJehnk-bYoTeRFsRxVppHJKg2orKRaA" />
+		<title>Hao Dong - Peking University</title>
+		<style type="text/css">
+		body {
+			width: 1400px;
+			text-align: center;
+			font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+			font-weight: 300;
+			font-size: 16px;
+			background-color: #FFF;
+		}
+
+		hr {
+			border: 0;
+			height: 1px;
+			background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+		}
+
+		table {
+			padding: 5px;
+		}
+
+		/* 选颜色 https://www.color-hex.com/color-names.html */
+		/* https://www.htmlcsscolor.com/hex/3B3B3B */
+		table.pub_table,
+		td.pub_td1,
+		td.pub_td2 {
+			border-collapse: collapse;
+			border-bottom: 0px solid #9B9B9B;
+			padding-bottom: 10px;
+			padding-top: 10px;
+			padding-left: 10px;
+			width: 1100px;
+			/* width: 1250px; /* hao*/
+			*/
+		}
+
+		td.pub_td1 {
+			width: 100px;
+		}
+
+		.level_1 {
+			display: none;
+		}
+
+		.paper2{
+			display: none;
+		}
+		select{
+			width:150px;
+			height: 20px;
+			border: 0px;
+			outline:none;
+			color: #1367a7;
+		}
+		td.sub_heading {
+			color: #3B3B3B;
+			font-weight: 700;
+			font-size: 20px;
+		}
+
+		tr {
+			background-color: #FFF;
+		}
+
+		div#container {
+			margin-left: auto;
+			margin-right: auto;
+			width: 1200px;
+			text-align: left;
+			position: relative;
+			background-color: #FFF;
+		}
+
+		div#DocInfo {
+			color: #9B9B9B;
+			height: 128px;
+		}
+
+		h4,
+		h3,
+		h2,
+		h1 {
+			color: #3B3B3B;
+		}
+
+		h2 {
+			font-size: 130%;
+		}
+
+		p {
+			color: #000;
+			margin-bottom: 20px;
+		}
+
+		p.caption {
+			color: #9B9B9B;
+			text-align: left;
+			width: 600px;
+			font: 11px helvetica, sans-serif;
+		}
+
+		p.caption2 {
+			color: #9B9B9B;
+			text-align: left;
+			width: 800px;
+			font: 11px helvetica, sans-serif;
+		}
+
+		#header_img {
+			position: absolute;
+			top: 0px;
+			right: 0px;
+		}
+
+		ul { margin: 0px; } /* remove space on ul list */
+
+		a:link,
+		a:visited {
+			color: #1367a7;
+			*/
+			/* 蓝色
+						/* color: #990000; /* 深红艄1�71ￄ1�771ￄ1�71ￄ1�777 990000 8b2323*/
+			*/ font-family: Tahoma, Geneva, sans-serif;
+			/* 加粗 */
+			text-decoration: none;
+		}
+
+		.section_div {
+			background-color: #FFF;
+			padding: 10px 10px 10px 10px;
+			margin: 10px 10px 10px 10px;
+			//border: 1px solid #AAA;
+		}
+
+		.service3 {
+			display: none;
+		}
+
+		.service4 {
+			display: none;
+		}
+
+		.btn{
+			border: 0;
+			background: none;
+			cursor: pointer;
+		}
+		.btn_two{
+			margin-left: 9px;
+		}
+		.btn_one{
+			margin-left: 22px;
+		}
+		.btn>span{
+			color: #1367a7;
+		}
+		.all_Btn{
+			border: 0;
+			background: none;
+			cursor: pointer;
+		}
+		.all_Btn>span{
+			color: #1367a7;
+		}
+		.all_Btn > span:hover {
+			border-bottom:1px solid #1367a7;
+		}
+		.all_Btn > span.current {
+			border-bottom:1px solid #1367a7;
+			font-weight: 500;
+		}
+		body {
+			background-color: #FFF;
+		}
+
+		#personal_info {
+			background-color: #FFF;
+		}
+
+		img.teaser_img {
+			width: 256px;
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+			margin-top: 5px;
+			margin-bottom: 5px;
+			border: 0px solid black
+		}
+
+		img.photo_of_me {
+			border-radius: 20px;
+		}
+
+		div.teaser_img_div {
+			width: 286px;
+		}
+
+		/* hao： table折叠  */
+		/* .chartTable{
+									width:100%;
+									margin-top:10px;
+							}
+							.chartTable th,.chartTable td{
+									text-align: center;
+									padding:10px 0;
+							}
+							.chartTable th{
+									background-color:#D7D7D7 ;
+							}
+							td.company{text-align: left;}
+							td.haschild .c_title{cursor: pointer;background: url(http://note.youdao.com/yws/public/resource/a5dec28b4c472b42d7126f3a389e3f28/xmlnote/531FC34716824BE5A6ABD0451F9FDBF0/WEBRESOURCE978aa3969c38110736f0c17a178b04b6/7204) no-repeat; background-size: 20px 20px;background-position: center left;}
+							td.isopen .c_title{cursor: pointer;background: url(http://note.youdao.com/yws/public/resource/a5dec28b4c472b42d7126f3a389e3f28/xmlnote/531FC34716824BE5A6ABD0451F9FDBF0/WEBRESOURCEed4cebea2ccd991c3265d5a7dd90d0e3/7205) no-repeat; background-size: 20px 20px;background-position: center left;}
+							.c_title{padding-left:20px;margin-top:0;margin-bottom:0;}
+							.haschild .c_icon{height:20px;width:20px;float:left}
+							.level_0 .company .c_title{margin-left:0; color:red;}
+							.level_1{display:none;}
+							.level_2{display:none;}
+							.level_3{display:none;}
+							.level_1 .company .c_title{margin-left:20px;color:blue;}
+							.level_2 .company .c_title{margin-left:40px;color:green;}
+							.level_3 .company .c_title{margin-left:60px;color:#ccc;} */
+		</style>
+
+		<!-- <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-24665197-4', 'auto');
+  ga('send', 'pageview');
+
+</script> -->
+
+
+	</head>
+
+	<body>
+		<div id="container">
+			<div class='section_div'>
+				<table id="personal_info">
+					<tr>
+						<td><img class="photo_of_me" src="images/haodong/haodong10.png" width=180px
+								style="border: 1px solid black; float:left; margin-right:15px" /></td>
+						<td>
+							<div id="DocInfo">
+								<h1>Hao Dong</h1>
+								<!-- 董豪 助理教授 博士生导师 北京大学-计算机学院-前沿计算研究中心 <br><br> -->
+								董豪 北京大学 助理教授 博士生导师 国家级青年人才计划 北大博雅青年学者<br><br>
+								hao.dong@pku.edu.cn<br><br>
+								<a href="https://scholar.google.com/citations?hl=en&user=xLFL4sMAAAAJ&view_op=list_works&sortby=pubdate">Google Scholar</a> /
+								<!-- <a href="https://www.researchgate.net/profile/Hao_Dong35">Research Gate</a> </a> /
+		<a href="https://dblp.uni-trier.de/pers/hd/d/Dong_0003:Hao">DBLP</a> </a> / -->
+								<!-- Github: -->
+								<a href="https://github.com/zsdonghao">Github</a> </a>
+								<!-- / -->
+								<!-- <a href="https://github.com/hyperplane-lab">Lab</a> </a> -->
+								<!-- https://orcid.org/0000-0002-7984-9909 -->
+								<br> <br>
+								<!-- <li>
+			<span style="font-weight:bold;">Open positions available (
+					<a href="recurit/phd.html">Ph.D</a>,
+					<a href="recurit/postdoc.html">Postdoc</a>,
+					<a href="recurit/engineer.html">Engineers</a>,
+					Interns ). Contact me for details.</span>
+		 </li> -->
+							</div><br>
+						</td>
+					</tr>
+				</table>
+
+				<h2>About Me</h2>
+
+				<!-- 董豪，北京大学计算机学院前沿计算研究中心，助理教授，博士生导师。研究方向为人工智能、机器人和计算机视觉。 -->
+				<!-- 董博士于2019年在英国帝国理工学院获博士学位，2012年获得英国帝国理工学院一等硕士学位、2011年获得英国中央兰开夏大学获一等学士学位。 -->
+				<!-- <br><br> -->
+
+
+				I am an Assistant Professor at School of Computer Science, Peking University,
+				where
+				I lead <a href="#lab"> PKU-Agibot Lab</a>.
+				<!-- I am also affiliated with Beijing Academy of Articial Intelligence (BAAI 北京智源). -->
+				 <!-- and PengCheng Lab (鹏城实验室). -->
+				My current research focuses on embodied AI, large models, reinforcement learning and computer vision.
+				<!-- My current research focuses on several exciting areas: robot vision, robotic manipulation, embodied large models, navigation and autonomous decision making.  -->
+				Our goal is to find the scaling law to create a cost-effective and autonomous robot system.
+				<!-- <a href="https://yoshuabengio.org/2023/05/07/ai-scientists-safe-and-useful-ai/">in a strictly safe way</a>, -->
+				<!-- not limited to industrial applications and home assistance scenarios. -->
+				<!-- aiming to make AI benefits a global scale. -->
+
+
+				<br><br>
+				Additionally, I am fortunate to serve as an Area Chair or Senior Program Committee member for CVPR, NeurIPS and AAAI conferences,
+				and as the Associate Editor of ICRA and Machine Intelligence Research. I received the
+				<a href="images/award/2023 MIR Oustanding Associate Editor Award-Hao Dong.pdf">MIR Outstanding Associate Editor Award</a>.
+				Also, I have been involved in open source AI system for a long time, I have led several open source projects, such as
+				<a href="https://prsorg.github.io">Polar Research Station</a>,
+				<a href="https://github.com/tensorlayer">TensorLayer</a>
+				<a href="https://github.com/tensorlayer"><img alt="GitHub Stars" style="vertical-align:middle" src="https://img.shields.io/github/stars/tensorlayer?style=social"/></a>
+				and <a href="https://github.com/openmlsys">OpenMLsys</a> <a href="https://github.com/openmlsys"><img alt="GitHub Stars" style="vertical-align:middle" src="https://img.shields.io/github/stars/openmlsys?style=social"/></a>
+				, and have won the <a href="paper/ACM MM Certification.pdf">Best Open Source Software Award</a> at ACM Multimedia, as well as the OpenI Outstanding Project Award twice.
+
+				<br>
+
+				<details><summary><b><font color="1367a7">more</font></b></summary>
+					Before joining PKU, I obtained my Ph.D. degree from Imperial College London
+					under the supervision of <a href="https://www.imperial.ac.uk/people/y.guo">Yike Guo</a>.
+					<!-- <a href="https://provost.hkust.edu.hk/meet_the_provost.html">Yike Guo</a>  -->
+					<!-- He is a Ph.D. student at the Department of Computing of Imperial College London under the supervision of Prof. Yike Guo and Prof. Paul M. Matthews. -->
+					<!-- My research involves computer vision with the goal of recreating and interacting the world. -->
+					<!-- My current research involves deep learning and computer vision with the goal of reducing the data required for learning intelligent systems. -->
+					<!-- and has publications on ICCV, TIFS, TMI, TNSRE, ACM MM, etc.
+				He is an active reviewer of SIGGRAPH, TIP, TKDE, Neurocomputing, PLUS ONE, etc. -->
+					<!-- I am passionate about popularising artificial intelligence technologies and established <a href="https://tensorlayer.readthedocs.io">TensorLayer</a>, a deep learning and reinforcement learning library for scientists and engineers, which won the <a href="paper/ACM MM Certification.pdf">Best Open Source Software Award</a> at ACM Multimedia 2017. -->
+				<!-- MSc specialist degree (visual information processing) -->
+					Prior to my Ph.D., I received a MSc degree with distinction from Imperial,
+					and a first-class BEng degree from the University of Central Lancashire.
+					Furthermore, I have founded a startup focused on AI-driven hardware between 2012 and 2015.
+				</details>
+			</div>
+			<hr>
+
+
+			<div class='section_div'>
+			<h2>News</h2>
+			<li>[2024/09] <b><font color="red" style="background-color:yellow;" >NEW</font></b> Two papers get accepted to NeurIPS 2024</a>
+			<li>[2024/09] <b><font color="red" style="background-color:yellow;" >NEW</font></b> The world's first general navigation large model that unifies all embodied navigation paradigms within one single framework: <a href="https://sites.google.com/view/instructnav">InstructNav</a>
+			<li>[2024/09] <b><font color="red" style="background-color:yellow;" >NEW</font></b> Three papers get accepted to CoRL 2024: <a href="https://sites.google.com/view/instructnav">Generic Instruction Navigation</a>, <a href="https://sites.google.com/view/aic-mllm">Interactive Correction for Manipulation</a>, <a href="https://arxiv.org/pdf/2406.07549">Articulation-Aware VLM</a></li>
+			<li>[2024/09] <b><font color="red" style="background-color:yellow;" >NEW</font></b> One paper gets accepted to <a href="https://www.nature.com/articles/s42256-024-00879-7#:~:text=In%20this%20section,%20we%20introduce%20the%20results%20of%20our%20method">Nature Machine Intelligence</a></li>
+			<li>[2024/09] <b><font color="red" style="background-color:yellow;" >NEW</font></b> One paper gets accepted to RAL</li>
+			<li>[2024/08] <b><font color="red" style="background-color:yellow;" >NEW</font></b> Call for Papers: <a href="https://onlinelibrary.wiley.com/page/journal/15564967/homepage/call-for-papers/si-2024-000757">Special Issues on Embodied AI in Journal of Field Robotics</a></li>
+			<li>[2024/07] Two papers get accepted to ECCV 2024: <a href="https://jiyao06.github.io/Omni6DPose/">Omni6DPose</a>, <a href="https://arxiv.org/pdf/2407.15771v1">Grasping</a> </li>
+			<li>[2024/06] Three papers get accepted to IROS 2024:<a href="https://air-discover.github.io/PreAfford/">Pre-grasping</a>, <a href="https://arxiv.org/pdf/2403.11289">ManipVQA</a>, <a href="https://github.com/Yaser-wyx/SCANet">Lego Assembly</a> </li>
+			<li>[2024/06] CVPR 2024 Embodied AI Workshop <a href="https://prsorg.github.io">PRS Challenge: Human-centered In-building Embodied Delivery</a> </li>
+			<li>[2024/05] Two papers get accepted to RSS 2024	</li>
+			<li>[2024/04] Our RGB-based object grasping paper is accepted to RAL 2024	</li>
+			<li>[2024/02] Three papers get accepted to CVPR 2024	</li>
+			<li>[2024/01] Five papers get accepted to ICRA 2024	</li>
+			<li>[2024/01] I received the <a href="images/award/2023 MIR Oustanding Associate Editor Award-Hao Dong.pdf">MIR Outstanding Associate Editor Award</a> </li>
+			<details><summary><b><font color="1367a7"> show more </font></b></summary>
+			<li>[2024/01] Two papers get accepted to ICLR 2024:
+					<a href="https://helloqxwang.github.io/SparseDFF/">SparseDFF</a> and <a href="https://arxiv.org/abs/2305.03048">PerSAM</a>
+			 		</li>
+			<li>[2023/12] One paper gets accepted to PAMI and two papers for AAAI 2024
+				<a href="https://bi-dexhands.ai">Bi-DexHands</a>, <a href="https://arxiv.org/pdf/2305.16318.pdf">MUTR</a> and <a href="https://arxiv.org/pdf/2312.12340.pdf">FractureAssembly</a>
+				</li>
+			<li>[2023/09] Five NeurPS 2023 submissions are all accepted:
+					<a href="https://sites.google.com/view/demand-driven-navigation">Demand-driven Navigation</a>,
+					<a href="https://sites.google.com/view/genpose">GenPose</a>,
+					<a href="https://sites.google.com/view/graspgf">GraspGF</a>,
+					<a href="https://chengkaiacademycity.github.io/EnvAwareAfford/">EnvAwareAfford</a> and
+					<a href="https://tritiumr.github.io/Where2Explore/">Where2Explore</a></li>
+			<li>[2023/09] I will serve as an associate editor of ICRA </li>
+			<li>[2023/08] One paper gets accepted to SIGGRAPH Asia, and two papers for BMVC </li>
+			<li>[2023/07] Two papers get accepted to ICCV 2023:
+				<a href="https://hyperplane-lab.github.io/DeformableAffordance/">DefoAfford</a> and
+				<a href="https://crtie.github.io/SE-3-part-assembly/">3D Shape Assembly</a>
+			 	</li>
+			<li>[2023/06] I will serve as an AC of CVPR 2024 </li>
+			<li>[2023/06] I will serve as a SPC of AAAI 2024 </li>
+			<li>[2023/04] Our <a href="https://sites.google.com/view/sasavan/">visual-audio navigation</a> gets accepted to RAL</li>
+			<li>[2023/03] I will serve as an AC of NeurIPS 2023 </li>
+			<li>[2023/02] Three paper get accepted to CVPR 2023</li>
+			<!-- <li>[2023/02] Our <a href="http://www.tensorlayerx.com/index_en.html?chlang=&langid=2">TensorLayerX</a> won the OpenI Outstanding Open Source Project Award 2022</li> -->
+			<!-- <li>[2023/01] Three papers get accepted to ICRA, ICLR and AAAI respectively</li> -->
+			<!-- <li>[2022/12] We won the Dual Object Manipulation Track of MyoChallenge @ NeurIPS 2022</li> -->
+			<!-- <li>[2022/11] Our metasurface indoor robotic paradigm gets accepted to National Science Review</li> -->
+			<!-- <li>[2022/10] I will serve as a co-chair of Learning Robot Manipulation Forum @ PRCV 2022</li> -->
+			<!-- <li>[2022/09] Two papers get accepted to NeurIPS 2022</li> -->
+			<!-- <li>[2022/09] I will serve as an AC of CVPR 2023 </li> -->
+			<!-- <li>[2022/07] I will serve as a SPC of AAAI 2023 </li> -->
+			<!-- <li>[2022/07] Two papers get accepted to ECCV 2022 </li> -->
+			<!-- <li>[2022/07] I will serve as a co-chair for <a href="https://neurips-hill.github.io">Human in the Loop Learning (HiLL) Workshop</a> @ NeurIPS 2022 </li> -->
+			<!-- <li>[2022/06] I serve as an associate editor of Machine Intelligence Research </li> -->
+			<!-- <li>[2022/06] One paper gets accepted to IROS 2022 </li> -->
+			...
+			</details>
+			<!-- <li>[2022/05] Our open-source ML system book is released @ <a href="https://openmlsys.github.io">OpenMLsys</a> </li> -->
+			<!-- <li>[2022/05] I will serve as an organizer of <a href="http://saferl.online/2022">SafeRL Workshop</a> @ <a href="https://www.mfi2022.com">MFI</a> 2022 </li> -->
+			<!-- <li>[12/2021] 科技部重大项目牵头人 </li> -->
+			<!-- <li>[12/2020] Panel discussion at WAVE Summit</li> -->
+			<!-- <li>[11/2020] 我们的�ￄ1�71ￄ1�77�深度强化学习：基础、研究与应用 》中文书将在2021年夏天出版，敬请关注</li> -->
+			<!-- <li>[11/2020]「Talk」百庄1�71ￄ1�77 《开源开放平台建设�ￄ1�71ￄ1�77ￄ1�71ￄ1�77 -->
+			<!-- <li>[08/2020] We won the <a href="paper/2020power_gride_winner_diploma.jpg">CityLearn Challenge 2020</a>, reducing 13% cost of building energy</li> -->
+			<!-- <li>[08/2020] TensorLayer 3.0.0 will supports multiple backends, such as TensorFlow, MindSpore and more, supporting GPU and Huawei-Ascend. Stay tuned!</li> -->
+			<!-- <li>[07/2020] Our  <a href="https://deepreinforcementlearningbook.org/index.html#mailing-list">DRL book</a> is published! </li> -->
+			<!-- <li>[07/2020]「Talk」中科院文献情报中心 《信息科学技术的弄1�71ￄ1�77源开放与知识传播〄1�71ￄ1�77 -->
+			<!-- <li>[06/2020]「Talk」人工智能大伄1�71ￄ1�77 - 弄1�71ￄ1�77发�ￄ1�71ￄ1�77�日 机器之心 WAIC《人工智能与弄1�71ￄ1�77源开放�ￄ1�71ￄ1�77ￄ1�71ￄ1�77 -->
+			<!-- <li>[06/2020]「Talk」Tsinghua University - From Deep Generation to Creation -->
+			<!-- <li>[08/2019] I graduated from Imperial and joined PKU. </li> -->
+			<!-- <li>[06/2019] Release <a href="https://github.com/tensorlayer/tensorlayer/tree/master/examples/reinforcement_learning">RL Model Zoo</a> for teaching and research. </li> -->
+			<!-- <li>[05/2019] Release <a href="https://github.com/tensorlayer/tensorlayer/releases/tag/2.0.0">TensorLayer 2.0</a> ! A BIG Updated!</li> -->
+			<!-- <li>[05/2019]「Talk」GAMES 2019, Introduction of Generative Adversarial Networks. </li> -->
+			<!-- <li>[04/2019]「Talk」Invited talk,  <a href="https://mp.weixin.qq.com/s/gXzayHO3Wtz4OJ61saF90A">"Deep Learning & Data Efficiency"</a> by CFCS, Peking University. </li> -->
+			<!-- <li>[12/2018] TensorLayer will give a demo of "Learning to Dance via Machine Learning" at NeurIPS. Montréal, Dec 4 2018 <a href="https://NeurIPS.cc/Conferences/2018/Schedule?showEvent=12183">(click)</a> </li> -->
+			<!-- <li>[12/2018]「Talk」TensorLayer give a talk at <a href="https://devfest.gdg.london">Google Developer Groups (GDG) DevFest</a>. London, Dec 1 2018 </li> -->
+			<!-- <li>[03/2018] Teaching Assistant of "Advanced Machine Learning" @ Imperial College</li> -->
+			<!-- <li>[02/2018] I gave a talk at <a href="https://github.com/tensorlayer/tensorlayer-chinese/blob/master/docs/LPN_AI_symposium_handbook_poster.pdf">London PhD Network AI Symposium</a> with DeepMind, UCL, and Francis Crick Institute (<a href="https://github.com/tensorlayer/tensorlayer-chinese/blob/master/docs/TensorLayer_London_PhD_Network_20180212.pdf">slides</a>) </li> -->
+			<!-- <li>[01/2018] Published my 1st <a href="http://www.broadview.com.cn/book/5059">Chinese Deep Learning Book</a> </li> -->
+			<!-- <li>[12/2017] Interviewed by ClusterOne - “Humans of AI 1�71ￄ1�771ￄ1�71ￄ1�777 series : <a href="https://clusterone.com/blog/hao-dong">TensorLayer and the Chinese Deep Learning Community</a> </li> -->
+			<!-- <li>[10/2017] We won the <a href="paper/ACM MM Certification.pdf">Best Open Source Software Award</a> @ACM MM 2017 </a> </li> -->
+			<!-- <li>[07/2017] TensorLayer is accepted by ACM Multimedia'17. It has quickly gained over 2000+ stars on <a href="https://github.com/zsdonghao/tensorlayer">Github</a>! </li> -->
+			<!-- <li>[06/2017] New ICCV Paper : <a href="https://arxiv.org/abs/1707.06873">Semantic Image Synthesis via Adversarial Learning</a> </li> -->
+			<!-- <li>[05/2016] Deputy leader of the machine learning group in <a href="https://www.imperial.ac.uk/data-science">Data Science Institute</a> at Imperial College </li> -->
+			<!-- <li>[04/2016]「Talk」Invited talk, “Introduction of Artificial Neural Network 1�71ￄ1�771ￄ1�71ￄ1�777 at Imperial College </li> -->
+			<!-- <li>[09/2016] TensorLayer is released. It has quickly gained over 2000+ stars on <a href="https://github.com/zsdonghao/tensorlayer">Github</a>! </li> -->
+			</div>
+			<hr>
+
+			<!-- <ul>
+<li>
+	<span style="font-weight:bold;">Open positions available (
+			<a href="recurit/phd.html">Ph.D</a>,
+			<a href="recurit/postdoc.html">Post Doc</a>,
+			<a href="recurit/engineer.html">Engineers</a>,
+			Interns ). Contact me for details.</span>
+ </li>
+</ul> -->
+			<!-- <hr> -->
+
+
+			<!-- <div class='section_div'>
+<h2>Postdocs and Students </h2>
+<li>PhD: <a href="https://warshallrho.github.io">Ruihai Wu</a>, <a href="https://xxx.github.io">Mingdong Wu</a><br></li>
+<li>Postdoc: <a href="https://xxx.github.io">Lin Dong</a><br></li>
+</div>
+<hr> -->
+
+
+			<div id="lab" class='section_div' id='ResearchGroup'>
+				<h2>PKU-Agibot Lab</h2>
+
+				<!-- We study how to improve the learning ability of artificial intelligence systems. -->
+				<!-- We are especially interested in <b>vision</b> and <b>robotics</b>, -->
+				<!-- recreating and interacting the world. -->
+				<!-- the current topic is generalisable and autonomous robot learning, with the goal to improve the reliability and functionality of AI systems. -->
+				<!-- the current topic is self-supervised and model-based robot learning, with the goal to improve the learning ability of artificial intelligence systems. -->
+				<!--include <b>3D vision</b>, <b>generative models</b> and <b>robotics</b>.-->
+				<!-- We have broader interests in medical data analysis and computer graphics. -->
+				<!-- <br><br> -->
+				<!-- We also enjoy developing and maintaining open source projects, e.g., <a href="https://github.com/tensorlayer">TensorLayer</a> and <a href="https://github.com/openmlsys">OpenMLsys</a>, -->
+				<!-- a deep learning and reinforcement learning library for scientists and engineers, which  -->
+				<!-- and won the <a href="paper/ACM MM Certification.pdf">Best Open Source Software Award</a> at ACM Multimedia 2017. -->
+				<!-- We are now developing <b>new projects</b> for AI, please contact us for the detail. -->
+				<!-- <br><br> -->
+
+				<!-- Our lab, affiliated with the <a href="http://cfcs.pku.edu.cn">CFCS</a> and the <a -->
+					<!-- href="https://cs.pku.edu.cn/English/Home.htm">School of CS</a> at PKU,  -->
+				Our lab welcomes research interns, masters, PhD candidates and postdocs. The current research interests include: </i> <br>
+				<!-- Our lab's name, 'Lab', reflects our commitment to exploring diverse and evolving frontiers in AI and robotics, allowing our research to adapt and grow as the field evolves. -->
+				<li>grasping and manipulation<br>
+				<li>task planning<br>
+				<li>navigation<br>
+				<li>safety and interpretability in robotics<br>
+				<!-- <br> -->
+				<!-- <br> -->
+			  <!-- I also have the leading of the Embodied AI center at the Beijing Academy of Artificial Intelligence (<a href="https://baai.ac.cn/english.html">BAAI</a> 北京智源), where we are also actively seeking for research scientists, engineers, and interns. -->
+				<!-- Additionally, I am also honored to be a member of PengCheng Lab (<a href="https://pcl.ac.cn">PCL</a> 鹏城实验室), where I contribute to a variety of exciting open-source projects. -->
+				For more information, please contact Hao Dong at <i>hao.dong (a) pku.edu.cn</i>
+				<br>
+
+				<!-- <details><summary><b><font color="1367a7"> lab members</font></b></summary>
+
+				<table class='personnel'>
+					<tr>
+						<td rowspan="2" width=350px>
+							<b>PhD Students</b><br>
+							<a href="http://warshallrho.github.io/">Ruihai Wu</a> 		<font size="2" color='grey'> <I>2020</I></font>  <br>
+							<a href="https://aaronanima.github.io/">Mingdong Wu </a>  <font size="2" color='grey'> <I>2021</I></font>  <br>
+							<a href="https://tianhaowuhz.github.io">Tianhao Wu</a> 		<font size="2" color='grey'> <I>2021</I></font>  <br>
+							<a href="https://sxy7147.github.io">Yan Shen</a> 					<font size="2" color='grey'> <I>2022</I></font>  <br>
+							<a href="https://whcpumpkin.github.io">Hongcheng Wang</a> 	<font size="2" color='grey'> <I>2022</I></font>  <br>
+							<a href="https://jiyao06.github.io">Jiyao Zhang </a> 			<font size="2" color='grey'> <I>2023</I></font>  <br>
+							<a href="https://clorislili.github.io/clorisLi">Xiaoqi Li </a> 			<font size="2" color='grey'> <I>2023</I></font>  <br>
+							<a href="https://">Yang Tian </a> 												<font size="2" color='grey'> <I>2023</I></font>  <br>
+							<a href="https://lyx0501.github.io">Yuxing Long </a> 			<font size="2" color='grey'> <I>2024</I></font>  <br>
+							<a href="https://yuanfei-wang.github.io">Yuanfei Wang </a> 											<font size="2" color='grey'> <I>2024</I></font>  <br>
+						</td>
+
+						<td width=320px>
+								<b>MSc Students</b><br>
+								<a href="https://">Yunchong Gan </a> 												<font size="2" color='grey'> <I>2021</I></font>  <br>
+								<a href="https://">Taewhan Kim </a> 												<font size="2" color='grey'> <I>2022</I></font>  <br>
+								<a href="https://">Zichen Zhang </a> 												<font size="2" color='grey'> <I>2023</I></font>  <br>
+								<a href="https://">Fei Hu </a> 														<font size="2" color='grey'> <I>2023</I></font>  <br>
+								<a href="https://">Hisham Barakat </a> 											<font size="2" color='grey'> <I>2023</I></font>  <br>
+								<a href="https://">Yaroslav Ponomarenko </a> 								<font size="2" color='grey'> <I>2023</I></font>  <br>
+						</td>
+
+					</tr>
+				</table> -->
+
+					<!-- <tr>
+		<td>
+			<b>Affiliates and Collaborators</b><br>
+			<a href="http://people.csail.mit.edu/jahanian/">Ali Jahanian</a>, <a href="https://people.eecs.berkeley.edu/~shelhamer/">Evan Shelhamer</a>,
+			<a href="https://www.alexandonian.com/">Alex Andonian</a>, Kexin Yi, <a href="https://people.csail.mit.edu/xavierpuig/">Xavier Puig</a>,
+			<a href="http://www.mit.edu/~lishuang/">Shuang Li</a>, <a href="https://people.csail.mit.edu/davidbau/home/">David Bau</a>,
+			<a href="https://ps.is.mpg.de/person/jwulff">Jonas Wulff</a>, <a href="http://people.csail.mit.edu/ganchuang/">Chuang Gan</a>,
+			<a href="http://www.sabrina-osmany.com/about">Sabrina Osmany</a>
+		</td>
+		<td>
+			<b>Former Members and Visitors</b><br>
+			<a href="http://kvfrans.com/">Kevin Frans</a> (UROP 2018-2020), <a href="https://yilundu.github.io/">Yilun Du</a> (UROP 2019), Zhongxia Yan (Rotation 2019)
+		</td>
+	</tr> -->
+
+
+				<!-- <table class='personnel'>
+				<td>
+						<b>Former Interns</b><br>
+						Guanqi Zhan   	<font size="2" color='grey'> <I>BS@PKU -> PhD@Oxford</I></font>
+						Mingxin Yu  		<font size="2" color='grey'> <I>BS@PKU -> PhD@MIT</I></font>
+						Junning Shao 		<font size="2" color='grey'> <I>BS@PKU -> PhD@THU</I></font>
+						Zihan Ding  		<font size="2" color='grey'> <I>MSc@Imperial -> PhD@Princeton</I></font>	<br>
+						Jiahao Huang  	<font size="2" color='grey'> <I>BS@BIT -> PhD@Imperial</I></font>
+						Jialei Huang  	<font size="2" color='grey'> <I>BS@PKU -> PhD@THU</I></font>
+						Haoqi Yuan  		<font size="2" color='grey'> <I>BS@PKU -> PhD@PKU</I></font>
+						Andrew Zhao			<font size="2" color='grey'> <I>BS@UBC -> PhD@THU</I></font>	<br>
+						Yihao Zhao  		<font size="2" color='grey'> <I>BS@PKU -> PhD@PKU</I></font>
+						Bingchan Zhao  	<font size="2" color='grey'> <I>BS@PKU -> PhD@PKU</I></font>
+						Lan Lyu 	  		<font size="2" color='grey'> <I>BS@PKU -> MSc@CMU</I></font>
+						Minghang Zheng  <font size="2" color='grey'> <I>BS@PKU -> PhD@PKU</I></font>	<br>
+						Zizheng Guo  		<font size="2" color='grey'> <I>BS@PKU -> PhD@PKU</I></font>
+						Jie Ren  				<font size="2" color='grey'> <I>BS@XDU -> PhD@Edin.</I></font>
+						Yian Wang   		<font size="2" color='grey'> <I>BS@PKU -> PhD@UMass</I></font>
+						Kejian Shi  		<font size="2" color='grey'> <I>MSc@Imperial -> PhD@CUHK</I></font> <br>
+						Lin Dong  		  <font size="2" color='grey'> <I>PostDoc@PKU -> Associate Prof in AI@CUPES</I></font>
+						<br> <font color="#ff0000">招收校内外实习生 (gap year, 研究生等)，对博后、RA和外地访问学生提供充足补贴</font>
+					</td>
+					</table> -->
+
+			 <!-- </details> -->
+
+			</div>
+			<hr>
+
+
+			<!--
+<div class='section_div'>
+	<h2>News</h2>
+	<p>&#9659; New blog post on our work on <a href="https://blog.openai.com/evolved-policy-gradients/">Evolved Policy Gradients</a>.<br>
+	&#9659; I am co-organizing a <a href="https://sites.google.com/view/cvpr2018tutorialongans/">tutorial on GANs at CVPR 2018</a>.</p>
+	<p>I recently co-organised the <a href="http://vui.eecs.berkeley.edu/">2nd Workshop on Visual Understanding for Interaction</a> at CVPR 2017. Talk slides coming soon!</p>
+</div>
+<hr>
+-->
+
+			<div class='section_div'>
+				<h2>Services</h2>
+				<li> Area Chair: NeurIPS (2023, 2024), CVPR (2023, 2024)			   </li>
+				<li> Senior Program Committee: AAAI (2023, 2024)				   </li>
+				<li> Associate Editor: ICRA, Machine Intelligence Research </li>
+				<!-- <li class="service1">Open-Source Organisation: <a href="https://github.com/tensorlayer">TensorLayer</a> and <a href="https://github.com/openmlsys">OpenMLsys</a> communities</li> -->
+				<!-- <li class="service2">Journal Organisation
+					<ul>
+					<li> Associate Editor of Machine Intelligence Research
+					</ul>
+				</li> -->
+
+			<!-- <details><summary><b><font color="1367a7"> show more</font></b></summary> -->
+				<!-- <li> Conference & Workshop Organisation
+						<ul>
+						<li> Co-chair of Learning Robot Manipulation Forum @ PRCV 2022
+						<li> Co-chair of <a href="https://neurips-hill.github.io">Human in the Loop Learning (HiLL) Workshop</a> @ NeurIPS 2022
+						<li> Organiser of <a href="http://saferl.online/2022">International Workshop on Safe Reinforcement Learning Theory and its Applications</a> @ IEEE International Conference on Multisensor Fusion and Integration (MFI) 2022
+						<li> Co-chair of <a href="https://bda4s.github.io"> International Workshop on Big Data Analytics for Sustainability</a> @ IEEE International Conference Big Data 2022
+						<li> Technical Program Committee of <a href="http://www.ieee-cybermatics.org/2022/dependsys/index.html"> IEEE DependSys 2022</a>
+						</ul>
+				</li> -->
+				<!-- <li >Organizer of the 1st International Workshop on Safe Reinforcement Learning Theory and its Applications at IEEE International Conference on Multi-sensor Fusion and Integration (MFI) 2022</li> -->
+				<!-- <li>Co-chair of the 2nd International Workshop on Big Data Analytics for Sustainability at IEEE International Conference Big Data 2022</li> -->
+				<!-- <li> Peer-reviewed Journals and Conferences
+					<ul>
+					<li> Associate Editor, ICRA (24)					 </li>
+					<li> Area Chair, NeurIPS (23)					 </li>
+					<li> Area Chair, CVPR (23, 24)					 </li>
+					<li> Senior Program Committee, AAAI (23, 24)				 </li>
+					<li> Reviewer, ICLR (23)						 </li>
+					<li> Reviewer, NeurIPS Dataset and Benchmark (22)	 </li>
+					<li> Reviewer, NeurIPS (21,22)					 </li>
+					<li> Reviewer, CoRL (20,21,22)					 </li>
+					<li> Reviewer, IROS (20,21,22)					 </li>
+					<li> Reviewer, CVPR (21,22)						 </li>
+					<li> Program Committee, AAAI (22)					 </li>
+					<li> Reviewer, ICRA (22)								 </li>
+					<li> Reviewer, ICCV (21)								 </li>
+					<li> Reviewer, SIGGRAPH Asia (20)					 </li>
+					<li> Reviewer, MICCAI (20)								 </li>
+					<li> Reviewer, China CAD&CG (20)					 </li>
+					<li> Reviewer, EuroGRAPHICS (20)					 </li>
+					<li> Reviewer, PAMI (19)								 </li>
+					<li> Reviewer, SIGGRAPH (19)						 </li>
+					<li> Reviewer, TIP (18)					 					</li>
+					<li> Reviewer, TKDE (18)					 				</li>
+					<li> Reviewer, PLUS ONE (18)					 			</li>
+					<li> Reviewer, Neurocomputing (17)					 </li>
+					</ul>
+				</li> -->
+				<!-- </ul> -->
+			<!-- </details> -->
+				<!-- <li>Program Commitee of IEEE CBMS</li> -->
+				<!-- <a class="btn btn_one" onclick="servicesShow()">[ <span> <b>show more</b></span> ]</a> -->
+			</div>
+			<hr>
+
+
+
+						<div class='section_div'>
+							<h2>Courses</h2>
+								<li><a href="courses/index_foundamentals_of_AI.html">Foundamentals of AI</a> (Spring Term 2023 - )<br>
+								<li><a href="courses/index_introduction_to_computing_A.html">Introduction to Computing (A)</a> (Fall Term 2022 - )<br></li>
+							</li>
+
+							<details><summary><b><font color="1367a7"> previous courses</font></b></summary>
+								<li><a href="https://deep-generative-models.github.io">Deep Generative Models</a> (Spring Term 2020 - 2022)<br>
+								<li><a href="courses/index_introduction_to_computing_B.html">Introduction to Computing (B)</a> (Fall Term 2020 - 2021)<br></li>
+								<li><a href="http://elective.pku.edu.cn/elective2008/edu/pku/stu/elective/controller/courseDetail/getCourseDetail.do?kclx=BK&course_seq_no=BZ1920104833460_15539">Study and Practice on Topics of Frontier Computing (I)</a> (Autumn Term 2019)<br></li>
+								<li><a href="courses/deep-learning/2019_introduction_deep_learning.html">Introduction to Deep Learning (Turing Class)</a> (Summer Term 2019)<br></li>
+							</details>
+
+						</div>
+						<hr>
+
+
+						<!-- <div class='section_div'>
+			<h2>Team</h2>
+			<li><a href="https://warshallrho.github.io">Ruihai Wu</a> Ph.D. 2020~Now<br></li>
+			<li><a href="https://github.com/zjduan">Zhijian Duan</a> Ph.D. 2020~Now<br></li>
+			</div>
+			<hr> -->
+
+						<!-- <div class='section_div'>
+			<h2>Team</h2>
+			<a href="https://warshallrho.github.io">Ruihai Wu</a> (Ph.D 2019)<br>
+			<a href="https://warshallrho.github.io">Jiabin Liu</a> (Post Doc 2019)<br>
+			</div>
+			<hr> -->
+
+			<div class='section_div'>
+				<!--
+	<h2>Publications</h2>
+	For all publications please check my <a href="https://scholar.google.co.uk/citations?hl=en&user=xLFL4sMAAAAJ">Google Scholar</a> and
+	<a href="https://www.researchgate.net/profile/Hao_Dong35">Research Gate</a> </a>.
+	<br><br> -->
+
+				<table class="pub_table">
+
+					<!--
+  <tr><td class="sub_heading">Selected Papers<hr></td></tr>
+
+	<tr>
+ 	 <td class="pub_td1"><div class="teaser_img_div"><a href="https://arxiv.org/abs/1707.06873"><img class="teaser_img" src='images/paper/2017iccv_sisgan.png'/></a></div></td>
+ 	 <td class="pub_td2"><b>SisGAN: Semantic Image Synthesis via Adversarial Learning</b> <br> <i>  ---Image Manipulation with Natural Language</i> <br>Hao Dong, Simiao Yu, Chao Wu, Yike Guo<br><i>International Conference on Computer Vision (ICCV) 2017</i><br>[<a href="https://arxiv.org/abs/1707.06873">Paper</a>]
+  </td></tr>
+
+	<tr>
+ 	 <td class="pub_td1"><div class="teaser_img_div"><a href="http://github.com/tensorlayer/tensorlayer/"><img class="teaser_img" src='images/paper/2017acmmm_tensorlayer.png'/></a></div></td>
+ 	 <td class="pub_td2"><b>TensorLayer: A Versatile Library for Efficient Deep Learning Development</b><br>Hao Dong, Akara Supratak, Luo Mai, Fangde Liu, Axel Oehmichen, Simiao Yu, Yike Guo<br><i>ACM Multimedia (MM) 2017 (Winner of the Best Open Source Software Award)</i><br>[<a href="https://arxiv.org/abs/1707.08551">Paper</a>] [<a href="http://github.com/tensorlayer/tensorlayer/">Code</a>] [<a href="http://github.com/tensorlayer">Organisation</a>] [<a href="http://tensorlayer.readthedocs.io">Documentation</a>]
+  </td></tr>
+
+	<tr>
+ 	 <td class="pub_td1"><div class="teaser_img_div"><a href="https://arxiv.org/abs/1610.06421"><img class="teaser_img" src='images/paper/2017tnsre_mnn.png'/></a></div></td>
+ 	 <td class="pub_td2"><b>Mixed Neural Network Approach for Temporal Sleep Stage Classification</b><br>Hao Dong, Akara Supratak, Wei Pan, Chao Wu, Paul M Matthews, Yike Guo<br><i>IEEE Trans. on Neural Systems and Rehabilitation Eng. (TNSRE) 2017</i><br>[<a href="https://arxiv.org/abs/1610.06421">Paper</a>]
+  </td></tr>
+
+	<tr>
+ 	 <td class="pub_td1"><div class="teaser_img_div"><a href="https://arxiv.org/abs/1711.07520"><img class="teaser_img" src='images/paper/2017tifs_drop.png'/></a></div></td>
+ 	 <td class="pub_td2"><b>Dropping Activation Outputs with Localized First-layer Deep Network for Enhancing User Privacy and Data Security</b><br>Hao Dong, Chao Wu, Wei Zhen, Yike Guo<br><i>IEEE Trans. on Inform. Forensics and Security (TIFS) 2018</i><br>[<a href="https://arxiv.org/abs/1711.07520">Paper</a>]
+  </td></tr> -->
+
+					<tr>
+						<td class="sub_heading">Books
+							<hr>
+						</td>
+					</tr>
+					<tr>
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://deepreinforcementlearningbook.org"><img class="teaser_img"
+										src='images/paper/2020drl_book_cover_v3-min.png' /></a></div>
+						</td>
+						<td class="pub_td2"><b>Deep Reinforcement Learning: Fundamentals, Research and Applications</b>
+							<br>Hao Dong, Zihan Ding, Shanghang Zhang <i>Eds.</i> <br><i>Springer Nature 2020 ISBN 978-981-15-4094-3</i>
+							<!--, 1st ed.</i>-->
+
+							<details><summary><b><font color="1367a7">Chinese version</font></b></summary>
+									<!-- <p> - 测试 测试测试</p>
+										<pre><code>  title，value，callBack可以缺省  </code>  </pre> -->
+										<b>深度强化学习：基础、研究与应用</b> 董豪、丁子涵、仉尚航 等著（简体中文译本 Simplified Chinese）<br> <i>电子工业出版社 2021 ISBN
+											978-7-121-41188-5</i>
+										<br><b>新一代AI霸主 - 深度強化學習</b> 董豪、丁子涵、仉尚航 等著（繁體中文譯本 Traditional Chinese）<br> <i>深智數位 2022 ISBN
+											978-986-0776-82-9</i>
+						 </details>
+							[<a href="https://deepreinforcementlearningbook.org">Free Open Source Book</a>] [<a
+								href="https://link.springer.com/book/10.1007%2F978-981-15-4095-0#editorsandaffiliations">Springer</a>]
+							[<a href="http://www.broadview.com.cn/book/6544">Broadview</a>] [<a
+								href="https://deepmind.com.tw">繁体版本</a>] [<a
+								href="https://search.jd.com/Search?keyword=深度强化学习%20董豪&enc=utf-8&suggest=1.def.0.base&wq=深度强化学习：基&pvid=3481b24e95ae4b86ba80128820fd563c">京东</a>]
+						</td>
+					</tr>
+
+					<tr>
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://openmlsys.github.io"><img class="teaser_img"
+										src='images/paper/2023openmlsys.png' /></a></div>
+						</td>
+						<td class="pub_td2"><b>Machine Learning System: Design and Implementation</b><br>Luo Mai, Hao
+							Dong <i>Eds.</i> <i>Springer Nature 2024 coming soon</i> <br>
+							<details><summary><b><font color="1367a7">Chinese version</font></b></summary>
+								<b>机器学习系统：设计与实现 </b> 麦络、董豪 <i>等著</i> <br>
+									<i>清华大学出版社 Tsinghua University Press 2023 ISBN 978-7-302-63007-4</i>
+							</details>
+							<!-- <br> -->
+							  [<a href="https://github.com/openmlsys">OpenMLsys Github</a>]
+								[<a	href="https://openmlsys.github.io/html-en/">English Open Source Book (coming soon)</a>]
+								[<a	href="https://openmlsys.github.io">Chinese Open Source Book</a>]
+								[<a href="https://search.jd.com/Search?keyword=机器学习系统：设计与实现&enc=utf-8&wq=机器学习系统：设计与实现&pvid=526e181cdf58456d842f3580fff9f1d5">京东</a>]
+
+						</td>
+					</tr>
+
+					<!-- <div id="MoreBook"> -->
+					<!-- <table id='table1'> -->
+
+					<!-- <tr><td class="sub_heading"><hr></td> -->
+
+
+					<!-- <tr class="level_0"><td class="company haschild"><p class="c_title" style="color:#1367a7;"><b>Show more ...</b></p></td> -->
+
+					<!-- <tr class="level_1">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="http://www.broadview.com.cn/book/5059"><img class="teaser_img"
+										src='images/paper/2018phei_tensorlayer_book3-min.png' /></a></div>
+						</td>
+						<td class="pub_td2"><b> 深度学习：一起玩转TensorLayer（Deep Learning using TensorLayer）</b><br>Hao Dong, Yike Guo,
+							Guang Yang et al<br><i>电子工业出版社 Publishing House of Electronics Industry 2018 ISBN:
+								9787121326226</i><br>[<a
+								href="https://www.amazon.com/深度学习-丄1�71ￄ1�771ￄ1�71ￄ1�777起玩转TensorLayer-董豪-筄1�71ￄ1�771ￄ1�71ￄ1�777/dp/B078YDZTCY/ref=sr_1_2?keywords=tensorlayer&qid=1570048255&s=gateway&sr=8-2">Amazon</a>]
+							[<a
+								href="https://search.jd.com/Search?keyword=tensorlayer&enc=utf-8&wq=tensorl&pvid=555e73b10c134c339afddc63c7ecdd8a">京东</a>]
+							[<a href="http://www.broadview.com.cn/book/5059">Broadview</a>] [<a
+								href="https://github.com/tensorlayer/chinese-book">Code</a>]
+							[<a href="http://github.com/tensorlayer">Organisation</a>] [<a
+								href="http://tensorlayer.readthedocs.io">Documentation</a>]
+						</td>
+					</tr> -->
+
+					<!-- <tr class="level_1">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://link.springer.com/chapter/10.1007/978-3-319-50478-0_8"><img
+										class="teaser_img" src='images/paper/2016springer_survey_v2-min.png' /></a></div>
+						</td>
+						<td class="pub_td2"><b>Chapter: Survey on Feature Extraction and Applications of Biosignals</b><br>Akara
+							Supratak, Chao Wu, Hao Dong, Kai Sun, Yike Guo<br><i>Machine Learning for Health Informatics, Springer,
+								Page 161-182 2016</i><br>[<a
+								href="https://link.springer.com/chapter/10.1007/978-3-319-50478-0_8">Springer</a>]
+						</td>
+					</tr>
+					 -->
+
+					<!-- <tr>
+						<td></td>
+						<td><a class="btn btn_two" onclick="trShow()">[ <span><b>show more</b></span> ]</a></td>
+					</tr> -->
+
+					<!-- </tr> -->
+
+					<!-- </table> -->
+					<!-- </div> -->
+					<!-- <button onclick=document.all["morebook"].style.display="none">show less</button>
+		<button onclick=document.all["morebook"].style.display="block">show more</button> -->
+
+
+
+		<!-- Recent Papers -->
+
+					<tr>
+						<td class="sub_heading">Papers
+							<hr>
+						</td>
+						<td>
+							(
+								<a class="all_Btn" onclick="showInfo(1)"> <span><b>show recent selected</b></span> </a> /
+								<!-- <a class="all_Btn" onclick="showInfo(2)"> <span>Before 2020</span> </a> /  -->
+								<a class="all_Btn" onclick="showInfo(3)"><span><b>show more</b></span></a>
+							)
+						</td>
+
+						<!-- <tr>
+	 	 <td class="pub_td1"><div class="teaser_img_div"><a href="https://arxiv.org/pdf/20xx.xxx.pdf"><img class="teaser_img" src='images/paper/2021pmoe-min.png'/></a></div></td>
+	 	 <td class="pub_td2"><b>Probabilistic Mixture-of-Experts for Efficient Deep Reinforcement Learning</b><br>Jie Ren*, Yewen Li*, Zihan Ding, Wei Pan, Hao Dong<br><i>arXiv 20xx.xxx</i><br>[<a href="https://arxiv.org/pdf/20xxxx.pdf">Paper</a>]
+	</td></tr> -->
+
+					<tr class="paper1">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/pdf/2406.13642"><img class="teaser_img"
+										src='images/paper/2024SpatialBot-min.jpg' /></a></div>
+						</td>
+						<td class="pub_td2"><b>SpatialBot: Precise Spatial Understanding with Vision Language Models</b>
+							<br>Wenxiao Cai, Yaroslav Ponomarenko, Jianhao Yuan, Xiaoqi Li, Wankou Yang, Hao Dong, Bo Zhao<br>
+							<i>arXiv 2024</i><br>
+							[<a href="https://arxiv.org/pdf/2406.13642">Paper</a>]
+							[<a href="https://github.com/BAAI-DCAI/SpatialBot">Code</a>]
+							[<a href="https://mp.weixin.qq.com/s/X1iqkkEMsop9DGCY08AfCw">机器之心</a>]
+						</td>
+					</tr>
+
+					<tr class="paper1">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://garmentlab.github.io"><img class="teaser_img"
+										src='images/paper/2024NeurIPS-GarmentLab-min.png' /></a></div>
+						</td>
+						<td class="pub_td2"><b>GarmentLab: A Unified Simulation and Benchmark for Garment Manipulation</b>
+							<br>Haoran Lu, Yitong Li, Ruihai Wu, Sijie Li, Ziyu Zhu, Chuanruo Ning, Yan Shen, Longzan Luo, Yuanpei Chen, Hao Dong<br>
+							<i>Neural Information Processing System (NeurIPS) 2024</i><br>
+							[Paper]
+							[<a href="https://garmentlab.github.io">Webpage</a>]
+							[<a href="https://github.com/GarmentLab">Code</a>]
+							[<a href="https://garmentlab.readthedocs.io/en/latest/">Docs</a>]
+						</td>
+					</tr>
+
+					<tr class="paper1">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://XXXX"><img class="teaser_img"
+										src='images/paper/2024NeurIPS-MO-DDN-min.jpg' /></a></div>
+						</td>
+						<td class="pub_td2"><b>MO-DDN: A Coarse-to-Fine Attribute-based Exploration Agent for Multi-Object Demand-driven Navigation</b>
+							<br>Hongcheng Wang, Peiqi Liu, Wenzhe Cai, Mingdong Wu, Zhengyu Qian, Hao Dong<br>
+							<i>Neural Information Processing System (NeurIPS) 2024</i><br>
+							[Paper]
+						</td>
+					</tr>
+
+					<tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://www.nature.com/articles/s42256-024-00879-7#:~:text=In%20this%20section,%20we%20introduce%20the%20results%20of%20our%20method"><img class="teaser_img"
+										src='images/paper/2024NMI-RL.jpg' /></a></div>
+						</td>
+						<td class="pub_td2"><b>Efficient and Scalable Reinforcement Learning for Large-scale Network Control</b>
+							<br>Chengdong Ma, Aming Li, Yali Du, Hao Dong, Yaodong Yang<br>
+							<i>Nature Machine Intelligence (NMI) 2024</i><br>
+							[<a href="https://www.nature.com/articles/s42256-024-00879-7#:~:text=In%20this%20section,%20we%20introduce%20the%20results%20of%20our%20method">Paper</a>]
+							[<a href="https://app.xinhuanet.com/news/article.html?articleId=b0c7469d95e5d02dd0c99aad3aa57f95&timestamp=21907">新华网</a>]
+							[<a href="https://www.stdaily.com/web/gdxw/2024-09/03/content_223871.html">科技日报</a>]
+						</td>
+					</tr>
+
+					<tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/pdf/2406.17898"><img class="teaser_img"
+										src='images/paper/2024PRSChallenge-min.jpg' /></a></div>
+						</td>
+						<td class="pub_td2"><b>Human-centered In-building Embodied Delivery Benchmark</b>
+							<br>Zhuoquan Xu, Yang Liu, Xiaoqi Li, Jiyao Zhang, Hao Dong<br>
+							<i>arXiv 2024</i><br>
+							[<a href="https://arxiv.org/pdf/2406.17898">Paper</a>]
+							[<a href="https://prsorg.github.io/#introduction">Webpage</a>]
+						</td>
+					</tr>
+
+					<tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://unidexfpm.github.io/unidexfpm.pdf"><img class="teaser_img"
+										src='images/paper/2024UniDexFPM-min.jpg' /></a></div>
+						</td>
+						<td class="pub_td2"><b>UniDexFPM: Universal Dexterous Functional Pre-grasp Manipulation via Diffusion Policy</b>
+							<br>Tianhao Wu, YunChong Gan, Mingdong Wu, Jingbo Cheng, Yaodong Yang, Yixin Zhu, Hao Dong<br>
+							<i>arXiv 2024</i><br>
+							[<a href="https://unidexfpm.github.io/unidexfpm.pdf">Paper</a>]
+							[<a href="https://unidexfpm.github.io">Webpage</a>]
+						</td>
+					</tr>
+
+					<tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/pdf/2406.07579"><img class="teaser_img"
+										src='images/paper/2024GFPack++-min.jpg' /></a></div>
+						</td>
+						<td class="pub_td2"><b>GFPack++: Improving 2D Irregular Packing by Learning Gradient Field with Attention</b>
+							<br>Tianyang Xue, Lin Lu, Yang Liu, Mingdong Wu, Hao Dong, Yanbin Zhang, Renmin Han, Baoquan Chen<br>
+							<i>arXiv 2024</i><br>
+							[<a href="https://arxiv.org/pdf/2406.07579">Paper</a>]
+						</td>
+					</tr>
+
+					<tr class="paper1">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/pdf/2406.04882"><img class="teaser_img"
+										src='images/paper/2024InstructNav-min.jpg' /></a></div>
+						</td>
+						<td class="pub_td2"><b>InstructNav: Zero-shot System for Generic Instruction Navigation in Unexplored Environment</b>
+							<br><i><font color="#1367a7">--- The world's first general navigation large model that unifies all embodied navigation paradigms within one single framework.</font></i>
+							<br>Yuxing Long, Wenzhe Cai, Hongcheng Wang, Guanqi Zhan, Hao Dong<br>
+							<i>Conference on Robot Learning (CoRL) 2024</i><br>
+							[<a href="https://arxiv.org/pdf/2406.04882">Paper</a>]
+							[<a href="https://sites.google.com/view/instructnav">Webpage</a>]
+							[<a href="https://github.com/LYX0501/InstructNav">Code</a>]
+							[<a href="https://mp.weixin.qq.com/s/T145ZQlDBTWyX621mNVYGQ">量子位</a>]
+						</td>
+					</tr>
+
+					<tr class="paper1">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/pdf/2406.11548"><img class="teaser_img"
+										src='images/paper/2024AIC-MLLM-min.jpg' /></a></div>
+						</td>
+						<td class="pub_td2"><b>AIC-MLLM: Autonomous Interactive Correction MLLM for Robust Robotic Manipulation</b>
+							<br><i><font color="#1367a7">--- The first automatic system for low-level end-effector action correction in manipulation tasks.</font></i>
+							<br>Chuyan Xiong, Chengyu Shen, Xiaoqi Li, Kaichen Zhou, Jiaming Liu, Ruiping Wang, Hao Dong<br>
+							<i>Conference on Robot Learning (CoRL) 2024</i><br>
+							[<a href="https://arxiv.org/pdf/2406.11548">Paper</a>]
+							[<a href="https://sites.google.com/view/aic-mllm">Webpage</a>]
+						</td>
+					</tr>
+
+					<tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/pdf/2406.07549"><img class="teaser_img"
+										src='images/paper/2024A3VLM-min.jpg' /></a></div>
+						</td>
+						<td class="pub_td2"><b>A3VLM: Actionable Articulation-Aware Vision Language Model</b>
+							<br>Siyuan Huang, Haonan Chang, Yuhan Liu, Yimeng Zhu, Hao Dong, Peng Gao, Abdeslam Boularias, Hongsheng Li<br>
+							<i>Conference on Robot Learning (CoRL) 2024</i><br>
+							[<a href="https://arxiv.org/pdf/2406.07549">Paper</a>]
+							[<a href="https://github.com/changhaonan/A3VLM">Code</a>]
+							[<a href="https://mp.weixin.qq.com/s/1pRcbz1rqQjq2GWqyUqg6Q">OpenGVLab摘要</a>]
+						</td>
+					</tr>
+
+					<tr class="paper1">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/pdf/2403.08355"><img class="teaser_img"
+										src='images/paper/2024RAL-NaturalVLM-min.jpg' /></a></div>
+						</td>
+						<td class="pub_td2"><b>NaturalVLM: Leveraging Fine-grained Natural Language for Affordance-Guided Visual Manipulation</b>
+							<br>Ran Xu, Yan Shen, Xiaoqi Li, Ruihai Wu, Hao Dong<br>
+							<i>IEEE Robotics and Automation Letters (RAL) 2024</i><br>
+							[<a href="https://arxiv.org/pdf/2403.08355">Paper</a>]
+							[<a href="https://sites.google.com/view/naturalvlm">Webpage</a>]
+						</td>
+					</tr>
+
+					<tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/pdf/2403.02604.pdf"><img class="teaser_img"
+										src='images/paper/2024UniDoorManip-min.jpg' /></a></div>
+						</td>
+						<td class="pub_td2"><b>UniDoorManip: Learning Universal Door Manipulation Policy over Large-scale and Diverse Door Manipulation Environments</b>
+							<br>Yu Li*, Xiaojie Zhang*, Ruihai Wu*, Zilong Zhang, Yiran Geng, Hao Dong, Zhaofeng He<br>
+							<i>arXiv 2024</i><br>
+							[<a href="https://arxiv.org/pdf/2403.02604.pdf">Paper</a>]
+							[<a href="https://unidoormanip.github.io">Webpage</a>]
+							[<a href="https://mp.weixin.qq.com/s/MTyLXXAx6vv_dS8wUZfMVw">量子位</a>]
+						</td>
+					</tr>
+
+					<tr class="paper1">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://jiyao06.github.io/Omni6DPose/"><img class="teaser_img"
+										src='images/paper/2024ECCV-Omni6DPose-min.jpg' /></a></div>
+						</td>
+						<td class="pub_td2"><b>Omni6DPose: A Benchmark and Model for Universal 6D Object Pose Estimation and Tracking</b>
+							<br><i><font color="#1367a7">--- The largest-scale benchmark for universal 6D object pose estimation.</font></i>
+							<br>Jiyao Zhang, Weiyao Huang, Bo Peng, Mingdong Wu, Fei Hu, Zijian Chen, Bo Zhao, Hao Dong<br>
+							<i>European Conference on Computer Vision (ECCV) 2024</i><br>
+							[<a href="https://arxiv.org/abs/2406.04316">Paper</a>]
+							[<a href="https://jiyao06.github.io/Omni6DPose/">Webpage</a>]
+							[<a href="https://github.com/Omni6DPose">Code</a>]
+							[<a href="https://mp.weixin.qq.com/s/wasOMlVaSNgMWO-g1I2-Dg">计算机视觉工坊</a>]
+						</td>
+					</tr>
+
+					<tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/pdf/2407.15771v1"><img class="teaser_img"
+										src='images/paper/2024ECCV-OccupancyGrasp-min.jpg' /></a></div>
+						</td>
+						<td class="pub_td2"><b>Local Occupancy-Enhanced Object Grasping with Multiple Triplanar Projection</b>
+							<br>Kangqi Ma, Hao Dong, Yadong Mu<br>
+							<i>European Conference on Computer Vision (ECCV) 2024</i><br>
+							[<a href="https://arxiv.org/pdf/2407.15771v1">Paper</a>]
+						</td>
+					</tr>
+
+					<!-- <tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/abs/2406.04316"><img class="teaser_img"
+										src='images/paper/2024ECCV-min.jpg' /></a></div>
+						</td>
+						<td class="pub_td2"><b>Local Occupancy-Enhanced Object Grasping with Multiple Triplanar Projection</b>
+							<br>Kangqi Ma, Hao Dong, Yadong Mu<br>
+							<i>European Conference on Computer Vision (ECCV) 2024</i><br>
+						</td>
+					</tr> -->
+
+					<tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/pdf/2404.03634.pdf"><img class="teaser_img"
+										src='images/paper/2024PreAfford-min.jpg' /></a></div>
+						</td>
+						<td class="pub_td2"><b>PreAfford: Universal Affordance-Based Pre-Grasping for Diverse Objects and Environments</b>
+							<br>Kairui Ding, Boyuan Chen, Ruihai Wu, Yuyang Li, Zongzheng Zhang, Huan-ang Gao, Siqi Li, Yixin Zhu, Guyue Zhou, Hao Dong, Hao Zhao<br>
+							<i>International Conference on Intelligent Robots and Systems (IROS) 2024 (Oral) </i><br>
+							[<a href="https://arxiv.org/pdf/2404.03634.pdf">Paper</a>]
+							[<a href="https://air-discover.github.io/PreAfford/">Webpage</a>]
+						</td>
+					</tr>
+
+					<tr class="paper1">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/pdf/2403.11289.pdf"><img class="teaser_img"
+										src='images/paper/2024ManipVQA-min.jpg' /></a></div>
+						</td>
+						<td class="pub_td2"><b>ManipVQA: Injecting Robotic Affordance and Physically Grounded Information into Multi-Modal Large Language Models</b>
+							<br>Siyuan Huang, Iaroslav Ponomarenko, Zhengkai Jiang, Xiaoqi Li, Xiaobin Hu, Peng Gao, Hongsheng Li, Hao Dong<br>
+							<i>International Conference on Intelligent Robots and Systems (IROS) 2024 (Oral)</i><br>
+							[<a href="https://arxiv.org/pdf/2403.11289.pdf">Paper</a>]
+							<!-- [<a href="https://unidexfpm.github.io">Webpage</a>] -->
+							[<a href="https://github.com/SiyuanHuang95/ManipVQA">Code</a>]
+						</td>
+					</tr>
+
+					<tr class="paper1">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/pdf/2403.18195"><img class="teaser_img"
+										src='images/paper/2024IROS-SCANet-min.jpg' /></a></div>
+						</td>
+						<td class="pub_td2"><b>SCANet: Correcting LEGO Assembly Errors with Self-Correct Assembly Network</b>
+							<br>Yuxuan Wan, Kaichen Zhou, Jinhong Chen, Hao Dong<br>
+							<i>International Conference on Intelligent Robots and Systems (IROS) 2024 (Oral)</i><br>
+							[<a href="https://arxiv.org/pdf/2403.18195">Paper</a>]
+							<!-- [<a href="https://unidexfpm.github.io">Webpage</a>] -->
+							[<a href="https://github.com/Yaser-wyx/SCANet">Code</a>]
+						</td>
+					</tr>
+
+					<tr class="paper1">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/pdf/2406.02283"><img class="teaser_img"
+										src='images/paper/2024RSSclutter-min.png' /></a></div>
+						</td>
+						<td class="pub_td2"><b>Broadcasting Support Relations Recursively from Local Dynamics for Object Retrieval in Clutters</b>
+							<br>Yitong Li*, Ruihai Wu*, Haoran Lu, Chuanruo Ning, Yan Shen, Guanqi Zhan, Hao Dong<br>
+							<i>Robotics: Science and Systems (RSS) 2024</i><br>
+							[<a href="https://arxiv.org/pdf/2406.02283">Paper</a>]
+							[<a href="https://lyttttt3333.github.io/broadcast.github.io/">Webpage</a>]
+							[<a href="https://github.com/lyttttt3333/Broadcast_Support_Relation">Code</a>]
+						</td>
+					</tr>
+
+					<tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/abs/2406.00439"><img class="teaser_img"
+										src='images/paper/2024RSS-MPI-min.jpg' /></a></div>
+						</td>
+						<td class="pub_td2"><b>MPI: Learning Manipulation by Predicting Interaction</b>
+							<br>Jia Zeng, Qingwen Bu, Bangjun Wang, Wenke Xia, Li Chen, Hao Dong, Haoming Song, Dong Wang, Di Hu, Ping Luo, Heming Cui, Bin Zhao, Xuelong Li, Yu Qiao, Hongyang Li<br>
+							<i>Robotics: Science and Systems (RSS) 2024</i><br>
+							[<a href="https://arxiv.org/abs/2406.00439">Paper</a>]
+							[<a href="https://opendrivelab.github.io/mpi.github.io/#">Webpage</a>]
+							[<a href="https://github.com/OpenDriveLab/MPI">Code</a>]
+						</td>
+					</tr>
+
+					<tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/pdf/2312.11562.pdf"><img class="teaser_img"
+										src='images/paper/2023SurveyReasoning-min.jpg' /></a></div>
+						</td>
+						<td class="pub_td2"><b>A Survey of Reasoning with Foundation Models</b>
+							<br>Jiankai Sun, Chuanyang Zheng, Enze Xie, Zhengying Liu, Ruihang Chu, Jianing Qiu, Jiaqi Xu, Mingyu Ding, Hongyang Li, Mengzhe Geng, Yue Wu, Wenhai Wang, Junsong Chen, Zhangyue Yin, Xiaozhe Ren, Jie Fu, Junxian He, Wu Yuan, Qi Liu, Xihui Liu, Yu Li, Hao Dong, Yu Cheng, Ming Zhang, Pheng Ann Heng, Jifeng Dai, Ping Luo, Jingdong Wang, Ji-Rong Wen, Xipeng Qiu, Yike Guo, Hui Xiong, Qun Liu, Zhenguo Li<br>
+							<i>arXiv 2023</i><br>
+							[<a href="https://arxiv.org/pdf/2312.11562.pdf">Paper</a>]
+							[<a href="https://github.com/reasoning-survey/Awesome-Reasoning-Foundation-Models">Github</a>]
+							<a href="https://github.com/reasoning-survey/Awesome-Reasoning-Foundation-Models"><img alt="GitHub Stars" style="vertical-align:middle" src="https://img.shields.io/github/stars/reasoning-survey/Awesome-Reasoning-Foundation-Models?style=social"/></a>
+						</td>
+					</tr>
+
+					<tr class="paper1">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/pdf/2312.01474.pdf"><img class="teaser_img"
+										src='images/paper/2023lvdiffusion-min.jpg' /></a></div>
+						</td>
+						<td class="pub_td2"><b>LVDiffusor: Distilling Functional Rearrangement Priors from Large Models into Diffusor</b>
+							<br>Yiming Zeng*, Mingdong Wu*, Long Yang, Jiyao Zhang, Hao Ding, Hui Cheng, Hao Dong<br>
+							<i>IEEE Robotics and Automation Letters (RAL) 2024</i><br>
+							[<a href="https://arxiv.org/pdf/2312.01474.pdf">Paper</a>]
+							[<a href="https://sites.google.com/view/lvdiffusion">Webpage</a>]
+						</td>
+					</tr>
+
+					<tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://xx"><img class="teaser_img"
+										src='images/paper/2024ICMR-Pattern4Ego-min.jpg' /></a></div>
+						</td>
+						<td class="pub_td2"><b>Pattern4Ego: Learning Egocentric Video Representation Using Cross-Video Activity Patterns</b>
+							<br>Ruihai Wu, Yourong Zhang, Yu Qi, Andy Guanhong Chen, Hao Dong<br>
+							<i>International Conference on Multimedia Retrieval (ICMR) 2024</i><br>
+							[<a href="https://dl.acm.org/doi/10.1145/3652583.3658010">Paper</a>]
+						</td>
+					</tr>
+
+					<tr class="paper1">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/pdf/2312.16217.pdf"><img class="teaser_img"
+										src='images/paper/2024CVPR-ManipLLM-min.jpg' /></a></div>
+						</td>
+						<td class="pub_td2"><b>ManipLLM: Embodied Multimodal Large Language Model for Object-Centric Robotic Manipulation</b>
+							<br>Xiaoqi Li, Mingxu Zhang, Yiran Geng, Haoran Geng, Yuxing Long, Yan Shen, Renrui Zhang, Jiaming Liu, Hao Dong<br>
+							<i>Conference on Computer Vision and Pattern Recognition (CVPR) 2024</i><br>
+							[<a href="https://arxiv.org/pdf/2312.16217.pdf">Paper</a>]
+							[<a href="https://sites.google.com/view/manipllm">Webpage</a>]
+							[<a href="https://github.com/clorislili/ManipLLM">Code</a>]
+							[<a href="https://mp.weixin.qq.com/s/YTvN6VDmP9aSxvI5M3YVCg">量子位</a>]
+							[<a href="https://mp.weixin.qq.com/s/FkTsKEeSREG9qy0iwrbzdA">强化学习技术前沿</a>]
+							[<a href="https://mp.weixin.qq.com/s/iX4K5TcCKttlq1vdl9MCtg">集智书童</a>]
+						</td>
+					</tr>
+
+					<tr class="paper1">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/abs/2405.06903"><img class="teaser_img"
+										src='images/paper/2024CVPR-GarmentManip-min.jpg' /></a></div>
+						</td>
+						<td class="pub_td2"><b>UniGarmentManip: A Unified Framework for Category-Level Garment Manipulation via Dense Visual Correspondence</b>
+							<br>Ruihai Wu, Haoran Lu, Yiyan Wang, Yubo Wang, Hao Dong<br>
+							<i><font color="#1367a7">--- The world's first work of category-level garment manipulation with only few-shot demonstrations</font></i><br>
+							<i>Conference on Computer Vision and Pattern Recognition (CVPR) 2024</i><br>
+							[<a href="https://arxiv.org/abs/2405.06903">Paper</a>]
+							[<a href="https://warshallrho.github.io/unigarmentmanip">Webpage</a>]
+							[<a href="https://github.com/luhr2003/UniGarmentManip">Code</a>]
+						</td>
+					</tr>
+
+					<tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/pdf/2404.04050.pdf"><img class="teaser_img"
+										src='images/paper/2024CVPR-lessinmore-min.jpg' /></a></div>
+						</td>
+						<td class="pub_td2"><b>No Time to Train: Empowering Non-Parametric Networks for Few-shot 3D Scene Segmentation</b>
+							<br>Xiangyang Zhu, Renrui Zhang, Bowei He, Ziyu Guo, Jiaming Liu, Han Xiao, Chaoyou Fu, Hao Dong, Peng Gao<br>
+							<i>Conference on Computer Vision and Pattern Recognition (CVPR) 2024 (Highlight)</i><br>
+							[<a href="https://arxiv.org/pdf/2404.04050.pdf">Paper</a>]
+							[<a href="https://github.com/yangyangyang127/TFS3D">Code</a>]
+							[<a href="https://mp.weixin.qq.com/s/dXOv2WTsHxYgoMMpFoxbzg">公众号</a>]
+						</td>
+					</tr>
+
+					<tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/abs/2310.09069"><img class="teaser_img"
+										src='images/paper/2024imagemanip-min.jpg' /></a></div>
+						</td>
+						<td class="pub_td2"><b>ImageManip: Image-based Robotic Manipulation with Affordance-guided Next View Selection</b>
+							<br>Xiaoqi Li, Yanzi Wang, Yan Shen, Haoran Lu, Qianxu Wang, Ponomarenko Iaroslav, Boshi An, Jiaming Liu, Hao Dong<br>
+							<i>arXiv 2023</i><br>
+							[<a href="https://arxiv.org/abs/2310.09069">Paper</a>]
+							[<a href="https://sites.google.com/view/imagemanip">Webpage</a>]
+						</td>
+					</tr>
+
+					<tr class="paper1">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/abs/2310.03478"><img class="teaser_img"
+										src='images/paper/2024ICRA-rgbmanip-min.jpg' /></a></div>
+						</td>
+						<td class="pub_td2"><b>RGBManip: Monocular Image-based Robotic Manipulation through Active Object Pose Estimation</b>
+							<br>Boshi An, Yiran Geng, Kai Chen, Xiaoqi Li, Qi Dou, Hao Dong<br>
+							<i>International Conference on Robotics and Automation (ICRA) 2024</i><br>
+							[<a href="https://arxiv.org/abs/2310.03478">Paper</a>]
+							[<a href="http://rgbmanip.github.io">Webpage</a>]
+							[<a href="https://github.com/hyperplane-lab/RGBManip">Code</a>]
+							[<a href="https://mp.weixin.qq.com/s/JIvXFT7oZkmHIygbbNPmRA">北大</a>]
+						</td>
+					</tr>
+
+					<tr class="paper1">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/pdf/2402.18699.pdf"><img class="teaser_img"
+										src='images/paper/2024ICRA-coarse2fine-min.jpg' /></a></div>
+						</td>
+						<td class="pub_td2"><b>Articulated Object Manipulation with Coarse-to-fine Affordance for Mitigating the Effect of Point Cloud Noise</b>
+							<br>Suhan Ling, Yian Wang, Shiguang Wu, Yuzheng Zhuang, Tianyi Xu, Yu Li, Chang Liu, Hao Dong<br>
+							<i>International Conference on Robotics and Automation (ICRA) 2024</i><br>
+							[<a href="https://arxiv.org/pdf/2402.18699.pdf">Paper</a>]
+							[<a href="https://sites.google.com/view/coarse-to-fine/">Webpage</a>]
+							[<a href="https://github.com/Suhan-Ling/Coarse-to-fine_Affordance/">Code</a>]
+						</td>
+					</tr>
+					<!-- <tr class="paper1"> -->
+						<!-- <td class="pub_td1"> -->
+							<!-- <div class="teaser_img_div"><a href="https://arxiv.org/pdf/xxxx.pdf"><img class="teaser_img" -->
+										<!-- src='images/paper/2024coarse2fine-min.jpg' /></a></div> -->
+						<!-- </td> -->
+						<!-- <td class="pub_td2"><b>Articulated Object Manipulation with Coarse-to-fine Affordance for Mitigating the Effect of Point Cloud Noise</b> -->
+							<!-- <br>Suhan Ling, Yian Wang, Shiguang Wu, Yuzheng Zhuang, Tianyi Xu, Yu Li, Chang Liu, Hao Dong<br> -->
+							<!-- <i>arXiv 2023</i><br> -->
+							<!-- [<a href="https://arxiv.org/pdf/xxxxx.pdf">Paper</a>] -->
+						<!-- </td> -->
+					<!-- </tr> -->
+
+					<tr class="paper1">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://nimolty.github.io/Robokeygen/robokeygen.pdf"><img class="teaser_img"
+										src='images/paper/2024ICRA-robokeygen-min.jpg' /></a></div>
+						</td>
+						<td class="pub_td2"><b>RoboKeyGen: Robot Pose and Joint Angles Estimation via Diffusion-based 3D Keypoint Generation</b>
+							<br>Yang Tian, Jiyao Zhang, Guowei Huang, Bin Wang, Ping Wang, Jiangmiao Pang, Hao Dong<br>
+							<i>International Conference on Robotics and Automation (ICRA) 2024</i><br>
+							[<a href="https://nimolty.github.io/Robokeygen/robokeygen.pdf">Paper</a>]
+							[<a href="https://nimolty.github.io/Robokeygen/">Webpage</a>]
+							[<a href="https://github.com/Nimolty/RoboKeyGen/tree/main">Code</a>]
+						</td>
+					</tr>
+
+					<tr class="paper1">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/pdf/2309.11382.pdf"><img class="teaser_img"
+										src='images/paper/2024ICRA-DiscussNav-min.jpg' /></a></div>
+						</td>
+						<td class="pub_td2"><b>Discuss Before Moving: Visual Language Navigation via Multi-expert Discussions</b><br>
+							<i><font color="#1367a7">--- The world's first visual language navigation large model system deployed in real world</font></i>
+							<br>Yuxing Long, Xiaoqi Li, Wenzhe Cai, Hao Dong<br>
+							<i>International Conference on Robotics and Automation (ICRA) 2024</i><br>
+							[<a href="https://arxiv.org/pdf/2309.11382.pdf">Paper</a>]
+							[<a href="https://sites.google.com/view/discussnav">Webpage</a>]
+							[<a href="https://github.com/LYX0501/DiscussNav">Code</a>]
+							[<a href="https://mp.weixin.qq.com/s/fJ99zkIyx_-xQglD-brCgg">量子位</a>]
+						</td>
+					</tr>
+
+					<tr class="paper1">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/pdf/2309.10309.pdf"><img class="teaser_img"
+										src='images/paper/2024ICRA-pixnav-min.jpg' /></a></div>
+						</td>
+						<td class="pub_td2"><b>PixNav: Bridging Zero-shot Object Navigation and Foundation Models through Pixel-guided Navigation Skill</b>
+							<br><i><font color="#1367a7">--- The world's first purely visual-based object goal navigation large model</font></i>
+							<br>Wenzhe Cai, Siyuan Huang, Guangran Cheng, Yuxing Long, Peng Gao, Changyin Sun, Hao Dong<br>
+							<i>International Conference on Robotics and Automation (ICRA) 2024</i><br>
+							[<a href="https://arxiv.org/pdf/2309.10309.pdf">Paper</a>]
+							[<a href="https://sites.google.com/view/pixnav/">Webpage</a>]
+							[<a href="https://github.com/wzcai99/Pixel-Navigator">Code</a>]
+							[<a href="https://mp.weixin.qq.com/s/biQfLpmSKqrWQjmeTIxOpQ">北大</a>]
+						</td>
+					</tr>
+
+					<tr class="paper1">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/pdf/2311.16592.pdf"><img class="teaser_img"
+										src='images/paper/2023rgbgrasp-min.jpg' /></a></div>
+						</td>
+						<td class="pub_td2"><b>RGBGrasp: Image-based Object Grasping by Capturing Multiple Views during Robot Arm Movement with Neural Radiance Field</b>
+							<br>Chang Liu, Kejian Shi, Kaichen Zhou, Haoxiao Wang, Jiyao Zhang, Hao Dong<br>
+							<i>IEEE Robotics and Automation Letters (RAL) 2024</i><br>
+							[<a href="https://arxiv.org/pdf/2311.16592.pdf">Paper</a>]
+							[<a href="https://sites.google.com/view/rgbgrasp">Webpage</a>]
+						</td>
+					</tr>
+
+					<tr class="paper1">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/abs/2310.16838"><img class="teaser_img"
+										src='images/paper/2024ICLR-SparseDFF-min.jpg' /></a></div>
+						</td>
+						<td class="pub_td2"><b>SparseDFF: Sparse-View Feature Distillation for One-Shot Dexterous Manipulation</b>
+							<br>Qianxu Wang, Haotong Zhang, Congyue Deng, Yang You, Hao Dong, Yixin Zhu, Leonidas Guibas<br>
+							<i>International Conference on Learning Representations (ICLR) 2024</i><br>
+							[<a href="https://arxiv.org/abs/2310.16838">Paper</a>]
+							[<a href="https://helloqxwang.github.io/SparseDFF/">Webpage</a>]
+							[<a href="https://github.com/Halowangqx/SparseDFF">Code</a>]
+						</td>
+					</tr>
+
+					<tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/abs/2305.03048"><img class="teaser_img"
+										src='images/paper/2023PerSAM-min.png' /></a></div>
+						</td>
+						<td class="pub_td2"><b>PerSAM: Personalize Segment Anything Model with One Shot</b>
+							<br>Renrui Zhang, Zhengkai Jiang, Ziyu Guo, Shilin Yan, Junting Pan, Hao Dong, Peng Gao, Hongsheng Li<br>
+							<i>International Conference on Learning Representations (ICLR) 2024</i><br>
+							[<a href="https://arxiv.org/abs/2305.03048">Paper</a>]
+							[<a href="https://huggingface.co/spaces/justin-zk/Personalize-SAM">Webpage</a>]
+							[<a href="https://github.com/ZrrSkywalker/Personalize-SAM">Code</a>]
+							[<a href="https://mp.weixin.qq.com/s/hX5ILAQ4u09v9E61RxEjwA">AIWalker</a>]
+						</td>
+					</tr>
+
+					<tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/abs/2312.12340"><img class="teaser_img"
+										src='images/paper/2024aaai-assembly-min.jpg' /></a></div>
+						</td>
+						<td class="pub_td2"><b>Scalable Geometric Fracture Assembly via Co-creation Space among Assemblers</b>
+							<br>Ruiyuan Zhang, Jiaxiang Liu, Zexi Li, Hao Dong, Jie Fu, Chao Wu<br>
+							<i> AAAI Conference on Artificial Intelligence 2024</i><br>
+							[<a href="https://arxiv.org/abs/2312.12340">Paper</a>]
+							[<a href="https://github.com/Ruiyuan-Zhang/CCS">Code</a>]
+						</td>
+					</tr>
+
+					<tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/abs/2305.16318"><img class="teaser_img"
+										src='images/paper/2024aaai-mutr-min.jpg' /></a></div>
+						</td>
+						<td class="pub_td2"><b>Referred by Multi-Modality: A Unified Temporal Transformer for Video Object Segmentation</b>
+							<br>Shilin Yan, Renrui Zhang, Ziyu Guo, Wenchao Chen, Wei Zhang, Hongyang Li, Yu Qiao, Hao Dong, Zhongjiang He, Peng Gao<br>
+							<i>AAAI Conference on Artificial Intelligence 2024</i><br>
+							[<a href="https://arxiv.org/abs/2305.16318">Paper</a>]
+							[<a href="https://github.com/OpenGVLab/MUTR">Code</a>]
+						</td>
+					</tr>
+
+					<tr class="paper1">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://ieeexplore.ieee.org/document/10343126"><img class="teaser_img"
+										src='images/paper/2023pami-bidexhands-min.jpg' /></a></div>
+						</td>
+						<td class="pub_td2"><b>Bi-DexHands: Towards Human-Level Bimanual Dexterous Manipulation</b>
+							<br>Yuanpei Chen, Yiran Geng, Fangwei Zhong, Jiaming Ji, Jiechuang Jiang, Zongqing Lu, Hao Dong, Yaodong Yang<br>
+							<i><font color="#1367a7">--- The world's first bimanual dexterous manipulation benchmark (in simulation)</font></i><br>
+							<i>IEEE Transactions on Pattern Analysis and Machine Intelligence (PAMI) 2023</i><br>
+							[<a href="https://ieeexplore.ieee.org/document/10343126">Paper</a>]
+							[<a href="https://bi-dexhands.ai">Webpage</a>]
+							[<a href="https://github.com/PKU-MARL/DexterousHands">Code</a>]
+						</td>
+					</tr>
+
+					<tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/abs/2305.11176"><img class="teaser_img"
+										src='images/paper/2023Instruct2Act-min.png' /></a></div>
+						</td>
+						<td class="pub_td2"><b>Instruct2Act: Mapping Multi-modality Instructions to Robotic Actions with Large Language Model</b>
+							<br>Siyuan Huang, Zhengkai Jiang, Hao Dong, Yu Qiao, Peng Gao, Hongsheng Li<br>
+							<i>arXiv 2023</i><br>
+							[<a href="https://arxiv.org/abs/2305.11176">Paper</a>]
+							[<a href="https://github.com/OpenGVLab/Instruct2Act">Code</a>]
+							[<a href="https://mp.weixin.qq.com/s/UygZw3zJBaj0fAc3KfqdbQ">机器人3D感知</a>]
+							[<a href="https://blog.csdn.net/m0_56661101/article/details/131670299">CSDN</a>]
+						</td>
+					</tr>
+
+					<tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/pdf/2308.15116.pdf"><img class="teaser_img"
+										src='images/paper/2023mixup-min.png' /></a></div>
+						</td>
+						<td class="pub_td2"><b>Mixup-Augmented Meta-Learning for Sample-Efficient Fine-Tuning of Protein Simulators</b>
+							<br>Jingbang Chen, Yian Wang, Xingwei Qu, Shuangjia Zheng, Yaodong Yang, Hao Dong, Jie Fu<br>
+							<i>arXiv 2023</i><br>
+							[<a href="https://arxiv.org/pdf/2308.15116.pdf">Paper</a>]
+							[<a href="https://github.com/Jingbang-Chen/mixup-meta-protein-simulators">Code</a>]
+						</td>
+					</tr>
+
+					<tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://ieeexplore.ieee.org/document/10292881"><img class="teaser_img"
+										src='images/paper/2023RemoteSensing-Posterior-min.jpg' /></a></div>
+						</td>
+						<td class="pub_td2"><b>Posterior Instance Injection Detector for Arbitrary-Oriented Object Detection From Optical Remote-Sensing Imagery</b>
+							<br>Tong Zhang, Yin Zhuang, He Chen, Guanqun Wang, Lihui Ge, Liang Chen, Hao Dong, Lianlin Li<br>
+							<i>Remote Sensing 2023</i><br>
+							[<a href="https://ieeexplore.ieee.org/document/10292881">Paper</a>]
+						</td>
+					</tr>
+
+					<tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/abs/2303.16563"><img class="teaser_img"
+										src='images/paper/2023Plan4MC-min.png' /></a></div>
+						</td>
+						<td class="pub_td2"><b>Plan4MC: Skill Reinforcement Learning and Planning for Open-World Minecraft Tasks </b>
+							<br>Haoqi Yuan, Chi Zhang, Hongcheng Wang, Feiyang Xie, Penglin Cai, Hao Dong, Zongqing Lu<br>
+							<i>Neural Information Processing Systems (NeurIPS) FMDM Workshop 2023</i><br>
+							[<a href="https://arxiv.org/abs/2303.16563">Paper</a>]
+							[<a href="https://sites.google.com/view/plan4mc">Webpage</a>]
+							[<a href="https://github.com/PKU-RL/Plan4MC">Code</a>]
+							[<a href="https://mp.weixin.qq.com/s/EJtL9g0u2EO_IhggwgfZJg">机器之心</a>]
+						</td>
+					</tr>
+
+					<tr class="paper1">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/abs/2309.08138"><img class="teaser_img"
+										src='images/paper/2023neurips-ddn-min.jpg' /></a></div>
+						</td>
+						<td class="pub_td2"><b>Find What You Want: Learning Demand-conditioned Object Attribute Space for Demand-driven Navigation</b>
+							<br><i><font color="#1367a7">---The world's first human demand-driven navigation model </font></i>
+							<br>Hongcheng Wang, Andy Guan Hong Chen, Xiaoqi Li, Mingdong Wu, Hao Dong<br>
+							<i> Neural Information Processing Systems (NeurIPS) 2023 </i><br>
+							[<a href="https://arxiv.org/abs/2309.08138">Paper</a>]
+							[<a href="https://sites.google.com/view/demand-driven-navigation">Webpage</a>]
+							[<a href="https://www.youtube.com/watch?v=edNpNH9Zt7Q">Video</a>]
+							[<a href="https://github.com/whcpumpkin/Demand-driven-navigation">Code</a>]
+							[<a href="https://hub.baai.ac.cn/view/32489">BAAI</a>]
+						</td>
+					</tr>
+
+					<tr class="paper1">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/pdf/2306.10531v1.pdf"><img class="teaser_img"
+										src='images/paper/2023genpose-min.png' /></a></div>
+						</td>
+						<td class="pub_td2"><b>GenPose: Generative Category-level Object Pose Estimation via Diffusion Models</b>
+							<br><i><font color="#1367a7">--- The next-generation category-level 6D object pose paradigm: generative pose estimation</font></i>
+							<br>Jiyao Zhang, Mingdong Wu, Hao Dong<br>
+							<i> Neural Information Processing Systems (NeurIPS) 2023 </i><br>
+							[<a href="https://arxiv.org/pdf/2306.10531v1.pdf">Paper</a>]
+							[<a href="https://sites.google.com/view/genpose">Webpage</a>]
+							[<a href="https://github.com/Jiyao06/GenPose">Code</a>]
+							[<a href="https://mp.weixin.qq.com/s/fWcjaB6qjXxaQ9yDoQSdAQ">北大</a>]
+						</td>
+					</tr>
+
+					<tr class="paper1">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="http://arxiv.org/abs/2309.07510"><img class="teaser_img"
+										src='images/paper/2023neurips-envafford2-min.jpg' /></a></div>
+						</td>
+						<td class="pub_td2"><b>Learning Environment-aware Affordance for 3D Articulated Object Manipulation under Occlusions</b><br>
+							<i><font color="#1367a7">--- The world's first work of affordance learning with environment constraints</font></i>
+							<br>Ruihai Wu, Kai Cheng, Yan Zhao, Chuanruo Ning, Guanqi Zhan, Hao Dong<br>
+							<i> Neural Information Processing Systems (NeurIPS) 2023 </i><br>
+							[<a href="http://arxiv.org/abs/2309.07510">Paper</a>]
+							[<a href="https://chengkaiacademycity.github.io/EnvAwareAfford/">Webpage</a>]
+							[<a href="https://github.com/chengkaiAcademyCity/EnvAwareAfford">Code</a>]
+							[<a href="https://mp.weixin.qq.com/s/nO6wznWoG4yYzkycJ7ap3w">AIR学术</a>]
+							[<a href="https://www.bilibili.com/video/BV1zy4y1N7z8/?spm_id_from=333.337.search-card.all.click&vd_source=9486a6185d2390720d5d92dbddc724cb">AIR论坛</a>]
+						</td>
+					</tr>
+
+					<tr class="paper1">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/abs/2309.06038"><img class="teaser_img"
+										src='images/paper/2023neurips-graspgf-min.gif' /></a></div>
+						</td>
+						<td class="pub_td2"><b>GraspGF: Learning Score-based Grasping Primitive for Human-assisting Dexterous Grasping</b>
+							<br>Tianhao Wu, Mingdong Wu, Jiyao Zhang, Yunchong Gan, Hao Dong<br>
+							<i> Neural Information Processing Systems (NeurIPS) 2023 </i><br>
+							[<a href="https://arxiv.org/abs/2309.06038">Paper</a>]
+							[<a href="https://sites.google.com/view/graspgf">Webpage</a>]
+							[<a href="https://github.com/tianhaowuhz/human-assisting-dex-grasp/">Code</a>]
+							[<a href="https://mp.weixin.qq.com/s/hpzZWMizR8tPSGIvGVjPoA">新智元</a>]
+						</td>
+					</tr>
+
+					<tr class="paper1">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/abs/2309.07473"><img class="teaser_img"
+										src='images/paper/2023neurips-where2explore2-min.jpg' /></a></div>
+						</td>
+						<td class="pub_td2"><b>Where2Explore: Few-shot Affordance Learning for Unseen Novel Categories of Articulated Objects</b><br>
+							<i><font color="#1367a7">--- The world's first work of few-shot exploration for object manipulation with novel geometries</font></i>
+							<br>Chuanruo Ning, Ruihai Wu, Haoran Lu, Kaichun Mo, Hao Dong<br>
+							<i> Neural Information Processing Systems (NeurIPS) 2023 </i><br>
+							[<a href="https://arxiv.org/abs/2309.07473">Paper</a>]
+							[<a href="https://tritiumr.github.io/Where2Explore/">Webpage</a>]
+							[<a href="https://github.com/TritiumR/Where2Explore">Code</a>]
+						</td>
+					</tr>
+
+					<tr class="paper1">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/abs/2310.19814"><img class="teaser_img"
+										src='images/paper/2023siggraphasia-packing-min.jpg' /></a></div>
+						</td>
+						<td class="pub_td2"><b>Learning Gradient Fields for Scalable and Generalizable Irregular Packing</b>
+							<br>Tianyang Xue, Mingdong Wu, Lin Lu, Haoxuan Wang, Hao Dong, Baoquan Chen<br>
+							<i>SIGGRAPH Asia 2023</i><br>
+							[<a href="https://arxiv.org/abs/2310.19814">Paper</a>]
+							[<a href="https://sites.google.com/view/gfpack">Webpage</a>]
+							[Code]
+						</td>
+					</tr>
+
+					<tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/abs/xx.xx"><img class="teaser_img"
+										src='images/paper/2023bmvc-partmotion-min.jpg' /></a></div>
+						</td>
+						<td class="pub_td2"><b>Learning Part Motion of Articulated Objects Using Spatially Continuous Neural Implicit Representations</b>
+							<br>Yushi Du, Ruihai Wu, Yan Shen, Hao Dong<br>
+							<i>British Machine Vision Conference (BMVC) 2023</i><br>
+							[<a href="https://arxiv.org/abs/xxx.xxx">Paper</a>]
+							[<a href="https://yushi-du.github.io/PartMotion/">Webpage</a>]
+							[<a href="https://github.com/Yushi-Du/PartMotion">Code</a>]
+						</td>
+					</tr>
+
+					<tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/pdf/2309.04220v1.pdf"><img class="teaser_img"
+										src='images/paper/2023bmvc-scorePA-min.jpg' /></a></div>
+						</td>
+						<td class="pub_td2"><b>Score-PA: Score-based 3D Part Assembly</b>
+							<br>Junfeng Cheng, Mingdong Wu, Ruiyuan Zhang, Guanqi Zhan, Chao Wu, Hao Dong<br>
+							<i>British Machine Vision Conference (BMVC) 2023 (Oral)</i><br>
+							[<a href="https://arxiv.org/pdf/2309.04220v1.pdf">Paper</a>]
+							[<a href="https://github.com/J-F-Cheng/Score-PA_Score-based-3D-Part-Assembly">Code</a>]
+						</td>
+					</tr>
+
+					<tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/pdf/2210.13708.pdf"><img class="teaser_img"
+										src='images/paper/2023MARLlib-min.png' /></a></div>
+						</td>
+						<td class="pub_td2"><b>MARLlib: A Scalable and Efficient Multi-agent Reinforcement Learning Library</b>
+							<br>Siyi Hu, Yifan Zhong, Minquan Gao, Weixun Wang, Hao Dong, Xiaodan Liang, Zhihui Li, Xiaojun Chang, Yaodong Yang<br>
+							<i>Journal of Machine Learning Research 2023</i><br>
+							[<a href="https://jmlr.org/papers/v24/23-0378.html">Paper</a>]
+							[<a href="https://marllib.readthedocs.io">Documentation</a>]
+							[<a href="https://github.com/Replicable-MARL/MARLlib">Code</a>]
+						</td>
+					</tr>
+
+					<tr class="paper1">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/abs/2303.11057"><img class="teaser_img"
+										src='images/paper/2023ICCV-defoafford-min.png' /></a></div>
+						</td>
+						<td class="pub_td2"><b>DefoAfford: Learning Foresightful Dense Visual Affordance for Deformable Object Manipulation </b>
+							<br>Ruihai Wu, Chuanruo Ning, Hao Dong<br>
+							<i>International Conference on Computer Vision (ICCV) 2023</i><br>
+							[<a href="https://arxiv.org/abs/2303.11057">Paper</a>]
+							[<a href="https://hyperplane-lab.github.io/DeformableAffordance/">Webpage</a>]
+							[<a href="https://github.com/TritiumR/DeformableAffordance">Code</a>]
+							[<a href="https://mp.weixin.qq.com/s/dBS84-kv3O7RNemaTRUd-g">将门创投</a>]
+							[<a href="https://mp.weixin.qq.com/s/nO6wznWoG4yYzkycJ7ap3w">AIR学术</a>]
+							[<a href="https://www.bilibili.com/video/BV1zy4y1N7z8/?spm_id_from=333.337.search-card.all.click&vd_source=9486a6185d2390720d5d92dbddc724cb">AIR论坛</a>]
+						</td>
+					</tr>
+
+					<tr class="paper1">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/pdf/2309.06810.pdf"><img class="teaser_img"
+										src='images/paper/2023ICCV-geoassembly-min.png' /></a></div>
+						</td>
+						<td class="pub_td2"><b>Leveraging SE(3) Equivariance for Learning 3D Geometric Shape Assembly</b>
+							<br>Ruihai Wu, Chenrui Tie, Yushi Du, Yan Zhao, Hao Dong<br>
+							<i>International Conference on Computer Vision (ICCV) 2023</i><br>
+							[<a href="https://arxiv.org/pdf/2309.06810.pdf">Paper</a>]
+							[<a href="https://crtie.github.io/SE-3-part-assembly/">Webpage</a>]
+							[<a href="https://github.com/crtie/Leveraging-SE-3-Equivariance-for-Learning-3D-Geometric-Shape-Assembly">Code</a>]
+						</td>
+					</tr>
+
+
+					<tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/abs/2304.04602"><img class="teaser_img"
+										src='images/paper/2023HumanPriorDex-min.png' /></a></div>
+						</td>
+						<td class="pub_td2"><b>Learning a Universal Human Prior for Dexterous Manipulation from Human Preference</b>
+							<br>Zihan Ding, Yuanpei Chen, Allen Z. Ren, Shixiang Shane Gu, Hao Dong, Chi Jin<br>
+							<i>RSS Workshop on Learning Dexterous Manipulation 2023</i><br>
+							[<a href="https://arxiv.org/abs/2304.04602">Paper</a>]
+						</td>
+					</tr>
+
+
+					<tr class="paper1">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/abs/2304.10773"><img class="teaser_img"
+										src='images/paper/2023RAL-Visual-Audio-Nav-min.png' /></a></div>
+						</td>
+						<td class="pub_td2"><b>Learning Semantic-Agnostic and Spatial-Aware Representation for Generalizable Visual-Audio Navigation</b>
+							<br>Hongcheng Wang, Yuxuan Wang, Fangwei Zhong, Mingdong Wu, Jianwei Zhang, Yizhou Wang, Hao Dong<br>
+							<i>IEEE Robotics and Automation Letters (RAL) 2023</i><br>
+							[<a href="https://arxiv.org/abs/2304.10773">Paper</a>]
+							[<a href="https://sites.google.com/view/sasavan/">Webpage</a>]
+							[<a href="https://github.com/wwwwwyyyyyxxxxx/SA2GVAN">Code</a>]
+							[<a href="https://mp.weixin.qq.com/s/Xzo6cNUWmACjAH0d1FRsdA">CFCS</a>]
+						</td>
+					</tr>
+
+
+					<tr class="paper1">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/pdf/2307.12106.pdf"><img class="teaser_img"
+										src='images/paper/2023CVPR-SGTAPose-min.png' /></a></div>
+						</td>
+						<td class="pub_td2"><b>SGTAPose: Robot Structure Prior Guided Temporal Attention for Camera-to-Robot Pose Estimation from Image Sequence</b>
+							<br>Yang Tian, Jiyao Zhang, Zekai Yin, Hao Dong<br>
+							<i>Conference on Computer Vision and Pattern Recognition (CVPR) 2023</i><br>
+							[<a href="https://arxiv.org/pdf/2307.12106.pdf">Paper</a>]
+							[<a href="https://sites.google.com/view/sgtapose">Webpage</a>]
+							[<a href="https://github.com/Jiyao06/SGTAPose">Code</a>]
+						</td>
+					</tr>
+
+					<tr class="paper1">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/abs/2212.08641"><img class="teaser_img"
+										src='images/paper/2023CVPR-GFPose-min.png' /></a></div>
+						</td>
+						<td class="pub_td2"><b>GFPose: Learning Gradient Field for Multi-Hypothesis 3D Human Pose Estimation</b>
+							<br>Hai Ci, Mingdong Wu, Wentao Zhu, Xiaoxuan Ma, Hao Dong, Fangwei Zhong, Yizhou Wang<br>
+							<i>Conference on Computer Vision and Pattern Recognition (CVPR) 2023</i><br>
+							[<a href="https://arxiv.org/abs/2212.08641">Paper</a>]
+							[<a href="https://sites.google.com/view/gfpose/">Webpage</a>]
+							[<a href="https://github.com/Embracing/GFPose">Code</a>]
+							[<a href="https://mp.weixin.qq.com/s/QucRPsWasrPDduH7NAmuJA">CFCS</a>]
+						</td>
+					</tr>
+
+					<tr class="paper1">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/abs/2303.16958"><img class="teaser_img"
+										src='images/paper/2023CPRV-gapartmanip-min.png' /></a></div>
+						</td>
+						<td class="pub_td2"><b>PartManip: Learning Cross-Category Generalizable Part Manipulation Policy from Point Cloud Observations</b>
+							<br>Haoran Geng, Ziming Li, Yiran Geng, Jiayi Chen, Hao Dong, He Wang<br>
+							<i>Conference on Computer Vision and Pattern Recognition (CVPR) 2023</i><br>
+							[<a href="https://arxiv.org/abs/2303.16958">Paper</a>]
+							[<a href="https://pku-epic.github.io/PartManip/">Webpage</a>]
+							[<a href="https://github.com/PKU-EPIC/PartManip">Code</a>]
+						</td>
+					</tr>
+
+					<tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/abs/2302.00956"><img class="teaser_img"
+										src='images/paper/2023AAAI-ResilientBNN-min.png' /></a></div>
+						</td>
+						<td class="pub_td2"><b>ReBNN: Resilient Binary Neural Network</b>
+							<br>Sheng Xu, Yanjing Li, Teli Ma, Mingbao Lin, Hao Dong, Baochang Zhang, Peng Gao, Jinhu Lu<br>
+							<i>AAAI Conference on Artificial Intelligence 2023 (Oral)</i><br>
+							[<a href="https://arxiv.org/abs/2302.00956">Paper</a>]
+							[<a href="https://github.com/SteveTsui/ReBNN">Code</a>]
+						</td>
+					</tr>
+
+					<tr class="paper1">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/pdf/2209.12941.pdf"><img class="teaser_img"
+										src='images/paper/2022RLAfford-min.png' /></a></div>
+						</td>
+						<td class="pub_td2"><b>RLAfford: End-to-End Affordance Learning for Robotic Manipulation</b>
+							<br>Yiran Geng, Boshi An, Haoran Geng, Yuanpei Chen, Yaodong Yang, Hao Dong<br>
+							<i>International Conference on Robotics and Automation (ICRA) 2023</i><br>
+							[<a href="https://arxiv.org/pdf/2209.12941.pdf">Paper</a>]
+							[<a href="https://sites.google.com/view/rlafford/">Webpage</a>]
+							[<a href="https://github.com/hyperplane-lab/RLAfford">Code</a>]
+							[<a href="https://mp.weixin.qq.com/s/kLZoWVZElS8SLCxqsPwZ9A">CFCS</a>]
+							[<a href="https://mp.weixin.qq.com/s/nO6wznWoG4yYzkycJ7ap3w">AIR学术</a>]
+							[<a href="https://www.bilibili.com/video/BV1zy4y1N7z8/?spm_id_from=333.337.search-card.all.click&vd_source=9486a6185d2390720d5d92dbddc724cb">AIR论坛</a>]
+						</td>
+					</tr>
+
+					<tr class="paper1">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/abs/2207.01971.pdf"><img class="teaser_img"
+										src='images/paper/2022dualAfford-min.gif' /></a></div>
+						</td>
+						<td class="pub_td2"><b>DualAfford: Learning Collaborative Visual Affordance for Dual-gripper Object Manipulation</b>
+							<br>Yan Zhao, Ruihai Wu, Zhehuan Chen, Yourong Zhang, Qingnan Fan, Kaichun Mo, Hao Dong<br>
+							<i> International Conference on Learning Representations (ICLR) 2023</i><br>
+							[<a href="https://arxiv.org/pdf/2207.01971.pdf">Paper</a>]
+							[<a href="https://hyperplane-lab.github.io/DualAfford/">Webpage</a>]
+							[<a href="https://github.com/hyperplane-lab/DualAfford">Code</a>]
+							[<a href="https://mp.weixin.qq.com/s/nO6wznWoG4yYzkycJ7ap3w">AIR学术</a>]
+							[<a href="https://www.bilibili.com/video/BV1zy4y1N7z8/?spm_id_from=333.337.search-card.all.click&vd_source=9486a6185d2390720d5d92dbddc724cb">AIR论坛</a>]
+						</td>
+					</tr>
+
+					<tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://ieeexplore.ieee.org/document/10129022"><img class="teaser_img"
+										src='images/paper/2023IEEEJournalofSelectedTopicsinAppliedEarthObservationsRemoteSensing-min.jpg' /></a></div>
+						</td>
+						<td class="pub_td2"><b>Object-Centric Masked Image Modeling-Based Self-Supervised Pretraining for Remote Sensing Object Detection</b>
+							<br>Tong Zhang, Yin Zhuang, He Chen, Liang Chen, Guanqun Wang, Peng Gao, Hao Dong<br>
+							<i> IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing 2023</i><br>
+							[<a href="https://ieeexplore.ieee.org/document/10129022">Paper</a>]
+						</td>
+					</tr>
+
+					<tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://www.mdpi.com/2072-4292/15/7/1773"><img class="teaser_img"
+										src='images/paper/2023RemoteSensing-P2FEViT-min.jpg' /></a></div>
+						</td>
+						<td class="pub_td2"><b>P2FEViT: Plug-and-Play CNN Feature Embedded Hybrid Vision Transformer for Remote Sensing Image Classification</b>
+							<br>Guanqun Wang, He Chen, Liang Chen, Yin Zhuang, Shanghang Zhang, Tong Zhang, Hao Dong, Peng Gao<br>
+							<i> Remote Sensing 2023</i><br>
+							[<a href="https://www.mdpi.com/2072-4292/15/7/1773">Paper</a>]
+							[<a href="https://github.com/wgqqgw/BIT-KTYG-AFGR">Code</a>]
+						</td>
+					</tr>
+
+					<tr class="paper1">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://academic.oup.com/nsr/advance-article/doi/10.1093/nsr/nwac266/6845755"><img class="teaser_img"
+										src='images/paper/2022NSR_metasurface.png' /></a></div>
+						</td>
+						<td class="pub_td2"><b>Intelligent Indoor Metasurface Robotics </b>
+							<br><i><font color="#1367a7">---Journal cover: a new robot concept of robot percepton and privacy </font></i>
+							<br>Hanting Zhao, Shengguo Hu, Hongrui Zhang, Zhuo Wang, Hao Dong, Philipp del Hougne, Tie Jun Cui, Lianlin Li<br>
+							<i>National Science Review (NSR) 2022</i><br>
+							[<a href="https://academic.oup.com/nsr/advance-article/doi/10.1093/nsr/nwac266/6845755">Paper</a>]
+							[<a href="https://oup.silverchair-cdn.com/oup/backfile/Content_public/Journal/nsr/Issue/10/8/17/cover.jpeg?Expires=1695223172&Signature=Gvo0ashklGWHIGU7Alig6BmrXP69gQa8oY1ID3RXw6n7lt1g1Y7lzDjHlLz4JCIWJ~4ysnaT4QFFmQSMTIS9t8jhMmpNChtnaSQhXYV0m-tqakf~6RZ5h6115BFRXyRJ62fGmRgxFl-asjaXutA0CJFn3hBelOLfC4DO1Cf-cKot4ZaHL~Sp7s6xjoTY5jWP7VYxSK-bOsyKOcsDX-gijKrHRlryaAIqbYFbr6EOlQoZIzWcSyzWejjwXnNw6KZDPEaU5li-JuOtQTOkU6FgqiQ~6TbsnlYZzkrMHZgYqjA6echUzMP1~41AUuhB~jR1XHsiQZWZvUsgdFLe1zLKQw__&Key-Pair-Id=APKAIE5G5CRDK6RD3PGA">Journal Cover</a>]
+							[<a href="https://mp.weixin.qq.com/s/pdlo8_fG0yaT09xeIaAS-A">中国科学杂志社</a>]
+						</td>
+					</tr>
+
+					<tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://proceedings.mlr.press/v220/caggiano23a/caggiano23a.pdf"><img class="teaser_img"
+										src='images/paper/2022PMLR-MyoChallenge-min.jpg' /></a></div>
+						</td>
+						<td class="pub_td2"><b>MyoChallenge 2022: Learning Contact-rich Manipulation using a Musculoskeletal Hand </b>
+							<br> <b><i><font color="#e11212">---First Place in NeurIPS 2022 Challenge Track (1st in 340 submissions from 40 teams)</font></i></b>
+							<br>Vittorio Caggiano, Guillaume Durandau, Huwawei Wang, Alberto Chiappa, Alexander Mathis, Pablo Tano, Nisheet Patel, Alexandre Pouget, Pierre Schumacher, Georg Martius, Daniel Haeufle, Yiran Geng, Boshi An, Yifan Zhong, Jiaming Ji, Yuanpei Chen, Hao Dong, Yaodong Yang, Rahul Siripurapu, Luis Eduardo Ferro Diez, Michael Kopp, Vihang Patil, Sepp Hochreiter, Yuval Tassa, Josh Merel, Randy Schultheis, Seungmoon Song, Massimo Sartori, Vikash Kumar <br>
+							<i>Proceedings of the NeurIPS 2022 Competitions Track, Proceedings of Machine Learning Research</i><br>
+							[<a href="https://proceedings.mlr.press/v220/caggiano23a/caggiano23a.pdf">Paper</a>]
+							[<a href="https://sites.google.com/view/myochallenge">Challenge Page</a>]
+							[<a href="https://github.com/PKU-MARL/MyoChallenge">Code</a>]
+							[<a href="images/award/2022 MyoChallenge NeurIPS.pdf">Award</a>]
+							[<a href="https://gengyiran.github.io/pdf/DieRotation_NIPS22.pdf">Slide</a>]
+							[<a href="https://sites.google.com/view/myochallenge#h.t3275626vjox">Talk</a>]
+							[<a href="https://mp.weixin.qq.com/s?__biz=Mzg2Njc1NjM2OA==&mid=2247494056&idx=1&sn=ad4a2b5195044bd4a73806c00641584b&chksm=ce475bd7f930d2c18344752b506df32daec23fdc7418265cb186961f9b550ec04981cfca95a7&mpshare=1&scene=1&srcid=0207iqqMmPfyBvV5g1RuPCdO&sharer_sharetime=1675771756722&sharer_shareid=71465da75fb2e1df3c97cf572a6ce074#rd">Media(BIGAI)</a>]
+							[<a href="https://mp.weixin.qq.com/s?__biz=MzU0MjU5NjQ3NA==&mid=2247498719&idx=1&sn=8a6630cdd46a8eafccf213eec2b92b76&chksm=fb1af7cacc6d7edc8c56b0f938b0615d3dbdb1d032ad830d82b48934b7e29cffc011d47b42f8&mpshare=1&scene=1&srcid=0207rvp6Pj3EzGQyeZC7Kzcr&sharer_sharetime=1675771732370&sharer_shareid=71465da75fb2e1df3c97cf572a6ce074#rd">Media(CFCS)</a>]
+							[<a href="https://mp.weixin.qq.com/s?__biz=MzA4MTAzMzQ5NA==&mid=2650882501&idx=1&sn=f6cd654038af025123468e3a490cc13f&chksm=846ec1bcb31948aad69a103063d51d20be78ef2b6be4253af26e42469b9f0439609a3bf87b8e&mpshare=1&scene=1&srcid=0207NcfZnJPgvrt11Qc3txi1&sharer_sharetime=1675778883713&sharer_shareid=71465da75fb2e1df3c97cf572a6ce074#rd">Media(PKU-EECS)</a>]
+							[<a href="https://mp.weixin.qq.com/s?__biz=MzkzMjM4MzA3Mg==&mid=2247488531&idx=1&sn=0b1c0066c0efa6ef0c7421d4d8de3e28&chksm=c25dc41cf52a4d0a5ee0b69f6fbfa47affa203af036cc0ecc31a503f6e30b5b6772969fe73e7&mpshare=1&scene=1&srcid=02098BnGNZesAATeZd0US28z&sharer_sharetime=1675917111487&sharer_shareid=71465da75fb2e1df3c97cf572a6ce074#rd">Media(IAI)</a>]
+							[<a href="https://mp.weixin.qq.com/s?__biz=MzA3OTE0MjQzMw==&mid=2651954123&idx=1&sn=d4f6814fc92e6e7ded87f74ffedf723c&chksm=845d3085b32ab9937babd49f0a048340a00e847666dc7126ef1b1b04b48974cae90e32134db1&mpshare=1&scene=1&srcid=0214KpmupUsYZkxuL6TboxV1&sharer_sharetime=1676344711865&sharer_shareid=8d02b18bc72b08d54fb4e28c3b683968#rd">Media(PKU)</a>]
+							[<a href="http://zqb.cyol.com/html/2023-03/17/nw.D110000zgqnb_20230317_1-07.htm">Media(China Youth Daily)</a>]
+						</td>
+					</tr>
+
+					<tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/abs/2208.01682"><img class="teaser_img"
+										src='images/paper/2022HAML-min.gif' /></a></div>
+						</td>
+						<td class="pub_td2"><b>Heterogeneous-Agent Mirror Learning: A Continuum of Solutions to Cooperative MARL</b>
+							<br>Jakub Grudzien Kuba, Xidong Feng, Shiyao Ding, Hao Dong, Jun Wang, Yaodong Yang<br>
+							<i>arXiv 2022</i><br>
+							[<a href="https://arxiv.org/abs/2208.01682">Paper</a>]
+							[<a href="https://github.com/anonymouswater/HAML">Code</a>]
+						</td>
+					</tr>
+
+					<tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/abs/2203.02119"><img class="teaser_img"
+										src='images/paper/2022grasparl-min.gif' /></a></div>
+						</td>
+						<td class="pub_td2"><b>GraspARL: Dynamic Grasping via Adversarial Reinforcement Learning</b><br>Tianhao Wu,
+							Fangwei Zhong, Yiran Geng, Hongchen Wang, Yongjian Zhu, Yizhou Wang, Hao Dong<br><i>arXiv 2022</i><br>[<a
+								href="https://arxiv.org/abs/2203.02119">Paper</a>]
+						</td>
+					</tr>
+
+					<tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/abs/2112.10143"><img class="teaser_img"
+										src='images/paper/2022roboAssembly-min.png' /></a></div>
+						</td>
+						<td class="pub_td2"><b>RoboAssembly: Learning Generalizable Furniture Assembly Policy in a Novel Multi-robot
+								Contact-rich Simulation Environment</b><br>Mingxin Yu*, Lin Shao*, Zhehuan Chen, Tianhao Wu, Qingnan
+							Fan, Kaichun Mo, Hao Dong<br><i>arXiv 2022</i><br>[<a
+								href="https://arxiv.org/abs/2112.10143">Paper</a>] [<a
+								href="https://sites.google.com/view/roboticassembly">Webpage</a>]
+						</td>
+					</tr>
+
+					<tr class="paper1">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/abs/2209.00853"><img class="teaser_img"
+										src='images/paper/2022TarGF-min.gif' /></a></div>
+						</td>
+						<td class="pub_td2"><b>TarGF: Learning Target Gradient Field to Rearrange Objects without Explicit Goal Specification</b>
+							<br>Mingdong Wu, Fangwei Zhong, Yulong Xia, Hao Dong<br>
+							<i>Neural Information Processing Systems (NeurIPS) 2022</i><br>
+							[<a href="https://arxiv.org/pdf/2209.00853.pdf">Paper</a>]
+							[<a href="https://sites.google.com/view/targf">Webpage</a>]
+							[<a href="https://github.com/AaronAnima/TarGF">Code</a>]
+						</td>
+					</tr>
+
+					<tr class="paper1">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/abs/2206.08686"><img class="teaser_img"
+										src='images/paper/2022dexterous_benchmark-min.gif' /></a></div>
+						</td>
+						<td class="pub_td2"><b>Towards Human-Level Bimanual Dexterous Manipulation with Reinforcement Learning</b>
+							<br>Yuanpei Chen, Tianhao Wu, Shengjie Wang, Xidong Feng, Jiechuang Jiang, Stephen Marcus McAleer, Hao Dong, Zongqing Lu, Song-Chun Zhu, Yaodong Yang<br>
+							<i>Neural Information Processing Systems (NeurIPS) Datasets and Benchmarks 2022</i><br>
+							<!-- <i>arXiv 2022</i><br> -->
+							[<a href="https://arxiv.org/abs/2206.08686">Paper</a>]
+							[<a href="https://bi-dexhands.ai">Webpage</a>]
+							[<a href="https://github.com/PKU-MARL/DexterousHands">Code</a>]
+						</td>
+					</tr>
+
+					<tr class="paper1">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/abs/2112.00246"><img class="teaser_img"
+										src='images/paper/2022adafford-min.png' /></a></div>
+						</td>
+						<td class="pub_td2"><b>AdaAfford: Learning to Adapt Manipulation Affordance for 3D Articulated Objects via
+								Few-shot Interactions</b><br>Yian Wang*, Ruihai Wu*, Kaichun Mo*, Jiaqi Ke, Qingnan Fan, Leonidas
+							Guibas, Hao Dong<br>
+							<i><font color="#1367a7">--- The world's first work of active exploration for object manipulation with invisible dynamics and kinematics</font></i><br>
+							<i>European Conference on Computer Vision (ECCV) 2022</i><br>[<a
+								href="https://arxiv.org/abs/2112.00246">Paper</a>] [<a
+								href="https://hyperplane-lab.github.io/AdaAfford/">Webpage</a>]
+								[<a href="https://github.com/wangyian-me/AdaAffordCode/">Code</a>]
+								[<a href="https://mp.weixin.qq.com/s/J3egqgUNJF2LMpiVJXQjUg">CFCS</a>]
+								[<a href="https://mp.weixin.qq.com/s/nO6wznWoG4yYzkycJ7ap3w">AIR学术</a>]
+								[<a href="https://www.bilibili.com/video/BV1zy4y1N7z8/?spm_id_from=333.337.search-card.all.click&vd_source=9486a6185d2390720d5d92dbddc724cb">AIR论坛</a>]
+						</td>
+					</tr>
+
+					<tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/pdf/2208.03792"><img class="teaser_img"
+										src='images/paper/2022DREDS-min.gif' /></a></div>
+						</td>
+						<td class="pub_td2"><b>DREDS: Domain Randomization-Enhanced Depth Simulation and Restoration for
+							Perceiving and Grasping Specular and Transparent Objects</b>
+							<br>Qiyu Dai*, Jiyao Zhang*, Qiwei Li, Tianhao Wu, Hao Dong, Ziyuan Liu, Ping Tan, He Wang<br>
+							<i>European Conference on Computer Vision (ECCV) 2022</i><br>
+							  [<a	href="https://arxiv.org/pdf/2208.03792">Paper</a>]
+								[<a href="https://pku-epic.github.io/DREDS">Webpage</a>]
+								[<a href="https://github.com/PKU-EPIC/DREDS">Code</a>]
+						</td>
+					</tr>
+
+					<tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/abs/2207.06559"><img class="teaser_img"
+										src='images/paper/2022iros-model-based-MARL-UAV-5X5-new-min.gif' /></a></div>
+						</td>
+						<td class="pub_td2"><b>Scalable Model-based Policy Optimization for Decentralized Networked Systems</b><br>Yali Du, Chengdong Ma,
+							Yuchen Liu, Runji Lin, Hao Dong, Jun Wang, Yaodong Yang<br><i>International Conference on Intelligent
+								Robots and Systems (IROS) 2022</i><br>
+								[<a href="https://arxiv.org/abs/2207.06559">Paper</a>]
+								[<a href="https://github.com/CDM1619/MARL-Algorithms">Code</a>]
+						</td>
+					</tr>
+
+					<tr class="paper1">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/abs/2106.14440"><img class="teaser_img"
+										src='images/paper/2022vat-mart-min.png' /></a></div>
+						</td>
+						<td class="pub_td2"><b>VAT-Mart: Learning Visual Action Trajectory Proposals for Manipulating 3D Articulated
+								Objects</b><br>Ruihai Wu, Yan Zhao, Kaichun Mo, Zizheng Guo, Yian Wang, Tianhao Wu, Qingnan Fan, Xuelin
+							Chen, Leonidas Guibas, Hao Dong<br><i>International Conference on Learning Representations (ICLR)
+								2022</i><br>[<a href="https://arxiv.org/abs/2106.14440">Paper</a>] [<a
+								href="https://github.com/warshallrho/VAT-Mart">Code</a>] [<a
+								href="https://hyperplane-lab.github.io/vat-mart/">Webpage</a>] [<a
+								href="https://www.youtube.com/watch?v=HjhsLKf1eQY">Youtube</a>] [<a
+								href="https://www.bilibili.com/video/BV1gS4y1y7hD?spm_id_from=333.337.search-card.all.click&vd_source=694bc9844f3d82be34deff2fc37d4c86">Bilibili</a>]
+								[<a href="https://mp.weixin.qq.com/s/720JH69bpn3RNUk6oaNEQQ">CFCS</a>]
+								[<a href="https://mp.weixin.qq.com/s/nO6wznWoG4yYzkycJ7ap3w">AIR学术</a>]
+								[<a href="https://www.bilibili.com/video/BV1zy4y1N7z8/?spm_id_from=333.337.search-card.all.click&vd_source=9486a6185d2390720d5d92dbddc724cb">AIR论坛</a>]
+						</td>
+					</tr>
+
+					<tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://www.researchgate.net/publication/365304475_Consecutive_Pre-Training_A_Knowledge_Transfer_Learning_Strategy_with_Relevant_Unlabeled_Data_for_Remote_Sensing_Domain#:~:text=Thus%2C%20in%20this%20paper%2C%20considering%20the%20self-supervised%20pre-training,potential%20of%20unlabeled%20data%20for%20task-aware%20model%20training."><img class="teaser_img"
+										src='images/paper/2022RemoteSensing-TransferLearn-min.jpg' /></a></div>
+						</td>
+						<td class="pub_td2"><b>Consecutive Pre-Training: A Knowledge Transfer Learning Strategy with Relevant Unlabeled Data for Remote Sensing Domain</b>
+							<br>Tong Zhang, Peng Gao, Hao Dong, Yin Zhuang, Guanqun Wang, Wei Zhang, He Chen<br>
+							<i>Remote Sensing 2022</i><br>
+							[<a href="https://www.researchgate.net/publication/365304475_Consecutive_Pre-Training_A_Knowledge_Transfer_Learning_Strategy_with_Relevant_Unlabeled_Data_for_Remote_Sensing_Domain#:~:text=Thus%2C%20in%20this%20paper%2C%20considering%20the%20self-supervised%20pre-training,potential%20of%20unlabeled%20data%20for%20task-aware%20model%20training.">Paper</a>]
+							[<a href="https://github.com/ZhAnGToNG1/transfer_learning_cspt">Code</a>]
+						</td>
+					</tr>
+
+					<tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://www.mdpi.com/2072-4292/14/7/1767/html"><img class="teaser_img"
+										src='images/paper/2022RemoteSensing-Hierarchical-min.jpg' /></a></div>
+						</td>
+						<td class="pub_td2"><b>Hierarchical Disentangling Network for Building Extraction from Very High Resolution Optical Remote Sensing Imagery</b>
+							<br>Jianhao Li, Yin Zhuang, Shan Dong, Peng Gao, Hao Dong, He Chen, Liang Chen, Lianlin Li<br>
+							<i>Remote Sensing 2022</i><br>
+							[<a href="https://www.mdpi.com/2072-4292/14/7/1767/html">Paper</a>]
+							[<a href="https://github.com/1lee1338/HDNet">Code</a>]
+						</td>
+					</tr>
+
+					<tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://ieeexplore.ieee.org/document/9883080"><img class="teaser_img"
+										src='images/paper/2022IGRASS-ALC-Net-min.jpg' /></a></div>
+						</td>
+						<td class="pub_td2"><b>Adaptive Local Context Embedding for Small Vehicle Detection from Aerial Optical Remote Sensing Images</b>
+							<br>Shanjunyu Liu, Yin Zhuang, Hao Dong, Peng Gao, Guanqun Wang, Tong Zhang, Liang Chen, He Chen, Lianlin Li<br>
+							<i>IEEE International Geoscience and Remote Sensing Symposium (IGRASS) 2022</i><br>
+							[<a href="https://ieeexplore.ieee.org/document/9883080">Paper</a>]
+						</td>
+					</tr>
+
+					<tr class="paper1">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/pdf/2103.04301.pdf"><img class="teaser_img"
+										src='images/paper/2021IROSdmotion-min.gif' loop=infinite /></a></div>
+						</td>
+						<td class="pub_td2"><b>DMotion: Robotic Visuomotor Control with Unsupervised Forward Model Learned from
+								Videos</b> <br> <i>
+								<font color="#1367a7">---The first attempt to learn the forward model unsupervisedly via motion disentanglement</font>
+							</i> <br>Haoqi Yuan, Ruihai Wu, Andrew Zhao, Haipeng Zhang, Zihan Ding, Hao Dong<br><i>International
+								Conference on Intelligent Robots and Systems (IROS) 2021</i><br>[<a
+								href="https://arxiv.org/pdf/2103.04301.pdf">Paper</a>] [<a
+								href="https://hyperplane-lab.github.io/dmotion/">Webpage</a>] [<a
+								href="https://hyperplane-lab.github.io/dmotion/">Code</a>]
+								[<a href="https://mp.weixin.qq.com/s/OkndnZRo7sIHM52acfih1g">CFCS</a>]
+						</td>
+					</tr>
+
+					<tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/pdf/2011.09315.pdf"><img class="teaser_img"
+										src='images/paper/2021act-min.png' /></a></div>
+						</td>
+						<td class="pub_td2"><b>End-to-End Object Detection with Adaptive Clustering Transformer</b><br>Minghang
+							Zheng, Peng Gao, Xiaogang Wang, Hongsheng Li, Hao Dong<br><i>British Machine Vision Conference (BMVC) 2021
+								(Oral)</i><br>[<a href="https://arxiv.org/pdf/2011.09315.pdf">Paper</a>] [<a
+								href="https://github.com/gaopengcuhk/SMCA-DETR/tree/main/Adaptive_Cluster_Transformer">Code</a>]
+								[<a href="https://mp.weixin.qq.com/s/RYidczPR6P9fVJJPr7H_zg">集智书童</a>]
+						</td>
+					</tr>
+
+					<tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/pdf/2107.02575.pdf"><img class="teaser_img"
+										src='images/paper/2021TupleInfoNCE-min.png' /></a></div>
+						</td>
+						<td class="pub_td2"><b>Contrastive Multimodal Fusion with TupleInfoNCE</b><br>Yunze Liu, Qingnan Fan,
+							Shanghang Zhang, Hao Dong, Thomas Funkhouser, Li Yi<br><i>International Conference on Computer Vision
+								(ICCV) 2021</i><br>
+								[<a href="https://arxiv.org/pdf/2107.02575.pdf">Paper</a>]
+								[<a href="https://github.com/hoi4d/TupleInfoNCE">Code</a>]
+								[Code]
+						</td>
+					</tr>
+
+					<tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="http://arxiv.org/abs/2012.13089"><img class="teaser_img"
+										src='images/paper/2021P4contrast-min.png' /></a></div>
+						</td>
+						<td class="pub_td2"><b>P4Contrast: Contrastive Learning with Pairs of Point-Pixel Pairs for RGB-D Scene
+								Understanding</b><br>Yunze Liu, Li Yi, Shanghang Zhang, Qingnan Fan, Thomas Funkhouser, Hao
+							Dong<br><i>arXiv 2012.13089</i><br>[<a href="http://arxiv.org/abs/2012.13089">Paper</a>] [Code]
+						</td>
+					</tr>
+
+					<!-- <tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org"><img class="teaser_img"
+										src='images/paper/2021tensorlayer3-min.png' /></a></div>
+						</td>
+						<td class="pub_td2"><b>Tensorlayer 3.0: A Deep Learning Library Compatible with Multiple
+								Backends</b><br>Cheng Lai, Jiarong Han, Hao Dong<br><i>International Conference on Multimedia & Expo
+								Workshops (ICMEW) 2021</i><br>
+						</td>
+					</tr> -->
+
+					<tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/abs/2108.11826"><img class="teaser_img"
+										src='images/paper/2020hyperpose-min.png' /></a></div>
+						</td>
+						<td class="pub_td2"><b>Fast and Flexible Human Pose Estimation with HyperPose</b><br>Yixiao Guo*, Jialei
+							Liu*, Guo Li*, Luo Mai, Hao Dong<br><i>ACM Multimedia (MM) Open Source 2021</i><br>[<a
+								href="https://arxiv.org/abs/2108.11826">Paper</a>] [<a
+								href="https://github.com/tensorlayer/hyperpose">Code</a>]
+						</td>
+					</tr>
+
+					<!-- <tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/pdf/2009.14406.pdf"><img class="teaser_img"
+										src='images/paper/2020bagc-min.png' /></a></div>
+						</td>
+						<td class="pub_td2"><b>Bilateral Asymmetry Guided Counterfactual Generating Network for Mammogram
+								Classification</b><br>Chu-ran Wang*, Jing Li*, Fandong Zhang, Xinwei Sun􏰀, Hao Dong, Yizhou Yu, and
+							Yizhou Wang<br><i>IEEE Trans. Image Processing (TIP) 2021</i><br>[<a
+								href="https://arxiv.org/pdf/2009.14406.pdf">Paper</a>]
+						</td>
+					</tr> -->
+
+					<tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/pdf/2009.08644.pdf"><img class="teaser_img"
+										src='images/paper/2020rlzoo-min.gif' /></a></div>
+						</td>
+						<td class="pub_td2"><b>Efficient Reinforcement Learning Development with RLzoo</b><br>Zihan Ding, Tianyang
+							Yu, Yanhua Huang, Hongming Zhang, Luo Mai, Hao Dong<br><i>ACM Multimedia (MM) Open Source 2021</i><br>[<a
+								href="https://arxiv.org/pdf/2009.08644.pdf">Paper</a>] [<a
+								href="https://github.com/tensorlayer/rlzoo">Code</a>]
+								[<a href="https://mp.weixin.qq.com/s/4nbqS7YCUAsOVPOQtg5jDQ">机器之心</a>]
+						</td>
+					</tr>
+
+					<tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/abs/2112.05758"><img class="teaser_img"
+										src='images/paper/2021mri-min.png' /></a></div>
+						</td>
+						<td class="pub_td2"><b>Edge-Enhanced Dual Discriminator Generative Adversarial Network for Fast MRI with
+								Parallel Imaging Using Multi-view Information</b><br>Jiahao Huang, Weiping Ding, Jun Lv, Jingwen Yang,
+							Hao Dong, Javier Del Ser, Jun Xia, Tiaojuan Ren, Stephen Wong, Guang Yang<br><i>Applied Intelligence
+								2021</i><br>[<a href="https://arxiv.org/abs/2112.05758">Paper</a>]
+						</td>
+					</tr>
+
+					<tr class="paper1">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/pdf/2006.07793.pdf"><img class="teaser_img"
+										src='images/paper/2020part_assembly-min.gif' /></a></div>
+						</td>
+						<td class="pub_td2"><b>Generative 3D Part Assembly via Dynamic Graph Learning</b><br> <i>
+								<font color="#1367a7">---The world's first 3D part assemble model without external guidance</font>
+							</i> <br>Jialei Huang*, Guanqi Zhan*, Qingnan Fan, Kaichun Mo, Lin Shao, Baoquan Chen, Leonidas Guibas,
+							Hao Dong<br><i>Neural Information Processing Systems (NeurIPS) 2020</i><br>[<a
+								href="https://arxiv.org/pdf/2006.07793.pdf">Paper</a>] [<a
+								href="https://github.com/hyperplane-lab/Generative-3D-Part-Assembly">Code</a>] [<a
+								href="https://hyperplane-lab.github.io/Generative-3D-Part-Assembly/">Webpage</a>]
+								( [<a	href="https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&mid=2650799676&idx=4&sn=1d2c6761bd3892686aacfc5d5dc1c14c&chksm=871a3a42b06db35402bc4e3ed6334f99b0e408ccf9ea30a072ec8bbd4d510e2a35887b563408&scene=0&xtrack=1&key=b21c8bfc2e98d5d832fabcf5a6128c64545a73289c8282c226af065f0e8e665138087c317b186eaebc3355bd9f2e7898b264453a14bd40dffbbb6fef2ef4abeec2a55a98cd3059f89720fff44355005b3bd6c07b912f9076963bed81b37c096beb0b826a868249f36912f97e3e7aaddf2db31632acfed190f0cc958aac41e3d8&ascene=1&uin=NDE4NjY0ODU1&devicetype=Windows+10+x64&version=6300002f&lang=zh_CN&exportkey=AWEFijHWuK4REu4n0VpJCOc%3D&pass_ticket=%2FxhWQurVrRrCi87xYVsAtep82meBarP1vauCZheyCMo17a9a4Hpo24ulX3EPdonG&wx_header=0">机器之心</a>]/
+								[<a
+								href="https://mp.weixin.qq.com/s?__biz=MzA5ODEzMjIyMA==&mid=2247547123&idx=4&sn=dea62a5edc7a65687d08872ce7ebb5ac&chksm=90943160a7e3b876a68ad4b69af47d5b57e40d50d5ba0034db79e2801dc6d6531eacee36e635&mpshare=1&scene=1&srcid=1017FVRyXZjpjkBieLaw7eQX&sharer_sharetime=1602869239113&sharer_shareid=49c5a30c6732bec1bffca4ce2cfd738b&key=905d9831417cd6b735a634c11fe9e11a86e7bec0fce71b3b6a37c07ef6c6049aea49aff5f0223327ab828a3657dbcd0fb4b9aad0c19b9ee4dedc401426ecd5fc0a44f846a5fb951c4039c3b26e3184934d8810e75e3a13d21762ae46ec85e060c0e769031a118bb4fcaf7d0d6d6c8944979019e20273ca05103f170d592abb78&ascene=1&uin=NDE4NjY0ODU1&devicetype=Windows+10+x64&version=6300002f&lang=zh_CN&exportkey=AYpfmqiYvoArYHlAv2MUXGs%3D&pass_ticket=%2FxhWQurVrRrCi87xYVsAtep82meBarP1vauCZheyCMo17a9a4Hpo24ulX3EPdonG&wx_header=0">AI科技评论</a>]
+
+								)
+						</td>
+					</tr>
+
+					<tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/abs/2003.04858"><img class="teaser_img"
+										src='images/paper/2020aclgan-min.gif' /></a></div>
+						</td>
+						<td class="pub_td2"><b>ACL-GAN: Unpaired Image-to-Image Translation using Adversarial Consistency
+								Loss</b><br>Yihao Zhao, Ruihai Wu, Hao Dong<br><i>European Conference on Computer Vision (ECCV)
+								2020</i><br>[<a href="https://arxiv.org/abs/2003.04858">Paper</a>] [<a
+								href="https://github.com/hyperplane-lab/ACL-GAN">Code</a>] [<a
+								href="https://hyperplane-lab.github.io/acl-gan-page/">Webpage</a>]
+								[<a href="https://mp.weixin.qq.com/s/XmMIUVdmWe6cWu0g9VSfYA">CFCS</a>]
+						</td>
+					</tr>
+
+					<tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/abs/2009.09361"><img class="teaser_img"
+										src='images/paper/2020dai_lyapunov.png' /></a></div>
+						</td>
+						<td class="pub_td2"><b>Lyapunov-Based Reinforcement Learning for Decentralized Multi-Agent
+								Control</b><br>Qingrui Zhang, Hao Dong and Wei Pan<br><i>International Conference on Distributed
+								Artificial Intelligence (DAI) 2020 (Oral)</i><br>[<a href="https://arxiv.org/abs/2009.09361">Paper</a>]
+						</td>
+					</tr>
+
+					<tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/abs/2004.08861"><img class="teaser_img"
+										src='images/paper/2020kd-min.png' /></a></div>
+						</td>
+						<td class="pub_td2"><b>Role-Wise Data Augmentation for Knowledge Distillation</b><br>Jie Fu, Xue Geng,
+							Zhijian Duan, Bohan Zhuang, Xingdi Yuan, Adam Trischler, Jie Lin, Chris Pal, Hao
+							Dong<br><i>arXiv-2004.08861 2020</i><br>[<a href="https://arxiv.org/abs/2004.08861">Paper</a>] [<a
+								href="https://github.com/bigaidream-projects/role-kd">Code</a>]
+						</td>
+					</tr>
+
+					<!-- <tr>
+						<td class="sub_heading">Before 2020
+							<hr>
+						</td>
+					</tr> -->
+
+					<tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/abs/1911.09943"><img class="teaser_img"
+										src='images/paper/2019dlgan-min.png' /></a></div>
+						</td>
+						<td class="pub_td2"><b>DLGAN: Disentangling Label-Specific Fine-Grained Features for Image
+								Manipulation</b><br>Guanqi Zhan, Yihao Zhao, Bingchan Zhao, Haoqi Yuan, Baoquan Chen, Hao
+							Dong<br><i>arXiv:1911.09943 2019</i><br>[<a href="https://arxiv.org/abs/1911.09943">Paper</a>]
+						</td>
+					</tr>
+
+					<tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="paper/2019jvcir_design.pdf"><img class="teaser_img"
+										src='images/paper/2019jvcir_design-min.png' /></a></div>
+						</td>
+						<td class="pub_td2"><b>An Artificial Intelligence Based Data-driven Approach for Design
+								Ideation</b><br>Liuqing Chen, Pan Wang, Hao Dong, Feng Shi, Ji Han, Yike Guo, Peter RN Childs, Jun Xiao,
+							Chao Wu<br><i>Journal of Visual Communication and Image Representation 2019</i><br>[<a
+								href="paper/2019jvcir_design.pdf">Paper</a>]
+						</td>
+					</tr>
+
+					<tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="paper/2019icip_simgan.pdf"><img class="teaser_img"
+										src='images/paper/2019icip_simgan-min.png' /></a></div>
+						</td>
+						<td class="pub_td2"><b>SIMGAN: Photo-Realistic Semantic Image Manipulation Using Generative Adversarial
+								Networks</b><br>Simiao Yu, Hao Dong, Felix Liang, Yuanhan Mo, Chao Wu, Yike Guo <br><i>International
+								Conference on Image Processing (ICIP) 2019 (Oral)</i><br>[<a
+								href="paper/2019icip_simgan.pdf">Paper</a>]
+						</td>
+					</tr>
+
+					<tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://link.springer.com/chapter/10.1007/978-3-030-03405-4_29"><img
+										class="teaser_img" src='images/paper/2018ficc_gan-min.png' /></a></div>
+						</td>
+						<td class="pub_td2"><b>Conditional Image Synthesis Using Stacked Auxiliary Classifier Generative Adversarial
+								Networks</b><br>Zhongwei Yao, Hao Dong, Pan Wang, Chao Wu, Yike Guo<br><i>Future of Information and
+								Communications Conference (FICC) 2018</i><br>[<a
+								href="https://link.springer.com/chapter/10.1007/978-3-030-03405-4_29">Paper</a>]
+						</td>
+					</tr>
+
+					<tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://export.arxiv.org/pdf/1805.07615"><img class="teaser_img"
+										src='images/paper/2018NeurIPSw_bionic-min.png' /></a></div>
+						</td>
+						<td class="pub_td2"><b>Generative Creativity: Adversarial Learning for Bionic Design</b><br>Simiao Yu, Hao
+							Dong, Pan Wang, Chao Wu, Yike Guo<br><i>International Conference on Artificial Neural Networks (ICANN)
+								Munich, Germany, 2019</i><br>[<a href="https://export.arxiv.org/pdf/1805.07615">Paper</a>]
+						</td>
+					</tr>
+
+					<tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="paper/2018pcm_txt2im.pdf"><img class="teaser_img"
+										src='images/paper/2018pcm_txt2im-min.png' /></a></div>
+						</td>
+						<td class="pub_td2"><b>Text-to-Image Synthesis via Visual-Memory Creative Adversarial Network</b><br>Shengyu
+							Zhang, Hao Dong, Wei Hu, Yike Guo, Chao Wu, Di Xie, Fei Wu<br><i>Pacific Rim Conference on Multimedia
+								(PCM) 2018</i><br>[<a href="paper/2018pcm_txt2im.pdf">Paper</a>]
+						</td>
+					</tr>
+
+					<tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/abs/1711.07520"><img class="teaser_img"
+										src='images/paper/2017tifs_drop-min.png' /></a></div>
+						</td>
+						<td class="pub_td2"><b>Dropping Activation Outputs with Localized First-layer Deep Network for Enhancing
+								User Privacy and Data Security</b><br>Hao Dong, Chao Wu, Wei Zhen, Yike Guo<br><i>IEEE Trans. on Inform.
+								Forensics and Security (TIFS) 2018</i><br>[<a href="https://arxiv.org/abs/1711.07520">Paper</a>]
+						</td>
+					</tr>
+
+					<tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a
+									href="https://sites.google.com/site/NeurIPSts2017/NeurIPS_2017_TSW_paper_14.pdf"><img
+										class="teaser_img" src='images/paper/2017NeurIPSw_biosignal-min.png' /></a></div>
+						</td>
+						<td class="pub_td2"><b>Towards Desynchronisation Detection in Biosignals</b><br>Akara Supratak, Steffen
+							Schneider, Hao Dong, Ling Li, Yike Guo<br><i>Neural Inform. Process. Systems (NeurIPS) Time Series
+								Workshop 2017</i><br>[<a
+								href="https://sites.google.com/site/NeurIPSts2017/NeurIPS_2017_TSW_paper_14.pdf">Paper</a>] [<a
+								href="https://akaraspt.github.io/publication/2017-11-01-desync-paper">Webpage</a>]
+						</td>
+					</tr>
+
+					<tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/abs/1707.06873"><img class="teaser_img"
+										src='images/paper/2017iccv_sisgan-min.png' /></a></div>
+						</td>
+						<td class="pub_td2"><b>SisGAN: Semantic Image Synthesis via Adversarial Learning</b> <br> <i>
+								<font color="#1367a7">--- The world's first work for manipulating image using natural language (text-guided image
+									manipulation)</font>
+							</i> <br>Hao Dong*, Simiao Yu*, Chao Wu, Yike Guo<br><i>International Conference on Computer Vision (ICCV)
+								2017</i><br>[<a href="https://arxiv.org/abs/1707.06873">Paper</a>]
+						</td>
+					</tr>
+
+					<tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="http://github.com/tensorlayer/tensorlayer/"><img class="teaser_img"
+										src='images/paper/2017acmmm_tensorlayer-min.png' /></a></div>
+						</td>
+						<td class="pub_td2"><b>TensorLayer: A Versatile Library for Efficient Deep Learning Development</b>
+							<!-- <br><i>	<font color="#1367a7">---Winner of the Best Open Source Software Award</font> -->
+								<br> <b><i><font color="#e11212">---Winner of the Best Open Source Software Award</font></i></b>
+							</i> <br>Hao Dong, Akara Supratak, Luo Mai, Fangde Liu, Axel Oehmichen, Simiao Yu, Yike Guo<br><i>ACM
+								Multimedia (MM) Open Source 2017</i><br>[<a href="https://arxiv.org/abs/1707.08551">Paper</a>] [<a
+								href="http://github.com/tensorlayer/tensorlayer/">Code</a>] [<a
+								href="http://github.com/tensorlayer">Organisation</a>] [<a
+								href="http://tensorlayer.readthedocs.io">Documentation</a>]
+						</td>
+					</tr>
+
+					<tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://ieeexplore.ieee.org/document/8233175"><img class="teaser_img"
+										src='images/paper/2017tmi_dagan-min.png' /></a></div>
+						</td>
+						<td class="pub_td2"><b>DAGAN: Deep De-Aliasing Generative Adversarial Networks for Fast Compressed Sensing
+								MRI Reconstruction</b><br>Guang Yang*, Simiao Yu*, Hao Dong, Greg Slabaugh, Pier Luigi Dragotti, Xujiong
+							Ye, Fangde Liu, Simon Arridge, Jennifer Keegan, Yike Guo, David Firmin<br><i>IEEE Trans. Med. Imag. (TMI)
+								2017</i><br>[<a href="https://ieeexplore.ieee.org/document/8233175">Paper</a>] [<a
+								href="https://github.com/nebulaV/DAGAN">Code</a>]
+						</td>
+					</tr>
+
+					<tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/abs/1705.07137"><img class="teaser_img"
+										src='images/paper/2017arxiv_mri-min.png' /></a></div>
+						</td>
+						<td class="pub_td2"><b>Deep De-Aliasing for Fast Compressive Sensing MRI </b><br>Simiao Yu*, Hao Dong*,
+							Guang Yang, Greg Slabaugh, Pier Luigi Dragotti, Xujiong Ye, Fangde Liu, Simon Arridge, Jennifer Keegan,
+							David Firmin, Yike Guo<br><i>arXiv:1705.07137 2017</i><br>[<a
+								href="https://arxiv.org/abs/1705.07137">Paper</a>]
+						</td>
+					</tr>
+
+					<tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/abs/1703.06676"><img class="teaser_img"
+										src='images/paper/2017icip_i2t2i-min.png' /></a></div>
+						</td>
+						<td class="pub_td2"><b>I2T2I: Learning Text to Image Synthesis with Textual Data Augmentation </b><br>Hao
+							Dong, Jingqing Zhang, Douglas McIlwraith, Yike Guo <br><i>International Conference on Image Processing
+								(ICIP) 2017 (Oral)</i><br>[<a href="https://arxiv.org/abs/1703.06676">Paper</a>] [<a
+								href="https://github.com/zsdonghao/im2txt2im">Code</a>]
+						</td>
+					</tr>
+
+					<tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/abs/1701.02676"><img class="teaser_img"
+										src='images/paper/2017arxiv_unim2im-min.png' /></a></div>
+						</td>
+						<td class="pub_td2"><b>Unsupervised Image-to-Image Translation with Generative Adversarial Networks
+							</b><br>Hao Dong, Paarth Neekhara, Chao Wu, Yike Guo <br><i>arXiv:1701.02676 2017</i><br>[<a
+								href="https://arxiv.org/abs/1701.02676">Paper</a>] [<a
+								href="https://github.com/zsdonghao/Unsup-Im2Im">Code</a>]
+						</td>
+					</tr>
+
+					<tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/abs/1703.04046"><img class="teaser_img"
+										src='images/paper/2017tnsre_deepsleepnet-min.png' /></a></div>
+						</td>
+						<td class="pub_td2"><b>DeepSleepNet: a Model for Automatic Sleep Stage Scoring based on Raw Single-Channel
+								EEG </b><br>Akara Supratak, Hao Dong, Chao Wu, Yike Guo <br><i>IEEE Trans. on Neural Systems and
+								Rehabilitation Eng. (TNSRE) 2017</i><br>[<a href="https://arxiv.org/abs/1703.04046">Paper</a>] [<a
+								href="https://github.com/akaraspt/deepsleepnet">Code</a>]
+						</td>
+					</tr>
+
+					<tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/abs/1610.06421"><img class="teaser_img"
+										src='images/paper/2017tnsre_mnn-min.png' /></a></div>
+						</td>
+						<td class="pub_td2"><b>Mixed Neural Network Approach for Temporal Sleep Stage Classification</b><br>Hao
+							Dong, Akara Supratak, Wei Pan, Chao Wu, Paul M Matthews, Yike Guo<br><i>IEEE Trans. on Neural Systems and
+								Rehabilitation Eng. (TNSRE) 2017</i><br>[<a href="https://arxiv.org/abs/1610.06421">Paper</a>]
+						</td>
+					</tr>
+
+					<tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/pdf/1705.03820.pdf"><img class="teaser_img"
+										src='images/paper/2017miua_mri-min.png' /></a></div>
+						</td>
+						<td class="pub_td2"><b>Automatic Brain Tumor Detection and Segmentation Using U-Net Based Fully
+								Convolutional Networks </b><br>Hao Dong, Guang Yang, Fangde Liu, Yuanhan Mo, Yike Guo <br><i>Medical
+								Image Understanding and Analysis (MIUA) 2017 (Oral)</i><br>[<a
+								href="https://arxiv.org/pdf/1705.03820.pdf">Paper</a>]
+						</td>
+					</tr>
+
+					<tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://csce.ucmss.com/books/LFS/CSREA2017/ICA3261.pdf"><img
+										class="teaser_img" src='images/paper/2017icai_tensordb-min.png' /></a></div>
+						</td>
+						<td class="pub_td2"><b>TensorDB: Database Infrastructure for Continuous Machine Learning </b><br>Fangde Liu,
+							Axel Oehmichen, Jingqing Zhang, Kai Sun, Hao Dong, Yuanman Mo, Yike Guo <br><i>International Conference
+								Artificial Intelligence (ICAI) 2017</i><br>[<a
+								href="https://csce.ucmss.com/books/LFS/CSREA2017/ICA3261.pdf">Paper</a>]
+						</td>
+					</tr>
+
+					<!-- <tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="paper/2016embc_material.pdf"><img class="teaser_img"
+										src='images/paper/2016embc_material-min.png' /></a></div>
+						</td>
+						<td class="pub_td2"><b>A New Soft Material based In-the-Ear EEG Recording Technique </b><br>Hao Dong, Paul M
+							Matthews, Yike Guo <br><i>Int. Eng. in Medicine and Biology Conf. (EMBC) 2016 (Oral)</i><br>[<a
+								href="paper/2016embc_material.pdf">Paper</a>]
+						</td>
+					</tr> -->
+
+					<tr class="paper2">
+						<td class="pub_td1">
+							<div class="teaser_img_div"><a href="https://arxiv.org/abs/1606.07326"><img class="teaser_img"
+										src='images/paper/2016arxiv_dropneuron-min.png' /></a></div>
+						</td>
+						<td class="pub_td2"><b>DropNeuron: Simplifying the Structure of Deep Neural Networks </b><br>Wei Pan, Hao
+							Dong, Yike Guo <br><i>arXiv:1606.07326 2016</i><br>[<a href="https://arxiv.org/abs/1606.07326">Paper</a>]
+							[<a href="https://github.com/panweihit/DropNeuron">Code</a>]
+						</td>
+					</tr>
+
+
+				</table>
+
+			</div>
+
+
+			<!--hao： table折叠 -->
+			<!-- <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+	<script>
+			$(".haschild").click(function(){
+					console.log(this);
+					var cls = $(this).parent().attr("class");
+					var childClassName = cls.substring(0,6)+(parseInt(cls.substring(6,7))+1);
+					var arr = $(this).parent().nextUntil('.'+cls);
+
+					if($(this).attr("class").indexOf("isopen")>=0){//关闭
+							$(this).removeClass("isopen");
+							$(arr).each(function(index,element){
+									$(element).find(".company").removeClass("isopen");
+									$(element).hide();
+							})
+					}else{//打开
+							$(this).addClass("isopen");
+							$(arr).each(function(index,element){
+									if($(element).attr("class")==childClassName){
+											$(element).show();
+									}
+							})
+					}
+
+			});
+	</script> -->
+
+			<hr>
+
+
+			<!--
+	<h2>Other recent projects</h2><p>
+	<a href="http://web.mit.edu/phillipi/www/Public/MAS.531/Final%20project/final%20website/final_website.html">Seeing sight</a> -- Final project for MAS.531. Annotates what is seen by one camera from the perspective of another camera.<br><br>
+
+	<a href="http://web.mit.edu/phillipi/www/Public/sfs/Bayesian%20Shape%20from%20Shading.pdf">Bayesian generative shape from shading</a> -- Final project for 9.660. Infers simple bumpy shapes with a generative model.<br><br>
+
+	<a href="http://web.mit.edu/phillipi/www/apps.html">Apps</a> -- A few simple apps written in Processing.<br><br>
+
+	<a href="http://www.flickr.com/photos/27639271@N07/sets/">Photos</a> -- flickr site with photos.<br><br>
+
+	<a href="http://www.wolfire.com/overgrowth">Overgrowth</a> -- Upcoming game from <a href="http://www.wolfire.com">Wolfire Games</a>, where I worked for a year, mainly on the <a href="http://www.youtube.com/watch?v=taX4h3UajBc">map editor</a> and <a href="http://blog.wolfire.com/2009/07/sky-and-lighting-editing-part-1/">other tools</a> for this game. They have an interesting, and very revealing, development blog <a href="http://blog.wolfire.com">here</a>!
+		-->
+
+
+			<a href="" target="\_blank">
+				<img src="https://deep-generative-models.github.io/files/web/water-bottom-min.png" width="1200" />
+			</a>
+
+			<!-- By enabling page-based impression tracking you agree that your impression data may be shared with Advertisers and/or third parties. -->
+			<script src="https://www.anrdoezrs.net/am/100163099/impressions/page/am.js"></script>
+			<script>
+				let paper1= document.querySelectorAll(".paper1")
+				let paper2= document.querySelectorAll(".paper2")
+
+				let servicesShow=function(){
+					let service3=document.getElementsByClassName("service3")[0]
+					let service4=document.getElementsByClassName("service4")[0]
+					let li = document.querySelectorAll(".section_div li");
+					let btn=document.getElementsByClassName("btn")[0]
+					service3.style.display= "list-item"
+					service4.style.display= "list-item"
+					btn.style.display="none"
+				}
+
+				let trShow = function (){
+					let level_11=document.getElementsByClassName("level_1")[0]
+					let level_12=document.getElementsByClassName("level_1")[1]
+					let btn=document.getElementsByClassName("btn")[1]
+					level_11.style.display= "table-row"
+					level_12.style.display= "table-row"
+					btn.style.display="none"
+				}
+
+				let showInfo=function(num){
+					const query = document.querySelectorAll('.all_Btn > span')
+					if(num==1){
+						query[1].classList.remove("current")
+						// query[2].classList.remove("current")
+						query[0].classList.add("current")
+						for(let i=0;i<paper1.length;i++){
+							paper1[i].style.display="table-row"
+						}
+						for(let i=0;i<paper2.length;i++){
+							paper2[i].style.display="none"
+						}
+					}else if(num==2){
+						query[0].classList.remove("current")
+						// query[2].classList.remove("current")
+						query[1].classList.add("current")
+						for(let i=0;i<paper2.length;i++){
+							paper2[i].style.display="table-row"
+						}
+						for(let i=0;i<paper1.length;i++){
+							paper1[i].style.display="none"
+						}
+					}else{
+						query[0].classList.remove("current")
+						query[1].classList.add("current")
+						// query[2].classList.add("current")
+						for(let i=0;i<paper1.length;i++){
+							paper1[i].style.display="table-row"
+						}
+						for(let i=0;i<paper2.length;i++){
+							paper2[i].style.display="table-row"
+						}
+					}
+				}
+			</script>
+	</body>
+
+	</html>
