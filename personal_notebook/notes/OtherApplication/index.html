@@ -867,6 +867,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#localsend" class="md-nav__link">
+    <span class="md-ellipsis">
+      Localsend提示报错
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -918,6 +927,27 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Photography/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Photography
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -958,6 +988,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#localsend" class="md-nav__link">
+    <span class="md-ellipsis">
+      Localsend提示报错
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -979,6 +1018,13 @@
 <p>对应的exe通常是在<code>C:\Users\George\AppData\Roaming\Tencent\WeChat\XPlugin\Plugins\RadiumWMPF\9105\extracted\runtime</code>目录下。</p>
 <p>删除该文件夹，然后重新新建一个同名文件夹/文件。右键修改该文件属性：安全性-》选项-》停用继承。然后修改所有者为：<code>NT SERVICE\TrustedInstaller</code>。</p>
 <p>对应的，删除<code>C:\Users\George\AppData\Roaming\Tencent\WeChat\XPlugin\Plugins</code>目录下的其他组件文件夹，修改为空白文件，并<strong>修改权限为TrustedInstaller</strong>使其无法被读取、修改。</p>
+<h4 id="localsend">Localsend提示报错</h4>
+<p>(10013): 以一种访问权限不允许的方式做了一个访问套接字的尝试</p>
+<pre><code class="language-powershell">net stop winnat
+netsh interface ipv4 show excludedportrange protocol=tcp
+net start winnat
+netsh interface ipv4 show excludedportrange protocol=tcp
+</code></pre>
 
 
 
