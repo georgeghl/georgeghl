@@ -479,7 +479,40 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#windows-amd" class="md-nav__link">
+    <span class="md-ellipsis">
+      解决Windows系统对 AMD 的负优化，修复部分卡顿问题
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="解决Windows系统对 AMD 的负优化，修复部分卡顿问题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      一：异类线程调度
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      二：禁用高精度事件计时器
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       计算机重命名失败，提示“这台电脑名称无效”/“此電腦名稱無效”
     </span>
@@ -506,7 +539,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
       流媒体服务器推荐
     </span>
@@ -1229,7 +1262,40 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#windows-amd" class="md-nav__link">
+    <span class="md-ellipsis">
+      解决Windows系统对 AMD 的负优化，修复部分卡顿问题
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="解决Windows系统对 AMD 的负优化，修复部分卡顿问题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      一：异类线程调度
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      二：禁用高精度事件计时器
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       计算机重命名失败，提示“这台电脑名称无效”/“此電腦名稱無效”
     </span>
@@ -1256,7 +1322,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
       流媒体服务器推荐
     </span>
@@ -1382,7 +1448,56 @@ Port='8236'
 DataFolder = 'D:\Program Files\navidrome_0.51.1_windows_amd64G\data\'
 CacheFolder = 'T:\Temp\'
 </code></pre>
-<h4 id="_4">计算机重命名失败，提示“这台电脑名称无效”/“此電腦名稱無效”</h4>
+<h4 id="windows-amd">解决Windows系统对 AMD 的负优化，修复部分卡顿问题</h4>
+<p>解决Windows系统对 AMD 的负优化，修复部分卡顿问题：https://seeizo.com/posts/amd-win-fix/</p>
+<h5 id="_4">一：异类线程调度</h5>
+<p>禁用异类线程调度可以显著优化 AMD CPU 在 Windows 上的核心负载均衡情况。</p>
+<ol>
+<li>右键 Windows 徽标，点击 “Windows Powershell（管理员）”，执行以下命令：</li>
+</ol>
+<pre><code>powercfg -attributes SUB_PROCESSOR 93b8b6dc-0698-4d1c-9ee4-0644e900c85d -ATTRIB_HIDE
+
+powercfg -attributes SUB_PROCESSOR bae08b81-2d5e-4688-ad6a-13243356654b -ATTRIB_HIDE
+</code></pre>
+<p><img alt="img" src="https://seeizo.com/_astro/1.DxvtYl_L_2oKuGa.webp" /></p>
+<ol>
+<li>在设置中搜索 <strong>电源选项</strong>，进入电源计划，选择高性能或者卓越性能。</li>
+</ol>
+<p><img alt="img" src="https://seeizo.com/_astro/explorer_gFjY63jLKL.C96AVoSh_2lVkL2.webp" /></p>
+<blockquote>
+<p>TIP</p>
+<p>卓越性能的启动命令：</p>
+<p><code>powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61</code></p>
+<p>WARNING</p>
+<p>7000/9000系，Ryzen AI 300 以及更新的 AMD CPU 请暂时不要选择“高性能”或“卓越性能”方案，尤其是在 Windows 11 系统上。</p>
+</blockquote>
+<p>3.点击高性能或卓越性能右侧的 <strong>更改计划设置</strong>，点击 <strong>更改高级电源设置</strong>，找到 <strong>处理器电源管理</strong> 并展开。</p>
+<p><img alt="img" src="https://seeizo.com/_astro/rundll32_tuMmpzow6p.BeOxjlce_Z1Y82QB.webp" /></p>
+<ol>
+<li>将 <strong>异类线程调度策略</strong> 和 <strong>异类短运行线程调度策略</strong> 选项修改为 <strong>所有处理器</strong>，然后点击确定即可。</li>
+</ol>
+<p><img alt="img" src="https://seeizo.com/_astro/rundll32_j2dSwcJG0a.1q2vvta7_Z4DDBV.webp" /></p>
+<blockquote>
+<p>TIP</p>
+<p>很多笔记本默认隐藏了这2个选项，要调整需要更改注册表。</p>
+<ol>
+<li>点击“Windows键”+“R键”，输入regedit打开注册表编辑器</li>
+<li>在“HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\54533251-82be-4824-96c1-47b60b740d00\”下找到“93b8b6dc-0698-4d1c-9ee4-0644e900c85d”以及“bae08b81-2d5e-4688-ad6a-13243356654b”</li>
+<li>进去后将2个路径下的“Attributes”值由默认0更改为2，重新打开电源计划即可更改异类线程调度策略和异类短运行线程调度策略。</li>
+</ol>
+</blockquote>
+<hr />
+<h5 id="_5">二：禁用高精度事件计时器</h5>
+<p><em>这个属于是远古 AMD CPU 就有的问题，理论上只有AMD处理器上才有，Intel不用管。</em>
+禁用高精度事件计时器可以解决在帧率正常的情况下仍会感觉到卡顿的情况。</p>
+<pre><code>bcdedit /deletevalue useplatformclock
+bcdedit /set useplatformclock false
+</code></pre>
+<p>运行第一个指令时，若出现：</p>
+<p><img alt="img" src="https://seeizo.com/_astro/999.CJ35QvSc_Z1psgwi.webp" /></p>
+<p>则代表系统已默认关闭高精度事件计时器，继续执行第二步骤即可。</p>
+<p>若要恢复高精度事件计时器，将指令二中的 <strong>false</strong> 修改为 <strong>true</strong> 即可。</p>
+<h4 id="_6">计算机重命名失败，提示“这台电脑名称无效”/“此電腦名稱無效”</h4>
 <p>请您按Win+R, 输入 regedit，找到
 HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\ComputerName\ActiveComputerName
 HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\ComputerName\ComputerName
@@ -1433,7 +1548,7 @@ HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters
 格式：BMP
 色彩深度：32位</p>
 <p>如果你的系统是联想OEM的系统可能以上注册表键值已经存在，只需直接修改OEM信息和图片即可。</p>
-<h4 id="_5">流媒体服务器推荐</h4>
+<h4 id="_7">流媒体服务器推荐</h4>
 <p>Madsonic</p>
 <p>subsonic</p>
 <p>jellyfin</p>
