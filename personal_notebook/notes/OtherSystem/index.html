@@ -62,7 +62,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#proxmox-virtual-environmentpvedocker" class="md-skip">
+        <a href="#esxi7-vmfsl120g" class="md-skip">
           Skip to content
         </a>
       
@@ -477,6 +477,15 @@
       Table of contents
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#esxi7-vmfsl120g" class="md-nav__link">
+    <span class="md-ellipsis">
+      ESXi7 VMFSL虚拟内存占用120g空间
+    </span>
+  </a>
+  
+</li>
       
         <li class="md-nav__item">
   <a href="#proxmox-virtual-environmentpvedocker" class="md-nav__link">
@@ -1184,6 +1193,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#esxi7-vmfsl120g" class="md-nav__link">
+    <span class="md-ellipsis">
+      ESXi7 VMFSL虚拟内存占用120g空间
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#proxmox-virtual-environmentpvedocker" class="md-nav__link">
     <span class="md-ellipsis">
       Proxmox Virtual Environment（PVE）安装、docker配置等
@@ -1380,6 +1398,10 @@
 
   <h1>OtherSystem</h1>
 
+<h4 id="esxi7-vmfsl120g">ESXi7 VMFSL虚拟内存占用120g空间</h4>
+<p>1、开始安装ESXI7.0，第一次进入安装时，抢在倒计时5秒之内 按shift + O 【是字母不是数字0】如下图：</p>
+<p>2、在<strong><code>cdromBoot runweasel</code></strong>后输入autoPartitionOSDataSize=5120 【注意大小写】【注意有可能开头默认非<code>cdromBoot runweasel</code>，如果不是的话需要自己修改】
+5120表示指定OSDataSzie为5GB，再按enter回车进行正常安装即可；当然了，如果觉得5G小了点，那就分8G 10G都可以。</p>
 <h4 id="proxmox-virtual-environmentpvedocker">Proxmox Virtual Environment（PVE）安装、docker配置等</h4>
 <h5 id="1">1.镜像下载</h5>
 <p>https://www.proxmox.com/en/downloads</p>
