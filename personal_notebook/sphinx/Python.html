@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>安装（python）注：更推荐直接安装使用anaconda &#8212; 个人笔记教程 1.0.0 文档</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/classic.css?v=def86cc0" />
+    
+    <script src="_static/documentation_options.js?v=34088549"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/translations.js?v=beaddf03"></script>
+    
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>导航</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="总索引"
+             accesskey="I">索引</a></li>
+        <li class="nav-item nav-item-0"><a href="index.html">个人笔记教程 1.0.0 文档</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">安装（python）<strong>注：更推荐直接安装使用anaconda</strong></a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="python-anaconda">
+<h1>安装（python）<strong>注：更推荐直接安装使用anaconda</strong><a class="headerlink" href="#python-anaconda" title="Link to this heading">¶</a></h1>
+<p>请到官网下载Python安装包：https://www.python.org/downloads/windows/</p>
+<p>下载完毕后，右键-&gt;以管理员身份运行-&gt;是。</p>
+<p><img alt="1722589272240" src="_images/1722589272240-1722589281866-2.png" /></p>
+<p><strong>如果你不想手动配置环境变量，请勾选上图中的“添加python.exe到环境变量”。</strong></p>
+<p>其他步骤没啥技术含量。</p>
+</section>
+<section id="anaconda">
+<h1>安装（anaconda）<a class="headerlink" href="#anaconda" title="Link to this heading">¶</a></h1>
+<p>完整conda：</p>
+<p>建议使用清华镜像站：https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/</p>
+<p><strong>请下载最新安装包！</strong></p>
+<p>miniconda：</p>
+<p>建议使用清华镜像站：https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/</p>
+<p><strong>请下载最新安装包！</strong></p>
+<section id="windows">
+<h2>对于Windows用户：<a class="headerlink" href="#windows" title="Link to this heading">¶</a></h2>
+<p>安装时直接右键-&gt;以管理员身份运行-&gt;是。</p>
+<p><img alt="1722589401701" src="_images/1722589401701.png" /></p>
+<p><strong>如果你不想手动配置环境变量，请勾选上图中的“添加python.exe到环境变量”。</strong></p>
+<p>其他步骤没啥技术含量。</p>
+<p>如果安装完毕使用出现错误，请参照下文“conda在windows Terminal中提示报错无法加载文件C:\XXX\WindowsPowerShell\profile.ps1”。笔者曾在2023年版本的anaconda遇到过这个问题。</p>
+<section id="pippip">
+<h3>使用pip报错“pip 不是内部或外部命令，也不是可运行的程序”<a class="headerlink" href="#pippip" title="Link to this heading">¶</a></h3>
+<p>出现在“Miniconda3-py312_24.5.0-0-Windows-x86_64”版本。</p>
+<p>请在系统环境变量中添加“<code class="docutils literal notranslate"><span class="pre">%CONDA_HOME%\Scripts</span></code>”。</p>
+</section>
+<section id="pip-defaulting-to-user-installation-because-normal-site-packages-is-not-writeable">
+<h3>pip下载库包报错：Defaulting to user installation because normal site-packages is not writeable<a class="headerlink" href="#pip-defaulting-to-user-installation-because-normal-site-packages-is-not-writeable" title="Link to this heading">¶</a></h3>
+<p>1、在使用pip下载库包的时候报错：Defaulting to user installation because normal site-packages is not writeable</p>
+<p>2、错误解决方式：</p>
+<p>查看了下anaconda的安装路径，查看目录属性，发现是<code class="docutils literal notranslate"><span class="pre">只读属性</span></code>，因此需要修改权限，或者使用管理员权限打开命令行，具体操作步骤：</p>
+<p>1）修改目录权限属性</p>
+<p>2）找到site.py文件：在命令行下输入：<code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">site</span> <span class="pre">-help</span></code></p>
+<p>site.py默认是在<code class="docutils literal notranslate"><span class="pre">C:\ProgramData\miniconda3\Lib\site.py</span></code></p>
+<p>然后打开site.py文件，把其中的：</p>
+<p>USER_SITE = None
+USER_BASE = None</p>
+<p>路径修改为自己的anaconda的安装路径即可：</p>
+<p>USER_SITE = “C:\ProgramData\miniconda3\Lib\site-packages”
+USER_BASE = “C:\ProgramData\miniconda3\Scripts”</p>
+</section>
+</section>
+</section>
+<section id="requests-cannot-connect-to-proxy-filenotfounderror-2-no-such-file-or-directory">
+<h1>requests 使用代理报错 Cannot connect to proxy.‘,FileNotFoundError(2, ‘No such file or directory问题解决<a class="headerlink" href="#requests-cannot-connect-to-proxy-filenotfounderror-2-no-such-file-or-directory" title="Link to this heading">¶</a></h1>
+<p>如题，使用代理报错,降级urllib3
+不要使用1.26.0版本，安装低版本。</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span><span class="nv">urllib3</span><span class="o">==</span><span class="m">1</span>.25.11
+</pre></div>
+</div>
+</section>
+<section id="requests">
+<h1>requests 代理设置<a class="headerlink" href="#requests" title="Link to this heading">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">urllib3</span>
+<span class="n">urllib3</span><span class="o">.</span><span class="n">disable_warnings</span><span class="p">()</span>
+
+<span class="n">proxies</span><span class="o">=</span><span class="p">{</span>
+<span class="s1">&#39;http&#39;</span><span class="p">:</span> <span class="s1">&#39;http://127.0.0.1:7890&#39;</span><span class="p">,</span>
+<span class="s1">&#39;https&#39;</span><span class="p">:</span> <span class="s1">&#39;https://127.0.0.1:7890&#39;</span>
+<span class="p">}</span>
+
+<span class="n">result0</span><span class="o">=</span><span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span><span class="n">proxies</span><span class="o">=</span><span class="n">proxies</span><span class="p">,</span><span class="n">verify</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="condawindows-terminalc-xxx-windowspowershell-profile-ps1">
+<h1>conda在windows Terminal中提示报错无法加载文件C:\XXX\WindowsPowerShell\profile.ps1<a class="headerlink" href="#condawindows-terminalc-xxx-windowspowershell-profile-ps1" title="Link to this heading">¶</a></h1>
+<p>提示 “<code class="docutils literal notranslate"><span class="pre">无法加载文件C:\XXX\WindowsPowerShell\profile.ps1，因为在此系统上禁止运行脚本</span></code>” 的错误。</p>
+<ol>
+<li><p>以管理员身份运行<code class="docutils literal notranslate"><span class="pre">PowerShell</span></code>；</p></li>
+<li><p>执行：<code class="docutils literal notranslate"><span class="pre">get-ExecutionPolicy</span></code>，回复<code class="docutils literal notranslate"><span class="pre">Restricted</span></code>，表示状态是<code class="docutils literal notranslate"><span class="pre">禁止</span></code>的；</p></li>
+<li><p>执行：<code class="docutils literal notranslate"><span class="pre">set-ExecutionPolicy</span> <span class="pre">RemoteSigned</span></code>，选择<code class="docutils literal notranslate"><span class="pre">A</span></code>即可。</p></li>
+<li><div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="nb">PS </span><span class="n">C</span><span class="p">:\</span><span class="n">WINDOWS</span><span class="p">\</span><span class="n">system32</span><span class="p">&gt;</span> <span class="nb">get-ExecutionPolicy</span>
+<span class="n">Restricted</span>
+<span class="nb">PS </span><span class="n">C</span><span class="p">:\</span><span class="n">WINDOWS</span><span class="p">\</span><span class="n">system32</span><span class="p">&gt;</span> <span class="nb">set-ExecutionPolicy</span> <span class="n">RemoteSigned</span>
+
+<span class="n">执行策略更改</span>
+<span class="n">执行策略可帮助你防止执行不信任的脚本</span><span class="err">。</span><span class="n">更改执行策略可能会产生安全风险</span><span class="err">，</span><span class="n">如</span> <span class="n">https</span><span class="p">:/</span><span class="n">go</span><span class="p">.</span><span class="n">microsoft</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">fwlink</span><span class="p">/</span><span class="k">?</span><span class="n">LinkID</span><span class="p">=</span><span class="n">135170</span>
+<span class="n">中的</span> <span class="n">about_Execution_Policies</span> <span class="n">帮助主题所述</span><span class="err">。</span><span class="n">是否要更改执行策略</span><span class="p">?</span>
+<span class="no">[Y]</span> <span class="n">是</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>  <span class="no">[A]</span> <span class="n">全是</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>  <span class="no">[N]</span> <span class="n">否</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>  <span class="no">[L]</span> <span class="n">全否</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>  <span class="no">[S]</span> <span class="n">暂停</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>  <span class="p">[?]</span> <span class="n">帮助</span> <span class="p">(</span><span class="n">默认值为</span><span class="err">“</span><span class="n">N</span><span class="err">”</span><span class="p">):</span> <span class="n">A</span>
+<span class="nb">PS </span><span class="n">C</span><span class="p">:\</span><span class="n">WINDOWS</span><span class="p">\</span><span class="n">system32</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="python-sql">
+<h1>python sql多线程<a class="headerlink" href="#python-sql" title="Link to this heading">¶</a></h1>
+<p>python中执行mysql查询时，需要使用线程池管理，不能直接使用pymysql，否则会报错。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>activate<span class="w"> </span>py37
+<span class="nb">cd</span><span class="w"> </span>d:<span class="se">\d\c</span>ode<span class="se">\g</span>ithub
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/luvvien/pymysqlpool.git
+<span class="nb">cd</span><span class="w"> </span>pymysqlpool
+python<span class="w"> </span>setup.py<span class="w"> </span>install
+</pre></div>
+</div>
+<p>示例代码如下：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">concurrent.futures</span> <span class="kn">import</span> <span class="n">ThreadPoolExecutor</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">pymysqlpool</span> <span class="kn">import</span> <span class="n">ConnectionPool</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%(asctime)s</span><span class="s1"> - </span><span class="si">%(pathname)s</span><span class="s1">[line:</span><span class="si">%(lineno)d</span><span class="s1">] - </span><span class="si">%(levelname)s</span><span class="s1">: </span><span class="si">%(message)s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+
+<span class="c1"># 连接池配置</span>
+<span class="n">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;pool_name&#39;</span><span class="p">:</span> <span class="s1">&#39;test&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;host&#39;</span><span class="p">:</span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;port&#39;</span><span class="p">:</span><span class="mi">3306</span><span class="p">,</span>
+    <span class="s1">&#39;user&#39;</span><span class="p">:</span><span class="s1">&#39;root&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;password&#39;</span><span class="p">:</span><span class="s1">&#39;10203090&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;database&#39;</span><span class="p">:</span><span class="s1">&#39;tmp&#39;</span>
+<span class="p">}</span>
+
+<span class="c1"># 建立连接池</span>
+<span class="k">def</span> <span class="nf">connection_pool</span><span class="p">():</span>
+    <span class="c1"># Return a connection pool instance</span>
+    <span class="n">pool</span> <span class="o">=</span> <span class="n">ConnectionPool</span><span class="p">(</span><span class="o">**</span><span class="n">config</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">pool</span>
+
+
+<span class="c1"># 自定义的处理函数</span>
+<span class="k">def</span> <span class="nf">processFile</span><span class="p">(</span><span class="n">filepath</span><span class="p">):</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Current file: &quot;</span><span class="o">+</span><span class="n">filepath</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">data</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+        <span class="n">tmp</span><span class="o">=</span><span class="n">i</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s2">&quot;GH&quot;</span> <span class="ow">in</span> <span class="n">tmp</span><span class="p">:</span>
+                <span class="n">GH</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="s2">&quot;GH&quot;</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">GH</span><span class="o">=</span><span class="s2">&quot;NULL&quot;</span>
+            <span class="k">if</span> <span class="s2">&quot;ZHZT&quot;</span> <span class="ow">in</span> <span class="n">tmp</span><span class="p">:</span>
+                <span class="n">ZHZT</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="s2">&quot;ZHZT&quot;</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">ZHZT</span><span class="o">=</span><span class="s2">&quot;NULL&quot;</span>
+            <span class="k">if</span> <span class="s2">&quot;GJ&quot;</span> <span class="ow">in</span> <span class="n">tmp</span><span class="p">:</span>
+                <span class="n">GJ</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="s2">&quot;GJ&quot;</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">GJ</span><span class="o">=</span><span class="s2">&quot;NULL&quot;</span>
+            <span class="k">if</span> <span class="s2">&quot;IDCARD&quot;</span> <span class="ow">in</span> <span class="n">tmp</span><span class="p">:</span>
+                <span class="n">IDCARD</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="s2">&quot;IDCARD&quot;</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">IDCARD</span><span class="o">=</span><span class="s2">&quot;NULL&quot;</span>
+            <span class="k">if</span> <span class="s2">&quot;RYZT&quot;</span> <span class="ow">in</span> <span class="n">tmp</span><span class="p">:</span>
+                <span class="n">RYZT</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="s2">&quot;RYZT&quot;</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">RYZT</span><span class="o">=</span><span class="s2">&quot;NULL&quot;</span>
+            <span class="k">if</span> <span class="s2">&quot;XB&quot;</span> <span class="ow">in</span> <span class="n">tmp</span><span class="p">:</span>
+                <span class="n">XB</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="s2">&quot;XB&quot;</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">XB</span><span class="o">=</span><span class="s2">&quot;NULL&quot;</span>
+            <span class="k">if</span> <span class="s2">&quot;ZHJHZT&quot;</span> <span class="ow">in</span> <span class="n">tmp</span><span class="p">:</span>
+                <span class="n">ZHJHZT</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="s2">&quot;ZHJHZT&quot;</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">ZHJHZT</span><span class="o">=</span><span class="s2">&quot;NULL&quot;</span>
+            <span class="k">if</span> <span class="s2">&quot;pageId&quot;</span> <span class="ow">in</span> <span class="n">tmp</span><span class="p">:</span>
+                <span class="n">pageId</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="s2">&quot;pageId&quot;</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">pageId</span><span class="o">=</span><span class="s2">&quot;NULL&quot;</span>
+            <span class="k">if</span> <span class="s2">&quot;userId&quot;</span> <span class="ow">in</span> <span class="n">tmp</span><span class="p">:</span>
+                <span class="n">userId</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="s2">&quot;userId&quot;</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">userId</span><span class="o">=</span><span class="s2">&quot;NULL&quot;</span>
+            <span class="k">if</span> <span class="s2">&quot;SFZJLXM&quot;</span> <span class="ow">in</span> <span class="n">tmp</span><span class="p">:</span>
+                <span class="n">SFZJLXM</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="s2">&quot;SFZJLXM&quot;</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">SFZJLXM</span><span class="o">=</span><span class="s2">&quot;NULL&quot;</span>
+            <span class="k">if</span> <span class="s2">&quot;SFLBDM&quot;</span> <span class="ow">in</span> <span class="n">tmp</span><span class="p">:</span>
+                <span class="n">SFLBDM</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="s2">&quot;SFLBDM&quot;</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">SFLBDM</span><span class="o">=</span><span class="s2">&quot;NULL&quot;</span>
+            <span class="k">if</span> <span class="s2">&quot;BMJZRYZT&quot;</span> <span class="ow">in</span> <span class="n">tmp</span><span class="p">:</span>
+                <span class="n">BMJZRYZT</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="s2">&quot;BMJZRYZT&quot;</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">BMJZRYZT</span><span class="o">=</span><span class="s2">&quot;NULL&quot;</span>
+            <span class="k">if</span> <span class="s2">&quot;SMZT&quot;</span> <span class="ow">in</span> <span class="n">tmp</span><span class="p">:</span>
+                <span class="n">SMZT</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="s2">&quot;SMZT&quot;</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">SMZT</span><span class="o">=</span><span class="s2">&quot;NULL&quot;</span>
+            <span class="k">if</span> <span class="s2">&quot;XM&quot;</span> <span class="ow">in</span> <span class="n">tmp</span><span class="p">:</span>
+                <span class="n">XM</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="s2">&quot;XM&quot;</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">XM</span><span class="o">=</span><span class="s2">&quot;NULL&quot;</span>
+            <span class="k">if</span> <span class="s2">&quot;TYSFRZH&quot;</span> <span class="ow">in</span> <span class="n">tmp</span><span class="p">:</span>
+                <span class="n">TYSFRZH</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="s2">&quot;TYSFRZH&quot;</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">TYSFRZH</span><span class="o">=</span><span class="s2">&quot;NULL&quot;</span>
+            <span class="k">if</span> <span class="s2">&quot;USERID_1&quot;</span> <span class="ow">in</span> <span class="n">tmp</span><span class="p">:</span>
+                <span class="n">USERID_1</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="s2">&quot;USERID_1&quot;</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">USERID_1</span><span class="o">=</span><span class="s2">&quot;NULL&quot;</span>
+            <span class="k">if</span> <span class="s2">&quot;orgInfo&quot;</span> <span class="ow">in</span> <span class="n">tmp</span><span class="p">:</span>
+                <span class="n">orgInfo</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="s2">&quot;orgInfo&quot;</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">orgInfo</span><span class="o">=</span><span class="s2">&quot;NULL&quot;</span>
+            <span class="k">if</span> <span class="s2">&quot;personId&quot;</span> <span class="ow">in</span> <span class="n">tmp</span><span class="p">:</span>
+                <span class="n">personId</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="s2">&quot;personId&quot;</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">personId</span><span class="o">=</span><span class="s2">&quot;NULL&quot;</span>
+            <span class="k">if</span> <span class="s2">&quot;objectId&quot;</span> <span class="ow">in</span> <span class="n">tmp</span><span class="p">:</span>
+                <span class="n">objectId</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="s2">&quot;objectId&quot;</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">objectId</span><span class="o">=</span><span class="s2">&quot;NULL&quot;</span>
+            <span class="k">if</span> <span class="s2">&quot;CQUBM&quot;</span> <span class="ow">in</span> <span class="n">tmp</span><span class="p">:</span>
+                <span class="n">CQUBM</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="s2">&quot;CQUBM&quot;</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">CQUBM</span><span class="o">=</span><span class="s2">&quot;NULL&quot;</span>
+            <span class="k">if</span> <span class="s2">&quot;BMPYRYZT&quot;</span> <span class="ow">in</span> <span class="n">tmp</span><span class="p">:</span>
+                <span class="n">BMPYRYZT</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="s2">&quot;BMPYRYZT&quot;</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">BMPYRYZT</span><span class="o">=</span><span class="s2">&quot;NULL&quot;</span>
+            <span class="k">if</span> <span class="s2">&quot;CSRQ&quot;</span> <span class="ow">in</span> <span class="n">tmp</span><span class="p">:</span>
+                <span class="n">CSRQ</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="s2">&quot;CSRQ&quot;</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">CSRQ</span><span class="o">=</span><span class="s2">&quot;NULL&quot;</span>
+            <span class="k">if</span> <span class="s2">&quot;JZBM&quot;</span> <span class="ow">in</span> <span class="n">tmp</span><span class="p">:</span>
+                <span class="n">JZBM</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="s2">&quot;JZBM&quot;</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">JZBM</span><span class="o">=</span><span class="s2">&quot;NULL&quot;</span>
+            <span class="k">if</span> <span class="s2">&quot;SFYDK&quot;</span> <span class="ow">in</span> <span class="n">tmp</span><span class="p">:</span>
+                <span class="n">SFYDK</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="s2">&quot;SFYDK&quot;</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">SFYDK</span><span class="o">=</span><span class="s2">&quot;NULL&quot;</span>
+            <span class="k">if</span> <span class="s2">&quot;ZHJHSMZT&quot;</span> <span class="ow">in</span> <span class="n">tmp</span><span class="p">:</span>
+                <span class="n">ZHJHSMZT</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="s2">&quot;ZHJHSMZT&quot;</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">ZHJHSMZT</span><span class="o">=</span><span class="s2">&quot;NULL&quot;</span>
+            <span class="k">if</span> <span class="s2">&quot;DQFWRYZT&quot;</span> <span class="ow">in</span> <span class="n">tmp</span><span class="p">:</span>
+                <span class="n">DQFWRYZT</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="s2">&quot;DQFWRYZT&quot;</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">DQFWRYZT</span><span class="o">=</span><span class="s2">&quot;NULL&quot;</span>
+            <span class="k">if</span> <span class="s2">&quot;TEL&quot;</span> <span class="ow">in</span> <span class="n">tmp</span><span class="p">:</span>
+                <span class="n">TEL</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="s2">&quot;TEL&quot;</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">TEL</span><span class="o">=</span><span class="s2">&quot;NULL&quot;</span>
+            <span class="k">if</span> <span class="s2">&quot;JZXGH&quot;</span> <span class="ow">in</span> <span class="n">tmp</span><span class="p">:</span>
+                <span class="n">JZXGH</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="s2">&quot;JZXGH&quot;</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">JZXGH</span><span class="o">=</span><span class="s2">&quot;NULL&quot;</span>
+            <span class="k">if</span> <span class="s2">&quot;JZORACLECOLLECT&quot;</span> <span class="ow">in</span> <span class="n">tmp</span><span class="p">:</span>
+                <span class="n">JZORACLECOLLECT</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="s2">&quot;JZORACLECOLLECT&quot;</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">JZORACLECOLLECT</span><span class="o">=</span><span class="s2">&quot;NULL&quot;</span>
+            <span class="k">if</span> <span class="s2">&quot;USERTYPE&quot;</span> <span class="ow">in</span> <span class="n">tmp</span><span class="p">:</span>
+                <span class="n">USERTYPE</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="s2">&quot;USERTYPE&quot;</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">USERTYPE</span><span class="o">=</span><span class="s2">&quot;NULL&quot;</span>
+            <span class="k">if</span> <span class="s2">&quot;LASTLOGINTIME&quot;</span> <span class="ow">in</span> <span class="n">tmp</span><span class="p">:</span>
+                <span class="n">LASTLOGINTIME</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="s2">&quot;LASTLOGINTIME&quot;</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">LASTLOGINTIME</span><span class="o">=</span><span class="s2">&quot;NULL&quot;</span>
+            <span class="k">if</span> <span class="s2">&quot;QYPYRYAZT&quot;</span> <span class="ow">in</span> <span class="n">tmp</span><span class="p">:</span>
+                <span class="n">QYPYRYAZT</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="s2">&quot;QYPYRYAZT&quot;</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">QYPYRYAZT</span><span class="o">=</span><span class="s2">&quot;NULL&quot;</span>
+            <span class="k">if</span> <span class="s2">&quot;SFYXQJZ&quot;</span> <span class="ow">in</span> <span class="n">tmp</span><span class="p">:</span>
+                <span class="n">SFYXQJZ</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="s2">&quot;SFYXQJZ&quot;</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">SFYXQJZ</span><span class="o">=</span><span class="s2">&quot;NULL&quot;</span>
+            <span class="k">if</span> <span class="s2">&quot;RSZPRYZT&quot;</span> <span class="ow">in</span> <span class="n">tmp</span><span class="p">:</span>
+                <span class="n">RSZPRYZT</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="s2">&quot;RSZPRYZT&quot;</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">RSZPRYZT</span><span class="o">=</span><span class="s2">&quot;NULL&quot;</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">with</span> <span class="n">connection_pool</span><span class="p">()</span><span class="o">.</span><span class="n">connection</span><span class="p">()</span> <span class="k">as</span> <span class="n">conn</span><span class="p">:</span>
+                    <span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+                    <span class="n">SQL</span><span class="o">=</span><span class="s2">&quot;INSERT INTO `sso_v2` VALUES(</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="o">+</span><span class="n">GH</span><span class="o">+</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="o">+</span><span class="n">ZHZT</span><span class="o">+</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="o">+</span><span class="n">GJ</span><span class="o">+</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="o">+</span><span class="n">IDCARD</span><span class="o">+</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="o">+</span><span class="n">RYZT</span><span class="o">+</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="o">+</span><span class="n">XB</span><span class="o">+</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="o">+</span><span class="n">ZHJHZT</span><span class="o">+</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="o">+</span><span class="n">pageId</span><span class="o">+</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="o">+</span><span class="n">userId</span><span class="o">+</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="o">+</span><span class="n">SFZJLXM</span><span class="o">+</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="o">+</span><span class="n">SFLBDM</span><span class="o">+</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="o">+</span><span class="n">BMJZRYZT</span><span class="o">+</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="o">+</span><span class="n">SMZT</span><span class="o">+</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="o">+</span><span class="n">XM</span><span class="o">+</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="o">+</span><span class="n">TYSFRZH</span><span class="o">+</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="o">+</span><span class="n">USERID_1</span><span class="o">+</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="o">+</span><span class="n">orgInfo</span><span class="o">+</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="o">+</span><span class="n">personId</span><span class="o">+</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="o">+</span><span class="n">objectId</span><span class="o">+</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="o">+</span><span class="n">CQUBM</span><span class="o">+</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="o">+</span><span class="n">BMPYRYZT</span><span class="o">+</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="o">+</span><span class="n">CSRQ</span><span class="o">+</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="o">+</span><span class="n">JZBM</span><span class="o">+</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="o">+</span><span class="n">SFYDK</span><span class="o">+</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="o">+</span><span class="n">ZHJHSMZT</span><span class="o">+</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="o">+</span><span class="n">DQFWRYZT</span><span class="o">+</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="o">+</span><span class="n">TEL</span><span class="o">+</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="o">+</span><span class="n">JZXGH</span><span class="o">+</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="o">+</span><span class="n">JZORACLECOLLECT</span><span class="o">+</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="o">+</span><span class="n">USERTYPE</span><span class="o">+</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="o">+</span><span class="n">LASTLOGINTIME</span><span class="o">+</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="o">+</span><span class="n">QYPYRYAZT</span><span class="o">+</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="o">+</span><span class="n">SFYXQJZ</span><span class="o">+</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="o">+</span><span class="n">RSZPRYZT</span><span class="o">+</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">);&quot;</span>
+                    <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">SQL</span><span class="p">)</span>
+                    <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">SQL</span><span class="p">)</span>
+                    <span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+            
+            
+<span class="c1">#这里开到4线程，可以自行修改     </span>
+<span class="n">MAX_THREAD_NUM</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">threadCnt</span> <span class="o">=</span> <span class="mi">0</span>
+
+
+<span class="k">def</span> <span class="nf">processFilesInThreadPool</span><span class="p">():</span>
+    <span class="n">jsonFiles</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s2">&quot;./data/&quot;</span><span class="p">)</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Json Files: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">jsonFiles</span><span class="p">))</span>
+    
+    <span class="c1">#以下是多线程执行代码</span>
+    <span class="k">global</span> <span class="n">threadCnt</span>
+    <span class="k">with</span> <span class="n">ThreadPoolExecutor</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="n">MAX_THREAD_NUM</span><span class="p">)</span> <span class="k">as</span> <span class="n">executor</span><span class="p">:</span>
+        <span class="n">futures</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">jsonFile</span> <span class="ow">in</span> <span class="n">jsonFiles</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">threadCnt</span> <span class="o">&lt;</span> <span class="n">MAX_THREAD_NUM</span><span class="p">:</span>
+                <span class="n">threadCnt</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="c1"># 这里调用自定义的处理函数</span>
+                <span class="n">future</span> <span class="o">=</span> <span class="n">executor</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">processFile</span><span class="p">,</span> <span class="s2">&quot;./data/&quot;</span> <span class="o">+</span> <span class="n">jsonFile</span><span class="p">)</span>
+                <span class="n">futures</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">future</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># 等待当前所有线程完成</span>
+                <span class="k">for</span> <span class="n">future</span> <span class="ow">in</span> <span class="n">futures</span><span class="p">:</span>
+                    <span class="n">future</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+                <span class="n">futures</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="n">threadCnt</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="c1"># 确保所有线程都完成</span>
+        <span class="k">for</span> <span class="n">future</span> <span class="ow">in</span> <span class="n">futures</span><span class="p">:</span>
+            <span class="n">future</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+
+
+<span class="n">processFilesInThreadPool</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">目录</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">安装（python）<strong>注：更推荐直接安装使用anaconda</strong></a></li>
+<li><a class="reference internal" href="#anaconda">安装（anaconda）</a><ul>
+<li><a class="reference internal" href="#windows">对于Windows用户：</a><ul>
+<li><a class="reference internal" href="#pippip">使用pip报错“pip 不是内部或外部命令，也不是可运行的程序”</a></li>
+<li><a class="reference internal" href="#pip-defaulting-to-user-installation-because-normal-site-packages-is-not-writeable">pip下载库包报错：Defaulting to user installation because normal site-packages is not writeable</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#requests-cannot-connect-to-proxy-filenotfounderror-2-no-such-file-or-directory">requests 使用代理报错 Cannot connect to proxy.‘,FileNotFoundError(2, ‘No such file or directory问题解决</a></li>
+<li><a class="reference internal" href="#requests">requests 代理设置</a></li>
+<li><a class="reference internal" href="#condawindows-terminalc-xxx-windowspowershell-profile-ps1">conda在windows Terminal中提示报错无法加载文件C:\XXX\WindowsPowerShell\profile.ps1</a></li>
+<li><a class="reference internal" href="#python-sql">python sql多线程</a></li>
+</ul>
+
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>本页</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/Python.md.txt"
+            rel="nofollow">显示源代码</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">快速搜索</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="提交" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>导航</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="总索引"
+             >索引</a></li>
+        <li class="nav-item nav-item-0"><a href="index.html">个人笔记教程 1.0.0 文档</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">安装（python）<strong>注：更推荐直接安装使用anaconda</strong></a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; 版权所有 2024, georgeghl.
+      由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7创建。
+    </div>
+  </body>
+</html>

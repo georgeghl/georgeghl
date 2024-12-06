@@ -1,0 +1,93 @@
+
+
+资源查找
+========================================
+.. toctree::
+   :maxdepth: 1
+   :caption: Contents:
+`操作系统和软件查找 <./mirrors.html>`_
+
+`神州网信政府版 <./CMGOS.html>`_
+
+
+
+操作系统
+========================================
+.. toctree::
+   :maxdepth: 1
+   :caption: Contents:
+
+`Android <Android.html>`_
+
+`Ubuntu <Ubuntu.html>`_
+
+`Windows <Windows.html>`_
+
+`Openwrt <Openwrt.html>`_
+
+`CQU_openwrt教程 <CQU_openwrt教程.html>`_
+
+`OtherSystem <OtherSystem.html>`_
+
+
+
+开发工具/容器/语言
+========================================
+.. toctree::
+   :maxdepth: 1
+   :caption: Contents:
+
+`Docker <Docker.html>`_
+
+`k8s <k8s.html>`_
+
+`Git <Git.html>`_
+
+`Maven <Maven.html>`_
+
+`Java <Java.html>`_
+
+`Python <Python.html>`_
+
+
+
+应用软件
+========================================
+.. toctree::
+   :maxdepth: 1
+   :caption: Contents:
+
+`Acrobat <Acrobat.html>`_
+
+`Chrome <Chrome.html>`_
+
+`ffmpeg <ffmpeg.html>`_
+
+`OfficeWPS <OfficeWPS.html>`_
+
+
+
+其他
+========================================
+.. toctree::
+   :maxdepth: 1
+   :caption: Contents:
+
+`Printer <Printer.html>`_
+
+`OtherApplication <OtherApplication.html>`_
+
+`Maintenance <Maintenance.html>`_
+
+`Photography <Photography.html>`_
+
+`VR <VR.html>`_
+
+
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`

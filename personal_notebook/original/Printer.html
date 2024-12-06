@@ -1,0 +1,911 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+
+<link href='https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700,700italic&subset=latin,cyrillic-ext,cyrillic,latin-ext' rel='stylesheet' type='text/css' /><style type='text/css'>html {overflow-x: initial !important;}:root { --bg-color:#ffffff; --text-color:#333333; --select-text-bg-color:#B5D6FC; --select-text-font-color:auto; --monospace:"Lucida Console",Consolas,"Courier",monospace; --title-bar-height:20px; }
+.mac-os-11 { --title-bar-height:28px; }
+html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+h1, h2, h3, h4, h5 { white-space: pre-wrap; }
+body { margin: 0px; padding: 0px; height: auto; inset: 0px; font-size: 1rem; line-height: 1.42857; overflow-x: hidden; background: inherit; tab-size: 4; }
+iframe { margin: auto; }
+a.url { word-break: break-all; }
+a:active, a:hover { outline: 0px; }
+.in-text-selection, ::selection { text-shadow: none; background: var(--select-text-bg-color); color: var(--select-text-font-color); }
+#write { margin: 0px auto; height: auto; width: inherit; word-break: normal; overflow-wrap: break-word; position: relative; white-space: normal; overflow-x: visible; padding-top: 36px; }
+#write.first-line-indent p { text-indent: 2em; }
+#write.first-line-indent li p, #write.first-line-indent p * { text-indent: 0px; }
+#write.first-line-indent li { margin-left: 2em; }
+.for-image #write { padding-left: 8px; padding-right: 8px; }
+body.typora-export { padding-left: 30px; padding-right: 30px; }
+.typora-export .footnote-line, .typora-export li, .typora-export p { white-space: pre-wrap; }
+.typora-export .task-list-item input { pointer-events: none; }
+@media screen and (max-width: 500px) {
+  body.typora-export { padding-left: 0px; padding-right: 0px; }
+  #write { padding-left: 20px; padding-right: 20px; }
+}
+#write li > figure:last-child { margin-bottom: 0.5rem; }
+#write ol, #write ul { position: relative; }
+img { max-width: 100%; vertical-align: middle; image-orientation: from-image; }
+button, input, select, textarea { color: inherit; font: inherit; }
+input[type="checkbox"], input[type="radio"] { line-height: normal; padding: 0px; }
+*, ::after, ::before { box-sizing: border-box; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre { width: inherit; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p { position: relative; }
+p { line-height: inherit; }
+h1, h2, h3, h4, h5, h6 { break-after: avoid-page; break-inside: avoid; orphans: 4; }
+p { orphans: 4; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1rem; }
+.md-math-block, .md-rawblock, h1, h2, h3, h4, h5, h6, p { margin-top: 1rem; margin-bottom: 1rem; }
+.hidden { display: none; }
+.md-blockmeta { color: rgb(204, 204, 204); font-weight: 700; font-style: italic; }
+a { cursor: pointer; }
+sup.md-footnote { padding: 2px 4px; background-color: rgba(238, 238, 238, 0.7); color: rgb(85, 85, 85); border-radius: 4px; cursor: pointer; }
+sup.md-footnote a, sup.md-footnote a:hover { color: inherit; text-transform: inherit; text-decoration: inherit; }
+#write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; }
+figure { overflow-x: auto; margin: 1.2em 0px; max-width: calc(100% + 16px); padding: 0px; }
+figure > table { margin: 0px; }
+thead, tr { break-inside: avoid; break-after: auto; }
+thead { display: table-header-group; }
+table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; break-inside: auto; text-align: left; }
+table.md-table td { min-width: 32px; }
+.CodeMirror-gutters { border-right: 0px; background-color: inherit; }
+.CodeMirror-linenumber { user-select: none; }
+.CodeMirror { text-align: left; }
+.CodeMirror-placeholder { opacity: 0.3; }
+.CodeMirror pre { padding: 0px 4px; }
+.CodeMirror-lines { padding: 0px; }
+div.hr:focus { cursor: none; }
+#write pre { white-space: pre-wrap; }
+#write.fences-no-line-wrapping pre { white-space: pre; }
+#write pre.ty-contain-cm { white-space: normal; }
+.CodeMirror-gutters { margin-right: 4px; }
+.md-fences { font-size: 0.9rem; display: block; break-inside: avoid; text-align: left; overflow: visible; white-space: pre; background: inherit; position: relative !important; }
+.md-fences-adv-panel { width: 100%; margin-top: 10px; text-align: center; padding-top: 0px; padding-bottom: 8px; overflow-x: auto; }
+#write .md-fences.mock-cm { white-space: pre-wrap; }
+.md-fences.md-fences-with-lineno { padding-left: 0px; }
+#write.fences-no-line-wrapping .md-fences.mock-cm { white-space: pre; overflow-x: auto; }
+.md-fences.mock-cm.md-fences-with-lineno { padding-left: 8px; }
+.CodeMirror-line, twitterwidget { break-inside: avoid; }
+svg { break-inside: avoid; }
+.footnotes { opacity: 0.8; font-size: 0.9rem; margin-top: 1em; margin-bottom: 1em; }
+.footnotes + .footnotes { margin-top: 0px; }
+.md-reset { margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: top; background: 0px 0px; text-decoration: none; text-shadow: none; float: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; -webkit-tap-highlight-color: transparent; line-height: normal; font-weight: 400; text-align: left; box-sizing: content-box; direction: ltr; }
+li div { padding-top: 0px; }
+blockquote { margin: 1rem 0px; }
+li .mathjax-block, li p { margin: 0.5rem 0px; }
+li blockquote { margin: 1rem 0px; }
+li { margin: 0px; position: relative; }
+blockquote > :last-child { margin-bottom: 0px; }
+blockquote > :first-child, li > :first-child { margin-top: 0px; }
+.footnotes-area { color: rgb(136, 136, 136); margin-top: 0.714rem; padding-bottom: 0.143rem; white-space: normal; }
+#write .footnote-line { white-space: pre-wrap; }
+@media print {
+  body, html { border: 1px solid transparent; height: 99%; break-after: avoid; break-before: avoid; font-variant-ligatures: no-common-ligatures; }
+  #write { margin-top: 0px; border-color: transparent !important; padding-top: 0px !important; padding-bottom: 0px !important; }
+  .typora-export * { -webkit-print-color-adjust: exact; }
+  .typora-export #write { break-after: avoid; }
+  .typora-export #write::after { height: 0px; }
+  .is-mac table { break-inside: avoid; }
+  #write > p:nth-child(1) { margin-top: 0px; }
+  .typora-export-show-outline .typora-export-sidebar { display: none; }
+  figure { overflow-x: visible; }
+}
+.footnote-line { margin-top: 0.714em; font-size: 0.7em; }
+a img, img a { cursor: pointer; }
+pre.md-meta-block { font-size: 0.8rem; min-height: 0.8rem; white-space: pre-wrap; background: rgb(204, 204, 204); display: block; overflow-x: hidden; }
+p > .md-image:only-child:not(.md-img-error) img, p > img:only-child { display: block; margin: auto; }
+#write.first-line-indent p > .md-image:only-child:not(.md-img-error) img { left: -2em; position: relative; }
+p > .md-image:only-child { display: inline-block; width: 100%; }
+#write .MathJax_Display { margin: 0.8em 0px 0px; }
+.md-math-block { width: 100%; }
+.md-math-block:not(:empty)::after { display: none; }
+.MathJax_ref { fill: currentcolor; }
+[contenteditable="true"]:active, [contenteditable="true"]:focus, [contenteditable="false"]:active, [contenteditable="false"]:focus { outline: 0px; box-shadow: none; }
+.md-task-list-item { position: relative; list-style-type: none; }
+.task-list-item.md-task-list-item { padding-left: 0px; }
+.md-task-list-item > input { position: absolute; top: 0px; left: 0px; margin-left: -1.2em; margin-top: calc(1em - 10px); border: none; }
+.math { font-size: 1rem; }
+.md-toc { min-height: 3.58rem; position: relative; font-size: 0.9rem; border-radius: 10px; }
+.md-toc-content { position: relative; margin-left: 0px; }
+.md-toc-content::after, .md-toc::after { display: none; }
+.md-toc-item { display: block; color: rgb(65, 131, 196); }
+.md-toc-item a { text-decoration: none; }
+.md-toc-inner:hover { text-decoration: underline; }
+.md-toc-inner { display: inline-block; cursor: pointer; }
+.md-toc-h1 .md-toc-inner { margin-left: 0px; font-weight: 700; }
+.md-toc-h2 .md-toc-inner { margin-left: 2em; }
+.md-toc-h3 .md-toc-inner { margin-left: 4em; }
+.md-toc-h4 .md-toc-inner { margin-left: 6em; }
+.md-toc-h5 .md-toc-inner { margin-left: 8em; }
+.md-toc-h6 .md-toc-inner { margin-left: 10em; }
+@media screen and (max-width: 48em) {
+  .md-toc-h3 .md-toc-inner { margin-left: 3.5em; }
+  .md-toc-h4 .md-toc-inner { margin-left: 5em; }
+  .md-toc-h5 .md-toc-inner { margin-left: 6.5em; }
+  .md-toc-h6 .md-toc-inner { margin-left: 8em; }
+}
+a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
+.footnote-line a:not(.reversefootnote) { color: inherit; }
+.reversefootnote { font-family: ui-monospace, sans-serif; }
+.md-attr { display: none; }
+.md-fn-count::after { content: "."; }
+code, pre, samp, tt { font-family: var(--monospace); }
+kbd { margin: 0px 0.1em; padding: 0.1em 0.6em; font-size: 0.8em; color: rgb(36, 39, 41); background: rgb(255, 255, 255); border: 1px solid rgb(173, 179, 185); border-radius: 3px; box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; white-space: nowrap; vertical-align: middle; }
+.md-comment { color: rgb(162, 127, 3); opacity: 0.6; font-family: var(--monospace); }
+code { text-align: left; vertical-align: initial; }
+a.md-print-anchor { white-space: pre !important; border-width: initial !important; border-style: none !important; border-color: initial !important; display: inline-block !important; position: absolute !important; width: 1px !important; right: 0px !important; outline: 0px !important; background: 0px 0px !important; text-decoration: initial !important; text-shadow: initial !important; }
+.os-windows.monocolor-emoji .md-emoji { font-family: "Segoe UI Symbol", sans-serif; }
+.md-diagram-panel > svg { max-width: 100%; }
+[lang="flow"] svg, [lang="mermaid"] svg { max-width: 100%; height: auto; }
+[lang="mermaid"] .node text { font-size: 1rem; }
+table tr th { border-bottom: 0px; }
+video { max-width: 100%; display: block; margin: 0px auto; }
+iframe { max-width: 100%; width: 100%; border: none; }
+.highlight td, .highlight tr { border: 0px; }
+mark { background: rgb(255, 255, 0); color: rgb(0, 0, 0); }
+.md-html-inline .md-plain, .md-html-inline strong, mark .md-inline-math, mark strong { color: inherit; }
+.md-expand mark .md-meta { opacity: 0.3 !important; }
+mark .md-meta { color: rgb(0, 0, 0); }
+@media print {
+  .typora-export h1, .typora-export h2, .typora-export h3, .typora-export h4, .typora-export h5, .typora-export h6 { break-inside: avoid; }
+}
+.md-diagram-panel .messageText { stroke: none !important; }
+.md-diagram-panel .start-state { fill: var(--node-fill); }
+.md-diagram-panel .edgeLabel rect { opacity: 1 !important; }
+.md-fences.md-fences-math { font-size: 1em; }
+.md-fences-advanced:not(.md-focus) { padding: 0px; white-space: nowrap; border: 0px; }
+.md-fences-advanced:not(.md-focus) { background: inherit; }
+.typora-export-show-outline .typora-export-content { max-width: 1440px; margin: auto; display: flex; flex-direction: row; }
+.typora-export-sidebar { width: 300px; font-size: 0.8rem; margin-top: 80px; margin-right: 18px; }
+.typora-export-show-outline #write { --webkit-flex:2; flex: 2 1 0%; }
+.typora-export-sidebar .outline-content { position: fixed; top: 0px; max-height: 100%; overflow: hidden auto; padding-bottom: 30px; padding-top: 60px; width: 300px; }
+@media screen and (max-width: 1024px) {
+  .typora-export-sidebar, .typora-export-sidebar .outline-content { width: 240px; }
+}
+@media screen and (max-width: 800px) {
+  .typora-export-sidebar { display: none; }
+}
+.outline-content li, .outline-content ul { margin-left: 0px; margin-right: 0px; padding-left: 0px; padding-right: 0px; list-style: none; overflow-wrap: anywhere; }
+.outline-content ul { margin-top: 0px; margin-bottom: 0px; }
+.outline-content strong { font-weight: 400; }
+.outline-expander { width: 1rem; height: 1.42857rem; position: relative; display: table-cell; vertical-align: middle; cursor: pointer; padding-left: 4px; }
+.outline-expander::before { content: ""; position: relative; font-family: Ionicons; display: inline-block; font-size: 8px; vertical-align: middle; }
+.outline-item { padding-top: 3px; padding-bottom: 3px; cursor: pointer; }
+.outline-expander:hover::before { content: ""; }
+.outline-h1 > .outline-item { padding-left: 0px; }
+.outline-h2 > .outline-item { padding-left: 1em; }
+.outline-h3 > .outline-item { padding-left: 2em; }
+.outline-h4 > .outline-item { padding-left: 3em; }
+.outline-h5 > .outline-item { padding-left: 4em; }
+.outline-h6 > .outline-item { padding-left: 5em; }
+.outline-label { cursor: pointer; display: table-cell; vertical-align: middle; text-decoration: none; color: inherit; }
+.outline-label:hover { text-decoration: underline; }
+.outline-item:hover { border-color: rgb(245, 245, 245); background-color: var(--item-hover-bg-color); }
+.outline-item:hover { margin-left: -28px; margin-right: -28px; border-left: 28px solid transparent; border-right: 28px solid transparent; }
+.outline-item-single .outline-expander::before, .outline-item-single .outline-expander:hover::before { display: none; }
+.outline-item-open > .outline-item > .outline-expander::before { content: ""; }
+.outline-children { display: none; }
+.info-panel-tab-wrapper { display: none; }
+.outline-item-open > .outline-children { display: block; }
+.typora-export .outline-item { padding-top: 1px; padding-bottom: 1px; }
+.typora-export .outline-item:hover { margin-right: -8px; border-right: 8px solid transparent; }
+.typora-export .outline-expander::before { content: "+"; font-family: inherit; top: -1px; }
+.typora-export .outline-expander:hover::before, .typora-export .outline-item-open > .outline-item > .outline-expander::before { content: "−"; }
+.typora-export-collapse-outline .outline-children { display: none; }
+.typora-export-collapse-outline .outline-item-open > .outline-children, .typora-export-no-collapse-outline .outline-children { display: block; }
+.typora-export-no-collapse-outline .outline-expander::before { content: "" !important; }
+.typora-export-show-outline .outline-item-active > .outline-item .outline-label { font-weight: 700; }
+.md-inline-math-container mjx-container { zoom: 0.95; }
+mjx-container { break-inside: avoid; }
+
+
+.CodeMirror { height: auto; }
+.CodeMirror.cm-s-inner { background: inherit; }
+.CodeMirror-scroll { overflow: auto hidden; z-index: 3; }
+.CodeMirror-gutter-filler, .CodeMirror-scrollbar-filler { background-color: rgb(255, 255, 255); }
+.CodeMirror-gutters { border-right: 1px solid rgb(221, 221, 221); background: inherit; white-space: nowrap; }
+.CodeMirror-linenumber { padding: 0px 3px 0px 5px; text-align: right; color: rgb(153, 153, 153); }
+.cm-s-inner .cm-keyword { color: rgb(119, 0, 136); }
+.cm-s-inner .cm-atom, .cm-s-inner.cm-atom { color: rgb(34, 17, 153); }
+.cm-s-inner .cm-number { color: rgb(17, 102, 68); }
+.cm-s-inner .cm-def { color: rgb(0, 0, 255); }
+.cm-s-inner .cm-variable { color: rgb(0, 0, 0); }
+.cm-s-inner .cm-variable-2 { color: rgb(0, 85, 170); }
+.cm-s-inner .cm-variable-3 { color: rgb(0, 136, 85); }
+.cm-s-inner .cm-string { color: rgb(170, 17, 17); }
+.cm-s-inner .cm-property { color: rgb(0, 0, 0); }
+.cm-s-inner .cm-operator { color: rgb(152, 26, 26); }
+.cm-s-inner .cm-comment, .cm-s-inner.cm-comment { color: rgb(170, 85, 0); }
+.cm-s-inner .cm-string-2 { color: rgb(255, 85, 0); }
+.cm-s-inner .cm-meta { color: rgb(85, 85, 85); }
+.cm-s-inner .cm-qualifier { color: rgb(85, 85, 85); }
+.cm-s-inner .cm-builtin { color: rgb(51, 0, 170); }
+.cm-s-inner .cm-bracket { color: rgb(153, 153, 119); }
+.cm-s-inner .cm-tag { color: rgb(17, 119, 0); }
+.cm-s-inner .cm-attribute { color: rgb(0, 0, 204); }
+.cm-s-inner .cm-header, .cm-s-inner.cm-header { color: rgb(0, 0, 255); }
+.cm-s-inner .cm-quote, .cm-s-inner.cm-quote { color: rgb(0, 153, 0); }
+.cm-s-inner .cm-hr, .cm-s-inner.cm-hr { color: rgb(153, 153, 153); }
+.cm-s-inner .cm-link, .cm-s-inner.cm-link { color: rgb(0, 0, 204); }
+.cm-negative { color: rgb(221, 68, 68); }
+.cm-positive { color: rgb(34, 153, 34); }
+.cm-header, .cm-strong { font-weight: 700; }
+.cm-del { text-decoration: line-through; }
+.cm-em { font-style: italic; }
+.cm-link { text-decoration: underline; }
+.cm-error { color: red; }
+.cm-invalidchar { color: red; }
+.cm-constant { color: rgb(38, 139, 210); }
+.cm-defined { color: rgb(181, 137, 0); }
+div.CodeMirror span.CodeMirror-matchingbracket { color: rgb(0, 255, 0); }
+div.CodeMirror span.CodeMirror-nonmatchingbracket { color: rgb(255, 34, 34); }
+.cm-s-inner .CodeMirror-activeline-background { background: inherit; }
+.CodeMirror { position: relative; overflow: hidden; }
+.CodeMirror-scroll { height: 100%; outline: 0px; position: relative; box-sizing: content-box; background: inherit; }
+.CodeMirror-sizer { position: relative; }
+.CodeMirror-gutter-filler, .CodeMirror-hscrollbar, .CodeMirror-scrollbar-filler, .CodeMirror-vscrollbar { position: absolute; z-index: 6; display: none; outline: 0px; }
+.CodeMirror-vscrollbar { right: 0px; top: 0px; overflow: hidden; }
+.CodeMirror-hscrollbar { bottom: 0px; left: 0px; overflow: auto hidden; }
+.CodeMirror-scrollbar-filler { right: 0px; bottom: 0px; }
+.CodeMirror-gutter-filler { left: 0px; bottom: 0px; }
+.CodeMirror-gutters { position: absolute; left: 0px; top: 0px; padding-bottom: 10px; z-index: 3; overflow-y: hidden; }
+.CodeMirror-gutter { white-space: normal; height: 100%; box-sizing: content-box; padding-bottom: 30px; margin-bottom: -32px; display: inline-block; }
+.CodeMirror-gutter-wrapper { position: absolute; z-index: 4; background: 0px 0px !important; border: none !important; }
+.CodeMirror-gutter-background { position: absolute; top: 0px; bottom: 0px; z-index: 4; }
+.CodeMirror-gutter-elt { position: absolute; cursor: default; z-index: 4; }
+.CodeMirror-lines { cursor: text; }
+.CodeMirror pre { border-radius: 0px; border-width: 0px; background: 0px 0px; font-family: inherit; font-size: inherit; margin: 0px; white-space: pre; overflow-wrap: normal; color: inherit; z-index: 2; position: relative; overflow: visible; }
+.CodeMirror-wrap pre { overflow-wrap: break-word; white-space: pre-wrap; word-break: normal; }
+.CodeMirror-code pre { border-right: 30px solid transparent; width: fit-content; }
+.CodeMirror-wrap .CodeMirror-code pre { border-right: none; width: auto; }
+.CodeMirror-linebackground { position: absolute; inset: 0px; z-index: 0; }
+.CodeMirror-linewidget { position: relative; z-index: 2; overflow: auto; }
+.CodeMirror-wrap .CodeMirror-scroll { overflow-x: hidden; }
+.CodeMirror-measure { position: absolute; width: 100%; height: 0px; overflow: hidden; visibility: hidden; }
+.CodeMirror-measure pre { position: static; }
+.CodeMirror div.CodeMirror-cursor { position: absolute; visibility: hidden; border-right: none; width: 0px; }
+.CodeMirror div.CodeMirror-cursor { visibility: hidden; }
+.CodeMirror-focused div.CodeMirror-cursor { visibility: inherit; }
+.cm-searching { background: rgba(255, 255, 0, 0.4); }
+span.cm-underlined { text-decoration: underline; }
+span.cm-strikethrough { text-decoration: line-through; }
+.cm-tw-syntaxerror { color: rgb(255, 255, 255); background-color: rgb(153, 0, 0); }
+.cm-tw-deleted { text-decoration: line-through; }
+.cm-tw-header5 { font-weight: 700; }
+.cm-tw-listitem:first-child { padding-left: 10px; }
+.cm-tw-box { border-style: solid; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-color: inherit; border-top-width: 0px !important; }
+.cm-tw-underline { text-decoration: underline; }
+@media print {
+  .CodeMirror div.CodeMirror-cursor { visibility: hidden; }
+}
+
+
+/* meyer reset -- http://meyerweb.com/eric/tools/css/reset/ , v2.0 | 20110126 | License: none (public domain) */
+
+@include-when-export url(https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700,700italic&subset=latin,cyrillic-ext,cyrillic,latin-ext);
+
+/* =========== */
+
+/* pt-serif-regular - latin */
+/* pt-serif-italic - latin */
+/* pt-serif-700 - latin */
+/* pt-serif-700italic - latin */
+:root {
+	--active-file-bg-color: #dadada;
+	--active-file-bg-color: rgba(32, 43, 51, 0.63);
+	--active-file-text-color: white;
+	--bg-color: #f3f2ee;
+	--text-color: #1f0909;
+	--control-text-color: #444;
+	--rawblock-edit-panel-bd: #e5e5e5;
+
+	--select-text-bg-color: rgba(32, 43, 51, 0.63);
+  --select-text-font-color: white;
+}
+
+pre {
+	--select-text-bg-color: #36284e;
+	--select-text-font-color: #fff;
+}
+
+html {
+	font-size: 16px;
+	-webkit-font-smoothing: antialiased;
+}
+
+html, body {
+	background-color: #f3f2ee;
+	font-family: "PT Serif", 'Times New Roman', Times, serif;
+	color: #1f0909;
+	line-height: 1.5em;
+}
+
+/*#write {
+	overflow-x: auto;
+    max-width: initial;
+	padding-left: calc(50% - 17em);
+    padding-right: calc(50% - 17em);
+}
+
+@media (max-width: 36em) {
+ 	#write {
+ 		padding-left: 1em;
+    	padding-right: 1em;
+ 	}
+}*/
+
+#write {
+	max-width: 40em;
+}
+
+@media only screen and (min-width: 1400px) {
+	#write {
+			max-width: 914px;
+	}
+}
+
+ol li {
+	list-style-type: decimal;
+	list-style-position: outside;
+}
+ul li {
+	list-style-type: disc;
+	list-style-position: outside;
+}
+
+ol,
+ul {
+	list-style: none;
+}
+
+blockquote,
+q {
+	quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/* styles */
+
+/* ====== */
+
+/* headings */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-weight: bold;
+}
+h1 {
+	font-size: 1.875em;
+	/*30 / 16*/
+	line-height: 1.6em;
+	/* 48 / 30*/
+	margin-top: 2em;
+}
+h2,
+h3 {
+	font-size: 1.3125em;
+	/*21 / 16*/
+	line-height: 1.15;
+	/*24 / 21*/
+	margin-top: 2.285714em;
+	/*48 / 21*/
+	margin-bottom: 1.15em;
+	/*24 / 21*/
+}
+h3 {
+	font-weight: normal;
+}
+h4 {
+	font-size: 1.125em;
+	/*18 / 16*/
+	margin-top: 2.67em;
+	/*48 / 18*/
+}
+h5,
+h6 {
+	font-size: 1em;
+	/*16*/
+}
+h1 {
+	border-bottom: 1px solid;
+	margin-bottom: 1.875em;
+	padding-bottom: 0.8125em;
+}
+/* links */
+
+a {
+	text-decoration: none;
+	color: #065588;
+}
+a:hover,
+a:active {
+	text-decoration: underline;
+}
+/* block spacing */
+
+p,
+blockquote,
+.md-fences {
+	margin-bottom: 1.5em;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	margin-bottom: 1.5em;
+}
+/* blockquote */
+
+blockquote {
+	font-style: italic;
+	border-left: 5px solid;
+	margin-left: 2em;
+	padding-left: 1em;
+}
+/* lists */
+
+ul,
+ol {
+	margin: 0 0 1.5em 1.5em;
+}
+/* tables */
+.md-meta,.md-before, .md-after {
+	color:#999;
+}
+
+table {
+	margin-bottom: 1.5em;
+	/*24 / 16*/
+	font-size: 1em;
+	/* width: 100%; */
+}
+thead th,
+tfoot th {
+	padding: .25em .25em .25em .4em;
+	text-transform: uppercase;
+}
+th {
+	text-align: left;
+}
+td {
+	vertical-align: top;
+	padding: .25em .25em .25em .4em;
+}
+
+code,
+.md-fences {
+	background-color: #dadada;
+}
+
+code {
+	padding-left: 2px;
+	padding-right: 2px;
+}
+
+.md-fences {
+	margin-left: 2em;
+	margin-bottom: 3em;
+	padding-left: 1ch;
+	padding-right: 1ch;
+}
+
+pre,
+code,
+tt {
+	font-size: .875em;
+	line-height: 1.714285em;
+}
+/* some fixes */
+
+h1 {
+	line-height: 1.3em;
+	font-weight: normal;
+	margin-bottom: 0.5em;
+}
+
+p + ul,
+p + ol{
+	margin-top: .5em;
+}
+
+h3 + ul,
+h4 + ul,
+h5 + ul,
+h6 + ul,
+h3 + ol,
+h4 + ol,
+h5 + ol,
+h6 + ol {
+	margin-top: .5em;
+}
+
+li > ul,
+li > ol {
+	margin-top: inherit;
+	margin-bottom: 0;
+}
+
+li ol>li {
+	list-style-type: lower-alpha;
+}
+
+li li ol>li{
+	list-style-type: lower-roman;
+}
+
+h2,
+h3 {
+	margin-bottom: .75em;
+}
+hr {
+	border-top: none;
+	border-right: none;
+	border-bottom: 1px solid;
+	border-left: none;
+}
+h1 {
+	border-color: #c5c5c5;
+}
+blockquote {
+	border-color: #bababa;
+	color: #656565;
+}
+
+blockquote ul,
+blockquote ol {
+	margin-left:0;
+}
+
+.ty-table-edit {
+	background-color: transparent;
+}
+thead {
+	background-color: #dadada;
+}
+tr:nth-child(even) {
+	background: #e8e7e7;
+}
+hr {
+	border-color: #c5c5c5;
+}
+.task-list{
+	padding-left: 1rem;
+}
+
+.md-task-list-item {
+	padding-left: 1.5rem;
+	list-style-type: none;
+}
+
+.md-task-list-item > input:before {
+	content: '\221A';
+	display: inline-block;
+	width: 1.25rem;
+  	height: 1.6rem;
+	vertical-align: middle;
+	text-align: center;
+	color: #ddd;
+	background-color: #F3F2EE;
+}
+
+.md-task-list-item > input:checked:before,
+.md-task-list-item > input[checked]:before{
+	color: inherit;
+}
+
+#write pre.md-meta-block {
+	min-height: 1.875rem;
+	color: #555;
+	border: 0px;
+	background: transparent;
+	margin-top: -4px;
+	margin-left: 1em;
+	margin-top: 1em;
+}
+
+.md-image>.md-meta {
+	color: #9B5146;
+}
+
+.md-image>.md-meta{
+	font-family: Menlo, 'Ubuntu Mono', Consolas, 'Courier New', 'Microsoft Yahei', 'Hiragino Sans GB', 'WenQuanYi Micro Hei', serif;
+}
+
+
+#write>h3.md-focus:before{
+	left: -1.5rem;
+	color:#999;
+	border-color:#999;
+}
+#write>h4.md-focus:before{
+	left: -1.5rem;
+	top: .25rem;
+	color:#999;
+	border-color:#999;
+}
+#write>h5.md-focus:before{
+	left: -1.5rem;
+	top: .0.3125rem;
+	color:#999;
+	border-color:#999;
+}
+#write>h6.md-focus:before{
+	left: -1.5rem;
+	top: 0.3125rem;
+	color:#999;
+	border-color:#999;
+}
+
+.md-toc:focus .md-toc-content{
+	margin-top: 19px;
+}
+
+.md-toc-content:empty:before{
+	color: #065588;
+}
+.md-toc-item {
+	color: #065588;
+}
+#write div.md-toc-tooltip {
+	background-color: #f3f2ee;
+}
+
+#typora-sidebar {
+	background-color: #f3f2ee;
+	-webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.375);
+  	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.375);
+}
+
+.pin-outline #typora-sidebar {
+	background: inherit;
+	box-shadow: none;
+	border-right: 1px dashed;
+}
+
+.pin-outline #typora-sidebar:hover .outline-title-wrapper {
+	border-left:1px dashed;
+}
+
+.outline-item:hover {
+  background-color: #dadada;
+  border-left: 28px solid #dadada;
+  border-right: 18px solid #dadada;
+}
+
+.typora-node .outline-item:hover {
+  	border-right: 28px solid #dadada;
+}
+
+.outline-expander:before {
+  content: "\f0da";
+  font-family: FontAwesome;
+  font-size:14px;
+  top: 1px;
+}
+
+.outline-expander:hover:before,
+.outline-item-open>.outline-item>.outline-expander:before {
+  content: "\f0d7";
+}
+
+.modal-content {
+	background-color: #f3f2ee;
+}
+
+.auto-suggest-container ul li {
+	list-style-type: none;
+}
+
+/** UI for electron */
+
+.megamenu-menu,
+#top-titlebar, #top-titlebar *,
+.megamenu-content {
+	background: #f3f2ee;
+	color: #1f0909;
+}
+
+.megamenu-menu-header {
+	border-bottom: 1px dashed #202B33;
+}
+
+.megamenu-menu {
+	box-shadow: none;
+	border-right: 1px dashed;
+}
+
+header, .context-menu, .megamenu-content, footer {
+	font-family: "PT Serif", 'Times New Roman', Times, serif;
+    color: #1f0909;
+}
+
+#megamenu-back-btn {
+	color: #1f0909;
+	border-color: #1f0909;
+}
+
+.megamenu-menu-header #megamenu-menu-header-title:before {
+	color: #1f0909;
+}
+
+.megamenu-menu-list li a:hover, .megamenu-menu-list li a.active {
+	color: inherit;
+	background-color: #e8e7df;
+}
+
+.long-btn:hover {
+	background-color: #e8e7df;
+}
+
+#recent-file-panel tbody tr:nth-child(2n-1) {
+    background-color: transparent !important;
+}
+
+.megamenu-menu-panel tbody tr:hover td:nth-child(2) {
+    color: inherit;
+}
+
+.megamenu-menu-panel .btn {
+	background-color: #D2D1D1;
+}
+
+.btn-default {
+	background-color: transparent;
+}
+
+.typora-sourceview-on #toggle-sourceview-btn,
+.ty-show-word-count #footer-word-count {
+	background: #c7c5c5;
+}
+
+#typora-quick-open {
+    background-color: inherit;
+}
+
+.md-diagram-panel {
+	margin-top: 8px;
+}
+
+.file-list-item-file-name {
+	font-weight: initial;
+}
+
+.file-list-item-summary {
+	opacity: 1;
+}
+
+.file-list-item {
+	color: #777;
+}
+
+.file-list-item.active {
+	background-color: inherit;
+	color: black;
+}
+
+.ty-side-sort-btn.active {
+	background-color: inherit;
+}
+
+.file-list-item.active .file-list-item-file-name  {
+	font-weight: bold;
+}
+
+.file-list-item{
+    opacity:1 !important;
+}
+
+.file-library-node.active>.file-node-background{
+	background-color: rgba(32, 43, 51, 0.63);
+	background-color: var(--active-file-bg-color);
+}
+
+.file-tree-node.active>.file-node-content{
+	color: white;
+	color: var(--active-file-text-color);
+}
+
+.md-task-list-item>input {
+	margin-left: -1.7em;
+	margin-top: calc(1rem - 12px);
+	-webkit-appearance: button;
+}
+
+input {
+	border: 1px solid #aaa;
+}
+
+.megamenu-menu-header #megamenu-menu-header-title,
+.megamenu-menu-header:hover, 
+.megamenu-menu-header:focus {
+	color: inherit;
+}
+
+.dropdown-menu .divider {
+	border-color: #e5e5e5;
+	opacity: 1;
+}
+
+/* https://github.com/typora/typora-issues/issues/2046 */
+.os-windows-7 strong,
+.os-windows-7 strong  {
+	font-weight: 760;
+}
+
+.ty-preferences .btn-default {
+	background: transparent;
+}
+
+.ty-preferences .window-header {
+	border-bottom: 1px dashed #202B33;
+	box-shadow: none;
+}
+
+#sidebar-loading-template, #sidebar-loading-template.file-list-item {
+	color: #777;
+}
+
+.searchpanel-search-option-btn.active {
+	background: #777;
+	color: white;
+}
+
+.export-detail, .light .export-detail, 
+.light .export-item.active, 
+.light .export-items-list-control {
+	background: #e0e0e0;
+	border-radius: 2px;
+	font-weight: 700;
+	color: inherit
+}
+
+
+</style><title>Printer</title>
+</head>
+<body class='typora-export os-windows typora-export-show-outline typora-export-no-collapse-outline'><div class='typora-export-content'>
+<div class="typora-export-sidebar"><div class="outline-content"><li class="outline-item-wrapper outline-h1"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#hp惠普">HP惠普</a></div><ul class="outline-children"><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#hp-打印机打印测试页配置页耗材状态页">HP 打印机打印测试页&amp;配置页&amp;耗材状态页</a></div><ul class="outline-children"><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#hp-m1005打印测试页">HP M1005打印测试页</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#hp-p1108打印测试页">HP P1108打印测试页</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#hp-m126a打印测试页配置页">HP M126a打印测试页&amp;配置页</a></div><ul class="outline-children"></ul></li></ul></li><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#hp-m128一体机-回复出厂设置冷复位方法清零">HP M128一体机 回复出厂设置/冷复位方法/清零</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#hp-cp1025彩机-搓纸轮-分页器-拆解">HP CP1025彩机 搓纸轮 /分页器 拆解</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#粉量充足-hp-cp1025-m175纵向空白">粉量充足 HP CP1025 M175纵向空白</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#惠普激光类打印机产品错误代码分享">惠普激光类打印机产品错误代码分享</a></div><ul class="outline-children"></ul></li></ul></li><li class="outline-item-wrapper outline-h1"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#brother兄弟lenovo联想">Brother兄弟/Lenovo联想</a></div><ul class="outline-children"><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#brother墨水类型说明">Brother墨水类型说明</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#brother-dcp-t220-226-425w-426w-显示墨水回收盒已满清除计数进入维修模式）">Brother DCP-T220 226 425w 426w 显示墨水回收盒已满，清除计数（进入维修模式）</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#brother-hl-l2300dl2320d22602260dl2321d清除碳粉盒硒鼓计数进入维修模式）">Brother HL-L2300D/L2320D/2260/2260D/L2321D清除碳粉盒/硒鼓计数（进入维修模式）</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#兄弟mfc7380粉盒硒鼓清零方法">兄弟MFC7380粉盒硒鼓清零方法</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#兄弟mfc7360和dcp7060d粉盒硒鼓清零方法">兄弟MFC7360和DCP7060D粉盒硒鼓清零方法</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#兄弟hl-31503140彩色打印机粉盒清零方法">兄弟HL-3150/3140彩色打印机粉盒清零方法</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#兄弟hl-5590dn5595dn5580d5585d加粉清零硒鼓清零">兄弟HL-5590DN/5595DN/5580d/5585D加粉清零硒鼓清零</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#兄弟dcp-7090dw-dcp-7190dw-dcp-b7500d-dcp-b7520dw-dcp-b7530dn-dcp-b7535dw-dcp-l2535dw-dcp-l2550dw-mfc-b7700d-mfc-b7720dn施乐248系列粉盒硒鼓清零教程">兄弟DCP-7090DW, DCP-7190DW, DCP-B7500D, DCP-B7520DW, DCP-B7530DN, DCP-B7535DW, DCP-L2535DW, DCP-L2550DW, MFC-B7700D, MFC-B7720DN施乐248系列粉盒硒鼓清零教程</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#兄弟mfc-l2700d粉盒硒鼓清零方法">兄弟MFC-L2700d粉盒硒鼓清零方法</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#联想36003650定影故障四灯全亮清除方法">联想3600/3650定影故障四灯全亮清除方法</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#兄弟mfc7380粉盒硒鼓清零方法-2">兄弟MFC7380粉盒硒鼓清零方法</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#兄弟dr2450-2595-7895-7190-7195-2595-打印机硒鼓清零-鼓架清零方法">兄弟DR2450 2595 7895 7190 7195 2595 打印机硒鼓清零 鼓架清零方法</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#兄弟tn-b020粉盒加粉清零b7530dn-b7500d-b7535dw-b7720dn-b2000d-b2050dn">兄弟TN-B020粉盒加粉清零B7530DN B7500D B7535DW B7720DN B2000D B2050DN</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#兄弟brother-hl-2240d-加粉后清零方法">兄弟brother HL-2240D 加粉后清零方法</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#兄弟dcp-1518-dcp-1519-dcp-1608-dcp-1618w-dcp-1619-mfc-1813-mfc-1816-mfc-1818-mfc-1819-mfc-1906-mfc-1908-mfc-1919nw一体机加粉后或者更换新粉盒后还提示墨粉不足-就需要机器清零">兄弟DCP-1518, DCP-1519, DCP-1608, DCP-1618W, DCP-1619, MFC-1813, MFC-1816, MFC-1818, MFC-1819, MFC-1906, MFC-1908, MFC-1919NW一体机加粉后或者更换新粉盒后还提示墨粉不足 就需要机器清零</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#兄弟2560dn-联想2655dn-粉盒硒鼓清零方法">兄弟2560DN 联想2655DN 粉盒硒鼓清零方法</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#联想7400pro打印机粉盒硒鼓清零">联想7400Pro打印机粉盒/硒鼓清零</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#联想7400打印机粉盒硒鼓清零">联想7400打印机粉盒/硒鼓清零</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#dcp-l3568cdw-hl-l3288cdw-mfc-l3768cdw重置硒鼓单元计数器">DCP-L3568CDW, HL-L3288CDW, MFC-L3768CDW重置硒鼓单元计数器</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#dcp-7080-dcp-7080d-dcp-7180dn-mfc-7380-mfc-7480d-mfc-7880dn">DCP-7080, DCP-7080D, DCP-7180DN, MFC-7380, MFC-7480D, MFC-7880DN</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#dcp-9030cdn-hl-3160cdw-hl-3190cdw-mfc-9150cdn-mfc-9350cdw">DCP-9030CDN, HL-3160CDW, HL-3190CDW, MFC-9150CDN, MFC-9350CDW</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#hl-2595dw-hl-b2050dn">HL-2595DW, HL-B2050DN</a></div><ul class="outline-children"></ul></li></ul></li><li class="outline-item-wrapper outline-h1"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#canon佳能">Canon佳能</a></div><ul class="outline-children"><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#佳能g1800g1810g2800g3800打印机5b00错误代码清零方法教程">佳能G1800,G1810,G2800,G3800打印机5B00错误代码清零方法教程</a></div><ul class="outline-children"></ul></li></ul></li><li class="outline-item-wrapper outline-h1"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#epson爱普生">EPSON爱普生</a></div><ul class="outline-children"><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#epson-l系列一体机显示废墨收集器已满计数清零adjustment-program使用）">EPSON L系列一体机显示废墨收集器已满，计数清零（Adjustment Program使用）</a></div><ul class="outline-children"></ul></li></ul></li><li class="outline-item-wrapper outline-h1"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#fuji-xeorx富士施乐xerox施乐">Fuji Xeorx富士施乐/Xerox施乐</a></div><ul class="outline-children"><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#施乐s2520-施乐s1810-每次打印都要按节电2次才能打印纸张不能直接打印的解决方案">施乐s2520 施乐s1810 每次打印都要按节电2次才能打印纸张不能直接打印的解决方案</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#施乐s1810s2010清除复印密码">施乐S1810/S2010清除复印密码</a></div><ul class="outline-children"></ul></li></ul></li><li class="outline-item-wrapper outline-h1"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#toshiba东芝">Toshiba东芝</a></div><ul class="outline-children"><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#东芝240s241300d301dn硒鼓粉盒清零方法">东芝240S/241/300D/301DN硒鼓粉盒清零方法</a></div><ul class="outline-children"></ul></li></ul></li></div></div><div id='write'  class=''><p>&nbsp;</p><p><span>维修手册查询：</span></p><pre class="md-fences md-end-block ty-contain-cm modeLoaded" spellcheck="false" lang="html"><div class="CodeMirror cm-s-inner cm-s-null-scroll CodeMirror-wrap" lang="html"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 10.3396px; left: 3.9906px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">ht删tp除s://w中ww.l文aser防exp止res吞sinc链.co接m/</span></pre></div></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 25px;"></div><div class="CodeMirror-gutters" style="display: none; height: 25px;"></div></div></div></pre><p><span>参考博客：</span><a href='https://blog.lancn.cn/'><span>维修笔记</span></a><a href='https://blog.lancn.cn/' target='_blank' class='url'>https://blog.lancn.cn/</a></p><h1 id='hp惠普'><span>HP惠普</span></h1><h2 id='hp-打印机打印测试页配置页耗材状态页'><span>HP 打印机打印测试页&amp;配置页&amp;耗材状态页</span></h2><h3 id='hp-m1005打印测试页'><span>HP M1005打印测试页</span></h3><p><span>方法0：同时按 左键 和 右键。</span></p><p><span>方法1：直接在打印机菜单中选择。</span></p><p><span>方法2：在打印机首选项中选择打印对应页面。</span></p><p><span>方法3：M1005测试页：右键-&gt;OK-&gt;右键-&gt;OK-&gt;OK</span></p><h3 id='hp-p1108打印测试页'><span>HP P1108打印测试页</span></h3><p><span>方法1：P1108测试页：顶盖翻7次。</span></p><p><span>方法2：在打印机首选项中选择打印对应页面。</span></p><h3 id='hp-m126a打印测试页配置页'><span>HP M126a打印测试页&amp;配置页</span></h3><p><span>方法1：按【×】键5秒打印测试页（1张纸），按【×】键10秒打印配置页（2张纸）。</span></p><p><span>方法2：在HP工具里打印。</span></p><p>&nbsp;</p><h2 id='hp-m128一体机-回复出厂设置冷复位方法清零'><span>HP M128一体机 回复出厂设置/冷复位方法/清零</span></h2><p><span>HP M128一体机回复出厂设置/冷复位方法/清零！</span></p><ul><li><p><span>首先关闭打印机；</span></p></li><li><p><span>同时按住打印机右箭头+取消，然后开机，</span></p></li><li><p><span>显示</span><code>Permanent Storage Init</code><span>松手，打印机复位成功；</span></p></li></ul><p>&nbsp;</p><h2 id='hp-cp1025彩机-搓纸轮-分页器-拆解'><span>HP CP1025彩机 搓纸轮 /分页器 拆解</span></h2><p><img src="./img/3455590679.png" referrerpolicy="no-referrer" alt="HP CP1025彩机 搓纸轮 分页器 拆解.png"></p><p>&nbsp;</p><h2 id='粉量充足-hp-cp1025-m175纵向空白'><span>粉量充足 HP CP1025 M175纵向空白</span></h2><p><img src="./img/465991645.png" referrerpolicy="no-referrer" alt="粉量充足..HP CP1025 M175纵向空白.png"></p><p>&nbsp;</p><h2 id='惠普激光类打印机产品错误代码分享'><span>惠普激光类打印机产品错误代码分享</span></h2><p><span>在使用打印机的过程中，可能会遇到打印机报错误代码，这时候用户一般都是束手无策的，根本不知道这些代码代表着什么意思，只能找打印机维修公司来维修，如果遇到不正规的维修公司这时也只能任由他们说是哪里坏了。今天给大家分享一下惠普激光打印机错误代码供大家参考。</span></p><p><span>惠普激光打印机错误代码</span>
+<span>Device State（English） 设备状态(中文） 事件代码 PML值</span></p><p><span>Black e-label error 黑色硒鼓e标签错误 10.0000 655360</span></p><p><span>Cyan e-label error 青色硒鼓e标签错误 10.0001 655361</span></p><p><span>Magenta e-label error 品色硒鼓e标签错误 10.0002 655362</span></p><p><span>Yellow e-label error 黄色硒鼓e标签错误 10.0003 655363</span></p><p><span>Imaging drum e-label error 感光鼓e标签错误 10.0004 655364</span></p><p><span>Black e-label missing 黑色硒鼓e标签丢失 10.1000 656360</span></p><p><span>Cyan e-label missing 青色硒鼓e标签丢失 10.1001 656361</span></p><p><span>Magenta e-label missing 品色硒鼓e标签丢失 10.1002 656362</span></p><p><span>Yellow e-label missing 黄色硒鼓e标签丢失 10.1003 656363</span></p><p><span>Imaging drum e-label missing 感光鼓e标签丢失 10.1004 656364</span></p><p><span>Non-HP black 非原装黑色硒鼓 10.3000 658360</span></p><p><span>Non-HP cyan 非原装青色硒鼓 10.3001 658361</span></p><p><span>Non-HP magenta 非原装品色硒鼓 10.3002 658362</span></p><p><span>Non-HP yellow 非原装黄色硒鼓 10.3003 658363</span></p><p><span>Non-HP drum 非原装感光鼓 10.3004 658364</span></p><p><span>Non-HP cloned black 非HP（克隆）黑色硒鼓 10.3100 658460</span></p><p><span>Non-HP cloned cyan 非HP（克隆）青色硒鼓 10.3101 658461</span></p><p><span>Non-HP cloned magenta 非HP（克隆）品色硒鼓 10.3102 658462</span></p><p><span>Non-HP cloned yellow 非HP（克隆）黄色硒鼓 10.3103 658463</span></p><p><span>Non-HP cloned imaging drum 非HP（克隆）感光鼓 10.3104 658464</span></p><p><span>Unauthorized black supply 非指定黑色耗材 10.3200 658560</span></p><p><span>Unauthorized cyan supply 非指定青色耗材 10.3201 658561</span></p><p><span>Unauthorized magenta supply 非指定品色耗材 10.3202 658562</span></p><p><span>Unauthorized yellow supply 非指定黄色耗材 10.3203 658563</span></p><p><span>Used (moved) black supply 使用过的黑色耗材 10.3300 658660</span></p><p><span>Used (moved) cyan supply 使用过的青色耗材 10.3301 658661</span></p><p><span>Used (moved) magenta supply 使用过的品色耗材 10.3302 658662</span></p><p><span>Used (moved) yellow supply 使用过的黄色耗材 10.3303 658663</span></p><p><span>Used (beyond life) black supply 使用过的超过使用寿命的黑色耗材 10.3400 658760</span></p><p><span>Used (beyond life) cyan supply 使用过的超过使用寿命的青色耗材 10.3401 658761</span></p><p><span>Used (beyond life) magenta supply 使用过的超过使用寿命的品色耗材 10.3402 658762</span></p><p><span>Used (beyond life) yellow supply 使用过的超过使用寿命的黄色耗材 10.3403 658763</span></p><p><span>Incompatible black supply 不兼容的黑色耗材 10.3500 658860</span></p><p><span>Incompatible cyan supply 不兼容的青色耗材 10.3501 658861</span></p><p><span>Incompatible magenta supply 不兼容的品色耗材 10.3502 658862</span></p><p><span>Incompatible yellow supply 不兼容的黄色耗材 10.3503 658863</span></p><p><span>Genuine HP supplies installed (transition caused by black) 已安装正品耗材（更换黑色硒鼓出现） 10.4000 659360</span></p><p><span>Genuine HP supplies installed (transition caused by cyan) 已安装正品耗材（更换青色硒鼓出现） 10.4001 659361</span></p><p><span>Genuine HP supplies installed (transition caused by magenta) 已安装正品耗材（更换品色硒鼓出现） 10.4002 659362</span></p><p><span>Genuine HP supplies installed (transition caused by yellow) 已安装正品耗材（更换黄色硒鼓出现） 10.4003 659363</span></p><p><span>Unsupported black supply 不被支持的黑色耗材 10.4100 659460</span></p><p><span>Unsupported cyan supply 不被支持的青色耗材 10.4101 659461</span></p><p><span>Unsupported magenta supply 不被支持的品色耗材 10.4102 659462</span></p><p><span>Unsupported yellow supply 不被支持的黄色耗材 10.4103 659463</span></p><p><span>Printing past very low black 通过不足的黑色碳粉打印中 10.7000 662360</span></p><p><span>Printing past very low cyan 通过不足的青色碳粉打印中 10.7001 662361</span></p><p><span>Printing past very low magenta 通过不足的品色碳粉打印中 10.7002 662362</span></p><p><span>Printing past very low yellow 通过不足的黄色碳粉打印中 10.7003 662363</span></p><p><span>Printing black only 仅用黑色碳粉打印 10.7100 662460</span></p><p><span>Not printing black only 不打印黑色 10.8100 663460</span></p><p><span>Unspecified supply error in Toner Collection Unit 废粉仓中某种耗材问题 10.9531 664891</span></p><p><span>Waste Toner Out (full) black 黑色废粉溢出 10.9800 665160</span></p><p><span>Waste Toner Out (full) cyan 青色废粉溢出 10.9801 665161</span></p><p><span>Waste Toner Out (full) magenta 品色废粉溢出 10.9802 665162</span></p><p><span>Waste Toner Out (full) yellow 黄色废粉溢出 10.9803 665163</span></p><p><span>Paper jam 卡纸 13.0000 851968</span></p><p><span>External device paper jam (13.12XX) 外部设备卡纸 13.1200 853168</span></p><p><span>Fax modem reset and power cycle 传真modem重置并关机再开机 19.0000 1245184</span></p><p><span>Memory out in print 打印内存不足 20.0000 1310720</span></p><p><span>Memory out in copy 复印内存不足 20.0001 1310721</span></p><p><span>Memory out in scan 扫描内存不足 20.0002 1310722</span></p><p><span>Memory out in photo 照片内存不足 20.0003 1310723</span></p><p><span>Memory out in fax 传真内存不足 20.0004 1310724</span></p><p><span>Memory out in fax flash 传真闪存不足 20.0005 1310725</span></p><p><span>Memory out in scan calibration 扫描校准内存不足 20.0006 1310726</span></p><p><span>Page punt 页面悬空 21.0000 1376256</span></p><p><span>SMTP error 简单邮件传输协议错误 25.0000 1638400</span></p><p><span>Scanner motor test failure 扫描马达测试错误 30.0012 1966092</span></p><p><span>Beam detect malfunction BD（光束检测）异常 41.2000 2688976</span></p><p><span>Unexpected size 不合规格尺寸的纸张 41.3000 2689976</span></p><p><span>Fuser error 定影器错误 50.0000 3276800</span></p><p><span>Low fuser temperature error 定影器温度不足 50.1000 3277800</span></p><p><span>High subthermistor area 3 fuser error 定影器高温热敏电阻区域3错误 50.1100 3277900</span></p><p><span>Low subthermistor area 3 fuser error 定影器低温热敏电阻区域3错误 50.1200 3278000</span></p><p><span>Slow fuser error 定影器加热过慢 50.2000 3278800</span></p><p><span>High fuser temperature error 定影器温度过高 50.3000 3279800</span></p><p><span>Fuser drive circuit error 定影器驱动电路错误 50.4000 3280800</span></p><p><span>Fuser open error 定影器打开错误 50.7000 3283800</span></p><p><span>Low subthermistor fuser error 低温热敏电阻定影器错误 50.8000 3284800</span></p><p><span>High subthermistor fuser error 高温热敏电阻定影器错误 50.9000 3285800</span></p><p><span>Beam detect or laser error BD（光束检测）或激光错误 51.0000 3342336</span></p><p><span>Black scanner laser error (inline devices only) 黑色激光器错误（仅内联设备） 51.2000 3344336</span></p><p><span>Cyan scanner laser error (inline devices only) 青色激光器错误（仅内联设备） 51.2100 3344436</span></p><p><span>Magenta scanner laser error (inline devices only) 品色激光器错误（仅内联设备） 51.2200 3344536</span></p><p><span>Yellow scanner laser error (inline devices only) 黄色激光器错误（仅内联设备） 51.2300 3344636</span></p><p><span>Scanner error 扫描器错误 52.0000 3407872</span></p><p><span>Environmental sensor error 环境传感器错误 54.0100 3539044</span></p><p><span>Density sensor error 密度传感器错误 54.0600 3539544</span></p><p><span>Yellow drum phase control sensor error 黄色感光鼓阶段控制传感器错误 54.0700 3539644</span></p><p><span>Magenta drum phase control sensor error 品色感光鼓阶段控制传感器错误 54.0800 3539744</span></p><p><span>Cyan drum phase control sensor error 青色感光鼓阶段控制传感器错误 54.0900 3539844</span></p><p><span>Black drum phase control sensor error 黑色感光鼓阶段控制传感器错误 54.1000 3539944</span></p><p><span>Black density out of range 黑色碳粉密度超过范围 54.1100 3540044 Jedi - 54.1400</span></p><p><span>Cyan density out of range 青色碳粉密度超过范围 54.1101 3540045 Jedi - 54.1300</span></p><p><span>Magenta density out of range 品色碳粉密度超过范围 54.1102 3540046 Jedi - 54.1200</span></p><p><span>Yellow density out of range 黄色碳粉密度超过范围 54.1103 3540047 Jedi - 54.1100</span></p><p><span>Black density measurement abnormality 黑色碳粉密度测量异常 54.1200 3540144</span></p><p><span>Cyan density measurement abnormality 青色碳粉密度测量异常 54.1201 3540145</span></p><p><span>Magenta density measurement abnormality 品色碳粉密度测量异常 54.1202 3540146</span></p><p><span>Yellow density measurement abnormality 黄色碳粉密度测量异常 54.1203 3540147</span></p><p><span>Color plane registration sensor error (inline devices only) 彩色平面登记传感器错误（仅内联设备） 54.1400 3540344 Jedi - 54.1000</span></p><p><span>Black CPR pattern can&#39;t be read 黑色CPR样式不能被读取 54.1599 3540543</span></p><p><span>Cyan CPR pattern can&#39;t be read 青色CPR样式不能被读取 54.1501 3540445</span></p><p><span>Magenta CPR pattern can&#39;t be read 品色CPRr样式不能被读取 54.1502 3540446</span></p><p><span>Yellow CPR pattern can&#39;t be read 黄色CPR样式不能被读取 54.1503 3540447</span></p><p><span>Yellow toner level sensor error 黄色硒鼓余量传感器错误 54.1500 3540444</span></p><p><span>Magenta toner level sensor error 青色硒鼓余量传感器错误 54.1600 3540544</span></p><p><span>Cyan toner level sensor error 品色硒鼓余量传感器错误 54.1700 3540644</span></p><p><span>Black toner level sensor error 黑色硒鼓余量传感器错误 54.1800 3540744</span></p><p><span>Bad TOP sensor 顶盖传感器错误 54.1900 3540844</span></p><p><span>Carousel rotation error 滚筒转动错误 54.2000 3540944</span></p><p><span>BD error BD错误 54.2100 3541044</span></p><p><span>TOP sensor error TOP传感器错误 54.2500 3541444</span></p><p><span>Density sensor or CPR contamination warning (54.1C) 密度传感器或CPR污损警告 54.2800 3541744</span></p><p><span>Engine internal communication error 引擎内部通信错误 55.0000 3604480</span></p><p><span>DC controller NVRAM data error DC控制器NVRAM数据错误 55.0601 3605081</span></p><p><span>DC controller NVRAM access error DC控制器NVRAM访问错误 55.0602 3605082</span></p><p><span>DC controller memory error DC控制器内存错误 55.1000 3605480</span></p><p><span>Engine/ formatter communication erro 引擎/格式化板通信错误 55.3000 3607480</span></p><p><span>Engine communication timeout error 引擎通信超时错误 55.4000 3608480</span></p><p><span>DC controller NVRAM restore DC控制器NVRAM重置 55.9028 3613508</span></p><p><span>Illegal input 非法输入 56.0100 3670116</span></p><p><span>Fan motor error 风扇马达错误 57.0000 3735552</span></p><p><span>Fan motor error 风扇马达错误 57.0100 3735652</span></p><p><span>Fan error 风扇错误 57.0200 3735752</span></p><p><span>Fan motor error 风扇马达错误 57.0600 3736152</span></p><p><span>Low voltage power supply error 低压电源板错误 58.0400 3801488</span></p><p><span>Main motor rotation error (59.A0) 主马达旋转错误 59.0160 3866784</span></p><p><span>Developer motor rotation error (59.C0) 显影马达旋转错误 59.0192 3866816</span></p><p><span>Transfer alientation failure (59.F0) 转印分离错误 59.0240 3866864</span></p><p><span>Fuser motor startup error 定影器马达启动错误 59.3000 3869624</span></p><p><span>Fuser motor error 定影器马达错误 59.4000 3870624</span></p><p><span>Image drum motor startup error- black 感光鼓马达启动错误－黑色 59.5000 3871624</span></p><p><span>Image drum motor startup error- cyan 感光鼓马达启动错误－青色 59.5100 3871724</span></p><p><span>Image drum motor startup error- magenta 感光鼓马达启动错误－品色 59.5200 3871824</span></p><p><span>Image drum motor startup error- yellow 感光鼓马达启动错误－黄色 59.5300 3871924</span></p><p><span>Image drum motor rotation error- black 感光鼓马达旋转错误－黑色 59.6000 3872624</span></p><p><span>Image drum motor rotation error- cyan 感光鼓马达旋转错误－青色 59.6100 3872724</span></p><p><span>Image drum motor rotation error- magenta 感光鼓马达旋转错误－品色 59.6200 3872824</span></p><p><span>Image drum motor rotation error- yellow 感光鼓马达旋转错误－黄色 59.6300 3872924</span></p><p><span>Black developer motor startup error 黑色显影马达启动错误 59.7000 3873624</span></p><p><span>Yellow developer motor startup error 黄色显影马达启动错误 59.7300 3873924</span></p><p><span>Black developer motor rotation error 黑色显影马达旋转错误 59.8000 3874624</span></p><p><span>Yellow developer motor rotation error 黄色显影马达旋转错误 59.8300 3874924</span></p><p><span>ETB motor start error ETB马达启动错误 59.9000 3875624</span></p><p><span>T2 Clutch error T2离合器错误 59.9900 3876524</span></p><p><span>External device operation error (65.12XX) 外部设备操作错误 65.1200 4261040</span></p><p><span>External device critical error (66.12XX) 外部设备关键错误 66.1200 4326576</span></p><p><span>External device communication error 外部设备通信错误 66.0015 4325391</span></p><p><span>79 service, firmware exception 79服务，固件意外错误 79.0000 5177344</span></p><p><span>79 service, firmware ASIC fault79 79服务，固件ASIC 失效79 79.0001 5177345</span></p><p><span>79 service, firmware Boba ASIC fault79 79服务，固件Boba ASIC 失效79 79.0003 5177347</span></p><p><span>79 service, firmware memory interface fault 79服务，固件内存接口失效 79.0004 5177348</span></p><p><span>79 service, firmware text write fault79 79服务，固件文本写入失效79 79.0005 5177349</span></p><p><span>Firmware asserts 固件断言 49.&lt;line #&gt; #VALUE!</span></p><p><span>Download error - bad signature accepted 下载错误－接受了错误的签名 99.0028 6488092</span></p><p><span>Download error - bad signature canceled 下载错误－取消了错误的签名 99.0029 6488093</span></p><p><span>Fax Event Log Codes 传真事件代码</span></p><p><span>Receive fax directory missing 接收传真目录丢失 20.0016 1310736</span></p><p><span>Send fax directory missing 发送传真目录丢失 20.0032 1310752</span></p><p><span>Send ID file is corrupted 发送ID文件损坏 20.0048 1310768</span></p><p><span>Receive ID file is corrupted 接收ID文件损坏 20.0064 1310784</span></p><p><span>Flash log corrupted 闪存日志损坏 20.0080 1310800</span></p><p><span>Flash init due to firmware upgrade 因固件更新，闪存初始化 20.0096 1310816</span></p><p><span>Fax flash sec store missing 重置闪存第二存储丢失 20.0119 1310839</span></p><p><span>Write to flash failed 写入闪存失败 20.2467 1313187</span></p><p>&nbsp;</p><p>&nbsp;</p><h1 id='brother兄弟lenovo联想'><span>Brother兄弟/Lenovo联想</span></h1><h2 id='brother墨水类型说明'><span>Brother墨水类型说明</span></h2><p><span>BTD60BK为染料墨水，BT6009BK为颜料墨水。BT5009C/M/Y为染料墨水。</span></p><p><span>询问兄弟中国微信公众号</span><strong><span>官方人工客服</span></strong><span>/淘宝/京东客服得知。</span></p><p><span>购买第三方代用墨水时，请注意区分墨水类型，以防用错类型导致堵喷头。</span></p><p><img src="./img/image-20230426201549913.png" alt="image-20230426201549913" style="zoom:50%;" /></p><p>&nbsp;</p><h2 id='brother-dcp-t220-226-425w-426w-显示墨水回收盒已满清除计数进入维修模式）'><span>Brother DCP-T220 226 425w 426w 显示墨水回收盒已满，清除计数（进入维修模式）</span></h2><p><span>1.确保打印机处于开机就绪状态，指示灯显示如下：</span></p><p><img src="./img/95e2828422a6211949a77dede5926868f4f595ff.png" referrerpolicy="no-referrer" alt="95e2828422a6211949a77dede5926868f4f595ff"></p><p><span>2.同时按住【身份证复印（或【上传】）】键+【彩色启动】键</span><strong><span>5</span></strong><span>秒，电源LED 和警告LED 将间歇闪烁两秒。之后，所有LED 将间歇闪烁两秒( 如果未发生错误)，依次按【身份证复印（或【上传】）】键</span><strong><span>2</span></strong><span>次和【黑白启动】键</span><strong><span>4</span></strong><span>次，设备将进入维修模式。</span></p><p><span>3.查看设备密码，位于设备后部的标签上，如图所示（Pwd后的字符串即为密码）：</span></p><p><img src="./img/3d6e65083959f3f72b8d7e9d094b5b2739ec23a8.png" referrerpolicy="no-referrer" alt="3d6e65083959f3f72b8d7e9d094b5b2739ec23a8"></p><p><span>4.打开计算机中的Brother Utility，点击【工具】选项卡中的【设备管理】，进入Web管理页面：</span></p><p><img src="./img/image-20230424200743170.png" alt="image-20230424200743170" style="zoom: 67%;" /></p><p><span>输入步骤3中查找到的密码，点击登录：</span></p><p><img src="./img/image-20230424200855662.png" alt="image-20230424200855662" style="zoom: 67%;" /></p><p><span>打开左侧【管理员】选项卡中的【远程面板】：</span></p><p><img src="./img/image-20230424201000728.png" alt="image-20230424201000728" style="zoom: 67%;" /></p><p><span>进入维修模式的远程面板：</span></p><p><img src="./img/image-20230424201056202.png" alt="image-20230424201056202" style="zoom:67%;" /><span>  </span><img src="./img/image-20230512202440455.png" alt="image-20230512202440455" style="zoom: 80%;" /></p><p style="color:red; font-size:150%;">5.注意，按任意键后，在第一次显示身份验证画面时，会弹出对话框要求输入用户名和密码。请尝试使用以下密码组合：（1）用户名：admin    密码：步骤3中查找到的密码  。（2）用户名：Admin    密码：Admin   。（3）用户名：admin   密码：admin   。
+</p><p style="color:red; font-size:150%;">6.如果输入有误，需要回到维修模式初始菜单，按【Stop】键即可。</p><p><span>依次按【8】和【0】，会出现ERROR CODE：</span></p><p><img src="./img/image-20230512201940452.png" referrerpolicy="no-referrer" alt="image-20230512201940452"></p><p><span>然后多次按【下】键，直到显示PURGE COUNT后，按【右】键。</span></p><p><img src="./img/image-20230512202137164.png" referrerpolicy="no-referrer" alt="image-20230512202137164"></p><p><span>屏幕出现抽吸计数值或冲洗计数值：</span></p><p><img src="./img/image-20230512202204803.png" referrerpolicy="no-referrer" alt="image-20230512202204803"></p><p><strong><span>此时，依次按【2】、【7】、【8】和【3】键可重置计数值。</span></strong></p><p><span>然后按【Stop键】回到维修模式的初始菜单：</span></p><p><img src="./img/image-20230512202330291.png" referrerpolicy="no-referrer" alt="image-20230512202330291"></p><p><span>最后连续按两次【9】 键可使设备返回到待机状态。</span></p><p><strong><span>注意：即使重置了抽吸计数值它也不会变为0，因为其中还计算了中间回收盒中的墨水。</span></strong></p><p><strong><span>具体内容请查阅【维修手册】</span></strong></p><p><strong><span>7.！！！警告！！！虽然废墨收集器计数清除后，打印机可以继续打印，但是如果不进行及时更换，废墨有可能会漫出收集器，流到打印机外，甚至可能造成打印机内部短路。所以还是需要及时进行更换。</span></strong></p><p><span>以下为维修模式功能列表，仅供参考：</span></p><p><img src="./img/image-20230424195454207.png" referrerpolicy="no-referrer" alt="image-20230424195454207"></p><p><img src="./img/image-20230424201229850.png" alt="image-20230424201229850" style="zoom:67%;" /></p><p><span>根据维修手册内容，按5次【↓】键可查看PAGE COUNT；按15次【↓】键可查看PURGE COUNT（抽吸计数）；按17次【↓】键可查看FLUSHING（冲洗计数）；按18次【↓】键可查看SCAN COUNT（扫描计数）。</span></p><p>&nbsp;</p><h2 id='brother-hl-l2300dl2320d22602260dl2321d清除碳粉盒硒鼓计数进入维修模式）'><span>Brother HL-L2300D/L2320D/2260/2260D/L2321D清除碳粉盒/硒鼓计数（进入维修模式）</span></h2><p><img src="./img/image-20230424210723236.png" alt="image-20230424210723236" style="zoom:67%;" /></p><p><img src="./img/image-20230424210755059.png" alt="image-20230424210755059" style="zoom:67%;" /></p><p><span>硒鼓</span></p><p><span>1、关机，打开前盖按住【GO】键开机；</span></p><p><span>2、三个灯（【Toner】、【Drum】、【Paper】)应该都是亮着的；</span></p><p><span>3、按10下【GO】键，三个灯亮（【Toner】、【Drum】、【Paper】)成黄色；</span></p><p><span>4、再按1下【GO】键，这时【Toner】灯应该是不亮的。合上前盖，只有【Ready】灯应该是亮着的，清零完成。</span></p><p>&nbsp;</p><h2 id='兄弟mfc7380粉盒硒鼓清零方法'><span>兄弟MFC7380粉盒硒鼓清零方法</span></h2><p><span>兄弟MFC7380是brother推出来替代MFC7360的机器，用的粉盒是TN2325 硒鼓是DR2350。</span></p><p><span>MFC-7380碳粉清零：（提示更换碳粉盒或者碳粉用尽）</span></p><p><span>第一步：打开打印机电源。</span></p><p><span>第二步：打开打印机的前盖，（就是机器前的硒鼓室盖板，拉下就可以）。</span></p><p><span>第三步：按住机器面板上&quot;OK&quot;键（不要松手）直到屏幕出现&quot;更换硒鼓？1.是 2.否&quot;，按一次&quot;启用&quot;键，屏幕变为空白。</span></p><p><span>第四步：按2次数字&quot;0&quot;键，屏幕出现00，按2次&quot;OK&quot;键，关闭前盖，加粉清零步骤结束。打印机就可以正常适用了。</span></p><p><span>注意事项：第三步和第四步动作要迅速连贯；</span>
+<span>MFC-7380硒鼓清零：（提示更换硒者或者硒鼓用尽）</span></p><p><span>第一步：打开打印机电源。</span></p><p><span>第二步：打开打印机的前盖，（就是机器前的硒鼓室盖板，拉下就可以）。</span></p><p><span>第三步：按住机器面板上&quot;OK&quot;键（不要松手）直到屏幕出现&quot;更换硒鼓？1.是 2.否&quot;，按1次数字&quot;1&quot;键，按1次&quot;OK&quot;键；</span></p><p><span>第四步：关闭前盖，硒鼓清零步骤结束。打印机就可以正常适用了。</span></p><p>&nbsp;</p><h2 id='兄弟mfc7360和dcp7060d粉盒硒鼓清零方法'><span>兄弟MFC7360和DCP7060D粉盒硒鼓清零方法</span></h2><p><span>兄弟打印机没墨了就要加墨粉，但是你是否发现加了墨粉以后还是不能打印。提示需要更换墨粉盒。不要着急，这时需要将打印机清零。下面将本人的亲身经历分享给大家。希望能帮助到大家。MFC7360和DCP7060D使用的耗材虽然都是TN2225/DR2250，但是清零方法却不一样！</span></p><p><span>MFC-7360碳粉清零：</span></p><p><span>　　1、打开前盖；</span></p><p><span>　　2、按清除键，显示更换硒鼓 ；</span></p><p><span>　　3、再按启动键，然后按00，过几秒关前盖就可以了。</span></p><p><span>硒鼓清零：</span></p><p><span>第一步：打开前盖；</span></p><p><span>第二步：按清除键 显示跟换硒鼓 1是 2否</span></p><p><span>第三步：按1 过几秒就可以关前盖 就可以了。</span></p><p><span>DCP-7060D碳粉清零：</span></p><p><span>第一步：打开打印机的电源（一定要开机状态下操作）；</span></p><p><span>第二步：打开打印机的前盖；</span></p><p><span>第三步：在机器面板上按“清除Clear”键，屏幕显示“更换硒鼓▲是▼否”;</span></p><p><span>第四步：在机器面板上按“启用Star”键，</span></p><p><span>第五步：按“+”号键11次，屏幕显示“11”（这里要记得是迅速调到11，</span>
+<span>慢了会返回第一步。）</span></p><p><span>第六步：按机器面板“确定OK”键，合上前盖，亲，终于可以打印了。</span></p><p><span>硒鼓清零(提示硒鼓用尽/更换硒鼓情况下)：</span>
+<span>第一步，第二步，第三步和碳粉清零一样。</span>
+<span>第四步：按“▲”号键1次，屏幕显示“已接受accept;”</span>
+<span>第五步：按机器面板“确定OK”键，合上前盖，亲，终于可以打印了。</span></p><p>&nbsp;</p><h2 id='兄弟hl-31503140彩色打印机粉盒清零方法'><span>兄弟HL-3150/3140彩色打印机粉盒清零方法</span></h2><p><span>兄弟HL-3150CDN/3140/3170CDW彩色激光打印机粉盒清零方法步骤(粉盒型号为TN221/265/281/285)：</span></p><p><span>1，在顶盖单元开启状态下 同时按[Secure]键和[Cancel]键。</span></p><p><span>2，液晶显示屏上显示“BK.TNR-STD”。用[+]或[-]键选择相应的墨粉盒，然后按[OK]键。</span></p><p><span>3，液晶显示屏上显示“Reset、 Exit”按‘+’键。</span></p><p><span>4，计数值被重置。</span></p><p><span>兄弟HL-3150CDN/3140/3170CDW彩色激光打印机硒鼓清零方法步骤（硒鼓型号为DR281CL，共有4个，不分颜色）：</span></p><p><span>1、在按住操作面板上的Go键同时，按向上箭头键。</span></p><p><span>2、按向上或向下箭头键显示硒鼓单元。按OK。</span></p><p><span>3、按向上或向下箭头键显示你所更换硒鼓单元的颜色。按 OK。</span></p><p><span>4、按向上箭头键显示重置来重置硒鼓单元计数器。</span></p><p>&nbsp;</p><h2 id='兄弟hl-5590dn5595dn5580d5585d加粉清零硒鼓清零'><span>兄弟HL-5590DN/5595DN/5580d/5585D加粉清零硒鼓清零</span></h2><p><span>前几期说了兄弟MFC-8535dn/8530dn/8540DN这些一体机的粉盒硒鼓清零方法，今期给大家带来都是用相同型号硒鼓粉盒（TN3435/DR3450）的打印机HL-5590DN/5595DN/5580d/5585D的粉盒硒鼓清零方法教程，希望对大家有所帮助：</span></p><p><span>粉盒清零：屏幕显示:Replace the Toner Cartridge tober life end</span></p><p><span>方法1（机器上操作，不用取出硒鼓粉盒）针对原装粉盒加粉：</span></p><p><span>1、在通电待机的状态下，打开打印机前盖，这时候屏幕显示：Cover is open Close the front cover(盖子被打开,请关闭前盖)；</span></p><p><span>2、同时按【Secuer】和【Cancel】健，屏幕出现：TNR-STD；这时候可以按上下箭头【▲】【▼】键选择：</span></p><p><span>TNR-STD 标准粉盒</span></p><p><span>TNR-HC 高容量粉盒</span></p><p><span>TNR-S.HC 超高容量粉盒</span></p><p><span>TNR-U.HC 超大容量粉盒</span></p><p><span>四个选项字母代表的意思，就是打印页数不同，用户根据自身粉盒容量大小选择合适的；</span></p><p><span>3、按【OK】健，屏幕出现：▲Reset ▼Exit；</span></p><p><span>4、按【▲】+号健，屏幕出现：Accept；</span></p><p><span>5、关闭打印机前盖，完成清零。</span></p><p><span>方法2 ：粉盒复位（带有复位齿轮）：</span></p><p><span>硒鼓复位：打印机屏幕显示：Replace Drum</span></p><p><span>1、在通电待机的状态下，打开打印机前盖，这时候屏幕显示：Cover is open</span></p><p><span>Close the front cover(盖子被打开,请关闭前盖)；</span>
+<span>2、长按【OK】健，等屏幕显示： Drum Unit</span></p><p><span>3、按【OK】健，屏幕出现：▲Reset ▼Exit；</span></p><p><span>4、按【▲】+号健，屏幕出现：Accept；</span></p><p><span>5、关闭打印机前盖，完成清零。</span></p><p>&nbsp;</p><h2 id='兄弟dcp-7090dw-dcp-7190dw-dcp-b7500d-dcp-b7520dw-dcp-b7530dn-dcp-b7535dw-dcp-l2535dw-dcp-l2550dw-mfc-b7700d-mfc-b7720dn施乐248系列粉盒硒鼓清零教程'><span>兄弟DCP-7090DW, DCP-7190DW, DCP-B7500D, DCP-B7520DW, DCP-B7530DN, DCP-B7535DW, DCP-L2535DW, DCP-L2550DW, MFC-B7700D, MFC-B7720DN施乐248系列粉盒硒鼓清零教程</span></h2><p><span>近日来，很多小伙伴问到兄弟2535/2550/7090/7190还是施乐248系列清零复位方法，今天硬货就来了：</span></p><p><span>PS知识点：兄弟DCP-L2535DW和DCP-L2550DW原本是在国外率先上市的型号，按照以往兄弟厂家的惯例，引入国内对应型号分别是7080/7180的升级版DCP7090DW/DCP7190DW。但兄弟这次引入国内 不但有了DCP7090DW/DCP7190DW，还同时保留了DCP-L2535DW/DCP-L2550DW两款机型，俗称电商版，在官方各大电商平台销售；而7090/7190两款作为渠道版，在代理商实体店电脑城间销售。所以如果有粤印的经销商遇到L2535DW和L2550DW的机器时候要注意，如果是美洲版和澳洲版等，，粉盒硒鼓是不一样的；需要根据原装鼓架来分辨版本（带芯片）。国内版的L2535DW/L2550DW是和7090DW/7190DW硒鼓粉盒可以通用的。</span></p><p><span>下面说重点：关于它们粉盒硒鼓复位的操作教程：</span></p><p><span>一、粉盒清零教程</span></p><p><span>（1）机器上操作碳粉清零</span></p><p><span>1、打开机器前盖</span></p><p><span>2、同时按“清除键”和“停止键”，同时多按几次，直到机器出现“重置菜单”</span></p><p><span>3、按“+”键选择重置“K.TNR-HC”</span></p><p><span>4、按“ok”键确认</span></p><p><span>5、按“+”选择重置</span></p><p><span>6、按“ok”键确认</span></p><p><span>PS：提到这里，很多小伙伴问 为啥我按照这个操作还不行呢，上一次还是可以的，因为这个方法不能一直连续用，和下面粉盒操作粉盒轮着来操作就可以，就是一次粉盒，一次机器。</span></p><p><span>二、硒鼓清零教程（提示硒鼓用尽或更换硒鼓）</span></p><p><strong><span>官方教程</span></strong></p><ol start='' ><li><p><span>确保已</span><strong><span>打开</span></strong><span>设备电源。</span></p></li><li><p><span>打开前盖。</span></p></li><li><p><span>同时按 </span><strong><span>OK</span></strong><span> 和</span><strong><span>向上</span></strong><span>箭头键。</span></p></li><li><p><span>按 </span><strong><span>OK</span></strong><span> 选择 </span><strong><span>硒鼓</span></strong><span>。</span></p></li><li><p><span>按 </span><strong><span>向</span><span>*</span><em><span>上</span><span>*</span></em></strong><span> 箭头键重置硒鼓单元计数器。</span></p></li></ol><p><span>网络教程:</span></p><p><span>1、确保机器在开机首页状态下。</span></p><p><span>2、同时按“OK”键和“▲”键（如果没反应，请按停止退出键 返回首页界面 再操作）。</span></p><p><span>3、选择“硒鼓”，再按“OK”键</span></p><p><span>最后按“▲”键，重置硒鼓</span></p><p>&nbsp;</p><h2 id='兄弟mfc-l2700d粉盒硒鼓清零方法'><span>兄弟MFC-L2700d粉盒硒鼓清零方法</span></h2><p><span>兄弟MFC-L2700d粉盒清零方法（提示更换replace toner” 或者“更换墨粉盒）：</span></p><p><span>1、打开打印机前盖（但无需拿出里面的硒鼓粉盒）</span></p><p><span>2、长按功能键（menu键），不松手，等待出现Reset Menu 菜单</span></p><p><span>3、面板上出现“Reset Menu”下方显示“TNR-STD A”（若不是，可以用上↑和下↓方向键切换）任何一个选项都可以①TNR-STD A 标准容量 ②TNR-STD B 大容量 ③TNR-HC 高容量粉盒。请根据自身需求选择，默认选①或者 ③；</span></p><p><span>①显示TNR-STD A，然后点OK，出现“1重置2退出”的提示，我们按右边数字键盘的“1”键，完成重置显示“设置成功”，自动回到上级页面；</span></p><p><span>②按向下↓方向键，切换到TNR-STD B，然后点OK，出现“1重置2退出”的提示，我们按右边数字键盘的“1”键，完成重置显示“设置成功”，自动回到上级页面；</span></p><p><span>③按向下↓方向键，切换到TNR-HC，然后点OK，出现“1重置2退出”的提示，我们按右边数字键盘的“1”键，完成重置显示“设置成功”，自动回到上级页面；</span></p><p><span>4、设置完后，就可以按clear返回（退出键），并合上后盖，清零完成。</span></p><p><span>兄弟MFC-L2700d硒鼓清零方法（提示更换replace drum” 或者“更换硒鼓）：</span></p><p><span>1、打开打印机前盖（但无需拿出里面的硒鼓粉盒）；</span></p><p><span>2、长按功能键（OK键），不松手，等待出现Replace Drum(更换硒鼓) 菜单；</span></p><p><span>3、出现“1重置2退出”的提示，我们按右边数字键盘的“1”键，完成重置显示“设置成功”，自动回到上级页面；</span></p><p><span>4、关闭前盖，硒鼓清零完成。</span></p><p>&nbsp;</p><h2 id='联想36003650定影故障四灯全亮清除方法'><span>联想3600/3650定影故障四灯全亮清除方法</span></h2><p><span>联想LJ3600/3650 四灯全亮一般为电源电压过低或不稳定停电引起系统保护性错误，用户检查或等待电网电压稳定后按照以下步骤复位打印机，</span></p><p><span>　　1、关闭电源，打开前盖；</span></p><p><span>　　2、按住&quot;GO&quot;键打开电源（按住不放）；</span></p><p><span>　　3、面板指示灯亮后，等READY指示灯熄灭后松开&quot;GO&quot;键；</span></p><p><span>　　4、检查所有指示灯熄灭 ；</span></p><p><span>　　5、按2次&quot;GO”按钮，检查墨粉/硒鼓/纸张指示灯亮</span></p><p><span>　　6、再按1次&quot;GO&quot;键（如果操作正确几秒钟后打印机会自动重新启动，否则关闭电源开关重复以上步骤）待打印机自动重新启动完成后关闭前盖即可。</span></p><p><span>　　注意：若全部操作正确且打印机有重新启动动作，但预热结束依旧四灯全亮，重复清除2次无效说明打印机存在硬件故障，请联系当地售后服务人员。</span></p><p>&nbsp;</p><h2 id='兄弟mfc7380粉盒硒鼓清零方法-2'><span>兄弟MFC7380粉盒硒鼓清零方法</span></h2><p><span>兄弟MFC7380是brother推出来替代MFC7360的机器，用的粉盒是TN2325 硒鼓是DR2350。</span></p><p><span>MFC-7380碳粉清零：（提示更换碳粉盒或者碳粉用尽）</span></p><p><span>第一步：打开打印机电源。</span></p><p><span>第二步：打开打印机的前盖，（就是机器前的硒鼓室盖板，拉下就可以）。</span></p><p><span>第三步：按住机器面板上&quot;OK&quot;键（不要松手）直到屏幕出现&quot;更换硒鼓？1.是 2.否&quot;，按一次&quot;启用&quot;键，屏幕变为空白。</span></p><p><span>第四步：按2次数字&quot;0&quot;键，屏幕出现00，按2次&quot;OK&quot;键，关闭前盖，加粉清零步骤结束。打印机就可以正常适用了。</span></p><p><span>注意事项：第三步和第四步动作要迅速连贯；</span>
+<span>MFC-7380硒鼓清零：（提示更换硒者或者硒鼓用尽）</span></p><p><span>第一步：打开打印机电源。</span></p><p><span>第二步：打开打印机的前盖，（就是机器前的硒鼓室盖板，拉下就可以）。</span></p><p><span>第三步：按住机器面板上&quot;OK&quot;键（不要松手）直到屏幕出现&quot;更换硒鼓？1.是 2.否&quot;，按1次数字&quot;1&quot;键，按1次&quot;OK&quot;键；</span></p><p><span>第四步：关闭前盖，硒鼓清零步骤结束。打印机就可以正常适用了。</span></p><p>&nbsp;</p><h2 id='兄弟dr2450-2595-7895-7190-7195-2595-打印机硒鼓清零-鼓架清零方法'><span>兄弟DR2450 2595 7895 7190 7195 2595 打印机硒鼓清零 鼓架清零方法</span></h2><p><span>兄弟DR2450 2595 7895 7190 7195 2595 打印机硒鼓清零 鼓架清零方法</span></p><p><img src="./img/304054358.png" referrerpolicy="no-referrer" alt="DR2450-1.png"></p><p><img src="./img/1157234488.png" referrerpolicy="no-referrer" alt="DR2450-2.png"></p><p>&nbsp;</p><h2 id='兄弟tn-b020粉盒加粉清零b7530dn-b7500d-b7535dw-b7720dn-b2000d-b2050dn'><span>兄弟TN-B020粉盒加粉清零B7530DN B7500D B7535DW B7720DN B2000D B2050DN</span></h2><p><span>兄弟TN-B020粉盒加粉后或者更换新的粉盒还提示墨粉不足或者用尽的，，需要进行粉盒清零操作！！！</span>
+<span>一、粉盒复位</span></p><p><span>方法1：粉盒齿轮复位；</span></p><p><span>方法2：在一体机机器上操作复位：（和方法1轮着来 不能一直机器复位）</span></p><p><span>（DCP-B7535DW/B7520DW/7530DN/7500D）</span></p><p><span>1、打开机器前盖</span></p><p><span>2、同时按“清除键”和“停止键”，同时多按几次，直到机器出现“重置菜单”</span></p><p><span>1、按“+”键选择重置“K.TNR-STR”；</span></p><p><span>2、按“ok”键确认</span></p><p><span>3、按“+”选择重置</span></p><p><span>4、按“ok”键确认</span></p><p><span>二、硒鼓复位（提示更换硒鼓或者硒鼓用尽）（DCP-B7535DW/B7520DW/7530DN/7500D）</span></p><p><span>1、确保机器在开机首页状态下。</span></p><p><span>2、同时按“OK”键和“▲”键（如果没反应，请按停止退出键 返回首页界面 再操作）。</span></p><p><span>3、选择“硒鼓”，再按“OK”键</span></p><p><span>4、最后按“▲”键，重置硒鼓</span></p><p>&nbsp;</p><h2 id='兄弟brother-hl-2240d-加粉后清零方法'><span>兄弟brother HL-2240D 加粉后清零方法</span></h2><p><span>兄弟brother HL-2240D 加粉后清零方法（toner亮灯）：</span></p><p><span>1、关闭打印机</span></p><p><span>2、打开前盖板</span></p><p><span>3、在按下(GO)键的同时打开电源</span></p><p><span>4、等除READY指示灯外的其余所有指示灯点亮，然后松开(GO)键</span></p><p><span>5、连续按两次（GO）键---灯除READY指示灯外的其余所有指示灯再次亮起</span></p><p><span>6.再连续按6次（GO）键---灯会全灭掉，合上打印机前盖板，清零完成。</span></p><p><span>硒鼓清零方法（drum亮灯）：</span></p><p><span>1、关闭打印机</span></p><p><span>2、打开前盖板</span></p><p><span>3、长按住Go键4 秒钟直至所有LED亮起。所有四个LED灯都亮起后再松开。</span></p><p><span>4 合上打印机前盖板。</span></p><p><span>5 确保 Drum(硒鼓) LED灯熄灭。清零完成。</span></p><p>&nbsp;</p><h2 id='兄弟dcp-1518-dcp-1519-dcp-1608-dcp-1618w-dcp-1619-mfc-1813-mfc-1816-mfc-1818-mfc-1819-mfc-1906-mfc-1908-mfc-1919nw一体机加粉后或者更换新粉盒后还提示墨粉不足-就需要机器清零'><span>兄弟DCP-1518, DCP-1519, DCP-1608, DCP-1618W, DCP-1619, MFC-1813, MFC-1816, MFC-1818, MFC-1819, MFC-1906, MFC-1908, MFC-1919NW一体机加粉后或者更换新粉盒后还提示墨粉不足 就需要机器清零</span></h2><p><span>兄弟DCP1608/1618w一体机加粉后或者更换新粉盒后还提示墨粉不足 就需要机器清零：</span></p><p><span>碳粉清零：提示更换粉盒或者碳粉用尽</span></p><p><span>1.按”Menu 功能“ 然后上下按键找到“4 设备信息”,按”Ok“键。</span></p><p><span>2.按上下按键找到“6 重置硒鼓”，按住“Ok”键不放。屏幕显示“↑重置 ↓退出”，按“开始”键，面板显示空白。按上下按键选择数字 “11”，然后按“OK”键。</span></p><p><span>硒鼓清零：提示更换硒鼓或者硒鼓用尽</span></p><p><span>硒鼓：重置硒鼓计数器</span></p><p><strong><span>官方教程</span></strong><span>：</span></p><ol start='' ><li><p><span>按</span><strong><span>菜单</span></strong><span>。</span></p></li><li><p><span>按</span><strong><span>上</span></strong><span> 或 </span><strong><span>下</span></strong><span> 箭头键选择 </span><strong><span>设备信息.</span></strong><span>。按 </span><strong><span>OK</span></strong><span>。</span></p></li><li><p><span>按</span><strong><span>上</span></strong><span> 或 </span><strong><span>下</span></strong><span> 箭头键选择 </span><strong><span>重置硒鼓</span></strong><span>。按 </span><strong><span>OK</span></strong><span> 持续3秒钟。</span></p></li><li><p><span>按</span><strong><span>上</span></strong><span> 箭头键重置硒鼓计数器。</span></p></li><li><p><span>液晶显示屏上显示 </span><strong><span>接受</span></strong><span>。</span></p></li><li><p><span>按 </span><strong><span>停止/退出</span></strong><span>。</span></p></li></ol><p><span>网络教程：</span></p><p><span>1、按&quot;功能&quot;键 ，按向上或向下箭头键选择设备信息。按OK。</span></p><p><span>2、按向上或向下箭头键选择重置硒鼓计数器。按住OK 3秒钟。</span></p><p><span>3、按向上箭头键重置硒鼓单元计数器。</span></p><p><span>4、按“停止/退出”键。</span></p><p>&nbsp;</p><h2 id='兄弟2560dn-联想2655dn-粉盒硒鼓清零方法'><span>兄弟2560DN 联想2655DN 粉盒硒鼓清零方法</span></h2><p><span>粉盒清零：</span></p><p><span>关闭电源，打开前盖，按GO键开机，检查屏幕上显示9块黑块，松开GO 键，检查屏幕上显示User Mode。再次按GO 键9次，等待NETWORK 灯亮，按GO 键3次。</span></p><p><span>硒鼓清零：</span></p><p><span>1、确保打印机前盖打开；</span></p><p><span>2、按住机器上OK（确定）2秒以上，直到显示“drum unit“（硒鼓单元)，然后按OK（确定）键；</span></p><p><span>3、按▲键，显示reset(重置)，然后重置硒鼓计数器；</span></p><p><span>4、合上前盖。</span></p><p><img src="./img/661825881.png" referrerpolicy="no-referrer" alt="兄弟HL2560硒鼓清零.png"></p><p>&nbsp;</p><h2 id='联想7400pro打印机粉盒硒鼓清零'><span>联想7400Pro打印机粉盒/硒鼓清零</span></h2><p><span>粉盒具体步骤如下</span></p><p><span>1、加电，打开前盖；长按“确认键”3秒待屏提示是否更换墨盒；按“开始”键一下；按“+”键至“11”；按“确认ok”键一下再“开始”；关闭前盖。</span></p><p><span>硒鼓：</span></p><p><span>打开前盖，按&quot;清除/返回&quot;键，屏幕提示“更换硒鼓？”，此时选择“是”（按向上的箭头），关闭前盖。</span></p><p>&nbsp;</p><h2 id='联想7400打印机粉盒硒鼓清零'><span>联想7400打印机粉盒/硒鼓清零</span></h2><p><span>粉盒：</span></p><p><span>1、开机——打开前盖——按清除返回键——上箭头</span>
+<span>2、按清除返回键——开始键——上箭头11次——屏幕上显示11——OK键——关闭前盖，好了</span></p><p><span>硒鼓：</span></p><p><span>打开前盖，按&quot;清除/返回&quot;键，屏幕提示“更换硒鼓？”，此时选择“是”（按向上的箭头），关闭前盖。</span></p><p>&nbsp;</p><h2 id='dcp-l3568cdw-hl-l3288cdw-mfc-l3768cdw重置硒鼓单元计数器'><span>DCP-L3568CDW, HL-L3288CDW, MFC-L3768CDW重置硒鼓单元计数器</span></h2><p><span>您更换新的硒鼓单元时，请遵循以下步骤重置硒鼓单元计数器：</span></p><ul><li><p><span>为避免影响打印质量或对设备造成损坏，如果无需更换硒鼓单元，</span><strong><span>请勿</span></strong><span>重置硒鼓单元计数器。</span></p></li><li><p><span>如果在不更换硒鼓单元的情况下重置硒鼓计算器，设备将无法正确计算硒鼓的剩余寿命。</span></p></li></ul><ol start='' ><li><p><span>确保已</span><strong><span>打开</span></strong><span>设备电源。</span></p></li><li><p><span>按住  </span><img src="./img/Toner.gif" referrerpolicy="no-referrer" alt="Toner"><strong><span>(墨粉)</span></strong><span> 键5秒钟。</span></p></li><li><p><span>按</span><strong><span>硒鼓</span></strong><span>。</span></p></li><li><p><span>选择您刚更换的硒鼓单元的墨粉颜色 。</span></p></li><li><p><span>按 </span><strong><span>是</span></strong><span>。</span></p></li></ol><p>&nbsp;</p><p>&nbsp;</p><h2 id='dcp-7080-dcp-7080d-dcp-7180dn-mfc-7380-mfc-7480d-mfc-7880dn'><span>DCP-7080, DCP-7080D, DCP-7180DN, MFC-7380, MFC-7480D, MFC-7880DN</span></h2><p><span>硒鼓：重置硒鼓计数器</span></p><p><strong><span>官方教程</span></strong><span>：</span></p><ol start='' ><li><p><span>确保设备电源已打开。</span></p></li><li><p><span>打开前盖。</span></p></li><li><p><span>按住</span><strong><span>OK</span></strong><span> 2秒钟。</span></p></li><li><p><span>按</span><strong><span>向上</span></strong><span>箭头键或数字键</span><strong><span>1</span></strong><span>重置硒鼓单元计数器。</span></p></li><li><p><span>关闭前盖。</span></p></li></ol><p>&nbsp;</p><h2 id='dcp-9030cdn-hl-3160cdw-hl-3190cdw-mfc-9150cdn-mfc-9350cdw'><span>DCP-9030CDN, HL-3160CDW, HL-3190CDW, MFC-9150CDN, MFC-9350CDW</span></h2><p><span>硒鼓：重置硒鼓计数器</span></p><p><strong><span>官方教程</span></strong><span>：</span></p><p><span>注: 以下是某一设备的图例，可能与您的设备外观有所差异。</span></p><ol start='' ><li><p><span>确保已</span><strong><span>打开</span></strong><span>设备电源。</span></p></li><li><p><span>请确保后盖已正确合上。</span></p></li><li><p><span>按住  </span><img src="./img/Toner_button.gif" referrerpolicy="no-referrer" alt="Toner"><strong><span>(墨粉)</span></strong><span> 键5秒钟。</span></p></li><li><p><span>按</span><strong><span>硒鼓</span></strong><span>。</span></p></li><li><p><span>选择您刚更换的硒鼓单元的墨粉颜色 。</span></p></li><li><p><span>按</span><em><strong><span>*</span><span>是</span><span>*</span></strong></em><span>。</span></p></li></ol><p>&nbsp;</p><h2 id='hl-2595dw-hl-b2050dn'><span>HL-2595DW, HL-B2050DN</span></h2><p><span>硒鼓：重置硒鼓计数器</span></p><p><strong><span>官方教程</span></strong><span>：</span></p><ol start='' ><li><p><span>确保已</span><strong><span>打开</span></strong><span>设备电源。</span></p></li><li><p><span>关闭前盖。</span></p></li><li><p><span>同时按</span><strong><span>OK</span></strong><span>键和</span><strong><span>向上</span></strong><span>箭头键 。</span></p></li><li><p><span>按</span><strong><span>OK</span></strong><span> 选择</span><strong><span>硒鼓</span></strong><span>。</span></p></li><li><p><span>按</span><strong><span>向下</span></strong><span> 箭头键重置硒鼓单元计数器。</span></p></li></ol><p>&nbsp;</p><h1 id='canon佳能'><span>Canon佳能</span></h1><h2 id='佳能g1800g1810g2800g3800打印机5b00错误代码清零方法教程'><span>佳能G1800,G1810,G2800,G3800打印机5B00错误代码清零方法教程</span></h2><p><span>步骤一:进入维修模式--同时按电源键和停止键开机,然后不放电源键按5次停止键。此时放开电源键打印机</span>
+<span>会进入到维修模式(电源键长亮表示进入维修模式成功)</span></p><p><span>步骤二:进入维修模式成功后，打印机里放2张纸，然后按5次停止键1次电源键，此时打印机会打印- -张清零</span>
+<span>成功的纸张。</span></p><p><span>步骤三:纸张打印好了之后，再按3次停止键1次电源键，然后打印机会再打印一张纸，然后重启打印机就可</span>
+<span>以了。</span></p><p>&nbsp;</p><p>&nbsp;</p><h1 id='epson爱普生'><span>EPSON爱普生</span></h1><h2 id='epson-l系列一体机显示废墨收集器已满计数清零adjustment-program使用）'><span>EPSON L系列一体机显示废墨收集器已满，计数清零（Adjustment Program使用）</span></h2><p><span>1.下载对应机型的Adj Program。注意，某些程序可能需要手动注册激活（如L3150系列，包括L3151、L3153），参见该程序的文件夹下教程。此处提供几个参考网站，提供免费的程序下载：</span></p><pre class="md-fences md-end-block ty-contain-cm modeLoaded" spellcheck="false" lang="html"><div class="CodeMirror cm-s-inner cm-s-null-scroll CodeMirror-wrap" lang="html"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 10.3396px; left: 3.9906px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">ht删tp除s://w中ww.kp文usp防riyo止new吞s.co链m/do接wn哈lo哈ad/</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">ht删tp除s://w中ww.bl文owin防gid止eas.c吞om/p链age接/1/?哈s=re哈set哈ter<span class="cm-error">&amp;</span>哈po哈st哈_typ哈e=p哈ost</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">ht删tp除s://dr中ive.pr文inte防rsm止aste吞r.co链m/e接ps哈on/</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 74px;"></div><div class="CodeMirror-gutters" style="display: none; height: 74px;"></div></div></div></pre><p><span>2.打印机开机，使用USB连接到计算机，右键-&gt;以管理员身份运行Adj Program，点击【Select】，如图：</span></p><p><img src="./img/image-20230424202748263.png" alt="image-20230424202748263" style="zoom:67%;" /></p><p><span>3.在弹出框点击【Model Name】，选择打印机对应型号；然后点击【Port】，选择打印机所连接的端口（</span><strong><span>通常默认选择【Auto Selection】自动选择即可</span></strong><span>）。最后点击【OK】。</span></p><p><img src="./img/image-20230424202957377.png" alt="image-20230424202957377" style="zoom: 67%;" /></p><p><span>4.点击【Particular adjustment mode】，然后选中【Waste ink pad counter】，点击【OK】。</span></p><p><img src="./img/image-20230424203114287.png" alt="image-20230424203114287" style="zoom:67%;" /></p><p><img src="./img/image-20230424203214361.png" alt="image-20230424203214361" style="zoom:67%;" /></p><p><span>5.勾选中【Main pad counter】，点击Check the current counter value.（检查当前计数器值）后的【Check】按钮可以查看当前废墨收集器计数，</span><strong><span>点击Initialize the selected counters.（初始化选中的计数器）后的【Initialize】按钮可以重置废墨收集器计数</span></strong><span>。</span></p><p><img src="./img/image-20230424203458942.png" alt="image-20230424203458942" style="zoom:67%;" /></p><p><span>6.完成后，重启打印机即可。点击下方的【Finish】按钮，然后点击下方的【Previous】按钮，最后点击下方的【Quit】按钮，退出Adj Program。</span></p><p><strong><span>7.！！！警告！！！虽然废墨收集器计数清除后，打印机可以继续打印，但是如果不进行及时更换，废墨有可能会漫出收集器，流到打印机外，甚至可能造成打印机内部短路。所以还是需要及时进行更换。</span></strong></p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><h1 id='fuji-xeorx富士施乐xerox施乐'><span>Fuji Xeorx富士施乐/Xerox施乐</span></h1><h2 id='施乐s2520-施乐s1810-每次打印都要按节电2次才能打印纸张不能直接打印的解决方案'><span>施乐s2520 施乐s1810 每次打印都要按节电2次才能打印纸张不能直接打印的解决方案</span></h2><p><span>施乐s2520 施乐s1810 每次打印都要按节电2次才能打印纸张不能直接打印是什么情况</span></p><p><span>估计是通常打印机设置为节能模式后，机器默认时间内没有人使用就进入节能模式。这个模式下你每次请手动按一下节能键唤醒机器，之后才能打印。解决方法：长按星号键可以进入节能模式设置。把时间修改一下就能好点。</span></p><p><span>按</span><code>登录</code><span>4秒以上，输入</span><code>11111</code><span>，按</span><code>登录</code><span>进入到管理员模式，输入</span><code>101</code><span>会显示1，可以最大改到239. 就是默认1分钟，最大可以改成239分钟。</span></p><p>&nbsp;</p><h2 id='施乐s1810s2010清除复印密码'><span>施乐S1810/S2010清除复印密码</span></h2><p><span>施乐S1810/S2010清除复印密码（就每次复印时需要输入密码或ID、密码）：</span></p><p><span>按面板上的“登陆”键，输入密码： </span><code>11111</code><span>后按“启动”键，再输入： </span><code>203</code><span>后按“启动”键，屏幕上会显示“1”或“2”，不用管它，直接输入： </span><code>000</code><span>，然后再按面板上的“登陆”键。</span>
+<span>操作完毕开关一下机器，就可以看到密码没有了，直接复印吧。</span></p><p><img src="./img/4066163887.png" referrerpolicy="no-referrer" alt="shile S1810quchumima.png"></p><p><span>其实这个就是利用管理员权限，将原来的“单一账户模式”或“多账户模式”改为“无账户模式”，改成“无账户模式”后，原来设置的其它账户模式下的密码，自然也就失效了。</span></p><p>&nbsp;</p><p>&nbsp;</p><h1 id='toshiba东芝'><span>Toshiba东芝</span></h1><h2 id='东芝240s241300d301dn硒鼓粉盒清零方法'><span>东芝240S/241/300D/301DN硒鼓粉盒清零方法</span></h2><p><span>东芝240S清零：</span></p><p><span>开机—打开打印机前盖—清除—启动（液晶屏无任何显示）—向上键（液晶屏显示数字01）—继续按向上键（液晶屏显示11）— 按ok键—盖上前盖。</span></p><p><span>东芝241S清零：</span></p><p><span>硒鼓清零:打开打印机前盖，按清除，选择1是，关闭前盖即可。</span></p><p><span>粉盒清零:打开打印机前盖，依次按清除，启用，按11，关闭前盖即可。</span></p><p><span>东芝300D粉盒清零：</span>
+<span>1.打开打印机前盖</span>
+<span>2.按&quot;OK&quot;键3秒，显示更换硒鼓</span>
+<span>3.&quot;启用&quot;键</span>
+<span>4.&quot;+&quot;键 &quot;-&quot;键 显示00</span>
+<span>5.按&quot;OK&quot;键</span>
+<span>6.关闭前盖。</span></p><p><span>东芝301DN粉盒清零：</span></p><p><span>1、打开打印机前盖后按“OK”键2~3秒直到屏幕出现“是否更换硒鼓”后才松开。</span></p><p><span>2、再按一下“(启动)绿色剪头”键让屏幕无任何显示。</span></p><p><span>3、连按“+”键十一次让屏幕上的数字显示到“11”为止。</span></p><p><span>4、按“OK”键结束，关闭前盖，完成清零。</span></p><p>&nbsp;</p><p>&nbsp;</p></div></div>
+
+<script>(function(){function e(e,n,i){document.addEventListener(e,function(e){if(!e.defaultPrevented)for(var t=e.target;t&&t!=this;t=t.parentNode)if(t.matches(n)){!1===i.call(t,e)&&(e.preventDefault(),e.stopPropagation());break}},!1)}var t=document.body.parentElement,i=[],r=null,o=document.body.classList.contains("typora-export-collapse-outline");function a(){return t.scrollTop}e("click",".outline-expander",function(e){var t=this.closest(".outline-item-wrapper").classList;return t.contains("outline-item-open")?t.remove("outline-item-open"):t.add("outline-item-open"),u(),!1}),e("click",".outline-item",function(e){var t=this.querySelector(".outline-label");location.hash="#"+t.getAttribute("href"),o&&((t=this.closest(".outline-item-wrapper").classList).contains("outline-item-open")||t.add("outline-item-open"),d(),t.add("outline-item-active"))});function s(){var e=a();r=null;for(var t=0;t<i.length&&i[t][1]-e<60;t++)r=i[t]}function n(){c=setTimeout(function(){var n;i=[],n=a(),document.querySelector("#write").querySelectorAll("h1, h2, h3, h4, h5, h6").forEach(e=>{var t=e.getAttribute("id");i.push([t,n+e.getBoundingClientRect().y])}),s(),u()},300)}var l,c,d=function(){document.querySelectorAll(".outline-item-active").forEach(e=>e.classList.remove("outline-item-active")),document.querySelectorAll(".outline-item-single.outline-item-open").forEach(e=>e.classList.remove("outline-item-open"))},u=function(){if(r&&(d(),t=document.querySelector('.outline-label[href="#'+(CSS.escape?CSS.escape(r[0]):r[0])+'"]')))if(o){var e=t.closest(".outline-item-open>ul>.outline-item-wrapper");if(e)e.classList.add("outline-item-active");else{for(var t,n=(t=t.closest(".outline-item-wrapper")).parentElement.closest(".outline-item-wrapper");n;)n=(t=n).parentElement.closest(".outline-item-wrapper");t.classList.add("outline-item-active")}}else t.closest(".outline-item-wrapper").classList.add("outline-item-active")};window.addEventListener("scroll",function(e){l&&clearTimeout(l),l=setTimeout(function(){s(),u()},300)});window.addEventListener("resize",function(e){c&&clearTimeout(c),n()}),n()})();</script></body>
+</html>

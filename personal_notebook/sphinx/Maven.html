@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Maven安装 &#8212; 个人笔记教程 1.0.0 文档</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/classic.css?v=def86cc0" />
+    
+    <script src="_static/documentation_options.js?v=34088549"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/translations.js?v=beaddf03"></script>
+    
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" />
+    <link rel="next" title="（安装）“Jvav”——从安装到放弃" href="Java.html" />
+    <link rel="prev" title="git 设置和取消代理" href="Git.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>导航</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="总索引"
+             accesskey="I">索引</a></li>
+        <li class="right" >
+          <a href="Java.html" title="（安装）“Jvav”——从安装到放弃"
+             accesskey="N">下一页</a> |</li>
+        <li class="right" >
+          <a href="Git.html" title="git 设置和取消代理"
+             accesskey="P">上一页</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">个人笔记教程 1.0.0 文档</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Maven安装</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="maven">
+<h1>Maven安装<a class="headerlink" href="#maven" title="Link to this heading">¶</a></h1>
+<p>一：首先，先到官网去下载maven。这里是官网的地址：http://maven.apache.org/download.cgi 请选择最新的版本下载。解压到某个目录。二、路径配置：右键“计算机”，选择“属性”，之后点击“高级系统设置”，点击“环境变量”，来设置环境变量。有以下系统变量需要配置：</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="c1">#添加</span>
+<span class="na">MAVEN_HOME  </span>
+<span class="c1">#变量值为你的maven目录，如：D:\D\apache-maven-3.8.5\</span>
+</pre></div>
+</div>
+<p>编辑系统变量 Path 添加变量值：</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">%MAVEN_HOME%\bin</span>
+</pre></div>
+</div>
+<p>最后检验配置是否成功：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mvn<span class="w"> </span>-version
+</pre></div>
+</div>
+</section>
+<section id="vscode-maven">
+<h1>VSCode Maven设置<a class="headerlink" href="#vscode-maven" title="Link to this heading">¶</a></h1>
+<p>首先安装Language Support  for Java 扩展包。</p>
+<p>(Ctrl+,) ，搜索：</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="err">java.co</span><span class="kc">nf</span><span class="err">igura</span><span class="kc">t</span><span class="err">io</span><span class="kc">n</span><span class="err">.mave</span><span class="kc">n</span>
+</pre></div>
+</div>
+<p>输入maven的settings.xml路径，如：</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">D</span><span class="o">:</span><span class="s">\D\apache-maven-3.8.5\conf\settings.xml</span>
+</pre></div>
+</div>
+<p>搜索</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="err">mave</span><span class="kc">n</span><span class="err">.execu</span><span class="kc">ta</span><span class="err">ble.pa</span><span class="kc">t</span><span class="err">h</span>
+</pre></div>
+</div>
+<p>设置为mvn所在路径：</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">D</span><span class="o">:</span><span class="s">\D\apache-maven-3.8.5\bin\mvn</span>
+</pre></div>
+</div>
+<p><strong>注意：这里填写的路径是mvn可执行文件的绝对路径</strong></p>
+</section>
+<section id="id1">
+<h1>Maven代理设置<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
+<p>步骤如下：</p>
+<p>·编辑setting.xml 文件。</p>
+<p>·找到 <strong><proxies></strong> 节点。去掉相应的注释，设置代理信息。</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;proxy&gt;</span>
+<span class="w">    </span><span class="nt">&lt;id&gt;</span>optional<span class="nt">&lt;/id&gt;</span>
+<span class="w">    </span><span class="nt">&lt;active&gt;</span>true<span class="nt">&lt;/active&gt;</span>
+<span class="w">    </span><span class="nt">&lt;protocol&gt;</span>http<span class="nt">&lt;/protocol&gt;</span>
+<span class="w">    </span><span class="cm">&lt;!--  &lt;username&gt;proxyuser&lt;/username&gt;</span>
+<span class="cm">    &lt;password&gt;proxypass&lt;/password&gt; --&gt;</span>
+<span class="w">    </span><span class="nt">&lt;host&gt;</span>127.0.0.1<span class="nt">&lt;/host&gt;</span>
+<span class="w">    </span><span class="nt">&lt;port&gt;</span>7890<span class="nt">&lt;/port&gt;</span>
+<span class="w">    </span><span class="nt">&lt;nonProxyHosts&gt;</span>local.net|some.host.com<span class="nt">&lt;/nonProxyHosts&gt;</span>
+<span class="nt">&lt;/proxy&gt;</span>
+
+<span class="nt">&lt;proxy&gt;</span>
+<span class="w">    </span><span class="nt">&lt;id&gt;</span>optional<span class="nt">&lt;/id&gt;</span>
+<span class="w">    </span><span class="nt">&lt;active&gt;</span>true<span class="nt">&lt;/active&gt;</span>
+<span class="w">    </span><span class="nt">&lt;protocol&gt;</span>https<span class="nt">&lt;/protocol&gt;</span>
+<span class="w">    </span><span class="cm">&lt;!--  &lt;username&gt;proxyuser&lt;/username&gt;</span>
+<span class="cm">    &lt;password&gt;proxypass&lt;/password&gt; --&gt;</span>
+<span class="w">    </span><span class="nt">&lt;host&gt;</span>127.0.0.1<span class="nt">&lt;/host&gt;</span>
+<span class="w">    </span><span class="nt">&lt;port&gt;</span>7890<span class="nt">&lt;/port&gt;</span>
+<span class="w">    </span><span class="nt">&lt;nonProxyHosts&gt;</span>local.net|some.host.com<span class="nt">&lt;/nonProxyHosts&gt;</span>
+<span class="nt">&lt;/proxy&gt;</span>
+</pre></div>
+</div>
+<p>id：代理的名称（随便设，XYZ也行）</p>
+<p>active：表示该代理是否激活</p>
+<p>protocol：代理协议，这个不用改</p>
+<p>username：当代理需要认证时的用户名</p>
+<p>password：当代理需要认证时的密码</p>
+<p>host：代理的IP地址</p>
+<p>port：代理的端口号</p>
+<p>nonProxyHost：指定不需要使用代理的主机，可不设置。如果有多个，用 | 分隔</p>
+<p>（P.S. 如果代理不需要用户认证，username 和 password 两个节点可注释掉）</p>
+</section>
+<section id="id2">
+<h1>Maven设置使用国内仓库（阿里云）<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h1>
+<p>编辑setting.xml 文件，找到mirrors，添加：</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="w">     </span><span class="nt">&lt;mirror&gt;</span>
+<span class="w">      </span><span class="nt">&lt;id&gt;</span>alimaven<span class="nt">&lt;/id&gt;</span>
+<span class="w">      </span><span class="nt">&lt;mirrorOf&gt;</span>central<span class="nt">&lt;/mirrorOf&gt;</span>
+<span class="w">      </span><span class="nt">&lt;name&gt;</span>aliyun<span class="w"> </span>maven<span class="nt">&lt;/name&gt;</span>
+<span class="w">      </span><span class="nt">&lt;url&gt;</span>http://maven.aliyun.com/nexus/content/repositories/central/<span class="nt">&lt;/url&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/mirror&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="mavenrepository">
+<h1>Maven设置本地repository路径<a class="headerlink" href="#mavenrepository" title="Link to this heading">¶</a></h1>
+<p>找到localRepository：</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="nt">&lt;localRepository&gt;</span>D:\D\apache-maven-3.8.5\maven-repository<span class="nt">&lt;/localRepository&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="settings-xml">
+<h1>附：settings.xml的完整内容<a class="headerlink" href="#settings-xml" title="Link to this heading">¶</a></h1>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+
+<span class="cm">&lt;!--</span>
+<span class="cm">Licensed to the Apache Software Foundation (ASF) under one</span>
+<span class="cm">or more contributor license agreements.  See the NOTICE file</span>
+<span class="cm">distributed with this work for additional information</span>
+<span class="cm">regarding copyright ownership.  The ASF licenses this file</span>
+<span class="cm">to you under the Apache License, Version 2.0 (the</span>
+<span class="cm">&quot;License&quot;); you may not use this file except in compliance</span>
+<span class="cm">with the License.  You may obtain a copy of the License at</span>
+
+<span class="cm">    http://www.apache.org/licenses/LICENSE-2.0</span>
+
+<span class="cm">Unless required by applicable law or agreed to in writing,</span>
+<span class="cm">software distributed under the License is distributed on an</span>
+<span class="cm">&quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY</span>
+<span class="cm">KIND, either express or implied.  See the License for the</span>
+<span class="cm">specific language governing permissions and limitations</span>
+<span class="cm">under the License.</span>
+<span class="cm">--&gt;</span>
+
+<span class="cm">&lt;!--</span>
+<span class="cm"> | This is the configuration file for Maven. It can be specified at two levels:</span>
+<span class="cm"> |</span>
+<span class="cm"> |  1. User Level. This settings.xml file provides configuration for a single user,</span>
+<span class="cm"> |                 and is normally provided in ${user.home}/.m2/settings.xml.</span>
+<span class="cm"> |</span>
+<span class="cm"> |                 NOTE: This location can be overridden with the CLI option:</span>
+<span class="cm"> |</span>
+<span class="cm"> |                 -s /path/to/user/settings.xml</span>
+<span class="cm"> |</span>
+<span class="cm"> |  2. Global Level. This settings.xml file provides configuration for all Maven</span>
+<span class="cm"> |                 users on a machine (assuming they&#39;re all using the same Maven</span>
+<span class="cm"> |                 installation). It&#39;s normally provided in</span>
+<span class="cm"> |                 ${maven.conf}/settings.xml.</span>
+<span class="cm"> |</span>
+<span class="cm"> |                 NOTE: This location can be overridden with the CLI option:</span>
+<span class="cm"> |</span>
+<span class="cm"> |                 -gs /path/to/global/settings.xml</span>
+<span class="cm"> |</span>
+<span class="cm"> | The sections in this sample file are intended to give you a running start at</span>
+<span class="cm"> | getting the most out of your Maven installation. Where appropriate, the default</span>
+<span class="cm"> | values (values used when the setting is not specified) are provided.</span>
+<span class="cm"> |</span>
+<span class="cm"> |--&gt;</span>
+<span class="nt">&lt;settings</span><span class="w"> </span><span class="na">xmlns=</span><span class="s">&quot;http://maven.apache.org/SETTINGS/1.2.0&quot;</span>
+<span class="w">          </span><span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+<span class="w">          </span><span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://maven.apache.org/SETTINGS/1.2.0 https://maven.apache.org/xsd/settings-1.2.0.xsd&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="cm">&lt;!-- localRepository</span>
+<span class="cm">   | The path to the local repository maven will use to store artifacts.</span>
+<span class="cm">   |</span>
+<span class="cm">   | Default: ${user.home}/.m2/repository</span>
+<span class="cm">  &lt;localRepository&gt;/path/to/local/repo&lt;/localRepository&gt;</span>
+
+<span class="cm">  --&gt;</span>
+<span class="w">  </span><span class="nt">&lt;localRepository&gt;</span>D:\D\apache-maven-3.8.5\maven-repository<span class="nt">&lt;/localRepository&gt;</span>
+
+<span class="w">  </span><span class="cm">&lt;!-- interactiveMode</span>
+<span class="cm">   | This will determine whether maven prompts you when it needs input. If set to false,</span>
+<span class="cm">   | maven will use a sensible default value, perhaps based on some other setting, for</span>
+<span class="cm">   | the parameter in question.</span>
+<span class="cm">   |</span>
+<span class="cm">   | Default: true</span>
+<span class="cm">  &lt;interactiveMode&gt;true&lt;/interactiveMode&gt;</span>
+<span class="cm">  --&gt;</span>
+
+<span class="w">  </span><span class="cm">&lt;!-- offline</span>
+<span class="cm">   | Determines whether maven should attempt to connect to the network when executing a build.</span>
+<span class="cm">   | This will have an effect on artifact downloads, artifact deployment, and others.</span>
+<span class="cm">   |</span>
+<span class="cm">   | Default: false</span>
+<span class="cm">  &lt;offline&gt;false&lt;/offline&gt;</span>
+<span class="cm">  --&gt;</span>
+
+<span class="w">  </span><span class="cm">&lt;!-- pluginGroups</span>
+<span class="cm">   | This is a list of additional group identifiers that will be searched when resolving plugins by their prefix, i.e.</span>
+<span class="cm">   | when invoking a command line like &quot;mvn prefix:goal&quot;. Maven will automatically add the group identifiers</span>
+<span class="cm">   | &quot;org.apache.maven.plugins&quot; and &quot;org.codehaus.mojo&quot; if these are not already contained in the list.</span>
+<span class="cm">   |--&gt;</span>
+<span class="w">  </span><span class="nt">&lt;pluginGroups&gt;</span>
+<span class="w">    </span><span class="cm">&lt;!-- pluginGroup</span>
+<span class="cm">     | Specifies a further group identifier to use for plugin lookup.</span>
+<span class="cm">    &lt;pluginGroup&gt;com.your.plugins&lt;/pluginGroup&gt;</span>
+<span class="cm">    --&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/pluginGroups&gt;</span>
+
+<span class="w">  </span><span class="cm">&lt;!-- proxies</span>
+<span class="cm">   | This is a list of proxies which can be used on this machine to connect to the network.</span>
+<span class="cm">   | Unless otherwise specified (by system property or command-line switch), the first proxy</span>
+<span class="cm">   | specification in this list marked as active will be used.</span>
+<span class="cm">   |--&gt;</span>
+<span class="w">  </span><span class="nt">&lt;proxies&gt;</span>
+<span class="w">    </span><span class="cm">&lt;!-- proxy</span>
+<span class="cm">     | Specification for one proxy, to be used in connecting to the network.</span>
+<span class="cm">     |</span>
+<span class="cm">    &lt;proxy&gt;</span>
+<span class="cm">      &lt;id&gt;optional&lt;/id&gt;</span>
+<span class="cm">      &lt;active&gt;true&lt;/active&gt;</span>
+<span class="cm">      &lt;protocol&gt;http&lt;/protocol&gt;</span>
+<span class="cm">      &lt;username&gt;proxyuser&lt;/username&gt;</span>
+<span class="cm">      &lt;password&gt;proxypass&lt;/password&gt;</span>
+<span class="cm">      &lt;host&gt;proxy.host.net&lt;/host&gt;</span>
+<span class="cm">      &lt;port&gt;80&lt;/port&gt;</span>
+<span class="cm">      &lt;nonProxyHosts&gt;local.net|some.host.com&lt;/nonProxyHosts&gt;</span>
+<span class="cm">    &lt;/proxy&gt;</span>
+<span class="cm">    --&gt;</span>
+
+<span class="nt">&lt;proxy&gt;</span>
+<span class="w">    </span><span class="nt">&lt;id&gt;</span>optional<span class="nt">&lt;/id&gt;</span>
+<span class="w">    </span><span class="nt">&lt;active&gt;</span>true<span class="nt">&lt;/active&gt;</span>
+<span class="w">    </span><span class="nt">&lt;protocol&gt;</span>http<span class="nt">&lt;/protocol&gt;</span>
+<span class="w">    </span><span class="cm">&lt;!--  &lt;username&gt;proxyuser&lt;/username&gt;</span>
+<span class="cm">    &lt;password&gt;proxypass&lt;/password&gt; --&gt;</span>
+<span class="w">    </span><span class="nt">&lt;host&gt;</span>127.0.0.1<span class="nt">&lt;/host&gt;</span>
+<span class="w">    </span><span class="nt">&lt;port&gt;</span>7890<span class="nt">&lt;/port&gt;</span>
+<span class="w">    </span><span class="nt">&lt;nonProxyHosts&gt;</span>local.net|some.host.com<span class="nt">&lt;/nonProxyHosts&gt;</span>
+<span class="nt">&lt;/proxy&gt;</span>
+
+<span class="nt">&lt;proxy&gt;</span>
+<span class="w">    </span><span class="nt">&lt;id&gt;</span>optional<span class="nt">&lt;/id&gt;</span>
+<span class="w">    </span><span class="nt">&lt;active&gt;</span>true<span class="nt">&lt;/active&gt;</span>
+<span class="w">    </span><span class="nt">&lt;protocol&gt;</span>https<span class="nt">&lt;/protocol&gt;</span>
+<span class="w">    </span><span class="cm">&lt;!--  &lt;username&gt;proxyuser&lt;/username&gt;</span>
+<span class="cm">    &lt;password&gt;proxypass&lt;/password&gt; --&gt;</span>
+<span class="w">    </span><span class="nt">&lt;host&gt;</span>127.0.0.1<span class="nt">&lt;/host&gt;</span>
+<span class="w">    </span><span class="nt">&lt;port&gt;</span>7890<span class="nt">&lt;/port&gt;</span>
+<span class="w">    </span><span class="nt">&lt;nonProxyHosts&gt;</span>local.net|some.host.com<span class="nt">&lt;/nonProxyHosts&gt;</span>
+<span class="nt">&lt;/proxy&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/proxies&gt;</span>
+
+<span class="w">  </span><span class="cm">&lt;!-- servers</span>
+<span class="cm">   | This is a list of authentication profiles, keyed by the server-id used within the system.</span>
+<span class="cm">   | Authentication profiles can be used whenever maven must make a connection to a remote server.</span>
+<span class="cm">   |--&gt;</span>
+<span class="w">  </span><span class="nt">&lt;servers&gt;</span>
+<span class="w">    </span><span class="cm">&lt;!-- server</span>
+<span class="cm">     | Specifies the authentication information to use when connecting to a particular server, identified by</span>
+<span class="cm">     | a unique name within the system (referred to by the &#39;id&#39; attribute below).</span>
+<span class="cm">     |</span>
+<span class="cm">     | NOTE: You should either specify username/password OR privateKey/passphrase, since these pairings are</span>
+<span class="cm">     |       used together.</span>
+<span class="cm">     |</span>
+<span class="cm">    &lt;server&gt;</span>
+<span class="cm">      &lt;id&gt;deploymentRepo&lt;/id&gt;</span>
+<span class="cm">      &lt;username&gt;repouser&lt;/username&gt;</span>
+<span class="cm">      &lt;password&gt;repopwd&lt;/password&gt;</span>
+<span class="cm">    &lt;/server&gt;</span>
+<span class="cm">    --&gt;</span>
+
+<span class="w">    </span><span class="cm">&lt;!-- Another sample, using keys to authenticate.</span>
+<span class="cm">    &lt;server&gt;</span>
+<span class="cm">      &lt;id&gt;siteServer&lt;/id&gt;</span>
+<span class="cm">      &lt;privateKey&gt;/path/to/private/key&lt;/privateKey&gt;</span>
+<span class="cm">      &lt;passphrase&gt;optional; leave empty if not used.&lt;/passphrase&gt;</span>
+<span class="cm">    &lt;/server&gt;</span>
+<span class="cm">    --&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/servers&gt;</span>
+
+<span class="w">  </span><span class="cm">&lt;!-- mirrors</span>
+<span class="cm">   | This is a list of mirrors to be used in downloading artifacts from remote repositories.</span>
+<span class="cm">   |</span>
+<span class="cm">   | It works like this: a POM may declare a repository to use in resolving certain artifacts.</span>
+<span class="cm">   | However, this repository may have problems with heavy traffic at times, so people have mirrored</span>
+<span class="cm">   | it to several places.</span>
+<span class="cm">   |</span>
+<span class="cm">   | That repository definition will have a unique id, so we can create a mirror reference for that</span>
+<span class="cm">   | repository, to be used as an alternate download site. The mirror site will be the preferred</span>
+<span class="cm">   | server for that repository.</span>
+<span class="cm">   |--&gt;</span>
+<span class="w">  </span><span class="nt">&lt;mirrors&gt;</span>
+<span class="w">    </span><span class="cm">&lt;!-- mirror</span>
+<span class="cm">     | Specifies a repository mirror site to use instead of a given repository. The repository that</span>
+<span class="cm">     | this mirror serves has an ID that matches the mirrorOf element of this mirror. IDs are used</span>
+<span class="cm">     | for inheritance and direct lookup purposes, and must be unique across the set of mirrors.</span>
+<span class="cm">     |</span>
+<span class="cm">    &lt;mirror&gt;</span>
+<span class="cm">      &lt;id&gt;mirrorId&lt;/id&gt;</span>
+<span class="cm">      &lt;mirrorOf&gt;repositoryId&lt;/mirrorOf&gt;</span>
+<span class="cm">      &lt;name&gt;Human Readable Name for this Mirror.&lt;/name&gt;</span>
+<span class="cm">      &lt;url&gt;http://my.repository.com/repo/path&lt;/url&gt;</span>
+<span class="cm">    &lt;/mirror&gt;</span>
+<span class="cm">     --&gt;</span>
+<span class="w">     </span><span class="nt">&lt;mirror&gt;</span>
+<span class="w">      </span><span class="nt">&lt;id&gt;</span>alimaven<span class="nt">&lt;/id&gt;</span>
+<span class="w">      </span><span class="nt">&lt;mirrorOf&gt;</span>central<span class="nt">&lt;/mirrorOf&gt;</span>
+<span class="w">      </span><span class="nt">&lt;name&gt;</span>aliyun<span class="w"> </span>maven<span class="nt">&lt;/name&gt;</span>
+<span class="w">      </span><span class="nt">&lt;url&gt;</span>http://maven.aliyun.com/nexus/content/repositories/central/<span class="nt">&lt;/url&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/mirror&gt;</span>
+<span class="w">    </span><span class="nt">&lt;mirror&gt;</span>
+<span class="w">      </span><span class="nt">&lt;id&gt;</span>maven-default-http-blocker<span class="nt">&lt;/id&gt;</span>
+<span class="w">      </span><span class="nt">&lt;mirrorOf&gt;</span>external:http:*<span class="nt">&lt;/mirrorOf&gt;</span>
+<span class="w">      </span><span class="nt">&lt;name&gt;</span>Pseudo<span class="w"> </span>repository<span class="w"> </span>to<span class="w"> </span>mirror<span class="w"> </span>external<span class="w"> </span>repositories<span class="w"> </span>initially<span class="w"> </span>using<span class="w"> </span>HTTP.<span class="nt">&lt;/name&gt;</span>
+<span class="w">      </span><span class="nt">&lt;url&gt;</span>http://0.0.0.0/<span class="nt">&lt;/url&gt;</span>
+<span class="w">      </span><span class="nt">&lt;blocked&gt;</span>true<span class="nt">&lt;/blocked&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/mirror&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/mirrors&gt;</span>
+
+<span class="w">  </span><span class="cm">&lt;!-- profiles</span>
+<span class="cm">   | This is a list of profiles which can be activated in a variety of ways, and which can modify</span>
+<span class="cm">   | the build process. Profiles provided in the settings.xml are intended to provide local machine-</span>
+<span class="cm">   | specific paths and repository locations which allow the build to work in the local environment.</span>
+<span class="cm">   |</span>
+<span class="cm">   | For example, if you have an integration testing plugin - like cactus - that needs to know where</span>
+<span class="cm">   | your Tomcat instance is installed, you can provide a variable here such that the variable is</span>
+<span class="cm">   | dereferenced during the build process to configure the cactus plugin.</span>
+<span class="cm">   |</span>
+<span class="cm">   | As noted above, profiles can be activated in a variety of ways. One way - the activeProfiles</span>
+<span class="cm">   | section of this document (settings.xml) - will be discussed later. Another way essentially</span>
+<span class="cm">   | relies on the detection of a system property, either matching a particular value for the property,</span>
+<span class="cm">   | or merely testing its existence. Profiles can also be activated by JDK version prefix, where a</span>
+<span class="cm">   | value of &#39;1.4&#39; might activate a profile when the build is executed on a JDK version of &#39;1.4.2_07&#39;.</span>
+<span class="cm">   | Finally, the list of active profiles can be specified directly from the command line.</span>
+<span class="cm">   |</span>
+<span class="cm">   | NOTE: For profiles defined in the settings.xml, you are restricted to specifying only artifact</span>
+<span class="cm">   |       repositories, plugin repositories, and free-form properties to be used as configuration</span>
+<span class="cm">   |       variables for plugins in the POM.</span>
+<span class="cm">   |</span>
+<span class="cm">   |--&gt;</span>
+<span class="w">  </span><span class="nt">&lt;profiles&gt;</span>
+<span class="w">    </span><span class="cm">&lt;!-- profile</span>
+<span class="cm">     | Specifies a set of introductions to the build process, to be activated using one or more of the</span>
+<span class="cm">     | mechanisms described above. For inheritance purposes, and to activate profiles via &lt;activatedProfiles/&gt;</span>
+<span class="cm">     | or the command line, profiles have to have an ID that is unique.</span>
+<span class="cm">     |</span>
+<span class="cm">     | An encouraged best practice for profile identification is to use a consistent naming convention</span>
+<span class="cm">     | for profiles, such as &#39;env-dev&#39;, &#39;env-test&#39;, &#39;env-production&#39;, &#39;user-jdcasey&#39;, &#39;user-brett&#39;, etc.</span>
+<span class="cm">     | This will make it more intuitive to understand what the set of introduced profiles is attempting</span>
+<span class="cm">     | to accomplish, particularly when you only have a list of profile id&#39;s for debug.</span>
+<span class="cm">     |</span>
+<span class="cm">     | This profile example uses the JDK version to trigger activation, and provides a JDK-specific repo.</span>
+<span class="cm">    &lt;profile&gt;</span>
+<span class="cm">      &lt;id&gt;jdk-1.4&lt;/id&gt;</span>
+
+<span class="cm">      &lt;activation&gt;</span>
+<span class="cm">        &lt;jdk&gt;1.4&lt;/jdk&gt;</span>
+<span class="cm">      &lt;/activation&gt;</span>
+
+<span class="cm">      &lt;repositories&gt;</span>
+<span class="cm">        &lt;repository&gt;</span>
+<span class="cm">          &lt;id&gt;jdk14&lt;/id&gt;</span>
+<span class="cm">          &lt;name&gt;Repository for JDK 1.4 builds&lt;/name&gt;</span>
+<span class="cm">          &lt;url&gt;http://www.myhost.com/maven/jdk14&lt;/url&gt;</span>
+<span class="cm">          &lt;layout&gt;default&lt;/layout&gt;</span>
+<span class="cm">          &lt;snapshotPolicy&gt;always&lt;/snapshotPolicy&gt;</span>
+<span class="cm">        &lt;/repository&gt;</span>
+<span class="cm">      &lt;/repositories&gt;</span>
+<span class="cm">    &lt;/profile&gt;</span>
+<span class="cm">    --&gt;</span>
+
+<span class="w">    </span><span class="cm">&lt;!--</span>
+<span class="cm">     | Here is another profile, activated by the system property &#39;target-env&#39; with a value of &#39;dev&#39;,</span>
+<span class="cm">     | which provides a specific path to the Tomcat instance. To use this, your plugin configuration</span>
+<span class="cm">     | might hypothetically look like:</span>
+<span class="cm">     |</span>
+<span class="cm">     | ...</span>
+<span class="cm">     | &lt;plugin&gt;</span>
+<span class="cm">     |   &lt;groupId&gt;org.myco.myplugins&lt;/groupId&gt;</span>
+<span class="cm">     |   &lt;artifactId&gt;myplugin&lt;/artifactId&gt;</span>
+<span class="cm">     |</span>
+<span class="cm">     |   &lt;configuration&gt;</span>
+<span class="cm">     |     &lt;tomcatLocation&gt;${tomcatPath}&lt;/tomcatLocation&gt;</span>
+<span class="cm">     |   &lt;/configuration&gt;</span>
+<span class="cm">     | &lt;/plugin&gt;</span>
+<span class="cm">     | ...</span>
+<span class="cm">     |</span>
+<span class="cm">     | NOTE: If you just wanted to inject this configuration whenever someone set &#39;target-env&#39; to</span>
+<span class="cm">     |       anything, you could just leave off the &lt;value/&gt; inside the activation-property.</span>
+<span class="cm">     |</span>
+<span class="cm">    &lt;profile&gt;</span>
+<span class="cm">      &lt;id&gt;env-dev&lt;/id&gt;</span>
+
+<span class="cm">      &lt;activation&gt;</span>
+<span class="cm">        &lt;property&gt;</span>
+<span class="cm">          &lt;name&gt;target-env&lt;/name&gt;</span>
+<span class="cm">          &lt;value&gt;dev&lt;/value&gt;</span>
+<span class="cm">        &lt;/property&gt;</span>
+<span class="cm">      &lt;/activation&gt;</span>
+
+<span class="cm">      &lt;properties&gt;</span>
+<span class="cm">        &lt;tomcatPath&gt;/path/to/tomcat/instance&lt;/tomcatPath&gt;</span>
+<span class="cm">      &lt;/properties&gt;</span>
+<span class="cm">    &lt;/profile&gt;</span>
+<span class="cm">    --&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/profiles&gt;</span>
+
+<span class="w">  </span><span class="cm">&lt;!-- activeProfiles</span>
+<span class="cm">   | List of profiles that are active for all builds.</span>
+<span class="cm">   |</span>
+<span class="cm">  &lt;activeProfiles&gt;</span>
+<span class="cm">    &lt;activeProfile&gt;alwaysActiveProfile&lt;/activeProfile&gt;</span>
+<span class="cm">    &lt;activeProfile&gt;anotherAlwaysActiveProfile&lt;/activeProfile&gt;</span>
+<span class="cm">  &lt;/activeProfiles&gt;</span>
+<span class="cm">  --&gt;</span>
+<span class="nt">&lt;/settings&gt;</span>
+</pre></div>
+</div>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">目录</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Maven安装</a></li>
+<li><a class="reference internal" href="#vscode-maven">VSCode Maven设置</a></li>
+<li><a class="reference internal" href="#id1">Maven代理设置</a></li>
+<li><a class="reference internal" href="#id2">Maven设置使用国内仓库（阿里云）</a></li>
+<li><a class="reference internal" href="#mavenrepository">Maven设置本地repository路径</a></li>
+<li><a class="reference internal" href="#settings-xml">附：settings.xml的完整内容</a></li>
+</ul>
+
+  </div>
+  <div>
+    <h4>上一主题</h4>
+    <p class="topless"><a href="Git.html"
+                          title="上一章">git 设置和取消代理</a></p>
+  </div>
+  <div>
+    <h4>下一主题</h4>
+    <p class="topless"><a href="Java.html"
+                          title="下一章">（安装）“Jvav”——从安装到放弃</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>本页</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/Maven.md.txt"
+            rel="nofollow">显示源代码</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">快速搜索</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="提交" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>导航</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="总索引"
+             >索引</a></li>
+        <li class="right" >
+          <a href="Java.html" title="（安装）“Jvav”——从安装到放弃"
+             >下一页</a> |</li>
+        <li class="right" >
+          <a href="Git.html" title="git 设置和取消代理"
+             >上一页</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">个人笔记教程 1.0.0 文档</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Maven安装</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; 版权所有 2024, georgeghl.
+      由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7创建。
+    </div>
+  </body>
+</html>

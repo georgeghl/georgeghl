@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>kms激活OFFICE &#8212; 个人笔记教程 1.0.0 文档</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/classic.css?v=def86cc0" />
+    
+    <script src="_static/documentation_options.js?v=34088549"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/translations.js?v=beaddf03"></script>
+    
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" />
+    <link rel="next" title="HP惠普" href="Printer.html" />
+    <link rel="prev" title="转h265" href="ffmpeg.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>导航</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="总索引"
+             accesskey="I">索引</a></li>
+        <li class="right" >
+          <a href="Printer.html" title="HP惠普"
+             accesskey="N">下一页</a> |</li>
+        <li class="right" >
+          <a href="ffmpeg.html" title="转h265"
+             accesskey="P">上一页</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">个人笔记教程 1.0.0 文档</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">kms激活OFFICE</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="kmsoffice">
+<h1>kms激活OFFICE<a class="headerlink" href="#kmsoffice" title="Link to this heading">¶</a></h1>
+<p>首先你的OFFICE必须是VOL版本，否则无法激活。 找到你的office安装目录，比如</p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;C:\Program Files (x86)\Microsoft Office\Office16&quot;</span>
+</pre></div>
+</div>
+<p>64位的就是</p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;C:\Program Files\Microsoft Office\Office16&quot;</span>
+</pre></div>
+</div>
+<p>office16是office2016，office15就是2013，office14就是2010.</p>
+<p>然后目录对的话，该目录下面应该有个OSPP.VBS。</p>
+<p>接下来我们就cd到这个目录下面，例如：</p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="c">#32位执行：</span>
+<span class="nb">cd </span><span class="s2">&quot;C:\Program Files (x86)\Microsoft Office\Office16&quot;</span>
+<span class="c">#64位执行：</span>
+<span class="nb">cd </span><span class="s2">&quot;C:\Program Files\Microsoft Office\Office16&quot;</span>
+</pre></div>
+</div>
+<p>然后执行注册kms服务器地址：</p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">cscript</span> <span class="n">ospp</span><span class="p">.</span><span class="n">vbs</span> <span class="p">/</span><span class="n">sethst</span><span class="p">:</span><span class="n">101</span><span class="p">.</span><span class="n">34</span><span class="p">.</span><span class="n">236</span><span class="p">.</span><span class="n">228</span>
+</pre></div>
+</div>
+<p>/sethst参数就是指定kms服务器地址。</p>
+<p>一般ospp.vbs可以拖进去cmd窗口，所以也可以这么弄：</p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="c">#32位执行：</span>
+<span class="n">cscript</span> <span class="s2">&quot;C:\Program Files (x86)\Microsoft Office\Office16\OSPP.VBS&quot;</span> <span class="p">/</span><span class="n">sethst</span><span class="p">:</span><span class="n">101</span><span class="p">.</span><span class="n">34</span><span class="p">.</span><span class="n">236</span><span class="p">.</span><span class="n">228</span>
+<span class="c">#64位执行：</span>
+<span class="n">cscript</span> <span class="s2">&quot;C:\Program Files\Microsoft Office\Office16\OSPP.VBS&quot;</span> <span class="p">/</span><span class="n">sethst</span><span class="p">:</span><span class="n">101</span><span class="p">.</span><span class="n">34</span><span class="p">.</span><span class="n">236</span><span class="p">.</span><span class="n">228</span>
+</pre></div>
+</div>
+<p>一般来说，“一句命令已经完成了”，但一般office不会马上连接kms服务器进行激活，所以我们额外补充一条手动激活命令：</p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">cscript</span> <span class="n">ospp</span><span class="p">.</span><span class="n">vbs</span> <span class="p">/</span><span class="n">act</span>
+</pre></div>
+</div>
+<p>如果提示看到successful的字样，那么就是激活成功了，重新打开office就好。</p>
+<p>##　如果遇到报错，请检查：</p>
+<blockquote>
+<div><ol class="simple">
+<li><p>你的系统/OFFICE是否是批量VL版本</p></li>
+<li><p>是否以管理员权限运行CMD</p></li>
+<li><p>你的系统/OFFICE是否修改过KEY/未安装GVLK KEY</p></li>
+<li><p>检查你的网络连接</p></li>
+<li><p>服务器繁忙，多试试（点击检查KMS服务是否可用）</p></li>
+<li><p>根据出错代码自己搜索出错原因</p></li>
+</ol>
+</div></blockquote>
+<section id="office-kms-gvlk-key">
+<h2>Office KMS 激活密钥（GVLK Key）<a class="headerlink" href="#office-kms-gvlk-key" title="Link to this heading">¶</a></h2>
+<section id="office-2010">
+<h3>Office 2010<a class="headerlink" href="#office-2010" title="Link to this heading">¶</a></h3>
+<p>https://learn.microsoft.com/zh-cn/previous-versions/office/office-2010/ee624355(v=office.14)?redirectedfrom=MSDN</p>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th><strong>套件</strong></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>Office Professional Plus 2010</td>
+<td>VYBBJ-TRJPB-QFQRF-QFT4D-H3GVB</td>
+</tr>
+<tr>
+<td></td>
+<td>Office Standard 2010</td>
+<td>V7QKV-4XVVR-XYV4D-F7DFM-8R6BM</td>
+</tr>
+<tr>
+<td></td>
+<td>Office Home and Business 2010</td>
+<td>D6QFG-VBYP2-XQHM7-J97RH-VVRCK</td>
+</tr>
+<tr>
+<td><strong>独立产品</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Access 2010</td>
+<td>V7Y44-9T38C-R2VJK-666HK-T7DDX</td>
+</tr>
+<tr>
+<td></td>
+<td>Excel 2010</td>
+<td>H62QG-HXVKF-PP4HP-66KMR-CW9BM</td>
+</tr>
+<tr>
+<td></td>
+<td>SharePoint Workspace 2010</td>
+<td>QYYW6-QP4CB-MBV6G-HYMCJ-4T3J4</td>
+</tr>
+<tr>
+<td></td>
+<td>InfoPath 2010</td>
+<td>K96W8-67RPQ-62T9Y-J8FQJ-BT37T</td>
+</tr>
+<tr>
+<td></td>
+<td>OneNote 2010</td>
+<td>Q4Y4M-RHWJM-PY37F-MTKWH-D3XHX</td>
+</tr>
+<tr>
+<td></td>
+<td>Outlook 2010</td>
+<td>7YDC2-CWM8M-RRTJC-8MDVC-X3DWQ</td>
+</tr>
+<tr>
+<td></td>
+<td>PowerPoint 2010</td>
+<td>RC8FX-88JRY-3PF7C-X8P67-P4VTT</td>
+</tr>
+<tr>
+<td></td>
+<td>Project Professional 2010</td>
+<td>YGX6F-PGV49-PGW3J-9BTGG-VHKC6</td>
+</tr>
+<tr>
+<td></td>
+<td>Project Standard 2010</td>
+<td>4HP3K-88W3F-W2K3D-6677X-F9PGB</td>
+</tr>
+<tr>
+<td></td>
+<td>Publisher 2010</td>
+<td>BFK7F-9MYHM-V68C7-DRQ66-83YTP</td>
+</tr>
+<tr>
+<td></td>
+<td>Word 2010</td>
+<td>HVHB3-C6FV7-KQX9W-YQG79-CRY7T</td>
+</tr>
+<tr>
+<td><strong>Visio</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Visio Premium 2010</td>
+<td>D9DWC-HPYVV-JGF4P-BTWQB-WX8BJ</td>
+</tr>
+<tr>
+<td></td>
+<td>Visio Professional 2010</td>
+<td>7MCW8-VRQVK-G677T-PDJCM-Q8TCP</td>
+</tr>
+<tr>
+<td></td>
+<td>Visio Standard 2010</td>
+<td>767HD-QGMWX-8QTDB-9G3R2-KHFGJ</td>
+</tr>
+</tbody>
+</table></section>
+<section id="office-2013">
+<h3>Office 2013<a class="headerlink" href="#office-2013" title="Link to this heading">¶</a></h3>
+<p>https://learn.microsoft.com/zh-cn/previous-versions/office/dn385360(v=office.15)?redirectedfrom=MSDN</p>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th style="text-align: left;">产品</th>
+<th style="text-align: left;">GVLK</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Office 2013 Professional Plus</td>
+<td style="text-align: left;">YC7DK-G2NP3-2QQC3-J6H88-GVGXT</td>
+</tr>
+<tr>
+<td style="text-align: left;">Office 2013 Standard</td>
+<td style="text-align: left;">KBKQT-2NMXY-JJWGP-M62JB-92CD4</td>
+</tr>
+<tr>
+<td style="text-align: left;">Project 2013 Professional</td>
+<td style="text-align: left;">FN8TT-7WMH6-2D4X9-M337T-2342K</td>
+</tr>
+<tr>
+<td style="text-align: left;">Project 2013 Standard</td>
+<td style="text-align: left;">6NTH3-CW976-3G3Y2-JK3TX-8QHTT</td>
+</tr>
+<tr>
+<td style="text-align: left;">Visio 2013 Professional</td>
+<td style="text-align: left;">C2FG9-N6J68-H8BTJ-BW3QX-RM3B3</td>
+</tr>
+<tr>
+<td style="text-align: left;">Visio 2013 Standard</td>
+<td style="text-align: left;">J484Y-4NKBF-W2HMG-DBMJC-PGWR7</td>
+</tr>
+<tr>
+<td style="text-align: left;">Access 2013</td>
+<td style="text-align: left;">NG2JY-H4JBT-HQXYP-78QH9-4JM2D</td>
+</tr>
+<tr>
+<td style="text-align: left;">Excel 2013</td>
+<td style="text-align: left;">VGPNG-Y7HQW-9RHP7-TKPV3-BG7GB</td>
+</tr>
+<tr>
+<td style="text-align: left;">InfoPath 2013</td>
+<td style="text-align: left;">DKT8B-N7VXH-D963P-Q4PHY-F8894</td>
+</tr>
+<tr>
+<td style="text-align: left;">Lync 2013</td>
+<td style="text-align: left;">2MG3G-3BNTT-3MFW9-KDQW3-TCK7R</td>
+</tr>
+<tr>
+<td style="text-align: left;">OneNote 2013</td>
+<td style="text-align: left;">TGN6P-8MMBC-37P2F-XHXXK-P34VW</td>
+</tr>
+<tr>
+<td style="text-align: left;">Outlook 2013</td>
+<td style="text-align: left;">QPN8Q-BJBTJ-334K3-93TGY-2PMBT</td>
+</tr>
+<tr>
+<td style="text-align: left;">PowerPoint 2013</td>
+<td style="text-align: left;">4NT99-8RJFH-Q2VDH-KYG2C-4RD4F</td>
+</tr>
+<tr>
+<td style="text-align: left;">Publisher 2013</td>
+<td style="text-align: left;">PN2WF-29XG2-T9HJ7-JQPJR-FCXK4</td>
+</tr>
+<tr>
+<td style="text-align: left;">Word 2013</td>
+<td style="text-align: left;">6Q7VD-NX8JD-WJ2VH-88V73-4GBJ7</td>
+</tr>
+</tbody>
+</table></section>
+<section id="office-2016">
+<h3>Office 2016<a class="headerlink" href="#office-2016" title="Link to this heading">¶</a></h3>
+<p>https://learn.microsoft.com/zh-cn/deployoffice/vlactivation/gvlks</p>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th style="text-align: left;"><strong>Product</strong></th>
+<th style="text-align: left;"><strong>GVLK</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Office 专业增强版 2016</td>
+<td style="text-align: left;">XQNVK-8JYDB-WJ9W3-YJ8YR-WFG99</td>
+</tr>
+<tr>
+<td style="text-align: left;">Office Standard 2016</td>
+<td style="text-align: left;">JNRGM-WHDWX-FJJG3-K47QV-DRTFM</td>
+</tr>
+<tr>
+<td style="text-align: left;">Project Professional 2016</td>
+<td style="text-align: left;">YG9NW-3K39V-2T3HJ-93F3Q-G83KT</td>
+</tr>
+<tr>
+<td style="text-align: left;">Project Standard 2016</td>
+<td style="text-align: left;">GNFHQ-F6YQM-KQDGJ-327XX-KQBVC</td>
+</tr>
+<tr>
+<td style="text-align: left;">Visio Professional 2016</td>
+<td style="text-align: left;">PD3PC-RHNGV-FXJ29-8JK7D-RJRJK</td>
+</tr>
+<tr>
+<td style="text-align: left;">Visio Standard 2016</td>
+<td style="text-align: left;">7WHWN-4T7MP-G96JF-G33KR-W8GF4</td>
+</tr>
+<tr>
+<td style="text-align: left;">Access 2016</td>
+<td style="text-align: left;">GNH9Y-D2J4T-FJHGG-QRVH7-QPFDW</td>
+</tr>
+<tr>
+<td style="text-align: left;">Excel 2016</td>
+<td style="text-align: left;">9C2PK-NWTVB-JMPW8-BFT28-7FTBF</td>
+</tr>
+<tr>
+<td style="text-align: left;">OneNote 2016</td>
+<td style="text-align: left;">DR92N-9HTF2-97XKM-XW2WJ-XW3J6</td>
+</tr>
+<tr>
+<td style="text-align: left;">Outlook 2016</td>
+<td style="text-align: left;">R69KK-NTPKF-7M3Q4-QYBHW-6MT9B</td>
+</tr>
+<tr>
+<td style="text-align: left;">PowerPoint 2016</td>
+<td style="text-align: left;">J7MQP-HNJ4Y-WJ7YM-PFYGF-BY6C6</td>
+</tr>
+<tr>
+<td style="text-align: left;">Publisher 2016</td>
+<td style="text-align: left;">F47MM-N3XJP-TQXJ9-BP99D-8 837 K</td>
+</tr>
+<tr>
+<td style="text-align: left;">Skype for Business 2016</td>
+<td style="text-align: left;">869NQ-FJ69K-466HW-QYCP2-DDBV6</td>
+</tr>
+<tr>
+<td style="text-align: left;">Word 2016</td>
+<td style="text-align: left;">WXY84-JN2Q9-RBCCQ-3Q3J3-3PFJ6</td>
+</tr>
+</tbody>
+</table></section>
+<section id="office-2019">
+<h3>Office 2019<a class="headerlink" href="#office-2019" title="Link to this heading">¶</a></h3>
+<p>https://learn.microsoft.com/zh-cn/deployoffice/vlactivation/gvlks</p>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th style="text-align: left;"><strong>Product</strong></th>
+<th style="text-align: left;"><strong>GVLK</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Office 专业增强版 2019</td>
+<td style="text-align: left;">NMMKJ-6RK4F-KMJVX-8D9MJ-6MWKP</td>
+</tr>
+<tr>
+<td style="text-align: left;">Office 标准版 2019</td>
+<td style="text-align: left;">6NWWJ-YQWMR-QKGCB-6TMB3-9D9HK</td>
+</tr>
+<tr>
+<td style="text-align: left;">Project 专业版 2019</td>
+<td style="text-align: left;">B4NPR-3FKK7-T2MBV-FRQ4W-PKD2B</td>
+</tr>
+<tr>
+<td style="text-align: left;">Project 标准版 2019</td>
+<td style="text-align: left;">C4F7P-NCP8C-6CQPT-MQHV9-JXD2M</td>
+</tr>
+<tr>
+<td style="text-align: left;">Visio 专业版 2019</td>
+<td style="text-align: left;">9BGNQ-K37YR-RQHF2-38RQ3-7VCBB</td>
+</tr>
+<tr>
+<td style="text-align: left;">Visio 标准版 2019</td>
+<td style="text-align: left;">7TQNQ-K3YQQ-3PFH7-CCPPM-X4VQ2</td>
+</tr>
+<tr>
+<td style="text-align: left;">Access 2019</td>
+<td style="text-align: left;">9N9PT-27V4Y-VJ2PD-YXFMF-YTFQT</td>
+</tr>
+<tr>
+<td style="text-align: left;">Excel 2019</td>
+<td style="text-align: left;">TMJWT-YYNMB-3BKTF-644FC-RVXBD</td>
+</tr>
+<tr>
+<td style="text-align: left;">Outlook 2019</td>
+<td style="text-align: left;">7HD7K-N4PVK-BHBCQ-YWQRW-XW4VK</td>
+</tr>
+<tr>
+<td style="text-align: left;">PowerPoint 2019</td>
+<td style="text-align: left;">RRNCX-C64HY-W2MM7-MCH9G-TJHMQ</td>
+</tr>
+<tr>
+<td style="text-align: left;">Publisher 2019</td>
+<td style="text-align: left;">G2KWX-3NW6P-PY93R-JXK2T-C9Y9V</td>
+</tr>
+<tr>
+<td style="text-align: left;">Skype for Business 2019</td>
+<td style="text-align: left;">NCJ33-JHBBY-HTK98-MYCV8-HMKHJ</td>
+</tr>
+<tr>
+<td style="text-align: left;">Word 2019</td>
+<td style="text-align: left;">PBX3G-NWMT6-Q7XBW-PYJGG-WXD33</td>
+</tr>
+</tbody>
+</table></section>
+<section id="office-2021">
+<h3>Office 2021<a class="headerlink" href="#office-2021" title="Link to this heading">¶</a></h3>
+<p>https://learn.microsoft.com/zh-cn/deployoffice/vlactivation/gvlks</p>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th style="text-align: left;"><strong>Product</strong></th>
+<th style="text-align: left;"><strong>GVLK</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Office LTSC 专业增强版 2021</td>
+<td style="text-align: left;">FXYTK-NJJ8C-GB6DW-3DYQT-6F7TH</td>
+</tr>
+<tr>
+<td style="text-align: left;">Office LTSC 标准版 2021</td>
+<td style="text-align: left;">KDX7X-BNVR8-TXXGX-4Q7Y8-78VT3</td>
+</tr>
+<tr>
+<td style="text-align: left;">Project Professional 2021</td>
+<td style="text-align: left;">FTNWT-C6WBT-8HMGF-K9PRX-QV9H8</td>
+</tr>
+<tr>
+<td style="text-align: left;">Project Standard 2021</td>
+<td style="text-align: left;">J2JDC-NJCYY-9RGQ4-YXWMH-T3D4T</td>
+</tr>
+<tr>
+<td style="text-align: left;">Visio LTSC Professional 2021</td>
+<td style="text-align: left;">KNH8D-FGHT4-T8RK3-CTDYJ-K2HT4</td>
+</tr>
+<tr>
+<td style="text-align: left;">Visio LTSC Standard 2021</td>
+<td style="text-align: left;">MJVNY-BYWPY-CWV6J-2RKRT-4M8QG</td>
+</tr>
+<tr>
+<td style="text-align: left;">Access LTSC 2021</td>
+<td style="text-align: left;">WM8YG-YNGDD-4JHDC-PG3F4-FC4T4</td>
+</tr>
+<tr>
+<td style="text-align: left;">Excel LTSC 2021</td>
+<td style="text-align: left;">NWG3X-87C9K-TC7YY-BC2G7-G6RVC</td>
+</tr>
+<tr>
+<td style="text-align: left;">Outlook LTSC 2021</td>
+<td style="text-align: left;">C9FM6-3N72F-HFJXB-TM3V9-T86R9</td>
+</tr>
+<tr>
+<td style="text-align: left;">PowerPoint LTSC 2021</td>
+<td style="text-align: left;">TY7XF-NFRBR-KJ44C-G83KF-GX27K</td>
+</tr>
+<tr>
+<td style="text-align: left;">Publisher LTSC 2021</td>
+<td style="text-align: left;">2MW9D-N4BXM-9VBPG-Q7W6M-KFBGQ</td>
+</tr>
+<tr>
+<td style="text-align: left;">Skype for Business LTSC 2021</td>
+<td style="text-align: left;">HWCXN-K3WBT-WJBKY-R8BD9-XK29P</td>
+</tr>
+<tr>
+<td style="text-align: left;">Word LTSC 2021</td>
+<td style="text-align: left;">TN8H9-M34D3-Y64V9-TR72V-X79KV</td>
+</tr>
+</tbody>
+</table></section>
+<section id="id1">
+<h3>汇总<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Office版本</th>
+<th>KMS激活序列号</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Office Professional Plus 2021</td>
+<td>FXYTK-NJJ8C-GB6DW-3DYQT-6F7TH</td>
+</tr>
+<tr>
+<td>Office Professional Plus 2019</td>
+<td>NMMKJ-6RK4F-KMJVX-8D9MJ-6MWKP</td>
+</tr>
+<tr>
+<td>Office Professional Plus 2016</td>
+<td>XQNVK-8JYDB-WJ9W3-YJ8YR-WFG99</td>
+</tr>
+<tr>
+<td>Office Professional Plus 2013</td>
+<td>YC7DK-G2NP3-2QQC3-J6H88-GVGXT</td>
+</tr>
+<tr>
+<td>Office Professional Plus 2010</td>
+<td>VYBBJ-TRJPB-QFQRF-QFT4D-H3GVB</td>
+</tr>
+</tbody>
+</table></section>
+</section>
+</section>
+<section id="word">
+<h1>Word<a class="headerlink" href="#word" title="Link to this heading">¶</a></h1>
+<section id="id2">
+<h2>保存文件时，提示需要登陆上载<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<p>关闭：OneDrive设置=》Office=》文件协助：通过与Office同步文件，与其他用户一起协作处理Office文件。</p>
+<img src="./img/1.webp" alt="v2-977f70b2f35b2a1536d575ff359fa7a0_720w" style="zoom: 67%;" /></section>
+</section>
+<section id="id3">
+<h1><strong>在 Word 中更改默认字体</strong><a class="headerlink" href="#id3" title="Link to this heading">¶</a></h1>
+<ol class="simple">
+<li><p>转到” 开始”， 然后选择”字体”对话框启动器 。</p></li>
+<li><p>选择想要使用的字体和大小。</p></li>
+<li><p>单击“ 设为默认值 ”。</p></li>
+<li><p>选择下列选项之一： 仅此文档 基于 Normal 模板的所有文档 。</p></li>
+<li><p>选择” 确定” 两次。</p></li>
+</ol>
+</section>
+<section id="word-pptpptword">
+<h1>【WORD+PPT】提取PPT中的文字内容到WORD<a class="headerlink" href="#word-pptpptword" title="Link to this heading">¶</a></h1>
+<p>老师发的课件有时候图片太多，打印时如果一张一张删除比较费时，因而选择将PPT中的文字全部提取，输出为Word。</p>
+<p><strong>操作[<a class="reference external" href="https://zhuanlan.zhihu.com/p/573434179#ref_1">1]</a>：</strong></p>
+<p>1、打开PPT文件，按【Fn+Alt + F11】键打开VBA编辑器。</p>
+<p>2、点击【工具】-【引用】，找到【Microsoft Word 16.0 Object Library】勾选添加。</p>
+<p>3、点击【插入】-【模块】，复制以下代码进编辑器。</p>
+<p>4、最后点击【运行】代码，或者按【F5】键，PPT就成功转换成Word了。</p>
+<div class="highlight-vb notranslate"><div class="highlight"><pre><span></span>Sub Main()
+On Error Resume Next
+Dim temp As New Word.Document, tmpShape As Shape, tmpSlide As Slide
+For Each tmpSlide In ActivePresentation.Slides
+For Each tmpShape In tmpSlide.Shapes
+temp.Range().Text = temp.Range() + tmpShape.TextFrame.TextRange.Text
+Next tmpShape
+Next tmpSlide
+temp.Application.Visible = True
+End Sub
+</pre></div>
+</div>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">目录</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">kms激活OFFICE</a><ul>
+<li><a class="reference internal" href="#office-kms-gvlk-key">Office KMS 激活密钥（GVLK Key）</a><ul>
+<li><a class="reference internal" href="#office-2010">Office 2010</a></li>
+<li><a class="reference internal" href="#office-2013">Office 2013</a></li>
+<li><a class="reference internal" href="#office-2016">Office 2016</a></li>
+<li><a class="reference internal" href="#office-2019">Office 2019</a></li>
+<li><a class="reference internal" href="#office-2021">Office 2021</a></li>
+<li><a class="reference internal" href="#id1">汇总</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#word">Word</a><ul>
+<li><a class="reference internal" href="#id2">保存文件时，提示需要登陆上载</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id3"><strong>在 Word 中更改默认字体</strong></a></li>
+<li><a class="reference internal" href="#word-pptpptword">【WORD+PPT】提取PPT中的文字内容到WORD</a></li>
+</ul>
+
+  </div>
+  <div>
+    <h4>上一主题</h4>
+    <p class="topless"><a href="ffmpeg.html"
+                          title="上一章">转h265</a></p>
+  </div>
+  <div>
+    <h4>下一主题</h4>
+    <p class="topless"><a href="Printer.html"
+                          title="下一章">HP惠普</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>本页</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/OfficeWPS.md.txt"
+            rel="nofollow">显示源代码</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">快速搜索</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="提交" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>导航</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="总索引"
+             >索引</a></li>
+        <li class="right" >
+          <a href="Printer.html" title="HP惠普"
+             >下一页</a> |</li>
+        <li class="right" >
+          <a href="ffmpeg.html" title="转h265"
+             >上一页</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">个人笔记教程 1.0.0 文档</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">kms激活OFFICE</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; 版权所有 2024, georgeghl.
+      由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7创建。
+    </div>
+  </body>
+</html>

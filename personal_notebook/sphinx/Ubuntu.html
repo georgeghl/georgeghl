@@ -1,0 +1,1849 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Ubuntu修改Grub默认启动Windows &#8212; 个人笔记教程 1.0.0 文档</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/classic.css?v=def86cc0" />
+    
+    <script src="_static/documentation_options.js?v=34088549"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/translations.js?v=beaddf03"></script>
+    
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>导航</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="总索引"
+             accesskey="I">索引</a></li>
+        <li class="nav-item nav-item-0"><a href="index.html">个人笔记教程 1.0.0 文档</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Ubuntu修改Grub默认启动Windows</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <p>https://cloud-atlas.readthedocs.io/zh-cn/latest/linux/server/index.html</p>
+<section id="ubuntugrubwindows">
+<h1>Ubuntu修改Grub默认启动Windows<a class="headerlink" href="#ubuntugrubwindows" title="Link to this heading">¶</a></h1>
+<p><strong>1.开机的时候，在GRUB选择页面查看Windows boot处于第几行(项)，记住，后续步骤要用！</strong></p>
+<p>2.进入Ubuntu，打开终端。注意以下步骤，有sudo的一定要加sudo！</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/etc/default
+sudo<span class="w"> </span>gedit<span class="w"> </span>/etc/default/grub
+</pre></div>
+</div>
+<p>出现以下界面</p>
+<p><img alt="在这里插入图片描述" src="_images/ubuntu111.jpg" /></p>
+<p>3.假设我的Windows boot处于步骤1中第三行（项），所以对应的GRUB_DEFAULT应改为2。（以0开始算）
+GRUB_TIMEOUT为在页面停留时间，根据自己的需要更改。</p>
+<p>4.最后在终端执行：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>update-grub
+</pre></div>
+</div>
+</section>
+<section id="sudo">
+<h1>添加新sudo用户<a class="headerlink" href="#sudo" title="Link to this heading">¶</a></h1>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>adduser<span class="w"> </span>newusername
+sudo<span class="w"> </span>usermod<span class="w"> </span>-a<span class="w"> </span>-G<span class="w"> </span>sudo<span class="w"> </span>newusername
+</pre></div>
+</div>
+</section>
+<section id="webadmin">
+<h1>运维面板——Webadmin<a class="headerlink" href="#webadmin" title="Link to this heading">¶</a></h1>
+<p>先到官网下载deb，然后</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>--install-recommends<span class="w"> </span>./webmin-current.deb
+</pre></div>
+</div>
+<p>修改端口号：到设置中设置。默认端口：10000。</p>
+</section>
+<section id="cockpit">
+<h1>运维面板——Cockpit<a class="headerlink" href="#cockpit" title="Link to this heading">¶</a></h1>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>cockpit
+
+<span class="c1"># 如果您计划管理 带 Cockpit 的 KVM 虚拟机 ，需要安装以下软件包</span>
+<span class="c1"># sudo apt install cockpit-machines</span>
+<span class="c1"># 为 Cockpit 安装 Podman 支持</span>
+<span class="c1"># sudo apt install cockpit-podman y</span>
+
+<span class="c1">#启动 Cockpit Web 控制台服务</span>
+sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>cockpit
+</pre></div>
+</div>
+<section id="id1">
+<h2>Cockpit监听端口和地址<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
+<p>https://cloud-atlas.readthedocs.io/zh-cn/latest/linux/server/cockpit/cockpit_port_address.html#cockpit</p>
+<p>Cockpit的 <code class="docutils literal notranslate"><span class="pre">cockpit-ws</span></code> 组件默认配置的端口是 <code class="docutils literal notranslate"><span class="pre">9090</span></code> ，这个端口是和 <a class="reference external" href="https://cloud-atlas.readthedocs.io/zh-cn/latest/kubernetes/monitor/prometheus/index.html#prometheus">Prometheus监控</a> 默认端口是重合的，这会导致 <a class="reference external" href="https://cloud-atlas.readthedocs.io/zh-cn/latest/kubernetes/monitor/prometheus/prometheus_startup.html#prometheus-startup">Prometheus快速起步</a> 部署在主机上的 Prometheus 启动失败。</p>
+<p>比较简单的方法是调整 <code class="docutils literal notranslate"><span class="pre">cockpit</span></code> 的TCP监听端口</p>
+<ul>
+<li><p>备份后修改 <code class="docutils literal notranslate"><span class="pre">/etc/systemd/system/cockpit.socket.d/listen.conf</span></code> (在 <a class="reference external" href="https://cloud-atlas.readthedocs.io/zh-cn/latest/linux/ubuntu_linux/index.html#ubuntu-linux">Ubuntu Linux</a> 发行版默认你配置 <code class="docutils literal notranslate"><span class="pre">/etc/systemd/system/sockets.target.wants/cockpit.socket</span></code> ):</p>
+<div class="highlight-conf notranslate"><div class="highlight"><pre><span></span>[Socket]
+ListenStream=
+ListenStream=9091
+</pre></div>
+</div>
+</li>
+</ul>
+<p>这里的 <code class="docutils literal notranslate"><span class="pre">ListenStream=</span></code> 是有意配置的，因为 <a class="reference external" href="https://cloud-atlas.readthedocs.io/zh-cn/latest/linux/redhat_linux/systemd/index.html#systemd">Systemd进程管理器</a> 允许多端口监听，所以这里配置一个空的配置表示关闭掉原始配置默认的 <code class="docutils literal notranslate"><span class="pre">9090</span></code> 端口</p>
+<ul>
+<li><p>重启服务:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>systemctl<span class="w"> </span>daemon-reload
+sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>cockpit.socket
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+</section>
+<section id="ubuntunetplan-ip">
+<h1>Ubuntu使用netplan，修改设置静态IP<a class="headerlink" href="#ubuntunetplan-ip" title="Link to this heading">¶</a></h1>
+<section id="ip">
+<h2>第1步： 查看当前主机的网卡名，当前ip, 子网掩码，网关地址<a class="headerlink" href="#ip" title="Link to this heading">¶</a></h2>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ifconfig
+route<span class="w"> </span>-n
+</pre></div>
+</div>
+<p>如果ifconfig命令无法使用, 请运行以下命令安装net-tools</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1">#sudo apt update -y </span>
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>net-tools<span class="w"> </span>-y
+</pre></div>
+</div>
+<p>查看当前主机的网卡名，当前ip, 子网掩码，网关地址</p>
+<p>如上图所示：网卡名为 <strong>enp0s5</strong>, 当前ip <strong>10.211.55.6</strong>, 子网掩码 <strong>255.255.255.0</strong>， 网关地址 <strong>10.211.55.1</strong></p>
+</section>
+<section id="id2">
+<h2>第2步： 修改配置文件<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<p>mac地址查询：<a class="reference external" href="oui.txt">oui</a>   或   <a class="reference external" href="Openwrt.html#%E4%BF%AE%E6%94%B9wan%E5%92%8Clan%E7%9A%84mac">Openwrt.html#%E4%BF%AE%E6%94%B9wan%E5%92%8Clan%E7%9A%84mac</a></p>
+<p>进入配置文件夹</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/etc/netplan
+</pre></div>
+</div>
+<p>备份旧配置文件内容为 00-installer-config.yaml_before</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>cp<span class="w"> </span><span class="m">00</span>-installer-config.yaml<span class="w">  </span><span class="m">00</span>-installer-config.yaml_before
+</pre></div>
+</div>
+<p><strong>旧</strong> 00-installer-config.yaml 的内容为:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># This is the network config written by &#39;subiquity&#39;</span>
+network:
+<span class="w">  </span>ethernets:
+<span class="w">    </span>enp0s5:
+<span class="w">      </span>dhcp4:<span class="w"> </span><span class="nb">true</span>
+<span class="w">  </span>version:<span class="w"> </span><span class="m">2</span>
+</pre></div>
+</div>
+<p>修改配置文件</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>vim<span class="w"> </span><span class="m">00</span>-installer-config.yaml
+</pre></div>
+</div>
+<p><strong>更新后的</strong>00-installer-config.yaml内容为:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>network:
+<span class="w">  </span>version:<span class="w"> </span><span class="m">2</span>
+<span class="w">  </span>renderer:<span class="w"> </span>NetworkManager
+<span class="w">  </span>ethernets:
+<span class="w">    </span>enp0s5:<span class="w">   </span><span class="c1"># 网卡名称</span>
+<span class="w">      </span>dhcp4:<span class="w"> </span>no<span class="w">     </span><span class="c1"># 关闭dhcp</span>
+<span class="w">      </span>dhcp6:<span class="w"> </span>no
+<span class="w">      </span>addresses:<span class="w"> </span><span class="o">[</span><span class="m">10</span>.211.55.10/24<span class="o">]</span><span class="w">  </span><span class="c1"># 静态ip</span>
+<span class="w">      </span>gateway4:<span class="w"> </span><span class="m">10</span>.211.55.1<span class="w">     </span><span class="c1"># 网关</span>
+<span class="w">      </span>nameservers:
+<span class="w">        </span>addresses:<span class="w"> </span><span class="o">[</span><span class="m">8</span>.8.8.8,<span class="w"> </span><span class="m">114</span>.114.114.114<span class="o">]</span><span class="w"> </span><span class="c1">#dns</span>
+</pre></div>
+</div>
+</section>
+<section id="id3">
+<h2>第3步： 使配置生效<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>netplan<span class="w"> </span>apply
+</pre></div>
+</div>
+</section>
+<section id="thinserveryaml">
+<h2>thinServer的yaml配置文件内容<a class="headerlink" href="#thinserveryaml" title="Link to this heading">¶</a></h2>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># Let NetworkManager manage all devices on this system</span>
+<span class="nt">network</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<span class="w">  </span><span class="nt">renderer</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NetworkManager</span>
+<span class="w">  </span><span class="nt">ethernets</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">eno1</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">dhcp4</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">no</span>
+<span class="w">      </span><span class="nt">addresses</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">192.168.0.125/24</span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="nt">optional</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">      </span><span class="nt">gateway4</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">192.168.0.1</span>
+<span class="w">      </span><span class="nt">macaddress</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">00:E0:FC:DA:C6:58</span>
+<span class="w">      </span><span class="nt">nameservers</span><span class="p">:</span>
+<span class="w">              </span><span class="nt">addresses</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">114.114.114.114</span><span class="p p-Indicator">,</span><span class="nv">8.8.8.8</span><span class="p p-Indicator">]</span>
+</pre></div>
+</div>
+</section>
+<section id="mac">
+<h2>修改MAC地址<a class="headerlink" href="#mac" title="Link to this heading">¶</a></h2>
+<p>方法一：使用<code class="docutils literal notranslate"><span class="pre">ifconfig</span></code>（推荐）</p>
+<ol>
+<li><p><strong>关闭网络接口</strong>：
+首先，需要关闭你想要修改MAC地址的网络接口，例如<code class="docutils literal notranslate"><span class="pre">eth0</span></code>。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># sudo ifconfig eth0 down</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>更改MAC地址</strong>：
+使用<code class="docutils literal notranslate"><span class="pre">ifconfig</span></code>命令设置新的MAC地址。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>ifconfig<span class="w"> </span>eth0<span class="w"> </span>hw<span class="w"> </span>ether<span class="w"> </span>XX:XX:XX:XX:XX:XX
+<span class="c1">#sudo ifconfig eth0 hw ether 00:E0:FC:DA:C6:58</span>
+</pre></div>
+</div>
+<p>将<code class="docutils literal notranslate"><span class="pre">XX:XX:XX:XX:XX:XX</span></code>替换为你想要设置的新MAC地址。</p>
+</li>
+<li><p><strong>重新启用网络接口</strong>：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>ifconfig<span class="w"> </span>eth0<span class="w"> </span>up
+</pre></div>
+</div>
+</li>
+</ol>
+<p>方法二：使用<code class="docutils literal notranslate"><span class="pre">ip</span></code></p>
+<ol>
+<li><p><strong>关闭网络接口</strong>：
+首先，需要关闭网络接口。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>ip<span class="w"> </span>link<span class="w"> </span><span class="nb">set</span><span class="w"> </span>dev<span class="w"> </span>eth0<span class="w"> </span>down
+</pre></div>
+</div>
+</li>
+<li><p><strong>更改MAC地址</strong>：
+使用<code class="docutils literal notranslate"><span class="pre">ip</span></code>命令设置新的MAC地址。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>ip<span class="w"> </span>link<span class="w"> </span><span class="nb">set</span><span class="w"> </span>dev<span class="w"> </span>eth0<span class="w"> </span>address<span class="w"> </span>XX:XX:XX:XX:XX:XX
+<span class="m">1</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>重新启用网络接口</strong>：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>ip<span class="w"> </span>link<span class="w"> </span><span class="nb">set</span><span class="w"> </span>dev<span class="w"> </span>eth0<span class="w"> </span>up
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+</section>
+<section id="zerotier">
+<h1>Zerotier<a class="headerlink" href="#zerotier" title="Link to this heading">¶</a></h1>
+<p><strong>这里 ZeroTier 的注册、管理后台、创建网路不在此赘述；</strong></p>
+<p><strong>后面代码中 *<em>**###########**</em>* 需要更换成管理页面创建的 *<em>**Network ID**</em>*</strong></p>
+<p>提示 ：Unix 系统上，可能需要在 zerotier-cli 命令前加上sudo，而在 Windows 上，将需要使用管理员模式命令提示符。</p>
+<section id="zerotier-linux">
+<h2>1. ZeroTier 的 Linux 安装脚本<a class="headerlink" href="#zerotier-linux" title="Link to this heading">¶</a></h2>
+<p>在 <strong>ubuntu</strong> 中安装 <strong>zerotier</strong> 使用 <strong>SSH</strong> 两种安装方法，安装过程会有进度显示：</p>
+<p>● 如果您愿意依靠 SSL 来验证站点，则可以通过以下方式完成单行安装：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-s<span class="w"> </span>https://install.zerotier.com<span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>bash
+</pre></div>
+</div>
+<p>● //如果您安装了 GPG，则可以使用更安全的选项：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-s<span class="w"> </span><span class="s1">&#39;https://raw.githubusercontent.com/zerotier/ZeroTierOne/master/doc/contact%40zerotier.com.gpg&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>gpg<span class="w"> </span>--import<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+<span class="k">if</span><span class="w"> </span><span class="nv">z</span><span class="o">=</span><span class="k">$(</span>curl<span class="w"> </span>-s<span class="w"> </span><span class="s1">&#39;https://install.zerotier.com/&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>gpg<span class="k">)</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$z</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>bash<span class="p">;</span><span class="w"> </span><span class="k">fi</span>
+</pre></div>
+</div>
+<p>ZeroTier 的 Linux 更新脚本</p>
+<p>如果您在<a class="reference external" href="https://www.zerotier.com/download/">下载页面</a>上使用 ZeroTier 的 linux 安装脚本，它会将 repo 添加到您的系统。使用 apt 或 yum 更新 zerotier-one。</p>
+<p>例如，在基于 debian/ubuntu 的系统上（ centos 系统需要将 apt 替换为 yum ）：</p>
+<p>查看可更新软件：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>update
+</pre></div>
+</div>
+<p>更新 ZeroTier</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>zerotier-one
+</pre></div>
+</div>
+<p>● 额外提示：您可以指定一个版本，比如更新到今天要更新的 1.10.6 版本：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>zerotier-one<span class="o">=</span><span class="m">1</span>.10.6
+</pre></div>
+</div>
+<p>提示 ：各服务客户端的版本经尽量保持一致能解决一些玄学问题！！</p>
+<p>2.加入一个网络</p>
+<p>●加入网络</p>
+<p>首先在要连接的Linux设备上输入如下命令加入网络，如果连接成功就会出现 200 join OK 的状态码提示：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 加入网络命令，操作成功则返回 “200 join OK” </span>
+sudo<span class="w"> </span>zerotier-cli<span class="w"> </span>join<span class="w">  </span><span class="c1">###########</span>
+</pre></div>
+</div>
+<p>●查看当前连接</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 查看当前连接的网络，如果列表中出现 Network ID、Name 说明连接成功，后台分配好IP后再查看IP地址也会出现。</span>
+sudo<span class="w"> </span>zerotier-cli<span class="w"> </span>listnetworks
+</pre></div>
+</div>
+<ol class="simple">
+<li><p>常用操作</p></li>
+</ol>
+<p>● <a class="reference external" href="https://so.csdn.net/so/search?q=zerotier&amp;spm=1001.2101.3001.7020">zerotier</a> 服务 手动启动：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 返回信息 “200 info ########### 1.10.6 ONLINE”</span>
+zerotier-cli<span class="w"> </span>status
+</pre></div>
+</div>
+<p>● zerotier 服务 手动启动：</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span><span class="w"> </span><span class="n">systemctl</span><span class="w"> </span><span class="k">start</span><span class="w"> </span><span class="n">zerotier</span><span class="o">-</span><span class="n">one</span><span class="p">.</span><span class="n">service</span>
+</pre></div>
+</div>
+<p>● zerotier 服务 开机自启动：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 开机自启动，成功怎返回值的最后会有“enable zerotier-one”字样</span>
+sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>zerotier-one.service
+</pre></div>
+</div>
+<p>● zerotier 服务 查看本机连接的网络：上面有提过—查看当前连接</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 查看当前连接的网络，如果列表中出现 Network ID、Name 说明连接成功，后台分配好IP后再查看IP地址也会出现。</span>
+sudo<span class="w"> </span>zerotier-cli<span class="w"> </span>listnetworks
+</pre></div>
+</div>
+<p>● zerotier 服务 加入网络：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 加入网络命令，操作成功则返回 “200 join OK”</span>
+sudo<span class="w"> </span>zerotier-cli<span class="w"> </span>join<span class="w"> </span><span class="c1">###########</span>
+</pre></div>
+</div>
+<p>● zerotier 服务 断开当前加入的网络：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 断开网络命令，操作成功则返回 “200 leave OK”</span>
+sudo<span class="w"> </span>zerotier-cli<span class="w"> </span>leave<span class="w"> </span><span class="c1">###########</span>
+</pre></div>
+</div>
+<p>● zerotier 服务 停止</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>systemctl<span class="w"> </span>stop<span class="w"> </span>zerotier-one
+</pre></div>
+</div>
+<p>或者</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>service<span class="w"> </span>zerotier-one<span class="w"> </span>stop
+</pre></div>
+</div>
+<p>● zerotier 服务 重启服务</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>zerotier-one
+</pre></div>
+</div>
+<p>或者</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>service<span class="w"> </span>zerotier-one<span class="w"> </span>start
+</pre></div>
+</div>
+<p>4.卸载命令</p>
+<p>在 <strong>ubuntu、Debian</strong> 中卸载 <strong>zerotier</strong></p>
+<p>使用 <strong>SSH</strong> 依次输入下面两条代码：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>dpkg<span class="w"> </span>-P<span class="w"> </span>zerotier-one
+sudo<span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span>/var/lib/zerotier-one/
+</pre></div>
+</div>
+<p>如果是 <strong>CentOS、Redhat</strong> 中卸载 <strong>zerotier</strong></p>
+<p>使用 <strong>SSH</strong> 依次输入下面两条代码：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>rpm<span class="w"> </span>-e<span class="w"> </span>zerotier-one
+sudo<span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span>/var/lib/zerotier-one/
+</pre></div>
+</div>
+</section>
+</section>
+<section id="ubuntu">
+<h1>Ubuntu开机默认进入图形界面/字符界面<a class="headerlink" href="#ubuntu" title="Link to this heading">¶</a></h1>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>systemctl<span class="w"> </span>set-default<span class="w"> </span>multi-user.target<span class="w">  </span><span class="s2">&quot;默认进入字符界面&quot;</span>
+sudo<span class="w"> </span>systemctl<span class="w"> </span>set-default<span class="w"> </span>graphical.target<span class="w">   </span><span class="s2">&quot;默认进入图形界面&quot;</span>
+</pre></div>
+</div>
+<p>字符界面下，可以输入以下命令启动图形化界面：</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>init<span class="w"> </span><span class="m">5</span>
+<span class="c1">#或(不推荐)</span>
+<span class="c1">#startx</span>
+</pre></div>
+</div>
+</section>
+<section id="ubuntugrub-grubrescue">
+<h1>Ubuntu开机grub/grubRescue手动启动<a class="headerlink" href="#ubuntugrub-grubrescue" title="Link to this heading">¶</a></h1>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1">#查看所有磁盘</span>
+ls
+<span class="c1">#依次查看每个磁盘分区内容，找到linux主分区/boot所在分区</span>
+ls<span class="w"> </span><span class="o">(</span>hd0,gpt8<span class="o">)</span>/
+<span class="c1">#设置root和prefix</span>
+<span class="nb">set</span><span class="w"> </span><span class="nv">root</span><span class="o">=(</span>hd0,gpt8<span class="o">)</span>/
+<span class="nb">set</span><span class="w"> </span><span class="nv">prefix</span><span class="o">=(</span>hd0,gpt8<span class="o">)</span>/boot/grub
+insmod<span class="w"> </span>normal
+normal
+</pre></div>
+</div>
+</section>
+<section id="apt">
+<h1>apt走代理<a class="headerlink" href="#apt" title="Link to this heading">¶</a></h1>
+<p>为 <code class="docutils literal notranslate"><span class="pre">apt</span></code> 命令配置代理的最简单方法是创建一个 <code class="docutils literal notranslate"><span class="pre">proxy.conf</span></code> 文件，如下：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>vi<span class="w"> </span>/etc/apt/apt.conf.d/proxy.conf
+</pre></div>
+</div>
+<p>对于没有用户名和密码的代理服务器，添加以下条目，如下：</p>
+<p>对于 HTTP 代理，添加以下条目：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Acquire::http::Proxy<span class="w"> </span><span class="s2">&quot;http://proxy-IP-address:proxyport/&quot;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>对 HTTPS 代理执行相同的操作：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Acquire::https::Proxy<span class="w"> </span><span class="s2">&quot;http://proxy-IP-address:proxyport/&quot;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>例子：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>vi<span class="w"> </span>/etc/apt/apt.conf.d/proxy.conf
+Acquire::http::Proxy<span class="w"> </span><span class="s2">&quot;http://127.0.0.1:7890/&quot;</span><span class="p">;</span>
+Acquire::https::Proxy<span class="w"> </span><span class="s2">&quot;http://127.0.0.1:7890&quot;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>如果你的代理服务器需要用户名和密码详细信息，请按以下方式添加：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Acquire::http::Proxy<span class="w"> </span><span class="s2">&quot;http://username:password@proxy-IP-address:proxyport&quot;</span><span class="p">;</span>
+Acquire::https::Proxy<span class="w"> </span><span class="s2">&quot;http://username:password@proxy-IP-address:proxyport&quot;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>例子：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>vi<span class="w"> </span>/etc/apt/apt.conf.d/proxy.conf
+Acquire::http::Proxy<span class="w"> </span><span class="s2">&quot;http://init@PassW0rd321#@192.168.56.102:3128/&quot;</span><span class="p">;</span>
+Acquire::https::Proxy<span class="w"> </span><span class="s2">&quot;http://init@PassW0rd321#@192.168.56.102:3128/&quot;</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="id4">
+<h1>Ubuntu代理服务器<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h1>
+<section id="clash-for-windows">
+<h2>Clash for Windows<a class="headerlink" href="#clash-for-windows" title="Link to this heading">¶</a></h2>
+<p>直接下载解压即可。记得sudo chmod +x cfw。</p>
+</section>
+<section id="clash-for-linux">
+<h2>√Clash for Linux<a class="headerlink" href="#clash-for-linux" title="Link to this heading">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>https://git.opclash.com/kehuduan/clash/clash-linux-amd64-v1.18.0.gz
+sudo<span class="w"> </span>gzip<span class="w"> </span>-d<span class="w"> </span>clash-linux-amd64-v1.18.0.gz
+sudo<span class="w"> </span>chmod<span class="w"> </span>+x<span class="w"> </span>clash-linux-amd64-v1.18.0
+sudo<span class="w"> </span>mv<span class="w"> </span>clash-linux-amd64-v1.18.0<span class="w"> </span>/usr/bin/clash
+
+clash<span class="w"> </span>-v
+</pre></div>
+</div>
+<p>需要注意：</p>
+<p>1：clash 默认会在 ~/.config/clash 目录下生成两个配置文件 config.yaml 和 Country.mmdb。
+2：如果提示 Country.mmdb invalid (即Country.mmdb配置无效)，可下载示例文件替换：<a class="reference external" href="https://cdn.hftech.ltd/download/clash/Country.mmdb">Country.mmdb示例文件下载</a>。
+3：在其他平台获取可用的 config.yaml 配置文件后，可替换原来 ~/.config/clash 目录下的配置文件，也可以在运行clash时，使用 -f 指定配置文件，示例：<em>clash -f config.yaml</em> (运行clash并指定配置文件为./config.yaml)，或者直接在服务中映射目录。
+4: clash成功运行后，使用浏览器访问 <a class="reference external" href="http://127.0.0.1:9090/">http://127.0.0.1:9090</a> 会出现 “hello clash”, 7890: http代理端口, 7891: socket代理端口。</p>
+<p>先创建文件夹，并复制配置文件：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>mkdir<span class="w"> </span>/etc/clash
+<span class="c1">#按需修改路径复制，</span>
+<span class="c1">#也可以直接 sudo touch /etc/clash/config.yaml</span>
+<span class="c1">#sudo vi /etc/clash/config.yaml</span>
+<span class="c1">#然后复制粘贴Windows下的配置文件</span>
+sudo<span class="w"> </span>cp<span class="w"> </span>config.yaml<span class="w"> </span>/etc/clash/
+sudo<span class="w"> </span>cp<span class="w"> </span>Country.mmdb<span class="w"> </span>/etc/clash/
+</pre></div>
+</div>
+<p>需要修改Windows下的配置文件，修改监听端口：</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">external-controller</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;127.0.0.1:9090&#39;</span>
+<span class="c1">#修改为</span>
+<span class="nt">external-controller</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;0.0.0.0:9090&#39;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>将clash命令设置为系统命令</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 创建clash.service文件，并编辑该文件</span>
+sudo<span class="w"> </span>vi<span class="w"> </span>/etc/systemd/system/clash.service
+<span class="c1"># 按i进入编辑模式，粘贴以下内容</span>
+<span class="o">[</span>Unit<span class="o">]</span>
+<span class="nv">Description</span><span class="o">=</span>clash
+<span class="o">[</span>Service<span class="o">]</span>
+<span class="nv">Type</span><span class="o">=</span>simple
+<span class="nv">ExecStart</span><span class="o">=</span>/usr/bin/clash<span class="w">  </span>-d<span class="w"> </span>/etc/clash
+<span class="c1"># 按ESC 然后：wq保存退出。</span>
+</pre></div>
+</div>
+<p>在/目录下的.config/clash/下，创建config.yml和Country.mmdb。可以直接复制以上下载的mmdb。yml配置文件内容从windows下的文件中直接复制。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 依次执行如下命令(reload: 刷新守护进程, enable: 开启自启动, start: 启动, status: 查看状态)</span>
+sudo<span class="w"> </span>systemctl<span class="w"> </span>daemon-reload
+sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>clash
+sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>clash
+sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>clash
+<span class="c1"># 访问localhost:9090查看clash是否正确运行。</span>
+</pre></div>
+</div>
+<ul>
+<li><p>设置clash界面</p>
+<p>下载yacd，解压到httpd-default。</p>
+<p>配置完毕后，即可使用。</p>
+<p>浏览器访问：http://127.0.0.1:8234/yacd，即可看到界面。</p>
+<p>（或者直接使用网络上的：https://clash.razord.top/#/proxies。）</p>
+</li>
+</ul>
+<p>5、为确保万无一失，打开 Ubuntu 的“设置”管理，在“网络”内将“网络代理”的“自动”改为“手动”，根据以下内容进行填写 HTTP、HTTPS 和 Socks 地址，或：参考以下内容</p>
+<section id="id5">
+<h3>Clash for Linux 完整参考内容：<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
+<section id="clash">
+<h4>Clash 下载<a class="headerlink" href="#clash" title="Link to this heading">¶</a></h4>
+<p>在 Clash <a class="reference external" href="https://github.com/Dreamacro/clash/releases">release</a> 页面下载相应的版本，对于 Ubuntu 一般使用 <a class="reference external" href="https://github.com/Dreamacro/clash/releases/download/v1.14.0/clash-linux-amd64-v1.14.0.gz">clash-linux-amd64</a> 版本：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>https://github.com/Dreamacro/clash/releases/download/v1.14.0/clash-linux-amd64-v1.14.0.gz
+</pre></div>
+</div>
+<blockquote>
+<div><p>如果直接 wget 速度较慢的话，可以本地下载完成后，使用 SFTP 上传到 Linux 服务器。</p>
+</div></blockquote>
+<p>然后使用 <code class="docutils literal notranslate"><span class="pre">gunzip</span></code> 命令解压，并重命名为 <code class="docutils literal notranslate"><span class="pre">clash</span></code>：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gunzip<span class="w"> </span>clash-linux-amd64-v1.14.0.gz
+mv<span class="w"> </span>clash-linux-amd64-v1.14.0<span class="w"> </span>clash
+</pre></div>
+</div>
+<p>为 clash 添加可执行权限：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>chmod<span class="w"> </span>u+x<span class="w"> </span>clash
+</pre></div>
+</div>
+<p>Clash 运行时需要 <code class="docutils literal notranslate"><span class="pre">Country.mmdb</span></code> 文件，当第一次启动 Clash 时（使用 <code class="docutils literal notranslate"><span class="pre">./clash</span></code> 命令） 会自动下载（会下载至 <code class="docutils literal notranslate"><span class="pre">/home/XXX/.config/clash</span></code> 文件夹下）。自动下载可能会因网络原因较慢，可以访问该<a class="reference external" href="https://github.com/Dreamacro/maxmind-geoip/releases">链接</a>手动下载。</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">Country.mmdb</span></code> 文件利用 GeoIP2 服务能识别互联网用户的地点位置，以供规则分流时使用。</p>
+</div></blockquote>
+<section id="id6">
+<h5>配置文件<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h5>
+<p>一般的网络服务提供了 Clash 订阅链接，可以直接下载链接指向的文件内容，保存到 <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code> 中。或者使用订阅转换服务（如该<a class="reference external" href="https://converter.niallapi.top/">链接</a>。也可以自行搭建，可参考<a class="reference external" href="https://codeswift.top/posts/docker-subscription-converter/">该文章</a>），将其它订阅转换为 Clash 订阅。</p>
+<p>这里推荐使用订阅转换服务，转换后的配置文件已添加更为强大的分流规则。就可以将 Clash 一直保持后台运行，自动分流，且会自动选择最优节点。</p>
+<blockquote>
+<div><p>Clash 配置文件的完整参数介绍见<a class="reference external" href="https://github.com/Dreamacro/clash/wiki/configuration">官方文档</a>。</p>
+</div></blockquote>
+<blockquote>
+<div><p>如果使用订阅转换服务，对于转换后的订阅链接，可以使用以下命令来下载配置文件：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-o<span class="w"> </span>config.yaml<span class="w"> </span><span class="s1">&#39;longURL&#39;</span>
+</pre></div>
+</div>
+<p>对于 <code class="docutils literal notranslate"><span class="pre">suo.yt</span></code> 短链接，需要重定向，因此使用以下命令来下载配置文件：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-L<span class="w"> </span>-o<span class="w"> </span>config.yaml<span class="w"> </span><span class="s1">&#39;shortURL&#39;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+</section>
+<section id="clash-as-a-daemon">
+<h4>Clash as a daemon<a class="headerlink" href="#clash-as-a-daemon" title="Link to this heading">¶</a></h4>
+<p>将 Clash 转变为系统服务，从而使得 Clash 实现常驻后台运行、开机自启动等。</p>
+<blockquote>
+<div><p>普通用户需要 <code class="docutils literal notranslate"><span class="pre">sudo</span></code> 权限。</p>
+</div></blockquote>
+<section id="systemd">
+<h5>配置 systemd 服务<a class="headerlink" href="#systemd" title="Link to this heading">¶</a></h5>
+<p>Linux 系统使用 systemd 作为启动服务器管理机制，首先把 Clash 可执行文件拷贝到 <code class="docutils literal notranslate"><span class="pre">/usr/local/bin</span></code> 目录，相关配置拷贝到 <code class="docutils literal notranslate"><span class="pre">/etc/clash</span></code> 目录。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>mkdir<span class="w"> </span>/etc/clash
+sudo<span class="w"> </span>cp<span class="w"> </span>clash<span class="w"> </span>/usr/local/bin
+sudo<span class="w"> </span>cp<span class="w"> </span>config.yaml<span class="w"> </span>/etc/clash/
+sudo<span class="w"> </span>cp<span class="w"> </span>Country.mmdb<span class="w"> </span>/etc/clash/
+</pre></div>
+</div>
+<p>创建 systemd 服务配置文件 <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">vim</span> <span class="pre">/etc/systemd/system/clash.service</span></code>：</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[Unit]</span>
+<span class="na">Description</span><span class="o">=</span><span class="s">Clash daemon, A rule-based proxy in Go.</span>
+<span class="na">After</span><span class="o">=</span><span class="s">network.target</span>
+
+<span class="k">[Service]</span>
+<span class="na">Type</span><span class="o">=</span><span class="s">simple</span>
+<span class="na">Restart</span><span class="o">=</span><span class="s">always</span>
+<span class="na">ExecStart</span><span class="o">=</span><span class="s">/usr/local/bin/clash -d /etc/clash</span>
+
+<span class="k">[Install]</span>
+<span class="na">WantedBy</span><span class="o">=</span><span class="s">multi-user.target</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="systemctl">
+<h3>使用 systemctl<a class="headerlink" href="#systemctl" title="Link to this heading">¶</a></h3>
+<p>使用以下命令，让 Clash 开机自启动：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>clash
+</pre></div>
+</div>
+<p>然后开启 Clash：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>clash
+</pre></div>
+</div>
+<p>查看 Clash 日志：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>clash
+sudo<span class="w"> </span>journalctl<span class="w"> </span>-xe
+</pre></div>
+</div>
+<section id="id7">
+<h4>使用代理<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h4>
+<section id="export">
+<h5>利用 <code class="docutils literal notranslate"><span class="pre">Export</span></code> 命令使用代理<a class="headerlink" href="#export" title="Link to this heading">¶</a></h5>
+<p>Clash 运行后，其在后台监听某一端口。Ubuntu 下使用代理，需要 <code class="docutils literal notranslate"><span class="pre">export</span></code> 命令。根据 config 配置文可以查看到件Clash 代理端口（订阅转换后，端口为7890），设置系统代理命令为：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">https_proxy</span><span class="o">=</span>http://127.0.0.1:7890<span class="w"> </span><span class="nv">http_proxy</span><span class="o">=</span>http://127.0.0.1:7890<span class="w"> </span><span class="nv">all_proxy</span><span class="o">=</span>socks5://127.0.0.1:7890
+</pre></div>
+</div>
+<p>可以将该命令添加到 <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code> 中，登陆后该用户自动开启代理。</p>
+<p>取消系统代理：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">unset</span><span class="w">  </span>http_proxy<span class="w">  </span>https_proxy<span class="w">  </span>all_proxy
+</pre></div>
+</div>
+<blockquote>
+<div><p>一般下载数据集时，记得取消代理。</p>
+</div></blockquote>
+</section>
+<section id="dashboard">
+<h5>DashBoard 外部控制<a class="headerlink" href="#dashboard" title="Link to this heading">¶</a></h5>
+<p>外部控制端口为 9090，因此也可以访问该<a class="reference external" href="http://clash.razord.top/">链接</a>，输入 IP 地址（需本机可以访问的 IP）以及端口号 9090，来进入 Clash Dashboard 进行节点的选择。也可以在服务器自行搭建 Clash Dashboard，请参见<a class="reference external" href="https://github.com/Dreamacro/clash-dashboard">该项目</a>。不过 Clash Dashboard 用处不大，使用<strong>订阅转换</strong>后的配置文件包含了自动选择的功能，Clash 会自动选择延迟最低的节点。</p>
+</section>
+<section id="id8">
+<h5>设置密码<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h5>
+<p><code class="docutils literal notranslate"><span class="pre">export</span></code> 命令其他用户执行后也可以使用该代理，此时通过可以更换代理端口、添加密码等措施加以限制。修改 <code class="docutils literal notranslate"><span class="pre">/etc/clash/config.yaml</span></code> 文件部分配置：</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">mixed-port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">12345</span>
+<span class="nt">authentication</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;用户名1:密码1&quot;</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;用户名2:密码2&quot;</span>
+<span class="nt">allow-lan</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Rule</span>
+<span class="nt">log-level</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">info</span>
+<span class="nt">external-controller</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">:9090</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">mixed-port:</span> <span class="pre">12345</span></code> 就是混合代理端口，即使用代理时所指定的端口。然后需要重启 Clash，命令为：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>clash
+</pre></div>
+</div>
+<p>根据上述配置文件，<code class="docutils literal notranslate"><span class="pre">export</span></code> 命令变为</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">https_proxy</span><span class="o">=</span>http://用户名1:密码1@127.0.0.1:12345<span class="w"> </span><span class="nv">http_proxy</span><span class="o">=</span>http://用户名1:密码1@127.0.0.1:12345<span class="w"> </span><span class="nv">all_proxy</span><span class="o">=</span>socks5://用户名1:密码1@127.0.0.1:12345
+</pre></div>
+</div>
+</section>
+<section id="tun">
+<h5>TUN 模式<a class="headerlink" href="#tun" title="Link to this heading">¶</a></h5>
+<p>新版的 Clash Premium 内核支持 TUN 模式，且目前已支持 Linux 系统下的 <code class="docutils literal notranslate"><span class="pre">auto-route</span></code> 和 <code class="docutils literal notranslate"><span class="pre">auto-detect-interface</span></code>，无需手动设置转发表，可以方便快捷的实现 <strong>透明网关（旁路由）</strong> 的功能。</p>
+<p>首先需要下载 <a class="reference external" href="https://github.com/Dreamacro/clash/releases/tag/premium">Clash Premium</a> 版本，替换上面的 <code class="docutils literal notranslate"><span class="pre">clash</span></code> 文件。接着需要设置 Linux 系统，开启转发功能。编辑文件 <code class="docutils literal notranslate"><span class="pre">/etc/sysctl.conf</span></code>，添加以下内容：</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">net.ipv4.ip_forward</span><span class="o">=</span><span class="s">1</span>
+</pre></div>
+</div>
+<p>保存退出后，执行以下命令使修改生效：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="n">sudo</span> <span class="n">sysctl</span> <span class="o">-</span><span class="n">p</span>
+</pre></div>
+</div>
+<p>然后接着需要关闭系统的 DNS 服务，使用以下命令：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>systemctl<span class="w"> </span>stop<span class="w"> </span>systemd-resolved
+sudo<span class="w"> </span>systemctl<span class="w"> </span>disable<span class="w"> </span>systemd-resolved
+</pre></div>
+</div>
+<blockquote>
+<div><p>关于代理环境下 DNS 解析行为的深入探讨，可以参见<a class="reference external" href="https://blog.skk.moe/post/what-happend-to-dns-in-proxy/">浅谈在代理环境中的 DNS 解析行为</a>以及<a class="reference external" href="https://blog.skk.moe/post/i-have-my-unique-dns-setup/">我有特别的 DNS 配置和使用技巧</a>。</p>
+</div></blockquote>
+<p>接着需要设置 Clash 的配置文件，添加以下内容：</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">dns</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">enable</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">listen</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0.0.0:53</span>
+<span class="w">  </span><span class="nt">enhanced-mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fake-ip</span>
+<span class="w">  </span><span class="nt">nameserver</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">114.114.114.114</span>
+<span class="w">  </span><span class="nt">fallback</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8.8.8.8</span>
+<span class="nt">tun</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">enable</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">stack</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">system</span><span class="w"> </span><span class="c1"># or gvisor</span>
+<span class="w">  </span><span class="nt">dns-hijack</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8.8.8.8:53</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tcp://8.8.8.8:53</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">any:53</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tcp://any:53</span>
+<span class="w">  </span><span class="nt">auto-route</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"> </span><span class="c1"># auto set global route</span>
+<span class="w">  </span><span class="nt">auto-detect-interface</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"> </span><span class="c1"># conflict with interface-name</span>
+</pre></div>
+</div>
+<p>最后重启 Clash 服务即可，这样流量就会通过 TUN 接口转发，同时利用强大的分流规则，实现按需代理。也可以设置局域网内的网关地址和 DNS 服务器地址，实现透明网关。</p>
+</section>
+</section>
+</section>
+</section>
+<section id="docker-clash">
+<h2>docker-clash<a class="headerlink" href="#docker-clash" title="Link to this heading">¶</a></h2>
+<ul>
+<li><p>下载 <a class="reference external" href="https://hub.docker.com/r/dreamacro/clash">docker-clash</a> 镜像</p></li>
+<li><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>docker<span class="w"> </span>pull<span class="w"> </span>dreamacro/clash
+<span class="c1"># 启动 docker-clash (-p: 设置端口映射; -v: 设置目录/文件映射)</span>
+sudo<span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>clash<span class="w"> </span>-p<span class="w"> </span><span class="m">7890</span>:7890<span class="w"> </span>-p<span class="w"> </span><span class="m">7891</span>:7891<span class="w"> </span>-p<span class="w"> </span><span class="m">9090</span>:9090<span class="w"> </span>-v<span class="w"> </span>~/.config/clash/config.yaml:/root/.config/clash/config.yaml<span class="w"> </span>-v<span class="w"> </span>~/.config/clash/clash-ui:/opt/clash/ui<span class="w"> </span>dreamacro/clash
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+<section id="wsl2-clash-for-windows">
+<h2>在 WSL2 中使用 Clash for Windows 代理连接<a class="headerlink" href="#wsl2-clash-for-windows" title="Link to this heading">¶</a></h2>
+<p>https://eastmonster.github.io/2022/10/05/clash-config-in-wsl/#</p>
+<p>因为网络问题，在 WSL2 中配环境时通常会非常缓慢甚至失败。在整合了各方资料及个人实践后，我总结了在 WSL2 中通过 Clash for Windows 连接代理的方法，供大家参考。</p>
+<p>1.在 Clash 客户端内的操作</p>
+<p>打开客户端的允许局域网连接 (Allow LAN) 开关，如图 1 所示。
+记录下客户端内的端口 (Port)，如这里是 <code class="docutils literal notranslate"><span class="pre">16514</span></code>. 一般默认端口为 <code class="docutils literal notranslate"><span class="pre">7890</span></code>.
+<a class="reference external" href="https://s2.loli.net/2024/01/22/sla3HO9UVu4wozn.png"><img alt="图 1" src="https://s2.loli.net/2024/01/22/sla3HO9UVu4wozn.png" /></a></p>
+<p>2.配置</p>
+<p>方法一</p>
+<p>这个方法需要 Windows 10/11 22H2 和 WSL 2.0.5 及以上版本，如果你不满足版本要求，请参考<a class="reference external" href="https://eastmonster.github.io/2022/10/05/clash-config-in-wsl/#%E6%96%B9%E6%B3%95%E4%BA%8C">方法二</a>。
+你可以使用 <code class="docutils literal notranslate"><span class="pre">winver</span></code> 和 <code class="docutils literal notranslate"><span class="pre">wsl</span> <span class="pre">-v</span></code> 查看你的 Windows 和 WSL 版本。</p>
+<p>如果你使用这个方法，你需要确保 Clash 客户端中设置的系统代理类型为 HTTP 而不是 PAC，否则无法代理 HTTPS 请求:
+<a class="reference external" href="https://s2.loli.net/2024/01/24/Y9DhxRw47tzlWIH.png"><img alt="img" src="https://s2.loli.net/2024/01/24/Y9DhxRw47tzlWIH.png" /></a>
+如果你确实需要使用 PAC 模式，请参考方法二，在 shell 的配置文件中添加:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">https_proxy</span><span class="o">=</span><span class="nv">$http_proxy</span>
+</pre></div>
+</div>
+<p>在 WSL <a class="reference external" href="https://github.com/microsoft/WSL/releases/tag/2.0.5">2.0.5 版本</a>后，一些特性得以稳定，这里要用到的是<a class="reference external" href="https://learn.microsoft.com/zh-cn/windows/wsl/networking#mirrored-mode-networking">镜像模式网络</a>。</p>
+<p>在 <code class="docutils literal notranslate"><span class="pre">C:\Users\&lt;UserName&gt;\.wslconfig</span></code> 文件中 (如果不存在就手动创建一个) 加入以下内容:</p>
+<div class="highlight-config notranslate"><div class="highlight"><pre><span></span>[wsl2]
+networkingMode=mirrored
+</pre></div>
+</div>
+<p>不过需要注意，shell 的配置文件中<strong>不能</strong>再 <code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">http_proxy=...</span></code>.</p>
+<p>方法二</p>
+<p>WSL <a class="reference external" href="https://github.com/microsoft/WSL/releases/tag/2.2.1">2.2.1 版本</a>默认启用了 DNS 隧道, 会导致<strong>该方法</strong>失效。如果你正在使用<strong>该版本</strong>可以参照<a class="reference external" href="https://learn.microsoft.com/zh-cn/windows/wsl/wsl-config#wslconfig">官方文档</a>配置，在 <code class="docutils literal notranslate"><span class="pre">C:\Users\&lt;UserName&gt;\.wslconfig</span></code> 文件中 (如果不存在就手动创建一个) 加入以下内容以关闭 DNS 隧道:</p>
+<div class="highlight-config notranslate"><div class="highlight"><pre><span></span>[wsl2]
+dnsTunneling=false
+</pre></div>
+</div>
+<p>你可以执行 <code class="docutils literal notranslate"><span class="pre">wsl</span> <span class="pre">-v</span></code> 查看你的 WSL 版本。</p>
+<p>这里默认你使用 bash, 如果你使用其他的 shell, 我相信你知道该改哪里。</p>
+<p>编辑 <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code>，在文件末尾根据第 1 步记录的数据，加入三行内容：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">host_ip</span><span class="o">=</span><span class="k">$(</span>cat<span class="w"> </span>/etc/resolv.conf<span class="w"> </span><span class="p">|</span>grep<span class="w"> </span><span class="s2">&quot;nameserver&quot;</span><span class="w"> </span><span class="p">|</span>cut<span class="w"> </span>-f<span class="w"> </span><span class="m">2</span><span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot; &quot;</span><span class="k">)</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">http_proxy</span><span class="o">=</span><span class="s2">&quot;http://</span><span class="nv">$host_ip</span><span class="s2">:[端口]&quot;</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">https_proxy</span><span class="o">=</span><span class="s2">&quot;http://</span><span class="nv">$host_ip</span><span class="s2">:[端口]&quot;</span>
+</pre></div>
+</div>
+<p>如图 2 所示，修改完后保存即可。
+<a class="reference external" href="https://s2.loli.net/2022/10/05/qWgwrFU7OMupiH2.png"><img alt="图 2" src="https://s2.loli.net/2022/10/05/qWgwrFU7OMupiH2.png" /></a></p>
+<p>输入 <code class="docutils literal notranslate"><span class="pre">source</span> <span class="pre">~/.bashrc</span></code> 使文件修改生效，可以通过输入 <code class="docutils literal notranslate"><span class="pre">echo</span> <span class="pre">$http_proxy</span></code> 验证修改是否成功。</p>
+<p>3.使 root 用户保留先前设置的环境变量</p>
+<p>在使用 <code class="docutils literal notranslate"><span class="pre">sudo</span></code> 执行命令时，之前设置的环境变量并不会生效，需要进一步设置。
+输入 <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">visudo</span></code>, 加入以下内容并保存，如图 3-1 所示。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Defaults<span class="w"> </span><span class="nv">env_keep</span><span class="o">=</span><span class="s2">&quot;http_proxy https_proxy&quot;</span>
+</pre></div>
+</div>
+<p><a class="reference external" href="https://s2.loli.net/2022/10/05/z4Q9PwhFmgRLG8d.png"><img alt="图 3-1" src="https://s2.loli.net/2022/10/05/z4Q9PwhFmgRLG8d.png" /></a></p>
+<p><strong>如果你使用 Ubuntu 22.04</strong>, 则你看到的内容应与图 3-1 不同。如下图所示，取消相应行的注释 (删除行首的 <code class="docutils literal notranslate"><span class="pre">#</span></code>) 即可.
+<a class="reference external" href="https://s2.loli.net/2023/10/13/Dp628PahyF1jOVl.png"><img alt="图 3-2" src="https://s2.loli.net/2023/10/13/Dp628PahyF1jOVl.png" /></a></p>
+<ol class="simple">
+<li><p>测试</p></li>
+</ol>
+<p>输入 <code class="docutils literal notranslate"><span class="pre">wget</span> <span class="pre">www.google.com</span></code>, 可以发现连接成功，至此大功告成，如图 4 所示。
+<a class="reference external" href="https://s2.loli.net/2022/10/05/UIQ8LhuROaXq6S2.png"><img alt="图 4" src="https://s2.loli.net/2022/10/05/UIQ8LhuROaXq6S2.png" /></a></p>
+</section>
+</section>
+<section id="ubuntu-ntfs">
+<h1>Ubuntu自动挂载磁盘分区(NTFS)<a class="headerlink" href="#ubuntu-ntfs" title="Link to this heading">¶</a></h1>
+<section id="id9">
+<h2>方式一<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h2>
+<p>安装ubuntu后才发现分配给ubuntu系统的磁盘容量根本不够，打算将windows的磁盘空间挤出来给ubuntu用，或者后续添加硬盘，挂载到ubuntu.</p>
+<ol class="simple">
+<li><p>在windows系统中，控制面板进入磁盘管理，选择要挤出空间的分区，右键压缩磁盘得到适当的空闲磁盘空间，结束后会得到free space（空闲未分配的分区）。</p></li>
+<li><p>进入ubuntu系统，执行以下命令安装gparted分区管理工具：</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>gparted
+</pre></div>
+</div>
+<p>安装完成，运行之：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>gparted
+</pre></div>
+</div>
+<ol class="simple">
+<li><p>进入gparted软件界面，选择挤出来的那个分区，右键创建新分区，类型和/目录一样，都是主分区(primary)，大小就是全部，格式为ext4，然后，点击上面的淡绿色的对勾，应用(apply)分区更改。
+结束后，分区表会自动更新，退出软件，最好重启。</p></li>
+<li><p>在你想要挂载的路径下创建挂载文件夹：</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>/home/xc/space1
+BASH<span class="w"> </span>复制<span class="w"> </span>全屏
+</pre></div>
+</div>
+<ol class="simple">
+<li><p>找到新分区的名称，可以采用如下命令查看要挂载的分区（通过大小区分）：</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>df<span class="w"> </span>-l
+</pre></div>
+</div>
+<p>输出类似如下：</p>
+<div class="highlight-plain notranslate"><div class="highlight"><pre><span></span>Filesystem     1K-blocks     Used Available Use% Mounted on
+udev             7992024        0   7992024   0% /dev
+tmpfs            1604316     2416   1601900   1% /run
+/dev/nvme0n1p7  75664204 52652344  19122608  74% /
+tmpfs            8021580        0   8021580   0% /dev/shm
+tmpfs               5120        4      5116   1% /run/lock
+tmpfs            8021580        0   8021580   0% /sys/fs/cgroup
+/dev/loop1        136576   136576         0 100% /snap/chromium/2036
+/dev/loop3         56832    56832         0 100% /snap/core18/2128
+/dev/loop2         56960    56960         0 100% /snap/core18/2538
+/dev/loop4        224256   224256         0 100% /snap/gnome-3-34-1804/77
+/dev/loop5          2688     2688         0 100% /snap/gnome-calculator/920
+/dev/loop6          2560     2560         0 100% /snap/gnome-calculator/884
+/dev/loop7        247168   247168         0 100% /snap/gnome-3-38-2004/70
+/dev/loop0           128      128         0 100% /snap/bare/5
+/dev/loop8           768      768         0 100% /snap/gnome-characters/741
+/dev/nvme0n1p6   9740796   140816   9083580   2% /boot
+/dev/nvme0n1p8  81988552       12  77777852   1% /home/xc/space1
+/dev/nvme0n1p1    262144    36848    225296  15% /boot/efi
+/dev/loop9         63488    63488         0 100% /snap/core20/1587
+/dev/loop10         2688     2688         0 100% /snap/gnome-system-monitor/178
+/dev/loop11          768      768         0 100% /snap/gnome-characters/726
+/dev/loop12        48128    48128         0 100% /snap/snapd/16292
+/dev/loop13         2560     2560         0 100% /snap/gnome-system-monitor/163
+/dev/loop14          640      640         0 100% /snap/gnome-logs/112
+/dev/loop15       224256   224256         0 100% /snap/gnome-3-34-1804/72
+/dev/loop16       410496   410496         0 100% /snap/gnome-3-38-2004/112
+/dev/loop17        63360    63360         0 100% /snap/core20/1081
+/dev/loop18        66688    66688         0 100% /snap/gtk-common-themes/1515
+/dev/loop19        93952    93952         0 100% /snap/gtk-common-themes/1535
+/dev/loop20          640      640         0 100% /snap/gnome-logs/106
+tmpfs            1604316       16   1604300   1% /run/user/121
+tmpfs            1604316       20   1604296   1% /run/user/1000
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">/dev/nvme0n1p8</span> <span class="pre">81988552</span> <span class="pre">12</span> <span class="pre">77777852</span> <span class="pre">1%</span> <span class="pre">/home/xc/space1</span></code>是我已经挂载了的，一般会默认挂载到/media目录下。</p>
+<ol class="simple">
+<li><p>查看要挂载分区的块标志符block id(blkid)，如目标分区是’/dev/nvme0n1p8’，则查询：</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>blkid<span class="w"> </span>/dev/nvme0n1p8
+</pre></div>
+</div>
+<p>输出类似如下：</p>
+<div class="highlight-plain notranslate"><div class="highlight"><pre><span></span>/dev/nvme0n1p8: UUID=&quot;df97552f-4af8-4469-a65a-7098fd5733ac&quot; TYPE=&quot;ext4&quot; PARTUUID=&quot;13dbfc2f-c5bd-4b9c-ab6d-6af72d4df077&quot;
+</pre></div>
+</div>
+<p>记录下UUID： UUID=”df97552f-4af8-4469-a65a-7098fd5733ac”</p>
+<ol class="simple">
+<li><p>修改<code class="docutils literal notranslate"><span class="pre">/etc/fstab</span></code>持久化挂载映射表：</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>gedit<span class="w"> </span>/etc/fstab
+</pre></div>
+</div>
+<p>添加如下内容：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">UUID</span><span class="o">=</span>df97552f-4af8-4469-a65a-7098fd5733ac<span class="w"> </span>/home/xc/space1<span class="w"> </span>ext4<span class="w">   </span>defaults<span class="w">         </span><span class="m">0</span><span class="w">       </span><span class="m">2</span>
+</pre></div>
+</div>
+<p>其中uuid就是上面blkid查询得到的分区块标志符，而第二列是要挂载的目录，最好挂载到<code class="docutils literal notranslate"><span class="pre">/home/xc/</span></code>下，这样没有权限问题。
+第三列是文件格式，选择ext4。第四列是挂载参数，如自动挂载等，保持defaults就好。
+第五列的0表示不备份分区，1表示备份，通常不备份。
+第六列的2表示系统磁盘fsck自检查的等级，0表示不检查磁盘，1表示最先检查，可以同时检查也可靠后，通常填2即可。
+具体的fstab的字段解释参考网址：https://blog.csdn.net/imliuqun123/article/details/109289716 .</p>
+<ol class="simple">
+<li><p>保存好fstab文件后重启系统，此时可以看到自动挂载的文件夹。但是文件夹有个🔓，表示需要root权限才能访问，因此，我们需要更改其权限为本用户所有：</p></li>
+</ol>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>nautilus<span class="w"> </span>/home/xc/space1
+</pre></div>
+</div>
+<p>设置文件夹权限为所有者为本用户xc。权限为创建与删除。
+退出，就OK了。</p>
+</section>
+<section id="id10">
+<h2>方式二(推荐)<a class="headerlink" href="#id10" title="Link to this heading">¶</a></h2>
+<p>ubuntu 20.04挂载ntfs磁盘步骤如下：</p>
+<ul class="simple">
+<li><p>查看当前用户id和组id，记下uid和gid</p></li>
+</ul>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>id
+</pre></div>
+</div>
+<p>显示结果如下：
+uid=1000(scue) gid=1000(scue) 组=1000(scue),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),109(lpadmin),124(sambashare),125(vboxusers),1001(usbfs)</p>
+<ul class="simple">
+<li><p>查看当前磁盘的UUID和分区表信息</p></li>
+</ul>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>blkid
+</pre></div>
+</div>
+<p>显示结果如下：
+/dev/sda1: UUID=“DA18EBFA09C1B27D” TYPE=“ntfs” PTTYPE=“atari” PARTLABEL=“Basic data partition” PARTUUID=“7fd2a2dd-d633-4740-bf96-6db2540b0f3a”</p>
+<ul class="simple">
+<li><p>创建挂载目录</p></li>
+</ul>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/home/xxx/data2
+</pre></div>
+</div>
+<p>此步骤不创建目录的话会导致挂载失败。</p>
+<ul class="simple">
+<li><p>打开/etc/fstab</p></li>
+</ul>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>gedit<span class="w"> </span>/etc/fstab
+</pre></div>
+</div>
+<p>添加如下内容：</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nv">UUID</span><span class="o">=</span><span class="s2">&quot;DA18EBFA09C1B27D&quot;</span><span class="w">     </span>/home/xx/data2<span class="w">    </span>ntfs<span class="w"> </span>defaults,locale<span class="o">=</span>zh_CN.UTF-8<span class="w"> </span><span class="m">0</span><span class="w">   </span><span class="m">0</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>验证挂载</p></li>
+</ul>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>mount<span class="w"> </span>-a
+</pre></div>
+</div>
+</section>
+</section>
+<section id="ubuntu20-04-dummy-output-intel">
+<h1>解决ubuntu20.04系统不发出声音、显示伪输出（dummy output）的问题(Intel板载声卡)<a class="headerlink" href="#ubuntu20-04-dummy-output-intel" title="Link to this heading">¶</a></h1>
+<p><strong>一、切换到root管理员权限vim 编辑</strong>
+/etc/modprobe.d/alsa-base.conf文件
+在文件中加入
+options snd-hda-intel dmic_detect=0
+或直接输入以下命令回车
+echo options snd-hda-intel dmic_detect=0 | sudo <a class="reference external" href="https://so.csdn.net/so/search?q=tee&amp;spm=1001.2101.3001.7020">tee</a> -a /etc/modprobe.d/alsa-base.conf
+<strong>二、再编辑</strong>
+/etc/modprobe.d/blacklist.conf文件
+加入
+blacklist snd_soc_skl
+或直接输入以下命令回车
+echo blacklist snd_soc_skl | sudo tee -a /etc/modprobe.d/blacklist.conf
+重启系统
+reboot</p>
+<p>参考以下脚本</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/etc/modprobe.d
+sudo<span class="w"> </span>cp<span class="w"> </span>./alsa-base.conf<span class="w"> </span>./alsa-base.conf.BAK
+sudo<span class="w"> </span>cp<span class="w"> </span>./blacklist.conf<span class="w"> </span>./blacklist.conf.BAK
+
+sudo<span class="w"> </span>vi<span class="w"> </span>./alsa-base.conf
+<span class="c1"># 在文件末尾插入 options snd-hda-intel dmic_detect=0</span>
+sudo<span class="w"> </span>vi<span class="w"> </span>./blacklist.conf
+<span class="c1"># 在文件末尾插入 blacklist snd_soc_skl</span>
+
+sudo<span class="w"> </span>reboot
+</pre></div>
+</div>
+</section>
+<section id="fail2ban-ssh">
+<h1>安装和配置 Fail2ban 以保护 SSH<a class="headerlink" href="#fail2ban-ssh" title="Link to this heading">¶</a></h1>
+<p>Fail2ban 介绍</p>
+<p>Fail2Ban 是一款开源的防护软件，旨在保护计算机系统免受恶意攻击和暴力破解。它通过监视系统日志文件，检测到多次失败的登录尝试、恶意行为或其他不寻常活动，然后采取预先配置的措施来应对这些威胁，比如暂时封禁攻击者的 IP 地址。</p>
+<p>以下是 Fail2Ban 的一些关键特点和功能：</p>
+<ol class="simple">
+<li><p><strong>监视日志文件</strong>：Fail2Ban 主要通过监视系统的日志文件来检测潜在的安全问题。它可以监视 SSH、FTP、SMTP 等服务的日志文件，并分析其中的登录尝试、错误信息等。</p></li>
+<li><p><strong>基于规则的匹配</strong>：Fail2Ban 使用基于正则表达式的规则来匹配日志文件中的事件。通过配置适当的规则，可以识别恶意行为，如暴力破解密码、拒绝服务攻击等。</p></li>
+<li><p><strong>自动封禁</strong>：一旦 Fail2Ban 检测到恶意行为，例如多次失败的登录尝试，它会自动封禁攻击者的 IP 地址。封禁可以是暂时的，也可以是永久的，具体取决于配置。</p></li>
+<li><p><strong>灵活的配置</strong>：Fail2Ban 的配置非常灵活，可以根据特定的需求和威胁模式进行定制。用户可以配置规则、封禁时长、白名单等参数，以适应不同的环境和安全策略。</p></li>
+<li><p><strong>日志和报告</strong>：Fail2Ban 提供了详细的日志和报告，记录了检测到的事件、封禁的 IP 地址以及采取的措施。这些日志和报告对于审计和调查安全事件非常有用。</p></li>
+</ol>
+<p>Fail2Ban 是一款功能强大的工具，可以帮助系统管理员保护计算机系统免受各种网络攻击的威胁，提高系统的安全性和稳定性。它已经被广泛应用于各种网络环境中，包括个人计算机、企业服务器和云平台。</p>
+<p>工作原理</p>
+<p>Fail2ban 是一款功能强大的工具，它可以通过监控日志文件（例如 /var/log/auth.log 和 /var/log/apache/access.log）来帮助保护您的服务器免受暴力攻击。该软件可以检测到多次登录系统的失败尝试，然后在一定时间内自动禁止违规 IP 地址。Fail2ban 可以执行各种操作，包括更新 Iptable 防火墙规则、将 IP 地址添加到 TCP Wrapper 的 hosts.deny 表、发送电子邮件通知以及执行任何用户定义的操作。</p>
+<p>在这篇文章中，我们将向您展示如何安装和配置 Fail2ban 以保护您的服务器免受 SSH 和 apache 基本身份验证的暴力登录攻击。</p>
+<p>安装</p>
+<p>要在您的服务器上安装 Fail2ban，您首先需要确保您具有管理权限。确认这一点后，您可以继续使用您选择的包管理器安装软件。例如，在 Ubuntu 上，您可以使用以下命令：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>fail2ban<span class="w"> </span>-y<span class="w">    </span>
+</pre></div>
+</div>
+<p>检查状态</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>fail2ban
+</pre></div>
+</div>
+<p>配置</p>
+<p>所有配置文件都位于 /etc/fail2ban/ 目录中。您应该能够看到目录中的文件，如下所示：</p>
+<p><img alt="img" src="https://nas.yanghong.dev:8200/wp-content/uploads/2024/05/image-11-1024x262.png" /></p>
+<p>jail.conf 是主配置文件，包含所有可用选项。它包含 HTTP、SSH、FTP、Webmail、WebApplications 等服务的配置文件。一些最常用的微调参数是：</p>
+<ul class="simple">
+<li><p><strong>bantime</strong>：主机被禁止的秒数。</p></li>
+<li><p><strong>findtime</strong>：如果主机在“findtime”期间生成了“maxretry”，则会被禁止。</p></li>
+<li><p><strong>maxretry</strong>：主机被禁止之前的失败次数。</p></li>
+<li><p><strong>ignoreip</strong>：fail2ban 将忽略的 IP 地址。</p></li>
+<li><p><strong>port</strong>：服务名称或端口。</p></li>
+<li><p><strong>logpath</strong>：fail2ban 检查的日志文件路径。</p></li>
+</ul>
+<p>一般不建议直接更改 jail.conf 文件。可以拷贝一个新的 jail.local 文件来管理 SSH 的安全，这样可以轻松跟踪 jail，并最大限度地减少错误配置的机会。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>cp<span class="w"> </span>/etc/fail2ban/jail.conf<span class="w"> </span>/etc/fail2ban/jail.local
+</pre></div>
+</div>
+<p><strong>为 SSH 配置 Fail2Ban</strong></p>
+<p>在 ubuntu 上，ssh 的 fail2ban 已默认配置。您可以使用以下命令验证 jail 是否已启用：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>fail2ban-client<span class="w"> </span>status
+</pre></div>
+</div>
+<p><img alt="img" src="https://nas.yanghong.dev:8200/wp-content/uploads/2024/05/image-13-1024x66.png" /></p>
+<p>但是需要手动配置 jail.local 文件。在该文件中找到 [sshd]并进行配置。如下是示范，可以按照自己的实际情况更改。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>sshd<span class="o">]</span>
+
+<span class="c1"># To use more aggressive sshd modes set filter parameter &quot;mode&quot; in jail.local:</span>
+<span class="c1"># normal (default), ddos, extra or aggressive (combines all).</span>
+<span class="c1"># See &quot;tests/files/logs/sshd&quot; or &quot;filter.d/sshd.conf&quot; for usage example and details.</span>
+<span class="c1">#mode   = normal</span>
+<span class="nb">enable</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="w"> </span><span class="c1"># 打开sshd保护</span>
+<span class="nv">port</span><span class="w">    </span><span class="o">=</span><span class="w"> </span>ssh<span class="w"> </span><span class="c1"># ssh端口。也可以是端口号</span>
+<span class="nv">filter</span><span class="w">  </span><span class="o">=</span><span class="w"> </span>sshd
+<span class="nv">logpath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>%<span class="o">(</span>sshd_log<span class="o">)</span>s
+<span class="nv">backend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>%<span class="o">(</span>sshd_backend<span class="o">)</span>s
+<span class="nv">bantime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>7d<span class="w"> </span><span class="c1"># block 7 days, 604800s</span>
+<span class="nv">findtime</span><span class="w">        </span><span class="o">=</span><span class="w"> </span>1d<span class="w"> </span><span class="c1"># fail in 1 hour</span>
+
+<span class="nv">maxretry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="c1"># max retry 5 times</span>
+</pre></div>
+</div>
+<p>更改完配置文件后需要重新启动服务以生效。可以使用以下命令完成此操作：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>fail2ban.service
+</pre></div>
+</div>
+<p>检查监狱状态和禁止/取消禁止 IP</p>
+<p>我们可以使用以下命令检查监狱的状态：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>fail2ban-client<span class="w"> </span>status
+</pre></div>
+</div>
+<p><img alt="img" src="https://nas.yanghong.dev:8200/wp-content/uploads/2024/05/image-14-1024x58.png" /></p>
+<p>我们可以通过故意输入错误的 ssh 身份验证参数来测试这一点。达到配置的 maxretry 后，该 ip 将被列入配置 bantime 的黑名单。那些偷偷摸摸干坏事的 IP 也列出来亮个相。</p>
+<p><img alt="img" src="https://nas.yanghong.dev:8200/wp-content/uploads/2024/05/image-15-1024x152.png" /></p>
+<p>检查位于 /var/log/fail2ban.log 的 fail2ban 日志后，我们可以看到 fail2ban 采取的措施</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="m">2024</span>-05-04<span class="w"> </span><span class="m">13</span>:15:38,352<span class="w"> </span>fail2ban.actions<span class="w">        </span><span class="o">[</span><span class="m">138750</span><span class="o">]</span>:<span class="w"> </span>NOTICE<span class="w">  </span><span class="o">[</span>sshd<span class="o">]</span><span class="w"> </span>Restore<span class="w"> </span>Ban<span class="w"> </span><span class="m">120</span>.26.123.230
+<span class="m">2024</span>-05-04<span class="w"> </span><span class="m">13</span>:15:38,373<span class="w"> </span>fail2ban.actions<span class="w">        </span><span class="o">[</span><span class="m">138750</span><span class="o">]</span>:<span class="w"> </span>NOTICE<span class="w">  </span><span class="o">[</span>sshd<span class="o">]</span><span class="w"> </span>Restore<span class="w"> </span>Ban<span class="w"> </span><span class="m">182</span>.92.180.6
+<span class="m">2024</span>-05-04<span class="w"> </span><span class="m">13</span>:15:38,376<span class="w"> </span>fail2ban.actions<span class="w">        </span><span class="o">[</span><span class="m">138750</span><span class="o">]</span>:<span class="w"> </span>NOTICE<span class="w">  </span><span class="o">[</span>sshd<span class="o">]</span><span class="w"> </span>Restore<span class="w"> </span>Ban<span class="w"> </span><span class="m">193</span>.201.9.156
+<span class="m">2024</span>-05-04<span class="w"> </span><span class="m">13</span>:15:38,380<span class="w"> </span>fail2ban.actions<span class="w">        </span><span class="o">[</span><span class="m">138750</span><span class="o">]</span>:<span class="w"> </span>NOTICE<span class="w">  </span><span class="o">[</span>sshd<span class="o">]</span><span class="w"> </span>Restore<span class="w"> </span>Ban<span class="w"> </span><span class="m">193</span>.32.162.36
+<span class="m">2024</span>-05-04<span class="w"> </span><span class="m">13</span>:15:38,387<span class="w"> </span>fail2ban.actions<span class="w">        </span><span class="o">[</span><span class="m">138750</span><span class="o">]</span>:<span class="w"> </span>NOTICE<span class="w">  </span><span class="o">[</span>sshd<span class="o">]</span><span class="w"> </span>Restore<span class="w"> </span>Ban<span class="w"> </span><span class="m">64</span>.227.140.112
+<span class="m">2024</span>-05-04<span class="w"> </span><span class="m">13</span>:15:38,398<span class="w"> </span>fail2ban.actions<span class="w">        </span><span class="o">[</span><span class="m">138750</span><span class="o">]</span>:<span class="w"> </span>NOTICE<span class="w">  </span><span class="o">[</span>sshd<span class="o">]</span><span class="w"> </span>Restore<span class="w"> </span>Ban<span class="w"> </span><span class="m">85</span>.209.11.227
+</pre></div>
+</div>
+<p>为了删除 IP 地址，我们可以发出以下命令：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>fail2ban-client<span class="w"> </span><span class="nb">set</span><span class="w"> </span>sshd<span class="w"> </span>unbanip<span class="w"> </span>&lt;REMOTE-IP-ADDRESS&gt;<span class="w"> </span>
+</pre></div>
+</div>
+<p>我们还可以使用以下命令禁止特定的 IP：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>fail2ban-client<span class="w"> </span><span class="nb">set</span><span class="w"> </span>sshd<span class="w"> </span>banip<span class="w"> </span>&lt;REMOTE-IP-ADDRESS&gt;
+</pre></div>
+</div>
+</section>
+<section id="id11">
+<h1>ubuntu 如何放开端口<a class="headerlink" href="#id11" title="Link to this heading">¶</a></h1>
+<p>在 Ubuntu 上放开端口，可以通过以下步骤进行操作：</p>
+<ol class="simple">
+<li><p>使用 root 用户或具有管理员权限的用户登录到 Ubuntu 系统。</p></li>
+<li><p>使用防火墙工具（如ufw）放开特定的端口。ufw 是 Ubuntu 上的一个简化的防火墙配置工具，可以轻松管理端口和防火墙规则。</p>
+<ul class="simple">
+<li><p>检查 ufw 是否已安装：在终端中执行 <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">ufw</span> <span class="pre">version</span></code>，如果显示版本信息，则已安装。</p></li>
+<li><p>如果 ufw 未安装，可以使用以下命令进行安装：<code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">install</span> <span class="pre">ufw</span></code></p></li>
+</ul>
+</li>
+<li><p>开放指定的端口：执行以下命令来放开特定的端口，例如放开 80 端口：</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>ufw<span class="w"> </span>allow<span class="w"> </span><span class="m">80</span>
+</pre></div>
+</div>
+<ol class="simple">
+<li><p>如果要放开其他端口，请将 <code class="docutils literal notranslate"><span class="pre">80</span></code> 替换为相应的端口号。</p></li>
+<li><p>验证端口是否已放开：可以执行以下命令来查看 ufw 的状态和已开放的端口：</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>ufw<span class="w"> </span>status
+</pre></div>
+</div>
+<p>这将显示当前的防火墙规则和已启用的端口。</p>
+<p>请注意，放开端口也意味着允许外部访问该端口，因此在放开端口之前，请确保你了解安全风险，并只放开需要的端口。另外，如果你的系统上运行了其他防火墙工具（如iptables），你需要根据具体工具的使用方式进行相应配置。</p>
+</section>
+<section id="springboot-systemd">
+<h1>springboot 服务制作成 systemd 服务<a class="headerlink" href="#springboot-systemd" title="Link to this heading">¶</a></h1>
+<p><strong>注意！防火墙开放8900端口</strong></p>
+<p>2、如何制作 systemd 服务</p>
+<p>首先，我们需要创建一个名为 <code class="docutils literal notranslate"><span class="pre">my-spring-boot-app.service</span></code> 的 systemd 服务文件。在 Linux 中，通常将此文件存储在 <code class="docutils literal notranslate"><span class="pre">/etc/systemd/system/</span></code> 目录下。</p>
+<p>my-spring-boot-app.service 内容为：</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[Unit]</span>
+<span class="na">Description</span><span class="o">=</span><span class="s">My Spring Boot Application</span><span class="w">  </span>
+<span class="c1">#名称描述</span>
+<span class="na">After</span><span class="o">=</span><span class="s">syslog.target</span><span class="w"> </span>
+<span class="c1">#告诉 systemd 在哪个主要系统服务后启动本服务</span>
+
+<span class="k">[Service]</span>
+<span class="na">User</span><span class="o">=</span><span class="s">myuser</span><span class="w"> </span>
+<span class="c1">#应用程序运行的用户</span>
+<span class="na">WorkingDirectory</span><span class="o">=</span><span class="s">/path/to/my/springboot/app</span><span class="w"> </span>
+<span class="c1">#应用程序的工作目录</span>
+<span class="na">Group</span><span class="o">=</span><span class="s">mygroup</span><span class="w"> </span>
+<span class="c1">#组信息</span>
+<span class="na">ExecStart</span><span class="o">=</span><span class="s">/usr/bin/java -Xms256m -Xmx512m -jar /path/to/my/springboot/app/my-spring-boot-app.jar --server.port=8080</span>
+<span class="c1">#或直接使用脚本sh文件：/mnt/toshiba/server/run/systemd_v1_0_1_localhost.sh</span>
+<span class="na">SuccessExitStatus</span><span class="o">=</span><span class="s">143</span><span class="w"> </span>
+<span class="c1">#应用程序退出时的退出状态码，设置为 143 表示systemctl stop 命令下服务可以快速关闭</span>
+<span class="na">TimeoutStopSec</span><span class="o">=</span><span class="s">10</span><span class="w"> </span>
+<span class="c1">#表示在关闭服务前等待的时间</span>
+<span class="na">Restart</span><span class="o">=</span><span class="s">always</span><span class="w"> </span>
+<span class="c1">#设置服务崩溃时自动重启服务</span>
+<span class="na">RestartSec</span><span class="o">=</span><span class="s">5</span><span class="w"> </span>
+<span class="c1">#在崩溃后五秒重试</span>
+<span class="na">LimitNOFILE</span><span class="o">=</span><span class="s">65536</span><span class="w"> </span>
+<span class="c1">#表示服务最多可以打开 65536 个文件</span>
+<span class="na">ExecStop</span><span class="o">=</span><span class="s">/usr/bin/pkill -f my-spring-boot-app.jar</span><span class="w"> </span>
+<span class="c1">#执行 systemctl 时执行的命令</span>
+<span class="c1">#ExecStop=/bin/kill -15 $MAINPID</span>
+
+<span class="k">[Install]</span>
+<span class="na">WantedBy</span><span class="o">=</span><span class="s">multi-user.target</span>
+<span class="c1">#服务会在 default.target 启动后启动，也可修改为multi-user.target</span>
+</pre></div>
+</div>
+<p>3、重新加载 systemd 配置</p>
+<p>添加服务文件后，需要重新加载 systemd 配置以更新系统。使用以下命令重新加载 systemd 配置：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>systemctl<span class="w"> </span>daemon-reload
+</pre></div>
+</div>
+<p>4、启动 systemd 服务</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>my-spring-boot-app
+</pre></div>
+</div>
+<p>5、查看服务状态</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>my-spring-boot-app
+</pre></div>
+</div>
+<p>6、停止服务</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>systemctl<span class="w"> </span>stop<span class="w"> </span>my-spring-boot-app
+</pre></div>
+</div>
+<p>7、设置服务自启动和禁止自启动</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>my-spring-boot-app<span class="w">   </span><span class="c1">#设置服务自启动</span>
+sudo<span class="w"> </span>systemctl<span class="w"> </span>disable<span class="w"> </span>my-spring-boot-app<span class="w">  </span><span class="c1">#取消服务自启动</span>
+</pre></div>
+</div>
+</section>
+<section id="id12">
+<h1>开机自动运行命令<a class="headerlink" href="#id12" title="Link to this heading">¶</a></h1>
+<section id="id13">
+<h2>第0种添加系统启动脚本方式：<a class="headerlink" href="#id13" title="Link to this heading">¶</a></h2>
+<p>Ubuntu 20.04的服务管理是基于<a class="reference external" href="https://github.com/systemd/systemd">systemd</a>的，因此设置服务自启动最推荐的方法是创建一个systemd服务文件，配置好要执行的服务。过程如下:</p>
+<ol class="simple">
+<li><p>创建我们需要开机自启动的脚本，例如/mnt/toshiba/server/run/run_v1_0_1_localhost.sh，其内容如下：</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+
+Your<span class="w"> </span><span class="nb">command</span><span class="w"> </span>here
+</pre></div>
+</div>
+<p><strong>注意，开头一定要加上：</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+</pre></div>
+</div>
+<ol class="simple">
+<li><p>在<code class="docutils literal notranslate"><span class="pre">/etc/systemd/system/</span></code>目录下创建一个systemd服务文件, 命名为<code class="docutils literal notranslate"><span class="pre">video_station.service</span></code>, 内容如下：</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>Unit<span class="o">]</span>
+<span class="nv">After</span><span class="o">=</span>network.service
+
+<span class="o">[</span>Service<span class="o">]</span>
+<span class="nv">User</span><span class="o">=</span>root
+<span class="nv">Group</span><span class="o">=</span>root
+<span class="nv">WorkingDirectory</span><span class="o">=</span>/mnt/toshiba/server/run/
+<span class="nv">Environment</span><span class="o">=</span><span class="s2">&quot;PATH=/mnt/toshiba/server/run/&quot;</span>
+<span class="nv">ExecStart</span><span class="o">=</span>/mnt/toshiba/server/run/run_v1_0_1_localhost.sh
+<span class="nv">ExecReload</span><span class="o">=</span>/bin/kill<span class="w"> </span>-s<span class="w"> </span>HUP<span class="w"> </span><span class="nv">$MAINPID</span>
+<span class="nv">RestartSec</span><span class="o">=</span><span class="m">5</span>
+
+<span class="o">[</span>Install<span class="o">]</span>
+<span class="nv">WantedBy</span><span class="o">=</span>default.target
+</pre></div>
+</div>
+<p>其中，After表示服务何时启动，After=network.service 表示网络连接完成后，启动我们的服务；ExecStart表示我们的脚本（步骤1中的test.sh)的路径；WantedBy默认填default.target。</p>
+<p>注意，ExecStart=/home/ubuntu/video_station.sh 这里一定不能用 ~/ 来代替/home/$USER</p>
+<ol class="simple">
+<li><p>将systemd服务文件和我们的脚本更改权限，使其可执行。</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>chmod<span class="w"> </span><span class="m">744</span><span class="w"> </span>/mnt/toshiba/server/run/run_v1_0_1_localhost.sh
+sudo<span class="w"> </span>chmod<span class="w"> </span><span class="m">664</span><span class="w"> </span>/etc/systemd/user/video_station.service
+</pre></div>
+</div>
+<ol class="simple">
+<li><p>重新加载系统的systemd服务文件，并启用我们自己写的video_station.service文件。</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>systemctl<span class="w"> </span>daemon-reload
+sudo<span class="w"> </span>systemctl<span class="w"> </span>--user<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>video_station.service
+</pre></div>
+</div>
+<p><a class="reference external" href="https://linuxconfig.org/how-to-run-script-on-startup-on-ubuntu-20-04-focal-fossa-server-desktop">参考文章</a></p>
+</section>
+<section id="shell">
+<h2>第一种shell脚本方式<a class="headerlink" href="#shell" title="Link to this heading">¶</a></h2>
+<p>1、进入 /etc/init.d/ 目录</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/etc/init.d/
+</pre></div>
+</div>
+<p>2、新建一个自定义名称的sh脚本，这里以 xxx 名称为例建立一个 xxx.sh 的脚本</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vi<span class="w"> </span>video_station.sh<span class="w">        </span><span class="c1"># xxx为你的脚本文件名</span>
+</pre></div>
+</div>
+<p>video_station.sh 脚本内容，编辑好以后保存退出 :wq</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">### BEGIN INIT INFO</span>
+<span class="c1"># Provides:          svnd.sh</span>
+<span class="c1"># Required-start:    $local_fs $remote_fs $network $syslog</span>
+<span class="c1"># Required-Stop:     $local_fs $remote_fs $network $syslog</span>
+<span class="c1"># Default-Start:     2 3 4 5</span>
+<span class="c1"># Default-Stop:      0 1 6</span>
+<span class="c1"># Short-Description: starts the svnd.sh daemon</span>
+<span class="c1"># Description:       starts svnd.sh using start-stop-daemon</span>
+<span class="c1">### END INIT INFO</span>
+<span class="w"> </span>
+<span class="w"> </span>
+bt<span class="w"> </span>restart<span class="w">        </span><span class="c1"># 这里为需要执行的命令</span>
+</pre></div>
+</div>
+<p>注：脚本内容必须包含 ### BEGIN INIT INFO  ……  ### END INIT INFO ,不然会报错误：<em><strong>*missing LSB tags and overrides*</strong></em></p>
+<p>3、赋予脚本权限</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>chmod<span class="w"> </span><span class="m">775</span><span class="w"> </span>./video_station.sh<span class="w">        </span>
+<span class="c1"># xxx为你的脚本文件名 </span>
+</pre></div>
+</div>
+<p>4、然后执行以下命令</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>update-rc.d<span class="w"> </span>video_station.sh<span class="w"> </span>defaults<span class="w"> </span><span class="m">90</span><span class="w">        </span>
+<span class="w"> </span><span class="c1"># xxx为你的脚本文件名</span>
+</pre></div>
+</div>
+<p>5、最后重启系统即可：reboot</p>
+<p>附：取消开机启动脚本</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/etc/init.d
+<span class="c1"># 进入/etc/init.d目录</span>
+sudo<span class="w"> </span>update-rc.d<span class="w"> </span>-f<span class="w"> </span>video_station.sh<span class="w"> </span>remove
+<span class="c1"># 移除脚本，XXX为你的脚本文件名</span>
+</pre></div>
+</div>
+</section>
+<section id="id14">
+<h2>第二种添加系统启动脚本方式：<a class="headerlink" href="#id14" title="Link to this heading">¶</a></h2>
+<p>0x01创建rc.local</p>
+<p>ubuntu-18.04以后 默认是没有 /etc/rc.local 这个文件的，需要自己创建</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>touch<span class="w"> </span>/etc/rc.local<span class="w"> </span>
+</pre></div>
+</div>
+<p>0x02写入开机自启的脚本</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/sh</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;看到这行字，说明添加自启动脚本成功。&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>/usr/local/test.log
+<span class="nb">exit</span><span class="w"> </span><span class="m">0</span>
+</pre></div>
+</div>
+<p>0x03给rc.local加执行权限</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>chmod<span class="w"> </span>+x<span class="w"> </span>/etc/rc.local
+</pre></div>
+</div>
+<p>0x04链接配置文件</p>
+<p>systemd 默认读取 /etc/systemd/system 下的配置文件, 所以还需要在 /etc/systemd/system 目录下创建软链接</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ln<span class="w"> </span>-s<span class="w"> </span>/lib/systemd/system/rc-local.service<span class="w"> </span>/etc/systemd/system/<span class="w"> </span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="wsl-ubuntu-systemctl">
+<h1>WSL Ubuntu systemctl报错<a class="headerlink" href="#wsl-ubuntu-systemctl" title="Link to this heading">¶</a></h1>
+<p>WSL 中暂时不支持 systemctl，所以使用下面的命令会报错。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>systemctl
+</pre></div>
+</div>
+<p>报错信息为</p>
+<blockquote>
+<div><p>System has not been booted with systemd as init system (PID 1). Can’t operate.
+Failed to connect to bus: Host is down</p>
+</div></blockquote>
+<p>即系统没有通过 systemd 启动，所以不能操作。</p>
+<p>WSL 的官方文档上也提到了这一点。</p>
+<blockquote>
+<div><p>目前 WSL 不支持 <code class="docutils literal notranslate"><span class="pre">systemd</span></code>（Linux 中的服务管理系统）。</p>
+</div></blockquote>
+<p>但是有折中的方法。</p>
+<p>可以把 systemctl 命令换成 /etc/init.d/</p>
+<p>例如</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>docker
+</pre></div>
+</div>
+<p>换成下面这样</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>/etc/init.d/docker<span class="w"> </span>status
+</pre></div>
+</div>
+<p>也可以使用 service 命令</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>service<span class="w"> </span>docker<span class="w"> </span>status
+</pre></div>
+</div>
+</section>
+<section id="id15">
+<h1>Ubuntu关闭盖子/按电源键/按休眠键功能，关闭盖子不休眠<a class="headerlink" href="#id15" title="Link to this heading">¶</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">HandlePowerKey</span></code>: 按下电源键后的行为，默认power off</p>
+<p><code class="docutils literal notranslate"><span class="pre">HandleSleepKey</span></code>: 按下挂起键后的行为，默认suspend</p>
+<p><code class="docutils literal notranslate"><span class="pre">HandleHibernateKey</span></code>: 按下休眠键后的行为，默认hibernate</p>
+<p><code class="docutils literal notranslate"><span class="pre">HandleLidSwitch</span></code>: 合上笔记本盖后的行为，默认suspend（改为ignore；即合盖不休眠）</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>vi<span class="w"> </span>/etc/systemd/logind.conf
+<span class="c1">#然后将其中的：</span>
+<span class="c1">#HandleLidSwitch=suspend</span>
+<span class="c1">#改成下面，记得去掉“#”号：</span>
+<span class="nv">HandleLidSwitch</span><span class="o">=</span>ignore
+<span class="c1">#最后重启服务</span>
+sudo<span class="w"> </span>service<span class="w"> </span>systemd-logind<span class="w"> </span>restart
+</pre></div>
+</div>
+<p>配置文件解析：</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1">#  This file is part of systemd.</span>
+<span class="c1"># </span>
+<span class="c1">#  systemd is free software; you can redistribute it and/or modify it</span>
+<span class="c1">#  under the terms of the GNU Lesser General Public License as published by</span>
+<span class="c1">#  the Free Software Foundation; either version 2.1 of the License, or</span>
+<span class="c1">#  (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1"># Entries in this file show the compile time defaults.</span>
+<span class="c1"># You can change settings by editing this file.</span>
+<span class="c1"># Defaults can be restored by simply deleting this file.</span>
+<span class="c1">#</span>
+<span class="c1"># See logind.conf(5) for details.</span>
+
+<span class="o">[</span>Login<span class="o">]</span>
+<span class="c1">#配置分配的虚拟终端(VTs)数量，默认6个</span>
+<span class="c1">#NAutoVTs=6</span>
+
+<span class="c1">#标识一个将无条件预留给autovt@.的虚拟终端服务激活</span>
+<span class="c1">#ReserveVT=6</span>
+
+<span class="c1">#配置用户退出时是否停止该用户的进程</span>
+<span class="c1">#KillUserProcesses=no</span>
+
+<span class="c1">#设置进程被杀死的用户</span>
+<span class="c1">#KillOnlyUsers=</span>
+
+<span class="c1">#设置不被杀死进程的用户</span>
+<span class="c1">#KillExcludeUsers=root</span>
+
+<span class="c1">#指定系统关闭或睡眠请求延迟的最长时间，默认为5秒</span>
+<span class="c1">#InhibitDelayMaxSec=5</span>
+
+<span class="c1">#为电源操作，默认关机</span>
+<span class="c1">#HandlePowerKey=poweroff</span>
+
+<span class="c1">#为电源操作，默认休眠到内存</span>
+<span class="c1">#HandleSuspendKey=suspend</span>
+
+<span class="c1">#为电源操作，默认休眠到硬盘</span>
+<span class="c1">#HandleHibernateKey=hibernate</span>
+
+<span class="c1">#关盖操作，默认休眠</span>
+<span class="c1">#HandleLidSwitch=ignore</span>
+
+<span class="c1">#使用外部电源关盖操作，默认休眠</span>
+<span class="c1">#HandleLidSwitchExternalPower=ignore</span>
+
+<span class="c1">#插了扩展坞或者连接多个显示器关盖子操作，默认无操作</span>
+<span class="c1">#HandleLidSwitchDocked=ignore</span>
+
+<span class="c1">#电源事件所触发的systemd-logind操作是否应该忽略高级inhibitor锁</span>
+<span class="c1">#PowerKeyIgnoreInhibited=no</span>
+
+<span class="c1">#休眠(到内存)事件所触发的systemd-logind操作是否应该忽略高级inhibitor锁</span>
+<span class="c1">#SuspendKeyIgnoreInhibited=no</span>
+
+<span class="c1">#休眠(到磁盘)事件所触发的systemd-logind操作是否应该忽略高级inhibitor锁</span>
+<span class="c1">#HibernateKeyIgnoreInhibited=no</span>
+
+<span class="c1">#关盖子事件所触发的systemd-logind操作是否应该忽略高级inhibitor锁</span>
+<span class="c1">#LidSwitchIgnoreInhibited=yes</span>
+
+<span class="c1">#当开机/唤醒时间 尚未超出此处设置的时间长度时， systemd将延迟响应合上盖子(lid)硬件事件，默认30秒</span>
+<span class="c1">#HoldoffTimeoutSec=30s</span>
+
+<span class="c1">#当系统持续处于空闲状态超过 IdleActionSec= 所设置的时间后，应该执行何种操作，默认无操作。</span>
+<span class="c1">#IdleAction=ignore</span>
+
+<span class="c1">#当系统持续处于空闲状态超过此处设置的时长之后将会自动执行IdleAction=设定的动作</span>
+<span class="c1">#IdleActionSec=30min</span>
+
+<span class="c1">#为每个已登录用户设置运行时目录 $XDG_RUNTIME_DIR 的最大尺寸</span>
+<span class="c1">#RuntimeDirectorySize=10%</span>
+
+<span class="c1">#当用户完全退出登录时(也就是退出最后一个登录会话时)， 是否销毁所有属于该用户的 SysV 与 POSIX IPC 对象</span>
+<span class="c1">#RemoveIPC=yes</span>
+
+<span class="c1">#控制最多允许同时存在多少个inhibitor锁，默认值是8192(8K)</span>
+<span class="c1">#InhibitorsMax=8192</span>
+
+<span class="c1">#控制最多允许同时管理多少个用户会话，默认值是 8192 </span>
+<span class="c1">#SessionsMax=8192</span>
+</pre></div>
+</div>
+</section>
+<section id="linux">
+<h1>Linux资源监控<a class="headerlink" href="#linux" title="Link to this heading">¶</a></h1>
+<p>1、nmon</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>nmon
+</pre></div>
+</div>
+<p>2、glances(suggested)</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>glances
+</pre></div>
+</div>
+<p>3、htop</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>htop
+</pre></div>
+</div>
+</section>
+<section id="id16">
+<h1>Linux美化输出<a class="headerlink" href="#id16" title="Link to this heading">¶</a></h1>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#一个在 Linux 终端中输出彩虹特效的命令行工具</span>
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>lolcat
+
+<span class="c1">#一款能够将文字转换为放大艺术字的命令</span>
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>figlet
+</pre></div>
+</div>
+</section>
+<section id="id17">
+<h1>Linux命令行多终端方案<a class="headerlink" href="#id17" title="Link to this heading">¶</a></h1>
+<p>tmux 由会话（session），窗口（window），面板（pane）组织起每个 shell 的输入框。会话用于区分不同的工作；窗口是会话中以显示屏为单位的不同的页；而面板则是一个窗口上被白线分割的不同区域。熟练掌握会话，窗口，面板之间的切换，可以极大提高使用效率。</p>
+<p>下面先行讲解这一工具的用法：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>tmux
+tmux
+</pre></div>
+</div>
+<p>首先，Ctrl + B 是 tmux 的全局前缀命令，按下该快捷键表示让 tmux 接收命令。</p>
+<p>一些 tmux 中的常见功能</p>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th style="text-align: left;">快捷键（需先按下 Ctrl + B）</th>
+<th style="text-align: left;">功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">%</td>
+<td style="text-align: left;">左右分屏</td>
+</tr>
+<tr>
+<td style="text-align: left;">"</td>
+<td style="text-align: left;">上下分屏</td>
+</tr>
+<tr>
+<td style="text-align: left;">↑ ↓ ← →</td>
+<td style="text-align: left;">焦点切换为上、下、左、右侧 pane，正在交互的 pane 被绿色框选中。</td>
+</tr>
+<tr>
+<td style="text-align: left;">d (detach)</td>
+<td style="text-align: left;">从 tmux 中脱离，回到命令行界面</td>
+</tr>
+<tr>
+<td style="text-align: left;">z (zoom)</td>
+<td style="text-align: left;">将 pane 暂时全屏，再按一次恢复原状</td>
+</tr>
+<tr>
+<td style="text-align: left;">c</td>
+<td style="text-align: left;">新建窗口</td>
+</tr>
+<tr>
+<td style="text-align: left;">,</td>
+<td style="text-align: left;">为窗口命名</td>
+</tr>
+<tr>
+<td style="text-align: left;">s</td>
+<td style="text-align: left;">列出所有 session</td>
+</tr>
+</tbody>
+</table><p>刚才提到如果不幸掉线，会话仍然被保存在后台，如果再次登录，可使用 <code class="docutils literal notranslate"><span class="pre">tmux</span> <span class="pre">attach</span> <span class="pre">[-t</span> <span class="pre">窗口名称]</span></code> 重新连接窗口，不加 <code class="docutils literal notranslate"><span class="pre">-t</span></code> 参数将默认连接最后一次打开的窗口。</p>
+</section>
+<section id="ubuntu-vim">
+<h1>Ubuntu vim上下左右键乱码<a class="headerlink" href="#ubuntu-vim" title="Link to this heading">¶</a></h1>
+<p>新装的ubuntu系统，在使用vi命令操作文件时，按上下左右键时不正常工作，而是出现ABCD现象，以下列举三种方式解决：</p>
+<section id="id18">
+<h2>方式一<a class="headerlink" href="#id18" title="Link to this heading">¶</a></h2>
+<p>普通用户下，执行 <code class="docutils literal notranslate"><span class="pre">cp</span> <span class="pre">/etc/vim/vimrc</span> <span class="pre">~/.vimrc</span></code> ，然后关闭终端，重新打开终端就可以正常使用 <code class="docutils literal notranslate"><span class="pre">vi</span></code> 命令</p>
+<p>但是这种方式有一个缺陷：如果编辑一个只能 <code class="docutils literal notranslate"><span class="pre">sudo</span></code> （管理员）权限的文件时，不能发挥作用</p>
+<p>比如执行 <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">vi</span> <span class="pre">/etc/apt/source.list</span></code> 命令时，无法正常使用上下左右键</p>
+</section>
+<section id="id19">
+<h2>方式二<a class="headerlink" href="#id19" title="Link to this heading">¶</a></h2>
+<p>安装<a class="reference external" href="https://so.csdn.net/so/search?q=vim&amp;spm=1001.2101.3001.7020">vim</a>编辑器，执行 <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">vim</span></code>，如果没有出现错误，再次进入vi 尝试一下，看看有没有修改过来，如果出现以下错误：
+<code class="docutils literal notranslate"><span class="pre">E:</span> <span class="pre">Package</span> <span class="pre">'vim'</span> <span class="pre">has</span> <span class="pre">no</span> <span class="pre">installation</span> <span class="pre">candidat</span></code></p>
+<p>则依次执行</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>update
+sudo<span class="w"> </span>apt-get<span class="w"> </span>remove<span class="w"> </span>vim-common
+sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>vim
+</pre></div>
+</div>
+<p>再次使用 <code class="docutils literal notranslate"><span class="pre">vi</span></code> 编辑文件，就能正常使用上下左右键啦！</p>
+</section>
+<section id="id20">
+<h2>方式三<a class="headerlink" href="#id20" title="Link to this heading">¶</a></h2>
+<p>列举一个笨方法:如果方式一无法解决，使用方式二时系统源又无法安装 <code class="docutils literal notranslate"><span class="pre">vim</span></code> ，可以使用方式三，保准解决</p>
+<p>1.换系统源</p>
+<p>使用 <code class="docutils literal notranslate"><span class="pre">vi</span></code> 命令，在普通模式下，按 <code class="docutils literal notranslate"><span class="pre">shift+:</span></code> 进入命令模式，之后输入 <code class="docutils literal notranslate"><span class="pre">%d</span></code> 清空文件内容，从其他地方复制国内源到此文件中，保存文件退出</p>
+<p>2.安装vim</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>update
+sudo<span class="w"> </span>apt-get<span class="w"> </span>upgrade
+sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>vim
+</pre></div>
+</div>
+<section id="vivim">
+<h3>正常使用vi或vim编辑文件<a class="headerlink" href="#vivim" title="Link to this heading">¶</a></h3>
+<p>再次使用 <code class="docutils literal notranslate"><span class="pre">vi</span></code> 就可以任意操作啦</p>
+</section>
+</section>
+</section>
+<section id="id21">
+<h1>常用命令<a class="headerlink" href="#id21" title="Link to this heading">¶</a></h1>
+<section id="id22">
+<h2>打包/解压<a class="headerlink" href="#id22" title="Link to this heading">¶</a></h2>
+<p>速查:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1">#压缩文件:压缩 a.c文件为test.tar.gz</span>
+tar<span class="w"> </span>-czvf<span class="w"> </span>test.tar.gz<span class="w"> </span>a.c
+<span class="c1">#列出压缩文件内容</span>
+tar<span class="w"> </span>-tzvf<span class="w"> </span>test.tar.gz<span class="w"> </span>
+<span class="c1">#解压文件</span>
+tar<span class="w"> </span>-xzvf<span class="w"> </span>test.tar.gz<span class="w"> </span>
+
+
+<span class="c1">#将 /home/html/ 这个目录下所有文件和文件夹打包为当前目录下的 html.zip：</span>
+zip<span class="w"> </span>-q<span class="w"> </span>-r<span class="w"> </span>html.zip<span class="w"> </span>/home/html
+<span class="c1">#如果在我们在 /home/html 目录下，可以执行以下命令：</span>
+zip<span class="w"> </span>-q<span class="w"> </span>-r<span class="w"> </span>html.zip<span class="w"> </span>*
+<span class="c1">#从压缩文件 cp.zip 中删除文件 a.c</span>
+zip<span class="w"> </span>-dv<span class="w"> </span>cp.zip<span class="w"> </span>a.c
+
+
+<span class="c1">#查看压缩文件中包含的文件</span>
+unzip<span class="w"> </span>-l<span class="w"> </span>abc.zip
+<span class="c1">#-v 参数用于查看压缩文件目录信息，但是不解压该文件</span>
+unzip<span class="w"> </span>-v<span class="w"> </span>abc.zip<span class="w"> </span>
+<span class="c1">#解压文件到当前目录</span>
+unzip<span class="w"> </span>./abc.zip
+</pre></div>
+</div>
+<p>完整:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>tar<span class="w"> </span><span class="o">[</span>-ABcdgGhiklmMoOpPrRsStuUvwWxzZ<span class="o">][</span>-b<span class="w"> </span>&lt;区块数目&gt;<span class="o">][</span>-C<span class="w"> </span>&lt;目的目录&gt;<span class="o">][</span>-f<span class="w"> </span>&lt;备份文件&gt;<span class="o">][</span>-F<span class="w"> </span>&lt;Script文件&gt;<span class="o">][</span>-K<span class="w"> </span>&lt;文件&gt;<span class="o">][</span>-L<span class="w"> </span>&lt;媒体容量&gt;<span class="o">][</span>-N<span class="w"> </span>&lt;日期时间&gt;<span class="o">][</span>-T<span class="w"> </span>&lt;范本文件&gt;<span class="o">][</span>-V<span class="w"> </span>&lt;卷册名称&gt;<span class="o">][</span>-X<span class="w"> </span>&lt;范本文件&gt;<span class="o">][</span>-&lt;设备编号&gt;&lt;存储密度&gt;<span class="o">][</span>--after-date<span class="o">=</span>&lt;日期时间&gt;<span class="o">][</span>--atime-preserve<span class="o">][</span>--backuup<span class="o">=</span>&lt;备份方式&gt;<span class="o">][</span>--checkpoint<span class="o">][</span>--concatenate<span class="o">][</span>--confirmation<span class="o">][</span>--delete<span class="o">][</span>--exclude<span class="o">=</span>&lt;范本样式&gt;<span class="o">][</span>--force-local<span class="o">][</span>--group<span class="o">=</span>&lt;群组名称&gt;<span class="o">][</span>--help<span class="o">][</span>--ignore-failed-read<span class="o">][</span>--new-volume-script<span class="o">=</span>&lt;Script文件&gt;<span class="o">][</span>--newer-mtime<span class="o">][</span>--no-recursion<span class="o">][</span>--null<span class="o">][</span>--numeric-owner<span class="o">][</span>--owner<span class="o">=</span>&lt;用户名称&gt;<span class="o">][</span>--posix<span class="o">][</span>--erve<span class="o">][</span>--preserve-order<span class="o">][</span>--preserve-permissions<span class="o">][</span>--record-size<span class="o">=</span>&lt;区块数目&gt;<span class="o">][</span>--recursive-unlink<span class="o">][</span>--remove-files<span class="o">][</span>--rsh-command<span class="o">=</span>&lt;执行指令&gt;<span class="o">][</span>--same-owner<span class="o">][</span>--suffix<span class="o">=</span>&lt;备份字尾字符串&gt;<span class="o">][</span>--totals<span class="o">][</span>--use-compress-program<span class="o">=</span>&lt;执行指令&gt;<span class="o">][</span>--version<span class="o">][</span>--volno-file<span class="o">=</span>&lt;编号文件&gt;<span class="o">][</span>文件或目录...<span class="o">]</span>
+<span class="c1">#-A或--catenate 新增文件到已存在的备份文件。</span>
+<span class="c1">#-b&lt;区块数目&gt;或--blocking-factor=&lt;区块数目&gt; 设置每笔记录的区块数目，每个区块大小为12Bytes。</span>
+<span class="c1">#-B或--read-full-records 读取数据时重设区块大小。</span>
+<span class="c1">#-c或--create 建立新的备份文件。</span>
+<span class="c1">#-C&lt;目的目录&gt;或--directory=&lt;目的目录&gt; 切换到指定的目录。</span>
+<span class="c1">#-d或--diff或--compare 对比备份文件内和文件系统上的文件的差异。</span>
+<span class="c1">#-f&lt;备份文件&gt;或--file=&lt;备份文件&gt; 指定备份文件。</span>
+<span class="c1">#-F&lt;Script文件&gt;或--info-script=&lt;Script文件&gt; 每次更换磁带时，就执行指定的Script文件。</span>
+<span class="c1">#-g或--listed-incremental 处理GNU格式的大量备份。</span>
+<span class="c1">#-G或--incremental 处理旧的GNU格式的大量备份。</span>
+<span class="c1">#-h或--dereference 不建立符号连接，直接复制该连接所指向的原始文件。</span>
+<span class="c1">#-i或--ignore-zeros 忽略备份文件中的0 Byte区块，也就是EOF。</span>
+<span class="c1">#-k或--keep-old-files 解开备份文件时，不覆盖已有的文件。</span>
+<span class="c1">#-K&lt;文件&gt;或--starting-file=&lt;文件&gt; 从指定的文件开始还原。</span>
+<span class="c1">#-l或--one-file-system 复制的文件或目录存放的文件系统，必须与tar指令执行时所处的文件系统相同，否则不予复制。</span>
+<span class="c1">#-L&lt;媒体容量&gt;或-tape-length=&lt;媒体容量&gt; 设置存放每体的容量，单位以1024 Bytes计算。</span>
+<span class="c1">#-m或--modification-time 还原文件时，不变更文件的更改时间。</span>
+<span class="c1">#-M或--multi-volume 在建立，还原备份文件或列出其中的内容时，采用多卷册模式。</span>
+<span class="c1">#-N&lt;日期格式&gt;或--newer=&lt;日期时间&gt; 只将较指定日期更新的文件保存到备份文件里。</span>
+<span class="c1">#-o或--old-archive或--portability 将资料写入备份文件时使用V7格式。</span>
+<span class="c1">#-O或--stdout 把从备份文件里还原的文件输出到标准输出设备。</span>
+<span class="c1">#-p或--same-permissions 用原来的文件权限还原文件。</span>
+<span class="c1">#-P或--absolute-names 文件名使用绝对名称，不移除文件名称前的&quot;/&quot;号。</span>
+<span class="c1">#-r或--append 新增文件到已存在的备份文件的结尾部分。</span>
+<span class="c1">#-R或--block-number 列出每个信息在备份文件中的区块编号。</span>
+<span class="c1">#-s或--same-order 还原文件的顺序和备份文件内的存放顺序相同。</span>
+<span class="c1">#-S或--sparse 倘若一个文件内含大量的连续0字节，则将此文件存成稀疏文件。</span>
+<span class="c1">#-t或--list 列出备份文件的内容。</span>
+<span class="c1">#-T&lt;范本文件&gt;或--files-from=&lt;范本文件&gt; 指定范本文件，其内含有一个或多个范本样式，让tar解开或建立符合设置条件的文件。</span>
+<span class="c1">#-u或--update 仅置换较备份文件内的文件更新的文件。</span>
+<span class="c1">#-U或--unlink-first 解开压缩文件还原文件之前，先解除文件的连接。</span>
+<span class="c1">#-v或--verbose 显示指令执行过程。</span>
+<span class="c1">#-V&lt;卷册名称&gt;或--label=&lt;卷册名称&gt; 建立使用指定的卷册名称的备份文件。</span>
+<span class="c1">#-w或--interactive 遭遇问题时先询问用户。</span>
+<span class="c1">#-W或--verify 写入备份文件后，确认文件正确无误。</span>
+<span class="c1">#-x或--extract或--get 从备份文件中还原文件。</span>
+<span class="c1">#-X&lt;范本文件&gt;或--exclude-from=&lt;范本文件&gt; 指定范本文件，其内含有一个或多个范本样式，让ar排除符合设置条件的文件。</span>
+<span class="c1">#-z或--gzip或--ungzip 通过gzip指令处理备份文件。</span>
+<span class="c1">#-Z或--compress或--uncompress 通过compress指令处理备份文件。</span>
+<span class="c1">#-&lt;设备编号&gt;&lt;存储密度&gt; 设置备份用的外围设备编号及存放数据的密度。</span>
+<span class="c1">#--after-date=&lt;日期时间&gt; 此参数的效果和指定&quot;-N&quot;参数相同。</span>
+<span class="c1">#--atime-preserve 不变更文件的存取时间。</span>
+<span class="c1">#--backup=&lt;备份方式&gt;或--backup 移除文件前先进行备份。</span>
+<span class="c1">#--checkpoint 读取备份文件时列出目录名称。</span>
+<span class="c1">#--concatenate 此参数的效果和指定&quot;-A&quot;参数相同。</span>
+<span class="c1">#--confirmation 此参数的效果和指定&quot;-w&quot;参数相同。</span>
+<span class="c1">#--delete 从备份文件中删除指定的文件。</span>
+<span class="c1">#--exclude=&lt;范本样式&gt; 排除符合范本样式的文件。</span>
+<span class="c1">#--group=&lt;群组名称&gt; 把加入设备文件中的文件的所属群组设成指定的群组。</span>
+<span class="c1">#--help 在线帮助。</span>
+<span class="c1">#--ignore-failed-read 忽略数据读取错误，不中断程序的执行。</span>
+<span class="c1">#--new-volume-script=&lt;Script文件&gt; 此参数的效果和指定&quot;-F&quot;参数相同。</span>
+<span class="c1">#--newer-mtime 只保存更改过的文件。</span>
+<span class="c1">#--no-recursion 不做递归处理，也就是指定目录下的所有文件及子目录不予处理。</span>
+<span class="c1">#--null 从null设备读取文件名称。</span>
+<span class="c1">#--numeric-owner 以用户识别码及群组识别码取代用户名称和群组名称。</span>
+<span class="c1">#--owner=&lt;用户名称&gt; 把加入备份文件中的文件的拥有者设成指定的用户。</span>
+<span class="c1">#--posix 将数据写入备份文件时使用POSIX格式。</span>
+<span class="c1">#--preserve 此参数的效果和指定&quot;-ps&quot;参数相同。</span>
+<span class="c1">#--preserve-order 此参数的效果和指定&quot;-A&quot;参数相同。</span>
+<span class="c1">#--preserve-permissions 此参数的效果和指定&quot;-p&quot;参数相同。</span>
+<span class="c1">#--record-size=&lt;区块数目&gt; 此参数的效果和指定&quot;-b&quot;参数相同。</span>
+<span class="c1">#--recursive-unlink 解开压缩文件还原目录之前，先解除整个目录下所有文件的连接。</span>
+<span class="c1">#--remove-files 文件加入备份文件后，就将其删除。</span>
+<span class="c1">#--rsh-command=&lt;执行指令&gt; 设置要在远端主机上执行的指令，以取代rsh指令。</span>
+<span class="c1">#--same-owner 尝试以相同的文件拥有者还原文件。</span>
+<span class="c1">#--suffix=&lt;备份字尾字符串&gt; 移除文件前先行备份。</span>
+<span class="c1">#--totals 备份文件建立后，列出文件大小。</span>
+<span class="c1">#--use-compress-program=&lt;执行指令&gt; 通过指定的指令处理备份文件。</span>
+<span class="c1">#--version 显示版本信息。</span>
+<span class="c1">#--volno-file=&lt;编号文件&gt; 使用指定文件内的编号取代预设的卷册编号。</span>
+
+<span class="c1">#e.g.</span>
+<span class="c1">#压缩文件</span>
+touch<span class="w"> </span>a.c<span class="w">       </span>
+tar<span class="w"> </span>-czvf<span class="w"> </span>test.tar.gz<span class="w"> </span>a.c<span class="w">   </span>//压缩<span class="w"> </span>a.c文件为test.tar.gz
+<span class="c1">#列出压缩文件内容</span>
+tar<span class="w"> </span>-tzvf<span class="w"> </span>test.tar.gz<span class="w"> </span>
+<span class="c1">#解压文件</span>
+tar<span class="w"> </span>-xzvf<span class="w"> </span>test.tar.gz<span class="w"> </span>
+
+
+
+zip<span class="w"> </span><span class="o">[</span>-AcdDfFghjJKlLmoqrSTuvVwXyz$<span class="o">][</span>-b<span class="w"> </span>&lt;工作目录&gt;<span class="o">][</span>-ll<span class="o">][</span>-n<span class="w"> </span>&lt;字尾字符串&gt;<span class="o">][</span>-t<span class="w"> </span>&lt;日期时间&gt;<span class="o">][</span>-&lt;压缩效率&gt;<span class="o">][</span>压缩文件<span class="o">][</span>文件...<span class="o">][</span>-i<span class="w"> </span>&lt;范本样式&gt;<span class="o">][</span>-x<span class="w"> </span>&lt;范本样式&gt;<span class="o">]</span>
+<span class="c1">#-A 调整可执行的自动解压缩文件。</span>
+<span class="c1">#-b&lt;工作目录&gt; 指定暂时存放文件的目录。</span>
+<span class="c1">#-c 替每个被压缩的文件加上注释。</span>
+<span class="c1">#-d 从压缩文件内删除指定的文件。</span>
+<span class="c1">#-D 压缩文件内不建立目录名称。</span>
+<span class="c1">#-f 更新现有的文件。</span>
+<span class="c1">#-F 尝试修复已损坏的压缩文件。</span>
+<span class="c1">#-g 将文件压缩后附加在既有的压缩文件之后，而非另行建立新的压缩文件。</span>
+<span class="c1">#-h 在线帮助。</span>
+<span class="c1">#-i&lt;范本样式&gt; 只压缩符合条件的文件。</span>
+<span class="c1">#-j 只保存文件名称及其内容，而不存放任何目录名称。</span>
+<span class="c1">#-J 删除压缩文件前面不必要的数据。</span>
+<span class="c1">#-k 使用MS-DOS兼容格式的文件名称。</span>
+<span class="c1">#-l 压缩文件时，把LF字符置换成LF+CR字符。</span>
+<span class="c1">#-ll 压缩文件时，把LF+CR字符置换成LF字符。</span>
+<span class="c1">#-L 显示版权信息。</span>
+<span class="c1">#-m 将文件压缩并加入压缩文件后，删除原始文件，即把文件移到压缩文件中。</span>
+<span class="c1">#-n&lt;字尾字符串&gt; 不压缩具有特定字尾字符串的文件。</span>
+<span class="c1">#-o 以压缩文件内拥有最新更改时间的文件为准，将压缩文件的更改时间设成和该文件相同。</span>
+<span class="c1">#-q 不显示指令执行过程。</span>
+<span class="c1">#-r 递归处理，将指定目录下的所有文件和子目录一并处理。</span>
+<span class="c1">#-S 包含系统和隐藏文件。</span>
+<span class="c1">#-t&lt;日期时间&gt; 把压缩文件的日期设成指定的日期。</span>
+<span class="c1">#-T 检查备份文件内的每个文件是否正确无误。</span>
+<span class="c1">#-u 与 -f 参数类似，但是除了更新现有的文件外，也会将压缩文件中的其他文件解压缩到目录中。</span>
+<span class="c1">#-v 显示指令执行过程或显示版本信息。</span>
+<span class="c1">#-V 保存VMS操作系统的文件属性。</span>
+<span class="c1">#-w 在文件名称里假如版本编号，本参数仅在VMS操作系统下有效。</span>
+<span class="c1">#-x&lt;范本样式&gt; 压缩时排除符合条件的文件。</span>
+<span class="c1">#-X 不保存额外的文件属性。</span>
+<span class="c1">#-y 直接保存符号连接，而非该连接所指向的文件，本参数仅在UNIX之类的系统下有效。</span>
+<span class="c1">#-z 替压缩文件加上注释。</span>
+<span class="c1">#-$ 保存第一个被压缩文件所在磁盘的卷册名称。</span>
+<span class="c1">#-&lt;压缩效率&gt; 压缩效率是一个介于1-9的数值。</span>
+
+<span class="c1">#e.g.</span>
+<span class="c1">#将 /home/html/ 这个目录下所有文件和文件夹打包为当前目录下的 html.zip：</span>
+zip<span class="w"> </span>-q<span class="w"> </span>-r<span class="w"> </span>html.zip<span class="w"> </span>/home/html
+<span class="c1">#如果在我们在 /home/html 目录下，可以执行以下命令：</span>
+zip<span class="w"> </span>-q<span class="w"> </span>-r<span class="w"> </span>html.zip<span class="w"> </span>*
+<span class="c1">#从压缩文件 cp.zip 中删除文件 a.c</span>
+zip<span class="w"> </span>-dv<span class="w"> </span>cp.zip<span class="w"> </span>a.c
+
+
+
+
+unzip<span class="w"> </span><span class="o">[</span>-cflptuvz<span class="o">][</span>-agCjLMnoqsVX<span class="o">][</span>-P<span class="w"> </span>&lt;密码&gt;<span class="o">][</span>.zip文件<span class="o">][</span>文件<span class="o">][</span>-d<span class="w"> </span>&lt;目录&gt;<span class="o">][</span>-x<span class="w"> </span>&lt;文件&gt;<span class="o">]</span><span class="w"> </span>或<span class="w"> </span>unzip<span class="w"> </span><span class="o">[</span>-Z<span class="o">]</span>
+<span class="c1">#-c 将解压缩的结果显示到屏幕上，并对字符做适当的转换。</span>
+<span class="c1">#-f 更新现有的文件。</span>
+<span class="c1">#-l 显示压缩文件内所包含的文件。</span>
+<span class="c1">#-p 与-c参数类似，会将解压缩的结果显示到屏幕上，但不会执行任何的转换。</span>
+<span class="c1">#-t 检查压缩文件是否正确。</span>
+<span class="c1">#-u 与-f参数类似，但是除了更新现有的文件外，也会将压缩文件中的其他文件解压缩到目录中。</span>
+<span class="c1">#-v 执行时显示详细的信息。</span>
+<span class="c1">#-z 仅显示压缩文件的备注文字。</span>
+<span class="c1">#-a 对文本文件进行必要的字符转换。</span>
+<span class="c1">#-b 不要对文本文件进行字符转换。</span>
+<span class="c1">#-C 压缩文件中的文件名称区分大小写。</span>
+<span class="c1">#-j 不处理压缩文件中原有的目录路径。</span>
+<span class="c1">#-L 将压缩文件中的全部文件名改为小写。</span>
+<span class="c1">#-M 将输出结果送到more程序处理。</span>
+<span class="c1">#-n 解压缩时不要覆盖原有的文件。</span>
+<span class="c1">#-o 不必先询问用户，unzip执行后覆盖原有文件。</span>
+<span class="c1">#-P&lt;密码&gt; 使用zip的密码选项。</span>
+<span class="c1">#-q 执行时不显示任何信息。</span>
+<span class="c1">#-s 将文件名中的空白字符转换为底线字符。</span>
+<span class="c1">#-V 保留VMS的文件版本信息。</span>
+<span class="c1">#-X 解压缩时同时回存文件原来的UID/GID。</span>
+<span class="c1">#[.zip文件] 指定.zip压缩文件。</span>
+<span class="c1">#[文件] 指定要处理.zip压缩文件中的哪些文件。</span>
+<span class="c1">#-d&lt;目录&gt; 指定文件解压缩后所要存储的目录。</span>
+<span class="c1">#-x&lt;文件&gt; 指定不要处理.zip压缩文件中的哪些文件。</span>
+<span class="c1">#-Z unzip -Z等于执行zipinfo指令。</span>
+
+<span class="c1">#e.g.</span>
+<span class="c1">#查看压缩文件中包含的文件</span>
+unzip<span class="w"> </span>-l<span class="w"> </span>abc.zip
+<span class="c1">#-v 参数用于查看压缩文件目录信息，但是不解压该文件</span>
+unzip<span class="w"> </span>-v<span class="w"> </span>abc.zip<span class="w"> </span>
+<span class="c1">#解压文件到当前目录</span>
+unzip<span class="w"> </span>./abc.zip
+</pre></div>
+</div>
+</section>
+<section id="id23">
+<h2>复制/移动&amp;重命名/删除<a class="headerlink" href="#id23" title="Link to this heading">¶</a></h2>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>cp<span class="w"> </span><span class="o">[</span>options<span class="o">]</span><span class="w"> </span><span class="nb">source</span><span class="w"> </span>dest
+cp<span class="w"> </span><span class="o">[</span>options<span class="o">]</span><span class="w"> </span>source...<span class="w"> </span>directory
+<span class="c1">#-a：此选项通常在复制目录时使用，它保留链接、文件属性，并复制目录下的所有内容。其作用等于dpR参数组合。</span>
+<span class="c1">#-d：复制时保留链接。这里所说的链接相当于 Windows 系统中的快捷方式。</span>
+<span class="c1">#-f：覆盖已经存在的目标文件而不给出提示。</span>
+<span class="c1">#-i：与 -f 选项相反，在覆盖目标文件之前给出提示，要求用户确认是否覆盖，回答 y 时目标文件将被覆盖。</span>
+<span class="c1">#-p：除复制文件的内容外，还把修改时间和访问权限也复制到新文件中。</span>
+<span class="c1">#-r：若给出的源文件是一个目录文件，此时将复制该目录下所有的子目录和文件。</span>
+<span class="c1">#-l：不复制文件，只是生成链接文件。</span>
+
+mv<span class="w"> </span><span class="o">[</span>options<span class="o">]</span><span class="w"> </span><span class="nb">source</span><span class="w"> </span>dest
+mv<span class="w"> </span><span class="o">[</span>options<span class="o">]</span><span class="w"> </span>source...<span class="w"> </span>directory
+<span class="c1">#-b: 当目标文件或目录存在时，在执行覆盖前，会为其创建一个备份。</span>
+<span class="c1">#-i: 如果指定移动的源目录或文件与目标的目录或文件同名，则会先询问是否覆盖旧文件，输入 y 表示直接覆盖，输入 n 表示取消该操作。</span>
+<span class="c1">#-f: 如果指定移动的源目录或文件与目标的目录或文件同名，不会询问，直接覆盖旧文件。</span>
+<span class="c1">#-n: 不要覆盖任何已存在的文件或目录。</span>
+<span class="c1">#-u：当源文件比目标文件新或者目标文件不存在时，才执行移动操作。</span>
+
+rm<span class="w"> </span><span class="o">[</span>options<span class="o">]</span><span class="w"> </span>name...
+<span class="c1">#-i 删除前逐一询问确认。</span>
+<span class="c1">#-f 即使原档案属性设为唯读，亦直接删除，无需逐一确认。</span>
+<span class="c1">#-r 将目录及以下之档案亦逐一删除。</span>
+</pre></div>
+</div>
+</section>
+<section id="kill">
+<h2>后台运行/显示进程/kill进程<a class="headerlink" href="#kill" title="Link to this heading">¶</a></h2>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>nohup<span class="w"> </span>Command<span class="w"> </span><span class="o">[</span><span class="w"> </span>Arg<span class="w"> </span>…<span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="w">　</span><span class="p">&amp;</span><span class="w"> </span><span class="o">]</span>
+<span class="c1">#Command：要执行的命令。</span>
+<span class="c1">#Arg：一些参数，可以指定输出文件。</span>
+<span class="c1">#&amp;：让命令在后台执行，终端退出后命令仍旧执行。</span>
+
+
+<span class="c1">#实时显示 process 的动态</span>
+top<span class="w"> </span><span class="o">[</span>-<span class="o">]</span><span class="w"> </span><span class="o">[</span>d<span class="w"> </span>delay<span class="o">]</span><span class="w"> </span><span class="o">[</span>q<span class="o">]</span><span class="w"> </span><span class="o">[</span>c<span class="o">]</span><span class="w"> </span><span class="o">[</span>S<span class="o">]</span><span class="w"> </span><span class="o">[</span>s<span class="o">]</span><span class="w"> </span><span class="o">[</span>i<span class="o">]</span><span class="w"> </span><span class="o">[</span>n<span class="o">]</span><span class="w"> </span><span class="o">[</span>b<span class="o">]</span>
+<span class="c1">#d : 改变显示的更新速度，或是在交谈式指令列( interactive command)按 s</span>
+<span class="c1">#q : 没有任何延迟的显示速度，如果使用者是有 superuser 的权限，则 top 将会以最高的优先序执行</span>
+<span class="c1">#c : 切换显示模式，共有两种模式，一是只显示执行档的名称，另一种是显示完整的路径与名称</span>
+<span class="c1">#S : 累积模式，会将己完成或消失的子进程 ( dead child process ) 的 CPU time 累积起来</span>
+<span class="c1">#s : 安全模式，将交谈式指令取消, 避免潜在的危机</span>
+<span class="c1">#i : 不显示任何闲置 (idle) 或无用 (zombie) 的进程</span>
+<span class="c1">#n : 更新的次数，完成后将会退出 top</span>
+<span class="c1">#b : 批次档模式，搭配 &quot;n&quot; 参数一起使用，可以用来将 top 的结果输出到档案内</span>
+
+
+<span class="c1">#将所有进程以树状图显示，树状图将会以 pid (如果有指定) 或是以 init 这个基本进程为根 (root)，如果有指定使用者 id，则树状图会只显示该使用者所拥有的进程。</span>
+pstree<span class="w"> </span><span class="o">[</span>-a<span class="o">]</span><span class="w"> </span><span class="o">[</span>-c<span class="o">]</span><span class="w"> </span><span class="o">[</span>-h<span class="p">|</span>-Hpid<span class="o">]</span><span class="w"> </span><span class="o">[</span>-l<span class="o">]</span><span class="w"> </span><span class="o">[</span>-n<span class="o">]</span><span class="w"> </span><span class="o">[</span>-p<span class="o">]</span><span class="w"> </span><span class="o">[</span>-u<span class="o">]</span><span class="w"> </span><span class="o">[</span>-G<span class="p">|</span>-U<span class="o">]</span><span class="w"> </span><span class="o">[</span>pid<span class="p">|</span>user<span class="o">]</span>
+<span class="c1">#-a 显示该进程的完整指令及参数, 如果是被记忆体置换出去的进程则会加上括号</span>
+<span class="c1">#-c 如果有重覆的进程名, 则分开列出（预设值是会在前面加上 *）</span>
+
+
+<span class="c1">#删除执行中的程序或工作。kill 可将指定的信息送至程序。预设的信息为 SIGTERM(15)，可将指定程序终止。若仍无法终止该程序，可使用 SIGKILL(9) 信息尝试强制删除程序。程序或工作的编号可利用 ps 指令或 jobs 指令查看。</span>
+<span class="nb">kill</span><span class="w"> </span><span class="o">[</span>-s<span class="w"> </span>&lt;信息名称或编号&gt;<span class="o">][</span>程序<span class="o">]</span><span class="w">　</span>或<span class="w">　</span><span class="nb">kill</span><span class="w"> </span><span class="o">[</span>-l<span class="w"> </span>&lt;信息编号&gt;<span class="o">]</span>
+<span class="c1">#-l &lt;信息编号&gt; 　若不加&lt;信息编号&gt;选项，则 -l 参数会列出全部的信息名称。</span>
+<span class="c1">#-s &lt;信息名称或编号&gt; 　指定要送出的信息。</span>
+<span class="c1">#[程序] 　[程序]可以是程序的PID或是PGID，也可以是工作编号。</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">目录</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Ubuntu修改Grub默认启动Windows</a></li>
+<li><a class="reference internal" href="#sudo">添加新sudo用户</a></li>
+<li><a class="reference internal" href="#webadmin">运维面板——Webadmin</a></li>
+<li><a class="reference internal" href="#cockpit">运维面板——Cockpit</a><ul>
+<li><a class="reference internal" href="#id1">Cockpit监听端口和地址</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ubuntunetplan-ip">Ubuntu使用netplan，修改设置静态IP</a><ul>
+<li><a class="reference internal" href="#ip">第1步： 查看当前主机的网卡名，当前ip, 子网掩码，网关地址</a></li>
+<li><a class="reference internal" href="#id2">第2步： 修改配置文件</a></li>
+<li><a class="reference internal" href="#id3">第3步： 使配置生效</a></li>
+<li><a class="reference internal" href="#thinserveryaml">thinServer的yaml配置文件内容</a></li>
+<li><a class="reference internal" href="#mac">修改MAC地址</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#zerotier">Zerotier</a><ul>
+<li><a class="reference internal" href="#zerotier-linux">1. ZeroTier 的 Linux 安装脚本</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ubuntu">Ubuntu开机默认进入图形界面/字符界面</a></li>
+<li><a class="reference internal" href="#ubuntugrub-grubrescue">Ubuntu开机grub/grubRescue手动启动</a></li>
+<li><a class="reference internal" href="#apt">apt走代理</a></li>
+<li><a class="reference internal" href="#id4">Ubuntu代理服务器</a><ul>
+<li><a class="reference internal" href="#clash-for-windows">Clash for Windows</a></li>
+<li><a class="reference internal" href="#clash-for-linux">√Clash for Linux</a><ul>
+<li><a class="reference internal" href="#id5">Clash for Linux 完整参考内容：</a><ul>
+<li><a class="reference internal" href="#clash">Clash 下载</a><ul>
+<li><a class="reference internal" href="#id6">配置文件</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#clash-as-a-daemon">Clash as a daemon</a><ul>
+<li><a class="reference internal" href="#systemd">配置 systemd 服务</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#systemctl">使用 systemctl</a><ul>
+<li><a class="reference internal" href="#id7">使用代理</a><ul>
+<li><a class="reference internal" href="#export">利用 <code class="docutils literal notranslate"><span class="pre">Export</span></code> 命令使用代理</a></li>
+<li><a class="reference internal" href="#dashboard">DashBoard 外部控制</a></li>
+<li><a class="reference internal" href="#id8">设置密码</a></li>
+<li><a class="reference internal" href="#tun">TUN 模式</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#docker-clash">docker-clash</a></li>
+<li><a class="reference internal" href="#wsl2-clash-for-windows">在 WSL2 中使用 Clash for Windows 代理连接</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ubuntu-ntfs">Ubuntu自动挂载磁盘分区(NTFS)</a><ul>
+<li><a class="reference internal" href="#id9">方式一</a></li>
+<li><a class="reference internal" href="#id10">方式二(推荐)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ubuntu20-04-dummy-output-intel">解决ubuntu20.04系统不发出声音、显示伪输出（dummy output）的问题(Intel板载声卡)</a></li>
+<li><a class="reference internal" href="#fail2ban-ssh">安装和配置 Fail2ban 以保护 SSH</a></li>
+<li><a class="reference internal" href="#id11">ubuntu 如何放开端口</a></li>
+<li><a class="reference internal" href="#springboot-systemd">springboot 服务制作成 systemd 服务</a></li>
+<li><a class="reference internal" href="#id12">开机自动运行命令</a><ul>
+<li><a class="reference internal" href="#id13">第0种添加系统启动脚本方式：</a></li>
+<li><a class="reference internal" href="#shell">第一种shell脚本方式</a></li>
+<li><a class="reference internal" href="#id14">第二种添加系统启动脚本方式：</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#wsl-ubuntu-systemctl">WSL Ubuntu systemctl报错</a></li>
+<li><a class="reference internal" href="#id15">Ubuntu关闭盖子/按电源键/按休眠键功能，关闭盖子不休眠</a></li>
+<li><a class="reference internal" href="#linux">Linux资源监控</a></li>
+<li><a class="reference internal" href="#id16">Linux美化输出</a></li>
+<li><a class="reference internal" href="#id17">Linux命令行多终端方案</a></li>
+<li><a class="reference internal" href="#ubuntu-vim">Ubuntu vim上下左右键乱码</a><ul>
+<li><a class="reference internal" href="#id18">方式一</a></li>
+<li><a class="reference internal" href="#id19">方式二</a></li>
+<li><a class="reference internal" href="#id20">方式三</a><ul>
+<li><a class="reference internal" href="#vivim">正常使用vi或vim编辑文件</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id21">常用命令</a><ul>
+<li><a class="reference internal" href="#id22">打包/解压</a></li>
+<li><a class="reference internal" href="#id23">复制/移动&amp;重命名/删除</a></li>
+<li><a class="reference internal" href="#kill">后台运行/显示进程/kill进程</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>本页</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/Ubuntu.md.txt"
+            rel="nofollow">显示源代码</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">快速搜索</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="提交" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>导航</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="总索引"
+             >索引</a></li>
+        <li class="nav-item nav-item-0"><a href="index.html">个人笔记教程 1.0.0 文档</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Ubuntu修改Grub默认启动Windows</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; 版权所有 2024, georgeghl.
+      由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7创建。
+    </div>
+  </body>
+</html>
