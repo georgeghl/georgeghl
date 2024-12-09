@@ -15,9 +15,7 @@
     <script src="_static/translations.js?v=beaddf03"></script>
     
     <link rel="index" title="索引" href="genindex.html" />
-    <link rel="search" title="搜索" href="search.html" />
-    <link rel="next" title="软件下载" href="Maintenance.html" />
-    <link rel="prev" title="HP惠普" href="Printer.html" /> 
+    <link rel="search" title="搜索" href="search.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>导航</h3>
@@ -25,12 +23,6 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="总索引"
              accesskey="I">索引</a></li>
-        <li class="right" >
-          <a href="Maintenance.html" title="软件下载"
-             accesskey="N">下一页</a> |</li>
-        <li class="right" >
-          <a href="Printer.html" title="HP惠普"
-             accesskey="P">上一页</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">个人笔记教程 1.0.0 文档</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Windows版微信WechatAppEx等进程占用内存多，干掉对应的exe</a></li> 
       </ul>
@@ -46,6 +38,19 @@
 <p>对应的exe通常是在<code class="docutils literal notranslate"><span class="pre">C:\Users\George\AppData\Roaming\Tencent\WeChat\XPlugin\Plugins\RadiumWMPF\9105\extracted\runtime</span></code>目录下。</p>
 <p>删除该文件夹，然后重新新建一个同名文件夹/文件。右键修改该文件属性：安全性-》选项-》停用继承。然后修改所有者为：<code class="docutils literal notranslate"><span class="pre">NT</span> <span class="pre">SERVICE\TrustedInstaller</span></code>。</p>
 <p>对应的，删除<code class="docutils literal notranslate"><span class="pre">C:\Users\George\AppData\Roaming\Tencent\WeChat\XPlugin\Plugins</span></code>目录下的其他组件文件夹，修改为空白文件，并<strong>修改权限为TrustedInstaller</strong>使其无法被读取、修改。</p>
+</section>
+<section id="adobe">
+<h1>Adobe提示非正版软件弹窗<a class="headerlink" href="#adobe" title="Link to this heading">¶</a></h1>
+<p>用FAB（Firewall App Blocker）直接添加防火墙，把这玩意禁止联网。也可以手动添加防火墙。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>C:<span class="se">\P</span>rogram<span class="w"> </span>Files<span class="w"> </span><span class="o">(</span>x86<span class="o">)</span><span class="se">\C</span>ommon<span class="w"> </span>Files<span class="se">\A</span>dobe<span class="se">\</span>
+<span class="c1">#C:\Program Files (x86)\Common Files\Adobe\AdobeGCClient\</span>
+</pre></div>
+</div>
+<p>最好把Adobe软件其他文件夹也给禁止联网：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">C</span><span class="p">:</span>\<span class="n">Program</span> <span class="n">Files</span> <span class="p">(</span><span class="n">x86</span><span class="p">)</span>\<span class="n">Adobe</span>\
+<span class="n">C</span><span class="p">:</span>\<span class="n">Program</span> <span class="n">Files</span>\<span class="n">Adobe</span>\
+</pre></div>
+</div>
 </section>
 <section id="localsend">
 <h1>Localsend提示报错<a class="headerlink" href="#localsend" title="Link to this heading">¶</a></h1>
@@ -336,21 +341,12 @@ mkdocs<span class="w"> </span>build
     <h3><a href="index.html">目录</a></h3>
     <ul>
 <li><a class="reference internal" href="#">Windows版微信WechatAppEx等进程占用内存多，干掉对应的exe</a></li>
+<li><a class="reference internal" href="#adobe">Adobe提示非正版软件弹窗</a></li>
 <li><a class="reference internal" href="#localsend">Localsend提示报错</a></li>
 <li><a class="reference internal" href="#mkdocs">mkdocs</a></li>
 <li><a class="reference internal" href="#sphinx">Sphinx</a></li>
 </ul>
 
-  </div>
-  <div>
-    <h4>上一主题</h4>
-    <p class="topless"><a href="Printer.html"
-                          title="上一章">HP惠普</a></p>
-  </div>
-  <div>
-    <h4>下一主题</h4>
-    <p class="topless"><a href="Maintenance.html"
-                          title="下一章">软件下载</a></p>
   </div>
   <div role="note" aria-label="source link">
     <h3>本页</h3>
@@ -379,12 +375,6 @@ mkdocs<span class="w"> </span>build
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="总索引"
              >索引</a></li>
-        <li class="right" >
-          <a href="Maintenance.html" title="软件下载"
-             >下一页</a> |</li>
-        <li class="right" >
-          <a href="Printer.html" title="HP惠普"
-             >上一页</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">个人笔记教程 1.0.0 文档</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Windows版微信WechatAppEx等进程占用内存多，干掉对应的exe</a></li> 
       </ul>

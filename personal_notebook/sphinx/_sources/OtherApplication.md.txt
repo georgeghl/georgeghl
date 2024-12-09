@@ -12,6 +12,30 @@
 
 
 
+# Adobe提示非正版软件弹窗
+
+用FAB（Firewall App Blocker）直接添加防火墙，把这玩意禁止联网。也可以手动添加防火墙。
+
+```bash
+C:\Program Files (x86)\Common Files\Adobe\
+#C:\Program Files (x86)\Common Files\Adobe\AdobeGCClient\
+```
+
+最好把Adobe软件其他文件夹也给禁止联网：
+
+```
+C:\Program Files (x86)\Adobe\
+C:\Program Files\Adobe\
+```
+
+
+
+
+
+
+
+
+
 # Localsend提示报错
 
 (10013): 以一种访问权限不允许的方式做了一个访问套接字的尝试
