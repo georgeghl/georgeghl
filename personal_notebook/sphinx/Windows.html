@@ -1006,6 +1006,44 @@ function formatJsonValue(value) {
 <p>下载链接：</p>
 <p>https://console.box.lenovo.com/l/q5WSj8</p>
 </section>
+<section id="cdpsvc">
+<h1>连接设备平台(用户)服务 (CDPSvc) 禁用<a class="headerlink" href="#cdpsvc" title="Link to this heading">¶</a></h1>
+<p>https://sclub.homes/tech/blogs/what-is-connected-devices-platform-service-cdpsvc</p>
+<section id="id13">
+<h2>1]使用服务管理器禁用连接设备平台服务<a class="headerlink" href="#id13" title="Link to this heading">¶</a></h2>
+<p>按 Win+R 打开运行窗口并输入命令<strong>服务.msc</strong>。 按 Enter 进入窗户。</p>
+<p>滚动到<strong>连接设备平台服务</strong>在列表中并右键单击它。 选择<strong>特性</strong>。</p>
+<p><img alt="img" src="_images/Disable-the-Connected-Devices-Platform-Service-from-the-Services-Manager.webp" /></p>
+<p>改变<strong>启动类型</strong>这项服务的<strong>残疾人</strong>。</p>
+<p><img alt="img" src="_images/Select-Disabled.webp" /></p>
+<p>打<strong>申请</strong>然后继续<strong>好的</strong>保存设置。</p>
+</section>
+<section id="id14">
+<h2>2]使用命令提示符禁用连接设备平台服务<a class="headerlink" href="#id14" title="Link to this heading">¶</a></h2>
+<p>您可以使用提升的命令提示符中的命令行禁用连接设备平台服务。 这样做的过程如下：</p>
+<p>搜索<strong>命令提示符</strong>在里面<strong>Windows 搜索栏</strong>并选择<strong>以管理员身份运行</strong>在右窗格中。</p>
+<p>在高架<strong>命令提示符</strong>窗口中，键入以下命令并按 Enter 键：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sc</span> <span class="n">config</span> <span class="n">CDP</span> <span class="n">user</span> <span class="n">SVC</span> <span class="nb">type</span><span class="o">=</span><span class="n">own</span>
+</pre></div>
+</div>
+<p><img alt="img" src="_images/Connected-Devices-Platform-Service-CDPSvc.png" /></p>
+<p>命令执行后重新启动系统。</p>
+</section>
+<section id="id15">
+<h2>3]使用注册表编辑器禁用连接设备平台服务<a class="headerlink" href="#id15" title="Link to this heading">¶</a></h2>
+<p>如果您无法禁用<strong>连接设备平台服务</strong>从服务管理器或提升的命令提示符中，尝试通过以下方式禁用它<strong>注册表编辑器</strong>如下：</p>
+<p>按 Win+R 打开“运行”窗口。 在运行窗口中输入命令<strong>注册表编辑器</strong>。 按 Enter 键打开注册表编辑器窗口。</p>
+<p>导航到以下路径：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Computer</span>\<span class="n">HKEY_LOCAL_MACHINE</span>\<span class="n">SYSTEM</span>\<span class="n">CurrentControlSet</span>\<span class="n">Services</span>\<span class="n">CDPUserSvc</span>
+</pre></div>
+</div>
+<p>在右侧窗格中，双击<strong>开始</strong>打开它的<strong>特性</strong>。</p>
+<p><img alt="img" src="_images/Connected-Devices-Platform-Service-fix.webp" /></p>
+<p>改变值<strong>价值数据</strong>从<strong>2</strong>到<strong>4</strong>。</p>
+<p><img alt="img" src="_images/Fix-Connected-Devices-Platform-Service.webp" /></p>
+<p>点击<strong>好的</strong>保存设置。</p>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -1055,6 +1093,12 @@ function formatJsonValue(value) {
 </ul>
 </li>
 <li><a class="reference internal" href="#win7nvmeusb3-0">Win7注入nvme和usb3.0驱动</a></li>
+<li><a class="reference internal" href="#cdpsvc">连接设备平台(用户)服务 (CDPSvc) 禁用</a><ul>
+<li><a class="reference internal" href="#id13">1]使用服务管理器禁用连接设备平台服务</a></li>
+<li><a class="reference internal" href="#id14">2]使用命令提示符禁用连接设备平台服务</a></li>
+<li><a class="reference internal" href="#id15">3]使用注册表编辑器禁用连接设备平台服务</a></li>
+</ul>
+</li>
 </ul>
 
   </div>

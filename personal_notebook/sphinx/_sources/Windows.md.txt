@@ -795,3 +795,63 @@ https://console.box.lenovo.com/l/q5WSj8
 
 
 
+
+
+# 连接设备平台(用户)服务 (CDPSvc) 禁用
+
+https://sclub.homes/tech/blogs/what-is-connected-devices-platform-service-cdpsvc
+
+## 1]使用服务管理器禁用连接设备平台服务
+
+按 Win+R 打开运行窗口并输入命令**服务.msc**。 按 Enter 进入窗户。
+
+滚动到**连接设备平台服务**在列表中并右键单击它。 选择**特性**。
+
+![img](./img/Disable-the-Connected-Devices-Platform-Service-from-the-Services-Manager.webp)
+
+改变**启动类型**这项服务的**残疾人**。
+
+![img](./img/Select-Disabled.webp)
+
+打**申请**然后继续**好的**保存设置。
+
+## 2]使用命令提示符禁用连接设备平台服务
+
+您可以使用提升的命令提示符中的命令行禁用连接设备平台服务。 这样做的过程如下：
+
+搜索**命令提示符**在里面**Windows 搜索栏**并选择**以管理员身份运行**在右窗格中。
+
+在高架**命令提示符**窗口中，键入以下命令并按 Enter 键：
+
+```
+sc config CDP user SVC type=own
+```
+
+![img](./img/Connected-Devices-Platform-Service-CDPSvc.png)
+
+命令执行后重新启动系统。
+
+## 3]使用注册表编辑器禁用连接设备平台服务
+
+如果您无法禁用**连接设备平台服务**从服务管理器或提升的命令提示符中，尝试通过以下方式禁用它**注册表编辑器**如下：
+
+按 Win+R 打开“运行”窗口。 在运行窗口中输入命令**注册表编辑器**。 按 Enter 键打开注册表编辑器窗口。
+
+导航到以下路径：
+
+```
+Computer\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CDPUserSvc
+```
+
+在右侧窗格中，双击**开始**打开它的**特性**。
+
+![img](./img/Connected-Devices-Platform-Service-fix.webp)
+
+改变值**价值数据**从**2**到**4**。
+
+![img](./img/Fix-Connected-Devices-Platform-Service.webp)
+
+点击**好的**保存设置。
+
+
+
