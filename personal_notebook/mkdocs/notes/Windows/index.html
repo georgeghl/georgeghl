@@ -467,6 +467,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#windows_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      WIndows下将文件夹映射为磁盘
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       服务注册
@@ -1379,6 +1388,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#windows_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      WIndows下将文件夹映射为磁盘
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       服务注册
@@ -1686,6 +1704,22 @@
 <p>完成后重启计算机。</p>
 <h4 id="windows_1">禁用Windows搜索的推荐</h4>
 <p><code>reg add HKCU\Software\Policies\Microsoft\Windows\explorer /v DisableSearchBoxSuggestions /t reg_dword /d 1 /f</code></p>
+<h4 id="windows_2">WIndows下将文件夹映射为磁盘</h4>
+<p>https://blog.csdn.net/bandaoyu/article/details/122746715</p>
+<p>映射</p>
+<ul>
+<li>将<code>e:\work</code>映射为<code>z:</code>盘，使用<code>subst z: e:\work</code></li>
+</ul>
+<p>取消映射</p>
+<ul>
+<li>取消z盘映射，使用<code>subst z: /d</code></li>
+</ul>
+<p>虚拟盘符可以用h~z任意一个做盘符,不能用已有的盘符的名称,包括光驱盘符，否则会报错。</p>
+<pre><code>C:\&gt;subst K: f:\file
+</code></pre>
+<p>运行<a href="https://so.csdn.net/so/search?q=cmd命令&amp;spm=1001.2101.3001.7020">cmd命令</a>，输入subst K: f:\file，</p>
+<p>可以把f盘下的文件夹“file”，映射为磁盘K。</p>
+<p>当<a href="https://so.csdn.net/so/search?q=删除文件夹&amp;spm=1001.2101.3001.7020">删除文件夹</a>file后，磁盘K自动被删除。</p>
 <h4 id="_3">服务注册</h4>
 <h5 id="nssm">NSSM(推荐)</h5>
 <p>下载：https://nssm.cc/download</p>

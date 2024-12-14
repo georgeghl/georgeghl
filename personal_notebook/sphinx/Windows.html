@@ -62,7 +62,26 @@
 <p><code class="docutils literal notranslate"><span class="pre">reg</span> <span class="pre">add</span> <span class="pre">HKCU\Software\Policies\Microsoft\Windows\explorer</span> <span class="pre">/v</span> <span class="pre">DisableSearchBoxSuggestions</span> <span class="pre">/t</span> <span class="pre">reg_dword</span> <span class="pre">/d</span> <span class="pre">1</span> <span class="pre">/f</span></code></p>
 </section>
 <section id="id4">
-<h1>服务注册<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h1>
+<h1>WIndows下将文件夹映射为磁盘<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h1>
+<p>https://blog.csdn.net/bandaoyu/article/details/122746715</p>
+<p>映射</p>
+<ul class="simple">
+<li><p>将<code class="docutils literal notranslate"><span class="pre">e:\work</span></code>映射为<code class="docutils literal notranslate"><span class="pre">z:</span></code>盘，使用<code class="docutils literal notranslate"><span class="pre">subst</span> <span class="pre">z:</span> <span class="pre">e:\work</span></code></p></li>
+</ul>
+<p>取消映射</p>
+<ul class="simple">
+<li><p>取消z盘映射，使用<code class="docutils literal notranslate"><span class="pre">subst</span> <span class="pre">z:</span> <span class="pre">/d</span></code></p></li>
+</ul>
+<p>虚拟盘符可以用h~z任意一个做盘符,不能用已有的盘符的名称,包括光驱盘符，否则会报错。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">C</span><span class="p">:</span>\<span class="o">&gt;</span><span class="n">subst</span> <span class="n">K</span><span class="p">:</span> <span class="n">f</span><span class="p">:</span>\<span class="n">file</span>
+</pre></div>
+</div>
+<p>运行<a class="reference external" href="https://so.csdn.net/so/search?q=cmd%E5%91%BD%E4%BB%A4&amp;spm=1001.2101.3001.7020">cmd命令</a>，输入subst K: f:\file，</p>
+<p>可以把f盘下的文件夹“file”，映射为磁盘K。</p>
+<p>当<a class="reference external" href="https://so.csdn.net/so/search?q=%E5%88%A0%E9%99%A4%E6%96%87%E4%BB%B6%E5%A4%B9&amp;spm=1001.2101.3001.7020">删除文件夹</a>file后，磁盘K自动被删除。</p>
+</section>
+<section id="id5">
+<h1>服务注册<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h1>
 <section id="nssm">
 <h2>NSSM(推荐)<a class="headerlink" href="#nssm" title="Link to this heading">¶</a></h2>
 <p>下载：https://nssm.cc/download</p>
@@ -115,8 +134,8 @@
 <section id="windows-amd">
 <h1>解决Windows系统对 AMD 的负优化，修复部分卡顿问题<a class="headerlink" href="#windows-amd" title="Link to this heading">¶</a></h1>
 <p>解决Windows系统对 AMD 的负优化，修复部分卡顿问题：https://seeizo.com/posts/amd-win-fix/</p>
-<section id="id5">
-<h2>一：异类线程调度<a class="reference external" href="https://seeizo.com/posts/amd-win-fix/#%E4%B8%80%E5%BC%82%E7%B1%BB%E7%BA%BF%E7%A8%8B%E8%B0%83%E5%BA%A6">#</a><a class="headerlink" href="#id5" title="Link to this heading">¶</a></h2>
+<section id="id6">
+<h2>一：异类线程调度<a class="reference external" href="https://seeizo.com/posts/amd-win-fix/#%E4%B8%80%E5%BC%82%E7%B1%BB%E7%BA%BF%E7%A8%8B%E8%B0%83%E5%BA%A6">#</a><a class="headerlink" href="#id6" title="Link to this heading">¶</a></h2>
 <p>禁用异类线程调度可以显著优化 AMD CPU 在 Windows 上的核心负载均衡情况。</p>
 <ol class="simple">
 <li><p>右键 Windows 徽标，点击 “Windows Powershell（管理员）”，执行以下命令：</p></li>
@@ -159,8 +178,8 @@
 </div></blockquote>
 </section>
 <hr class="docutils" />
-<section id="id6">
-<h2>二：禁用高精度事件计时器。<a class="reference external" href="https://seeizo.com/posts/amd-win-fix/#%E4%BA%8C%E7%A6%81%E7%94%A8%E9%AB%98%E7%B2%BE%E5%BA%A6%E4%BA%8B%E4%BB%B6%E8%AE%A1%E6%97%B6%E5%99%A8">#</a><a class="headerlink" href="#id6" title="Link to this heading">¶</a></h2>
+<section id="id7">
+<h2>二：禁用高精度事件计时器。<a class="reference external" href="https://seeizo.com/posts/amd-win-fix/#%E4%BA%8C%E7%A6%81%E7%94%A8%E9%AB%98%E7%B2%BE%E5%BA%A6%E4%BA%8B%E4%BB%B6%E8%AE%A1%E6%97%B6%E5%99%A8">#</a><a class="headerlink" href="#id7" title="Link to this heading">¶</a></h2>
 <p><em>这个属于是远古 AMD CPU 就有的问题，理论上只有AMD处理器上才有，Intel不用管。</em>
 禁用高精度事件计时器可以解决在帧率正常的情况下仍会感觉到卡顿的情况。</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bcdedit</span> <span class="o">/</span><span class="n">deletevalue</span> <span class="n">useplatformclock</span>
@@ -173,8 +192,8 @@
 <p>若要恢复高精度事件计时器，将指令二中的 <strong>false</strong> 修改为 <strong>true</strong> 即可。</p>
 </section>
 </section>
-<section id="id7">
-<h1>计算机重命名失败，提示“这台电脑名称无效”/“此電腦名稱無效”<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h1>
+<section id="id8">
+<h1>计算机重命名失败，提示“这台电脑名称无效”/“此電腦名稱無效”<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h1>
 <p>请您按Win+R, 输入 regedit，找到
 HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\ComputerName\ActiveComputerName
 HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\ComputerName\ComputerName
@@ -224,8 +243,8 @@ HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters
 色彩深度：32位</p>
 <p>如果你的系统是联想OEM的系统可能以上注册表键值已经存在，只需直接修改OEM信息和图片即可。</p>
 </section>
-<section id="id8">
-<h1>流媒体服务器推荐<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h1>
+<section id="id9">
+<h1>流媒体服务器推荐<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h1>
 <p>Madsonic</p>
 <p>subsonic</p>
 <p>jellyfin</p>
@@ -934,8 +953,8 @@ function formatJsonValue(value) {
 举例：将.cab后缀文件拖到C:\sxs目录下，然后以管理员方式打开PowerShell或Cmd，直接粘贴语句<code class="docutils literal notranslate"><span class="pre">dism.exe</span> <span class="pre">/online</span> <span class="pre">/enable-feature</span> <span class="pre">/featurename:NetFX3</span> <span class="pre">/Source:c:\sxs</span></code>回车等待就好了。
 <a class="reference external" href="https://img2020.cnblogs.com/blog/1751997/202106/1751997-20210613144436674-31698719.png"><img alt="DISM安装.NET Framework 3.5" src="_images/1751997-20210613144436674-31698719.png" /></a></p>
 </section>
-<section id="id9">
-<h2>3. 解禁麦克风和摄像头限制<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h2>
+<section id="id10">
+<h2>3. 解禁麦克风和摄像头限制<a class="headerlink" href="#id10" title="Link to this heading">¶</a></h2>
 <p>3.1 官方工具</p>
 <p>神州网信官方推出的工具，操作很简单。
 官网地址：<a class="reference external" href="https://support.cmgos.com/cmgetools/cmge_mic_camera_tool">官网链接</a>
@@ -945,13 +964,13 @@ function formatJsonValue(value) {
 <p><code class="docutils literal notranslate"><span class="pre">gpedit.msc</span></code>打开组策略-&gt;计算机配置-&gt;管理模板-&gt;windows组件-&gt;应用隐私
 允许Windows应用访问相机—未配置，或强制允许。允许Windows应用访问麦克风—未配置，或强制允许</p>
 </section>
-<section id="id10">
-<h2>4. 取消强密码<a class="headerlink" href="#id10" title="Link to this heading">¶</a></h2>
+<section id="id11">
+<h2>4. 取消强密码<a class="headerlink" href="#id11" title="Link to this heading">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">gpedit.msc</span></code>打开组策略-&gt;Windows设置-&gt;安全设置-&gt;账户策略-&gt;密码策略
 <code class="docutils literal notranslate"><span class="pre">密码必须符合复杂性要求</span></code>禁用，密码长度最小值、最短和最长使用期限都改成0，重启再次输密码登陆到桌面后，双击<code class="docutils literal notranslate"><span class="pre">ctrl+alt+del</span></code>点更改密码，输入旧密码，两次新密码不用输入，即清空了密码。</p>
 </section>
-<section id="id11">
-<h2>5. 解除屏幕保护程序限制（选项灰色不可更改）<a class="headerlink" href="#id11" title="Link to this heading">¶</a></h2>
+<section id="id12">
+<h2>5. 解除屏幕保护程序限制（选项灰色不可更改）<a class="headerlink" href="#id12" title="Link to this heading">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">gpedit.msc</span></code>打开组策略-&gt;用户配置-&gt;管理模板-&gt;控制面板-&gt;个性化，将所有与屏幕保护程序相关的选项改为未配置即可。
 <a class="reference external" href="https://img2022.cnblogs.com/blog/1751997/202201/1751997-20220121133104895-695358431.png"><img alt="img" src="_images/1751997-20220121133104895-695358431.png" /></a>
 另一种办法，注册表<code class="docutils literal notranslate"><span class="pre">regedit</span></code>定位到<code class="docutils literal notranslate"><span class="pre">HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\Control</span> <span class="pre">Panel\Desktop</span></code>右栏删掉下表提到的键。</p>
@@ -986,8 +1005,8 @@ function formatJsonValue(value) {
 </tr>
 </tbody>
 </table></section>
-<section id="id12">
-<h2>6. 休眠后直接进入桌面<a class="headerlink" href="#id12" title="Link to this heading">¶</a></h2>
+<section id="id13">
+<h2>6. 休眠后直接进入桌面<a class="headerlink" href="#id13" title="Link to this heading">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">gpedit.msc</span></code>打开组策略-&gt;计算机配置-&gt;管理模板-&gt;控制面板-&gt;个性化，如下图所示，将<code class="docutils literal notranslate"><span class="pre">不显示锁屏</span></code>启用，其他选择未配置。
 <a class="reference external" href="https://img2022.cnblogs.com/blog/1751997/202202/1751997-20220207125457163-1331842797.png"><img alt="img" src="_images/1751997-20220207125457163-1331842797.png" /></a>
 运行窗口键入<code class="docutils literal notranslate"><span class="pre">netplwiz</span></code>。
@@ -1009,8 +1028,8 @@ function formatJsonValue(value) {
 <section id="cdpsvc">
 <h1>连接设备平台(用户)服务 (CDPSvc) 禁用<a class="headerlink" href="#cdpsvc" title="Link to this heading">¶</a></h1>
 <p>https://sclub.homes/tech/blogs/what-is-connected-devices-platform-service-cdpsvc</p>
-<section id="id13">
-<h2>1]使用服务管理器禁用连接设备平台服务<a class="headerlink" href="#id13" title="Link to this heading">¶</a></h2>
+<section id="id14">
+<h2>1]使用服务管理器禁用连接设备平台服务<a class="headerlink" href="#id14" title="Link to this heading">¶</a></h2>
 <p>按 Win+R 打开运行窗口并输入命令<strong>服务.msc</strong>。 按 Enter 进入窗户。</p>
 <p>滚动到<strong>连接设备平台服务</strong>在列表中并右键单击它。 选择<strong>特性</strong>。</p>
 <p><img alt="img" src="_images/Disable-the-Connected-Devices-Platform-Service-from-the-Services-Manager.webp" /></p>
@@ -1018,8 +1037,8 @@ function formatJsonValue(value) {
 <p><img alt="img" src="_images/Select-Disabled.webp" /></p>
 <p>打<strong>申请</strong>然后继续<strong>好的</strong>保存设置。</p>
 </section>
-<section id="id14">
-<h2>2]使用命令提示符禁用连接设备平台服务<a class="headerlink" href="#id14" title="Link to this heading">¶</a></h2>
+<section id="id15">
+<h2>2]使用命令提示符禁用连接设备平台服务<a class="headerlink" href="#id15" title="Link to this heading">¶</a></h2>
 <p>您可以使用提升的命令提示符中的命令行禁用连接设备平台服务。 这样做的过程如下：</p>
 <p>搜索<strong>命令提示符</strong>在里面<strong>Windows 搜索栏</strong>并选择<strong>以管理员身份运行</strong>在右窗格中。</p>
 <p>在高架<strong>命令提示符</strong>窗口中，键入以下命令并按 Enter 键：</p>
@@ -1029,8 +1048,8 @@ function formatJsonValue(value) {
 <p><img alt="img" src="_images/Connected-Devices-Platform-Service-CDPSvc.png" /></p>
 <p>命令执行后重新启动系统。</p>
 </section>
-<section id="id15">
-<h2>3]使用注册表编辑器禁用连接设备平台服务<a class="headerlink" href="#id15" title="Link to this heading">¶</a></h2>
+<section id="id16">
+<h2>3]使用注册表编辑器禁用连接设备平台服务<a class="headerlink" href="#id16" title="Link to this heading">¶</a></h2>
 <p>如果您无法禁用<strong>连接设备平台服务</strong>从服务管理器或提升的命令提示符中，尝试通过以下方式禁用它<strong>注册表编辑器</strong>如下：</p>
 <p>按 Win+R 打开“运行”窗口。 在运行窗口中输入命令<strong>注册表编辑器</strong>。 按 Enter 键打开注册表编辑器窗口。</p>
 <p>导航到以下路径：</p>
@@ -1062,20 +1081,21 @@ function formatJsonValue(value) {
 </ul>
 </li>
 <li><a class="reference internal" href="#id3">禁用Windows搜索的推荐</a></li>
-<li><a class="reference internal" href="#id4">服务注册</a><ul>
+<li><a class="reference internal" href="#id4">WIndows下将文件夹映射为磁盘</a></li>
+<li><a class="reference internal" href="#id5">服务注册</a><ul>
 <li><a class="reference internal" href="#nssm">NSSM(推荐)</a></li>
 <li><a class="reference internal" href="#using-shawl">Using Shawl</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#windows-amd">解决Windows系统对 AMD 的负优化，修复部分卡顿问题</a><ul>
-<li><a class="reference internal" href="#id5">一：异类线程调度#</a></li>
-<li><a class="reference internal" href="#id6">二：禁用高精度事件计时器。#</a></li>
+<li><a class="reference internal" href="#id6">一：异类线程调度#</a></li>
+<li><a class="reference internal" href="#id7">二：禁用高精度事件计时器。#</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id7">计算机重命名失败，提示“这台电脑名称无效”/“此電腦名稱無效”</a></li>
+<li><a class="reference internal" href="#id8">计算机重命名失败，提示“这台电脑名称无效”/“此電腦名稱無效”</a></li>
 <li><a class="reference internal" href="#condawindows-terminalc-xxx-windowspowershell-profile-ps1">conda在windows Terminal中提示报错无法加载文件C:\XXX\WindowsPowerShell\profile.ps1</a></li>
 <li><a class="reference internal" href="#windows10oem">Windows10自定义OEM信息</a></li>
-<li><a class="reference internal" href="#id8">流媒体服务器推荐</a></li>
+<li><a class="reference internal" href="#id9">流媒体服务器推荐</a></li>
 <li><a class="reference internal" href="#navidrome">navidrome安装与服务注册</a></li>
 <li><a class="reference internal" href="#kmswindows">kms激活Windows</a><ul>
 <li><a class="reference internal" href="#kms">KMS激活使用方法</a></li>
@@ -1086,17 +1106,17 @@ function formatJsonValue(value) {
 <li><a class="reference internal" href="#win10">Win10神州网信政府版 取消反人类的设定</a><ul>
 <li><a class="reference internal" href="#ctrl-alt-del">1. 取消Ctrl+Alt+Del打开启动屏幕</a></li>
 <li><a class="reference internal" href="#net-framework-3-5">2. 安装.NET Framework 3.5</a></li>
-<li><a class="reference internal" href="#id9">3. 解禁麦克风和摄像头限制</a></li>
-<li><a class="reference internal" href="#id10">4. 取消强密码</a></li>
-<li><a class="reference internal" href="#id11">5. 解除屏幕保护程序限制（选项灰色不可更改）</a></li>
-<li><a class="reference internal" href="#id12">6. 休眠后直接进入桌面</a></li>
+<li><a class="reference internal" href="#id10">3. 解禁麦克风和摄像头限制</a></li>
+<li><a class="reference internal" href="#id11">4. 取消强密码</a></li>
+<li><a class="reference internal" href="#id12">5. 解除屏幕保护程序限制（选项灰色不可更改）</a></li>
+<li><a class="reference internal" href="#id13">6. 休眠后直接进入桌面</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#win7nvmeusb3-0">Win7注入nvme和usb3.0驱动</a></li>
 <li><a class="reference internal" href="#cdpsvc">连接设备平台(用户)服务 (CDPSvc) 禁用</a><ul>
-<li><a class="reference internal" href="#id13">1]使用服务管理器禁用连接设备平台服务</a></li>
-<li><a class="reference internal" href="#id14">2]使用命令提示符禁用连接设备平台服务</a></li>
-<li><a class="reference internal" href="#id15">3]使用注册表编辑器禁用连接设备平台服务</a></li>
+<li><a class="reference internal" href="#id14">1]使用服务管理器禁用连接设备平台服务</a></li>
+<li><a class="reference internal" href="#id15">2]使用命令提示符禁用连接设备平台服务</a></li>
+<li><a class="reference internal" href="#id16">3]使用注册表编辑器禁用连接设备平台服务</a></li>
 </ul>
 </li>
 </ul>

@@ -40,6 +40,40 @@
 
 
 
+
+
+# WIndows下将文件夹映射为磁盘
+
+https://blog.csdn.net/bandaoyu/article/details/122746715
+
+映射
+
+- 将`e:\work`映射为`z:`盘，使用`subst z: e:\work`
+
+取消映射
+
+- 取消z盘映射，使用`subst z: /d`
+
+虚拟盘符可以用h~z任意一个做盘符,不能用已有的盘符的名称,包括光驱盘符，否则会报错。
+
+```
+C:\>subst K: f:\file
+```
+
+运行[cmd命令](https://so.csdn.net/so/search?q=cmd命令&spm=1001.2101.3001.7020)，输入subst K: f:\file，
+
+可以把f盘下的文件夹“file”，映射为磁盘K。
+
+当[删除文件夹](https://so.csdn.net/so/search?q=删除文件夹&spm=1001.2101.3001.7020)file后，磁盘K自动被删除。
+
+
+
+
+
+
+
+
+
 # 服务注册
 
 ## NSSM(推荐)
