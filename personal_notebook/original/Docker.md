@@ -2518,6 +2518,34 @@ sudo systemctl start sparkcluster_hdfs
 
 
 
+# v2ray-core
+
+
+
+
+
+
+
+# nginx-proxy-manager
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
