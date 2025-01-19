@@ -1223,6 +1223,12 @@ vi<span class="w"> </span>.htaccess
 <span class="c1">#修改完毕后按ESC退出编辑模式，按`:`，输入`wq`后回车，保存退出</span>
 <span class="c1">#利用Apache附带的程序htpasswd，生成包含用户名和密码的文本文件：/var/www/html/.htpasswd</span>
 htpasswd<span class="w"> </span>-c<span class="w"> </span>/usr/local/apache2/htdocs/.htpasswd<span class="w"> </span>admin
+
+<span class="c1"># 若需要添加多个用户，则依次再为每个用户设置密码:</span>
+htpasswd<span class="w"> </span>-m<span class="w"> </span>.htpasswd<span class="w"> </span>your_user_name
+<span class="c1"># htaccess中，添加对应用户名，使用空格分隔</span>
+require<span class="w"> </span>user<span class="w"> </span>admin<span class="w"> </span>your_user_name1<span class="w"> </span>your_user_name2
+
 <span class="c1">#若使用映射到主机的目录，则为： htpasswd -c /home/ubuntu/docker/httpd-default/htdocs/.htpasswd admin</span>
 <span class="c1">#输入密码</span>
 <span class="c1"># 或：/usr/local/apache2/bin/htpasswd -c /usr/local/apache2/htdocs/.htpasswd admin</span>

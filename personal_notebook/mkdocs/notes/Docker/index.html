@@ -3731,6 +3731,12 @@ require user admin
 #修改完毕后按ESC退出编辑模式，按`:`，输入`wq`后回车，保存退出
 #利用Apache附带的程序htpasswd，生成包含用户名和密码的文本文件：/var/www/html/.htpasswd
 htpasswd -c /usr/local/apache2/htdocs/.htpasswd admin
+
+# 若需要添加多个用户，则依次再为每个用户设置密码:
+htpasswd -m .htpasswd your_user_name
+# htaccess中，添加对应用户名，使用空格分隔
+require user admin your_user_name1 your_user_name2
+
 #若使用映射到主机的目录，则为： htpasswd -c /home/ubuntu/docker/httpd-default/htdocs/.htpasswd admin
 #输入密码
 # 或：/usr/local/apache2/bin/htpasswd -c /usr/local/apache2/htdocs/.htpasswd admin

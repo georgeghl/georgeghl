@@ -86,6 +86,29 @@ sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> <
 </pre></div>
 </div>
 <p>）</p>
+<p>新版本：</p>
+<p>https://mirrors.tuna.tsinghua.edu.cn/help/Adoptium/</p>
+<p>首先请安装依赖：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">update</span> <span class="o">&amp;&amp;</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="o">-</span><span class="n">y</span> <span class="n">wget</span> <span class="n">apt</span><span class="o">-</span><span class="n">transport</span><span class="o">-</span><span class="n">https</span>
+</pre></div>
+</div>
+<p>然后信任 GPG 公钥：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wget</span> <span class="o">-</span><span class="n">O</span> <span class="o">-</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">packages</span><span class="o">.</span><span class="n">adoptium</span><span class="o">.</span><span class="n">net</span><span class="o">/</span><span class="n">artifactory</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">gpg</span><span class="o">/</span><span class="n">key</span><span class="o">/</span><span class="n">public</span> <span class="o">|</span> <span class="n">tee</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">apt</span><span class="o">/</span><span class="n">keyrings</span><span class="o">/</span><span class="n">adoptium</span><span class="o">.</span><span class="n">asc</span>
+</pre></div>
+</div>
+<p>随后将下列内容添加到 <code class="docutils literal notranslate"><span class="pre">/etc/apt/sources.list.d/adoptium.list</span></code> ：</p>
+<p>操作系统版本Debian 12 (bookworm)Debian 11 (bullseye)Debian 10 (buster)Debian 9 (stretch) (EOL)Ubuntu 22.04 LTS (jammy)Ubuntu 20.04 LTS (focal)Ubuntu 18.04 LTS (bionic)Ubuntu 16.04 LTS (xenial) (EOL)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">deb</span> <span class="p">[</span><span class="n">signed</span><span class="o">-</span><span class="n">by</span><span class="o">=/</span><span class="n">etc</span><span class="o">/</span><span class="n">apt</span><span class="o">/</span><span class="n">keyrings</span><span class="o">/</span><span class="n">adoptium</span><span class="o">.</span><span class="n">asc</span><span class="p">]</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">mirrors</span><span class="o">.</span><span class="n">tuna</span><span class="o">.</span><span class="n">tsinghua</span><span class="o">.</span><span class="n">edu</span><span class="o">.</span><span class="n">cn</span><span class="o">/</span><span class="n">Adoptium</span><span class="o">/</span><span class="n">deb</span> <span class="n">bookworm</span> <span class="n">main</span>
+</pre></div>
+</div>
+<p>再执行</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">update</span>
+</pre></div>
+</div>
+<p>之后可以安装软件包，例如：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">temurin</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="n">jdk</span>
+</pre></div>
+</div>
 </section>
 </section>
 

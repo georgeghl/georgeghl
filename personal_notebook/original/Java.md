@@ -69,3 +69,47 @@ sudo apt install ecj                      # version 3.16.0-1
 
 ）
 
+
+
+
+
+新版本：
+
+https://mirrors.tuna.tsinghua.edu.cn/help/Adoptium/
+
+首先请安装依赖：
+
+```
+apt-get update && apt-get install -y wget apt-transport-https
+```
+
+然后信任 GPG 公钥：
+
+```
+wget -O - https://packages.adoptium.net/artifactory/api/gpg/key/public | tee /etc/apt/keyrings/adoptium.asc
+```
+
+随后将下列内容添加到 `/etc/apt/sources.list.d/adoptium.list` ：
+
+操作系统版本Debian 12 (bookworm)Debian 11 (bullseye)Debian 10 (buster)Debian 9 (stretch) (EOL)Ubuntu 22.04 LTS (jammy)Ubuntu 20.04 LTS (focal)Ubuntu 18.04 LTS (bionic)Ubuntu 16.04 LTS (xenial) (EOL)
+
+```
+deb [signed-by=/etc/apt/keyrings/adoptium.asc] https://mirrors.tuna.tsinghua.edu.cn/Adoptium/deb bookworm main
+```
+
+再执行
+
+```
+apt-get update
+```
+
+之后可以安装软件包，例如：
+
+```
+apt-get install temurin-11-jdk
+```
+
+
+
+
+

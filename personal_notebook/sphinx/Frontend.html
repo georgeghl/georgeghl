@@ -72,6 +72,27 @@
 </div>
 </section>
 </section>
+<section id="vue404-apache-nginx-tomcat">
+<h1><a class="reference external" href="https://www.cnblogs.com/LindaBlog/p/14485033.html">Vue项目上线后刷新报错404问题（apache，nginx，tomcat）</a><a class="headerlink" href="#vue404-apache-nginx-tomcat" title="Link to this heading">¶</a></h1>
+<section id="apache">
+<h2>apache<a class="headerlink" href="#apache" title="Link to this heading">¶</a></h2>
+<p>1.修改httpd.conf文件，开启rewrite_module功能。</p>
+<p>​    <code class="docutils literal notranslate"><span class="pre">LoadModule</span> <span class="pre">rewrite_module</span> <span class="pre">libexec/apache2/mod_rewrite.so</span></code>，去掉前面的#</p>
+<p>2.找到<code class="docutils literal notranslate"><span class="pre">AllowOverride</span> <span class="pre">None</span></code>的那行，把它改成<code class="docutils literal notranslate"><span class="pre">AllowOverride</span> <span class="pre">All</span></code>，来使<code class="docutils literal notranslate"><span class="pre">.htaccess</span></code>文件生效。</p>
+<p>3.在你的项目目录下，也就是我的根目录添加一个.htaccess文件：</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;IfModule</span><span class="w"> </span><span class="err">mod_rewrite.c</span><span class="nt">&gt;</span>
+<span class="w">  </span>RewriteEngine<span class="w"> </span>On
+<span class="w">  </span>RewriteBase<span class="w"> </span>/
+<span class="w">  </span>RewriteRule<span class="w"> </span>^index\.html$<span class="w"> </span>-<span class="w"> </span>[L]
+<span class="w">  </span>RewriteCond<span class="w"> </span>%{REQUEST_FILENAME}<span class="w"> </span>!-f
+<span class="w">  </span>RewriteCond<span class="w"> </span>%{REQUEST_FILENAME}<span class="w"> </span>!-d
+<span class="w">  </span>RewriteRule<span class="w"> </span>.<span class="w"> </span>/index.html<span class="w"> </span>[L]
+<span class="nt">&lt;/IfModule&gt;</span>
+</pre></div>
+</div>
+<p>4.重启apache httpd</p>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -86,6 +107,10 @@
 <li><a class="reference internal" href="#">VUE 部署到 IIS, 刷新页面报404</a><ul>
 <li><a class="reference internal" href="#id1">安装</a></li>
 <li><a class="reference internal" href="#web-config">根目录新建web.config</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#vue404-apache-nginx-tomcat">Vue项目上线后刷新报错404问题（apache，nginx，tomcat）</a><ul>
+<li><a class="reference internal" href="#apache">apache</a></li>
 </ul>
 </li>
 </ul>

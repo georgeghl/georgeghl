@@ -36,3 +36,54 @@
 </configuration>
 ```
 
+
+
+
+
+
+
+# [Vue项目上线后刷新报错404问题（apache，nginx，tomcat）](https://www.cnblogs.com/LindaBlog/p/14485033.html)
+
+## apache
+
+1.修改httpd.conf文件，开启rewrite_module功能。
+
+​    `LoadModule rewrite_module libexec/apache2/mod_rewrite.so`，去掉前面的#
+
+2.找到`AllowOverride None`的那行，把它改成`AllowOverride All`，来使`.htaccess`文件生效。
+
+3.在你的项目目录下，也就是我的根目录添加一个.htaccess文件：
+
+```xml
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  RewriteRule ^index\.html$ - [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . /index.html [L]
+</IfModule>
+```
+
+4.重启apache httpd
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

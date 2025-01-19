@@ -405,6 +405,84 @@ apt<span class="w"> </span>install<span class="w"> </span>s-tui
 <p><a class="reference external" href="https://post.smzdm.com/p/akle62mk/pic_45/"><img alt="2024年PVE8最新安装使用指南|新手入门|安装|优化|Proxmox VE 8.1" src="_images/65f268ad6cfa06177.png_e1080.jpg" /></a></p>
 </section>
 </section>
+<section id="r3gbreed">
+<h1>r3g刷breed<a class="headerlink" href="#r3gbreed" title="Link to this heading">¶</a></h1>
+<p>看有人在问R3G刷Breed，所以分享出自己在用的教程。
+一、刷开发版(目前最新2018.10.30，版本2.25.124)
+1、下载固件(http://www.miwifi.com/miwifi_download.html)文件，miwifi_r3g_firmware_12f97_2.25.124.bin
+2、备份原厂稳定版固件
+3、进路由器设置，系统状态-系统版本-手动升级，上传.bin 文件，升级重启
+二、开SSH权限
+1、（如果app已经绑定路由器，跳过）通过手机app【小米wifi】绑定路由器
+2、找到开SSH的工具包：https://d.miwifi.com/rom/ssh下载对应的工具包miwifi_ssh.bin，并保存 root 密码
+3、把工具包miwifi_ssh.bin(文件名只能是这个)放入U盘(FAT/FAT32格式,U盘不能是启动盘)根目录
+4、断开小米路由器电源，插入U盘到路由器
+5、按住reset键开机，指示灯变黄色闪烁状态即松开 reset 键
+6、待3-5秒后蓝灯亮起安装完成，路由器自动重启
+7、终端ssh登录：ssh <a class="reference external" href="mailto:root&#37;&#52;&#48;192&#46;168&#46;31&#46;1">root<span>&#64;</span>192<span>&#46;</span>168<span>&#46;</span>31<span>&#46;</span>1</a>，输入ssh权限密码
+三、刷不死平台breed：(注意，原版OpenWrt不要通过 breed刷，因为，OpenWrt 原版需要上传2个文件，而breed，只能上传一个文件，如果要用原版 OpenWrt，可以scp 复制文件到/tmp 下，然后 ssh 登录后命令行安装)
+1、https://breed.hackpascal.net/下载breed-mt7621-xiaomi-r3g.bin
+2、用ssh工具上传.bin文件到路由器/tmp目录下：
+scp -P 22 文件名路径 <a class="reference external" href="mailto:root&#37;&#52;&#48;192&#46;168&#46;31&#46;1">root<span>&#64;</span>192<span>&#46;</span>168<span>&#46;</span>31<span>&#46;</span>1</a>:/tmp
+3、ssh进入小米路由器，写入 breed：
+mtd -r write /tmp/breed-mt7621-xiaomi-r3g.bin Bootloader
+4、刷入后，机器会重新启动。
+四、进入 breed方法：
+1、按住reset键开机，灯闪烁后松开reset键
+2、等获取到ip，浏览器进入192.168.1.1
+3、非常重要的备份：
+在 Breed 页面中，先备份所有的数据，固件备份选项里能点的都点一下，备份的eeprom.bin(EEPROM)和full.bin(编程器固件)要保存好，以防止丢失了SN以后又想刷回官方版本的麻烦。</p>
+<p>已知小米R3G需要
+1、删除normal_firmware_md5=8945bfb64aa2cdc1a35dd63333b6f28f(R4是8a5ea648853b89e0936f3e2a18b31099)这个键值，否则可能会导致无法开机
+2、添加环境变量xiaomi.r3g.bootfw:2</p>
+</section>
+<section id="proxmox-ve-pve">
+<h1><a class="reference external" href="https://www.cnblogs.com/txqdm/p/17946432">Proxmox VE（PVE）添加硬盘做存储</a><a class="headerlink" href="#proxmox-ve-pve" title="Link to this heading">¶</a></h1>
+<p>首先需要先先看下需添加硬盘的设备名称</p>
+<p>如下图的/dev/sda(当然也可以在命令里用fdisk -l去确认)</p>
+<p>确定好名称后打开Shell命令终端，输入</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fdisk</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">sda</span>
+</pre></div>
+</div>
+<p>这里的操作就跟Linux没什么区别了，分区格式化</p>
+<p>先分区，输入n(分区) - 输入p(主分区) - 输入w(写入分区)</p>
+<p>格式化(格式化为ext4格式)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkfs</span> <span class="o">-</span><span class="n">t</span> <span class="n">ext4</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">sda1</span>
+</pre></div>
+</div>
+<p>创建/mnt/sda1目录</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="o">/</span><span class="n">mnt</span><span class="o">/</span><span class="n">sda1</span>
+</pre></div>
+</div>
+<p>将/dev/sda1分区挂载在/mnt/sda1上</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mount</span> <span class="o">-</span><span class="n">t</span> <span class="n">ext4</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">sda1</span> <span class="o">/</span><span class="n">mnt</span><span class="o">/</span><span class="n">sda1</span>
+</pre></div>
+</div>
+<p>将/mnt/sda1挂载写入到系统启动项</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">echo</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">sda1</span> <span class="o">/</span><span class="n">mnt</span><span class="o">/</span><span class="n">sda1</span> <span class="n">ext4</span> <span class="n">defaults</span> <span class="mi">1</span> <span class="mi">2</span> <span class="o">&gt;&gt;</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">fstab</span>
+</pre></div>
+</div>
+<p>选择“数据中心”(这块一定要注意不是选择PVE)存储 - 添加 - 目录</p>
+<p>ID可以随便填，目录就是刚才创建好的/mnt/sda1，内容<strong>全选</strong>，其它默认点击添加。</p>
+</section>
+<section id="pve-sudo-debian12-sudo">
+<h1>pve sudo(Debian12) 安装sudo权限<a class="headerlink" href="#pve-sudo-debian12-sudo" title="Link to this heading">¶</a></h1>
+<p>https://www.mulingyuer.com/archives/912/</p>
+<p>登录root账号，安装依赖：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>apt-get<span class="w"> </span>install<span class="w"> </span>sudo
+</pre></div>
+</div>
+<p>安装完毕后我们还需要配置文件，输入命令：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>visudo
+</pre></div>
+</div>
+<p>进入到编辑状态，找到root的地址，再下面新增一个你允许提权的账号.</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">your_user_name  ALL</span><span class="o">=</span><span class="s">(ALL:ALL) ALL</span>
+</pre></div>
+</div>
+<p>改好后 <code class="docutils literal notranslate"><span class="pre">CTRL</span> <span class="pre">+</span> <span class="pre">O</span></code>保存文件，<code class="docutils literal notranslate"><span class="pre">CTRL</span> <span class="pre">+</span> <span class="pre">X</span></code>退出编辑模式。</p>
+<p>此时我们通过ABC ssh连接服务器，输入命令：<code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">-i</span></code>，然后输入ABC账号的密码，即可提权成root账号。</p>
+</section>
 
 
             <div class="clearer"></div>
@@ -460,6 +538,9 @@ apt<span class="w"> </span>install<span class="w"> </span>s-tui
 <li><a class="reference internal" href="#id14"><strong>虚拟机安装</strong></a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#r3gbreed">r3g刷breed</a></li>
+<li><a class="reference internal" href="#proxmox-ve-pve">Proxmox VE（PVE）添加硬盘做存储</a></li>
+<li><a class="reference internal" href="#pve-sudo-debian12-sudo">pve sudo(Debian12) 安装sudo权限</a></li>
 </ul>
 
   </div>

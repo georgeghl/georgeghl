@@ -28,12 +28,100 @@ sudo update-grub
 
 
 
+
+
+# 忘记密码重置
+
+（1）启动Ubuntu系统，按住shift不松，进入GRUB界面。
+
+（2）通过上下左右键移动选择，选择Ubuntu高级选项（或者是此单词Ubuntu Advanced），按Enter键回车即可。
+
+（3）选择Ubuntu，with linux 5.8.0-36（recovery mode）（选择您所显示的最高版本选项即可，不必纠结版本），Enter键回车，（可能需要按 **e** 键至出新界面为止）。
+
+（4）新版本界面不同之前界面，选择 root 选项。
+
+Enter键盘回车，进入此界面（下面出现命令行）；须注意：此处是root账户无密码状态。
+
+注意：在选择root选项时，第二次按Enter回车键出现。
+
+输入账户和密码
+注意：此处可设置root账户密码，命令如下
+第一行：passwd root
+第二行：–输入密码–
+修改完成显示，successfully为修改成功提示。
+
+添加用户则：`adduser`。
+
+
+
+
+
 # 添加新sudo用户
 
 ```bash
 sudo adduser newusername
 sudo usermod -a -G sudo newusername
 ```
+
+
+
+
+
+# 指定 sudo 会话的时间
+
+在终端中，输入以下命令来编辑 sudoers 文件。
+
+```undefined
+sudo visudo
+```
+
+请记住，请勿使用任何文本编辑器编辑 sudoers 文件。相反，请使用上述方法来实现此目的。
+
+当提示输入密码时，输入 sudo 用户的密码。默认情况下，Sudoers 文件将在 nano 编辑器中打开，如以下屏幕截图所示。现在在 sudoers 文件中查找以下行：
+
+```undefined
+Defaults env_reset
+```
+
+编辑上面的行，在其末尾添加 **timestamp_timeout=x** 。它应该是这样的：
+
+```undefined
+Defaults env_reset timestamp_timeout=x
+```
+
+其中 x 是再次询问 sudo 密码之前等待的超时值。如果您希望系统每次执行 sudo 命令时都询问密码，请将 x 的值设置为 0。如果您希望系统从不询问 sudo 密码，则将 x 的值设置为 -1。
+
+在这里，我们希望将 sudo 提示符的超时值从 15 分钟减少到 5 分钟。为此，我们将 x 替换为 5，如下所示：
+
+```undefined
+Defaults env_reset,timestamp_timeout=5
+```
+
+完成后，按 Ctrl+o 和 Ctrl+x 同时保存并退出文件。
+
+## 将 sudo 会话设置为持续到终端关闭
+
+使用单个命令，您可以允许终端会话持续到您关闭终端为止，无论终端保持打开状态多长时间。执行以下命令后，系统将不会提示您输入 sudo 命令的密码。
+
+```undefined
+sudo -s
+```
+
+## 终止 sudo 会话
+
+输入 sudo 的密码后，您甚至可以在 sudoers 文件中定义的超时限制之前暂停 sudo 会话。为此，请使用以下命令：
+
+```undefined
+sudo –k
+```
+
+请注意，如果您在终端会话期间运行“sudo –s”命令，上述命令将不会终止会话。
+
+
+
+
+
+
 
 
 
