@@ -254,6 +254,30 @@ sudo apt-get install docker-compose
 
 
 
+# docker国内镜像
+
+https://fast360.xyz/
+
+https://www.cnblogs.com/OneSeting/p/18532166
+
+https://cloud.tencent.com/developer/article/2485043
+
+https://xuanyuan.me/blog/archives/1154
+
+在`/etc/docker/daemon.json`中添加镜像地址，如：
+
+```json
+{
+    "registry-mirrors": [
+        "https://hub.fast360.xyz"
+    ]
+}
+```
+
+
+
+
+
 # docker走代理
 
 ```bash
@@ -2534,6 +2558,39 @@ sudo systemctl start sparkcluster_hdfs
 
 # nginx-proxy-manager
 
+```bash
+sudo docker pull jc21/nginx-proxy-manager:2.12.2
+sudo docker pull zoeyvid/nginx-proxy-manager:341
+
+sudo docker pull chishin/nginx-proxy-manager-zh:2.12.2
+
+sudo docker pull zoeyvid/npmplus:434
+#https://hub.docker.com/r/zoeyvid/npmplus#quick-setup
+```
+
+docker-compose方式：
+
+```
+version: '3'
+services:
+  app:
+    image: 'jc21/nginx-proxy-manager:latest'
+    restart: unless-stopped
+    ports:
+      - '80:80'
+      - '81:81'
+      - '443:443'
+    volumes:
+      - ./data:/data
+      - ./letsencrypt:/etc/letsencrypt
+```
+
+```
+docker-compose up -d
+ 
+#如果使用的是 docker-compose-plugin
+docker compose up -d
+```
 
 
 
@@ -2541,6 +2598,239 @@ sudo systemctl start sparkcluster_hdfs
 
 
 
+# openvpn
+
+## 教程1：
+
+- 镜像：https://hub.docker.com/r/kylemanna/openvpn
+
+```bash
+docker pull kylemanna/openvpn:latest
+# 创建缩主机目录
+mkdir openvpn
+```
+
+- docker-compose.yml
+
+```bash
+services:
+  openvpn:
+    image: kylemanna/openvpn:latest
+    container_name: openvpn
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - ./openvpn:/etc/openvpn
+    ports:
+      - '1194:1194/udp'
+    cap_add:
+      - NET_ADMIN
+    restart: always
+    privileged: true
+```
+
+- 公网 IP
+
+```bash
+# 查询服务器公网 IP 地址
+curl ifconfig.me 
+```
+
+- 公网 IP 是一个唯一标识你的服务器的地址。当客户端想要连接到 OpenVPN 服务器时，它们需要知道服务器的公网 IP 才能建立连接。
+- 路由器和防火墙通过公网 IP 来将传入的 OpenVPN 流量路由到正确的服务器。
+
+**使用方法**
+
+**生成配置文件**
+
+```bash
+# 生成 OpenVPN 配置文件，使用 UDP 协议和指定的服务器 IP 地址
+docker-compose run --rm openvpn ovpn_genconfig -u udp://公网IP
+```
+
+**初始化 PKI**
+
+```bash
+# 初始化 Public Key Infrastructure (PKI)，也就是生成和管理证书、密钥
+docker-compose run --rm openvpn ovpn_initpki
+# 输入新的 CA 密钥
+# Common Name (eg: your user, host, or server name) [Easy-RSA CA]
+```
+
+**生成客户端证书**
+
+```bash
+# 生成客户端证书，而且这个证书是无需密码的
+docker-compose run --rm openvpn easyrsa build-client-full client1 nopass
+
+# 或：生成客户端证书，而且这个证书是有密码的
+docker-compose run --rm openvpn easyrsa build-client-full client2
+```
+
+- 新生成的客户端证书密钥文件在 ./openvpn/pki/private 目录下
+
+```bash
+# 导出已生成的客户端配置文件（.ovpn 文件）
+docker-compose run --rm openvpn ovpn_getclient client1 > ./client1.ovpn
+```
+
+启动 VPN 服务
+
+```bash
+# 启动 openvpn 服务
+docker-compose up -d openvp
+```
+
+载你系统对应的客户端并安装运行后，在你的任务栏右下角中可看到小电脑类似的图标，右键后在出来的导入配置文件选项中，将先前导出的客户端配置文件client1.ovpn文件 
+
+**撤销客户端证书**
+
+```bash
+# 撤销客户端证书
+docker-compose run --rm openvpn easyrsa revoke client1
+```
+
+```bash
+# 生成证书撤销列表（CRL），并且额外指示 EasyRSA 更新相关数据库或索引
+docker-compose run *--rm openvpn easyrsa gen-crl update-db*
+```
+
+```bash
+# 重启 openvpn 服务
+docker-compose up -d openvpn
+```
+
+**Docker容器内部的命令执行**
+
+```bash
+# 创建client1用户，有两次密码输入
+easyrsa build-client-full client1
+
+# 导出证书
+cd /etc/openvpn/pki/private/ && ovpn_getclient client1 > ./client1.ovpn
+
+#注销client1用户，注意，注销完后同样需要重启容器
+easyrsa revoke client1
+```
+
+**常见问题**
+
+1、在连接时提示：server pushed compression settings that are not allowed and will result in a non-working connection. See also allow-compression in the manual.
+
+解决方案：在你的Open[VPN配置](https://so.csdn.net/so/search?q=VPN配置&spm=1001.2101.3001.7020)文件中添加或修改以下行  
+
+```bash
+allow-compression yes
+```
+
+## 教程2：
+
+**Docker 部署**
+
+- 镜像：https://hub.docker.com/r/kylemanna/openvpn
+
+```bash
+docker pull kylemanna/openvpn:latest
+# 创建缩主机目录
+mkdir openvpn
+```
+
+- docker-compose.yml
+
+```yml
+services:
+  openvpn:
+    image: kylemanna/openvpn:latest
+    container_name: openvpn
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - ./openvpn:/etc/openvpn
+    ports:
+      - '1194:1194/udp'
+    cap_add:
+      - NET_ADMIN
+    restart: always
+    privileged: true
+```
+
+**公网 IP**
+
+```bash
+# 查询服务器公网 IP 地址
+curl ifconfig.me
+```
+
+- 公网 IP 是一个唯一标识你的服务器的地址。当客户端想要连接到 OpenVPN 服务器时，它们需要知道服务器的公网 IP 才能建立连接。
+- 路由器和防火墙通过公网 IP 来将传入的 OpenVPN 流量路由到正确的服务器。
+
+**使用方法**
+
+**生成配置文件**
+
+```bash
+# 生成 OpenVPN 配置文件，使用 UDP 协议和指定的服务器 IP 地址
+docker-compose run --rm openvpn ovpn_genconfig -u udp://公网IP
+```
+
+- 在 ./openvpn 目录下生成配置文件
+
+**初始化 PKI**
+
+```bash
+# 初始化 Public Key Infrastructure (PKI)，也就是生成和管理证书、密钥
+docker-compose run --rm openvpn ovpn_initpki
+# 输入新的 CA 密钥
+# Common Name (eg: your user, host, or server name) [Easy-RSA CA]
+```
+
+- 在 ./openvpn 目录下新生成 pki 目录
+
+**生成客户端证书**
+
+```bash
+# 生成客户端证书，而且这个证书是无需密码的
+docker-compose run --rm openvpn easyrsa build-client-full client1 nopass
+# 或：生成客户端证书，而且这个证书是有密码的
+docker-compose run --rm openvpn easyrsa build-client-full client2
+```
+
+- 新生成的客户端证书密钥文件在 ./openvpn/pki/private 目录下
+
+```bash
+# 导出已生成的客户端配置文件（.ovpn 文件）
+docker-compose run --rm openvpn ovpn_getclient client1 > ./client1.ovpn
+```
+
+- client1.ovpn 文件
+
+**启动 VPN 服务**
+
+```bash
+# 启动 openvpn 服务
+docker-compose up -d openvpn
+```
+
+**OpenVPN 客户端**
+
+**撤销客户端证书**
+
+```bash
+# 撤销客户端证书
+docker-compose run --rm openvpn easyrsa revoke client1
+```
+
+- 并且 ./openvpn/pki/private 目录下的 client1.key 文件也已被删除
+
+```bash
+# 生成证书撤销列表（CRL），并且额外指示 EasyRSA 更新相关数据库或索引
+docker-compose run --rm openvpn easyrsa gen-crl update-db
+```
+
+```bash
+# 重启 openvpn 服务
+docker restart openvpn
+```
+
+> **注意：** 完成 openvpn 服务重启后，客户端证书才算真正完成撤销。
 
 
 
@@ -2548,6 +2838,222 @@ sudo systemctl start sparkcluster_hdfs
 
 
 
+# ××openvpn-as
+
+## zh-cn:
+
+拉取镜像：
+
+```bash
+sudo docker pull openvpn/openvpn-as:2.14.1-ff013d4d-Ubuntu22
+```
+
+运行：
+
+创建数据文件夹：
+
+```bash
+sudo mkdir -p /home/ubuntu/docker/openvpn-as-default/openvpn
+```
+
+基于 Access Server 镜像并使用以下参数运行 Docker 容器：
+
+```bash
+sudo docker run -itd --name=openvpn-as-default --restart=always --device /dev/net/tun --cap-add=MKNOD --cap-add=NET_ADMIN -p 943:943 -p 443:443 -p 1194:1194/udp -v /home/ubuntu/docker/openvpn-as-default/openvpn:/openvpn openvpn/openvpn-as:2.14.1-ff013d4d-Ubuntu22
+
+#sudo docker run -itd --name=openvpn-as-default --restart=always --device /dev/net/tun --cap-add=MKNOD --cap-add=NET_ADMIN -p 40943:943 -p 40443:443 -p 41194:1194/udp -v /home/ubuntu/docker/openvpn-as-default/openvpn:/openvpn openvpn/openvpn-as:2.14.1-ff013d4d-Ubuntu22
+
+```
+
+| [**1**](https://openvpn.net/as-docs/docker.html#UUID-d7e3eb1d-7337-ddfd-c84c-2ce341b3e7e3_run-co1) | 为 VPN 流量提供对 TUN 设备的访问。                           |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| [**2**](https://openvpn.net/as-docs/docker.html#UUID-d7e3eb1d-7337-ddfd-c84c-2ce341b3e7e3_run-co2) | 允许容器创建设备节点。                                       |
+| [**3**](https://openvpn.net/as-docs/docker.html#UUID-d7e3eb1d-7337-ddfd-c84c-2ce341b3e7e3_run-co3) | 授予容器必要的网络管理权限。                                 |
+| [**4**](https://openvpn.net/as-docs/docker.html#UUID-d7e3eb1d-7337-ddfd-c84c-2ce341b3e7e3_run-co4) | 打开必要的端口：943 用于管理 Web UI，443 用于 TCP，1194 用于 UDP。 |
+| [**5**](https://openvpn.net/as-docs/docker.html#UUID-d7e3eb1d-7337-ddfd-c84c-2ce341b3e7e3_run-co5) | 存储 Access Server 配置文件的位置。将 ***\*<path to date>\**** 替换为您首选的文件路径。 |
+
+登录到管理 Web UI：
+
+您已经安装了 Access Server，并且容器正在运行。现在，您可以登录到管理 Web UI，这是一个用于管理 VPN 服务器的基于 Web 的图形界面，无需 Linux 知识也能使用。
+
+管理 Web UI 可通过 `https://DOCKER-HOST-IP:943/admin` 访问。
+
+查找临时密码
+
+默认用户是 ***\*openvpn\****，您可以在容器日志中找到与初始 Access Server 配置一起创建的临时密码：
+
+1. 在容器运行时，使用以下命令显示日志：
+
+   ```bash
+   sudo docker logs -f openvpn-as
+   ```
+
+   - 显示 Access Server 初始配置工具的输出。
+
+2. 滚动查找行，***\*Auto-generated pass = "<password>". Setting in db...\****
+
+3. 使用生成的密码和 ***\*openvpn\**** 用户名登录管理 Web UI。
+
+以管理员身份登录
+
+要访问并登录到管理 Web UI：
+
+1. 打开一个 Web 浏览器。
+
+2. 输入管理 Web UI URL，格式为 ***\*https://DOCKER-HOST-IP:943/admin\****。
+
+   - 会显示安全警告。Access Server 使用自签名 SSL 证书。我们建议您将其替换为签名证书。请参阅 [SSL 证书](https://openvpn.net/as-docs/ssl-certificates.html)。
+
+   ### 重要
+
+   确保在 URL 中使用 ***\*https\****。
+
+3. 点击通过安全警告。
+
+   - 显示 ***\*管理员登录\**** 页面。
+
+4. 输入 ***\*openvpn\**** 用户名和临时密码，然后点击 ***\*登录\****。
+
+   - 显示 EULA，供您阅读、接受并继续到管理员 Web UI 配置页面。
+
+更新 IP 地址/主机名
+
+为了使您的设备能够正确连接到 VPN 服务器，您需要更新域名或公网 IP 地址：
+
+1. 登录到管理 Web UI。
+
+2. 点击 ***\*配置 > 网络设置\****。
+
+3. 将 ***\*主机名或 IP 地址\**** 字段更改为公网 IP 地址或您的域名。
+
+   ### 注意
+
+   Access Server 可能会在此字段中填充一个私有 IP 地址。客户端需要公网 IP 来从外部网络访问，或者是映射了 A 记录的域名。我们建议使用 [域名](https://openvpn.net/as-docs/hostname.html)。
+
+4. 点击 ***\*保存设置\**** 并点击 ***\*更新正在运行的服务器\****。
+
+限制和已知问题
+
+以下是从 Docker 镜像部署 Access Server 时的已知问题或限制：
+
+- ***\*故障转移模式：\**** 不支持此功能。
+- ***\*第 2 层（桥接）：\**** 不支持此模式。
+- ***\*固定许可证密钥：\**** 不支持此许可证密钥模型。使用固定密钥可能会导致许可证失效，因为硬件规格指纹不是持久性的。
+- ***\*DCO：\**** 如果您在主机 Linux 系统上安装并加载 DCO，则可以启用 DCO。
+- ***\*集群：\**** 您可以使用从 Docker 镜像部署的 Access Server 构建集群功能，具有以下限制：
+  - 必须暴露端口 TCP945 用于节点间通信。
+  - 每个主机系统一次只能运行一个集群节点。
+  - 主机必须能够直接通过互联网访问，而不是通过负载均衡器、代理或入口控制器。
+- ***\*性能：\**** 额外的抽象层可能导致性能下降并增加延迟。我们不建议使用 Docker 部署高负载的安装。
+- ***\*PAM 认证方法：\**** 我们建议避免使用 PAM 作为认证方法，因为存储在容器中的用户凭证不是持久性的。
+- ***\*日志：\**** Access Server 会将日志转发到 Docker，因此它不能在 Access Server 配置中处理日志记录。请参阅 Docker 日志文档以设置日志轮换、转发等。
+- ***\*IPv6：\**** 如果您计划为 VPN 客户端使用 IPv6，我们不建议将 Access Server 部署在 Docker 容器中，因为 Docker 网络工具集对 IPv6 的支持是有限的/实验性的。
+
+## en:
+
+Pull the image:
+
+```bash
+sudo docker pull openvpn/openvpn-as
+```
+
+Run:
+
+Create data folder:
+
+```bash
+sudo mkdir -p /home/ubuntu/docker/openvpn-as-default
+```
+
+Run the Docker container based on the Access Server image with these parameters:
+
+```bash
+sudo docker run -itd --name=openvpn-as-default --device /dev/net/tun --cap-add=MKNOD --cap-add=NET_ADMIN -p 40943:943 -p 40443:443 -p 41194:1194/udp -v /home/ubuntu/docker/openvpn-as-default:/openvpn openvpn/openvpn-as
+```
+
+| [**1**](https://openvpn.net/as-docs/docker.html#UUID-d7e3eb1d-7337-ddfd-c84c-2ce341b3e7e3_run-co1) | Provides access to the TUN device for VPN traffic.           |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| [**2**](https://openvpn.net/as-docs/docker.html#UUID-d7e3eb1d-7337-ddfd-c84c-2ce341b3e7e3_run-co2) | Allows the container to create device nodes.                 |
+| [**3**](https://openvpn.net/as-docs/docker.html#UUID-d7e3eb1d-7337-ddfd-c84c-2ce341b3e7e3_run-co3) | Grants the container the necessary network administration capabilities. |
+| [**4**](https://openvpn.net/as-docs/docker.html#UUID-d7e3eb1d-7337-ddfd-c84c-2ce341b3e7e3_run-co4) | Opens up the necessary ports: 943 for the Admin Web UI, 443 for TCP, and 1194 for UDP. |
+| [**5**](https://openvpn.net/as-docs/docker.html#UUID-d7e3eb1d-7337-ddfd-c84c-2ce341b3e7e3_run-co5) | Location for storing the Access Server configuration files. Replace ***\*<path to date>\**** with your preferred file path. |
+
+Sign in to the Admin Web UI:
+
+You've installed Access Server, and the container is running. You can now sign in to the Admin Web UI, a web-based GUI for managing your VPN server, with or without Linux knowledge.
+
+The Admin Web UI is available at `https://DOCKER-HOST-IP:943/admin`.
+
+Find the temporary password
+
+The default user is ***\*openvpn\**** and you can find the temporary password created with the initial Access Server configuration in the container logs:
+
+1. With the container running, display the logs with this command:
+
+   ```bash
+   sudo docker logs -f openvpn-as
+   ```
+
+   - The Access Server Initial Configuration Tool output displays.
+
+2. Scroll to find the line, ***\*Auto-generated pass = "<password>". Setting in db...\****
+
+3. Use the generated password with the ***\*openvpn\**** username to sign in to the Admin Web UI.
+
+Sign in as an administrator
+
+To access and sign in to the Admin Web UI:
+
+1. Open a web browser.
+
+2. Enter the Admin Web UI URL, available at ***\*https://DOCKER-HOST-IP:943/admin\****.
+
+   - A security warning displays. Access Server uses a self-signed SSL certificate. We recommend replacing it with a signed certificate. Refer to [SSL Certificates](https://openvpn.net/as-docs/ssl-certificates.html).
+
+   ### Important
+
+   Ensure you use ***\*https\**** in the URL.
+
+3. Click through the security warning.
+
+   - The ***\*Admin Login\**** displays.
+
+4. Enter the ***\*openvpn\**** username with the temporary password and click ***\*Sign In\****.
+
+   - The EULA displays for you to read through, accept, and proceed to the Admin Web UI configuration pages.
+
+Update the IP address/hostname
+
+For your devices to properly connect to your VPN server, you need to update the domain or public IP address:
+
+1. Sign in to the Admin Web UI.
+
+2. Click ***\*Configuration > Network Settings\****.
+
+3. Change the ***\*Hostname or IP Address\**** field to a public IP address or your domain name.
+
+   ### Note
+
+   Access Server likely has a private IP address populated in this field. Clients need a public IP to access from outside the network, or a domain name mapped with an A record. We recommend using a [domain name](https://openvpn.net/as-docs/hostname.html).
+
+4. Click ***\*Save Settings\**** and ***\*Update Running Server\****.
+
+Limitations and known issues
+
+The following are known issues or limitations if you deploy Access Server from a Docker image:
+
+- ***\*Failover mode:\**** This feature isn't supported.
+- ***\*Layer 2 (bridging):\**** This mode isn't supported.
+- ***\*Fixed license keys:\**** This license key model isn't supported. Using fixed keys can cause license invalidation because the hardware specification fingerprint isn't persistent.
+- ***\*DCO:\**** You can enable DCO with Access Server if you install and load it on the host Linux system.
+- ***\*Clustering:\**** You can use Access Servers, deployed from Docker images, to build cluster functionality with the following limitations:
+  - You must expose port TCP945 for internode communication.
+  - You can only run one cluster node per Host system at a time.
+  - Hosts must be available directly from the internet, not via a load balancer, proxy, or ingress controller.
+- ***\*Performance:\**** The additional abstraction layer can cause performance degradation and increase latency. We don't recommend deploying highly loaded installations using Docker.
+- ***\*PAM authentication method:\**** We recommend avoiding PAM as your authentication method because user credentials stored inside the container aren't persistent.
+- ***\*Logs:\**** Access Server forwards logs to Docker, so it can't handle logging in the Access Server configuration. See the Docker logging documentation to set up rotation, forwarding, etc.
+- ***\*IPv6:\**** We don't recommend Access Server inside a Docker container if you plan to use IPv6 for VPN clients because IPv6 support in the Docker network toolset is limited/experimental.
 
 
 
@@ -2555,8 +3061,72 @@ sudo systemctl start sparkcluster_hdfs
 
 
 
+# qbittorrent
+
+linuxserver/qbittorrent
+
+```bash
+sudo docker pull linuxserver/qbittorrent:amd64-5.0.3-libtorrentv1
+```
 
 
+
+```bash
+sudo mkdir -p /mnt/sda1/docker/qbittorrent-default/appdata
+sudo mkdir -p /mnt/sda1/docker/qbittorrent-default/downloads
+```
+
+docker-compose
+
+```yaml
+---
+services:
+  qbittorrent:
+    image: linuxserver/qbittorrent:amd64-5.0.3-libtorrentv1
+    container_name: qbittorrent
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - WEBUI_PORT=8080
+      - TORRENTING_PORT=6881
+    volumes:
+      - /mnt/sda1/docker/qbittorrent-default/appdata:/config
+      - /mnt/sda1/docker/qbittorrent-default/downloads:/downloads #optional
+    ports:
+      - 8080:8080
+      - 6881:6881
+      - 6881:6881/udp
+    restart: unless-stopped
+
+```
+
+docker-cli:
+
+这里映射55555端口用于传输。
+
+```bash
+sudo docker run -itd --name=qbittorrent-default -e PUID=1000 -e PGID=1000 -e TZ=Etc/UTC -e WEBUI_PORT=48238 -e TORRENTING_PORT=46881 -p 48238:48238 -p 46881:46881 -p 46881:46881/udp -p 55555:55555 -v /mnt/sda1/docker/qbittorrent-default/appdata:/config -v /mnt/sda1/docker/qbittorrent-default/downloads:/downloads --restart unless-stopped linuxserver/qbittorrent:amd64-5.0.3-libtorrentv1
+```
+
+**Parameters**
+
+Containers are configured using parameters passed at runtime (such as those above). These parameters are separated by a colon and indicate `<external>:<internal>` respectively. For example, `-p 8080:80` would expose port `80` from inside the container to be accessible from the host's IP on port `8080` outside the container.
+
+|         Parameter         | Function                                                     |
+| :-----------------------: | :----------------------------------------------------------- |
+|      `-p 8080:8080`       | WebUI                                                        |
+|      `-p 6881:6881`       | tcp connection port                                          |
+|    `-p 6881:6881/udp`     | udp connection port                                          |
+|      `-e PUID=1000`       | for UserID - see below for explanation                       |
+|      `-e PGID=1000`       | for GroupID - see below for explanation                      |
+|      `-e TZ=Etc/UTC`      | specify a timezone to use, see this [list⁠](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List). |
+|   `-e WEBUI_PORT=8080`    | for changing the port of the web UI, see below for explanation |
+| `-e TORRENTING_PORT=6881` | for changing the port of tcp/udp connection, see below for explanation |
+|       `-v /config`        | Contains all relevant configuration files.                   |
+|      `-v /downloads`      | Location of downloads on disk.                               |
+|    `--read-only=true`     | Run container with a read-only filesystem. Please [read the docs⁠](https://docs.linuxserver.io/misc/read-only/). |
+|    `--user=1000:1000`     | Run container with a non-root user. Please [read the docs⁠](https://docs.linuxserver.io/misc/non-root/). |
 
 
 

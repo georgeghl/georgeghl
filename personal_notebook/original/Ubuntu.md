@@ -71,7 +71,7 @@ sudo usermod -a -G sudo newusername
 
 在终端中，输入以下命令来编辑 sudoers 文件。
 
-```undefined
+```bash
 sudo visudo
 ```
 
@@ -79,13 +79,13 @@ sudo visudo
 
 当提示输入密码时，输入 sudo 用户的密码。默认情况下，Sudoers 文件将在 nano 编辑器中打开，如以下屏幕截图所示。现在在 sudoers 文件中查找以下行：
 
-```undefined
+```bash
 Defaults env_reset
 ```
 
 编辑上面的行，在其末尾添加 **timestamp_timeout=x** 。它应该是这样的：
 
-```undefined
+```bash
 Defaults env_reset timestamp_timeout=x
 ```
 
@@ -93,7 +93,7 @@ Defaults env_reset timestamp_timeout=x
 
 在这里，我们希望将 sudo 提示符的超时值从 15 分钟减少到 5 分钟。为此，我们将 x 替换为 5，如下所示：
 
-```undefined
+```bash
 Defaults env_reset,timestamp_timeout=5
 ```
 
@@ -103,7 +103,7 @@ Defaults env_reset,timestamp_timeout=5
 
 使用单个命令，您可以允许终端会话持续到您关闭终端为止，无论终端保持打开状态多长时间。执行以下命令后，系统将不会提示您输入 sudo 命令的密码。
 
-```undefined
+```bash
 sudo -s
 ```
 
@@ -111,13 +111,383 @@ sudo -s
 
 输入 sudo 的密码后，您甚至可以在 sudoers 文件中定义的超时限制之前暂停 sudo 会话。为此，请使用以下命令：
 
-```undefined
+```bash
 sudo –k
 ```
 
 请注意，如果您在终端会话期间运行“sudo –s”命令，上述命令将不会终止会话。
 
 
+
+# 禁止/允许root远程登录
+
+​    一般攻击者只知道有个root用户，不知道你自己创建了哪些用户，所以可以禁止root远程登录，他也没法了。
+
+​    打开配置文件，修改PermitRootLogin项改为no，保存重启SSH。
+
+```bash
+sudo vim /etc/ssh/sshd_config
+```
+
+```bash
+sudo service ssh restart
+```
+
+
+
+
+
+# 修改SSH端口
+
+打开配置文件，修改Port项改为8022（自定义的端口），保存重启SSH。
+
+```bash
+sudo vim /etc/ssh/sshd_config
+```
+
+
+
+
+
+
+
+# 允许/禁止ip访问(hosts.allow/deny)、ssh 禁止多次失败后访问
+
+## 先设置ip白名单：
+
+`/etc/hosts.allow` 中添加：
+
+```bash
+sshd:192.168.
+sshd:192.168.110.
+sshd:10.80.
+sshd:10.80.12.
+```
+
+含义分别是允许IP段192.168、192.168.110。
+
+`/etc/hosts.deny` 中添加：
+
+```bash
+#你的需要禁止的ip
+#例如
+#no sshd
+# sshd : ALL
+```
+
+## 设置定期自动从日志中提取失败ip，并禁止
+
+参考：
+
+https://cloud.tencent.com/developer/article/1997321
+
+https://www.insilen.com/archives/53.html
+
+https://blog.csdn.net/qq_39726772/article/details/122416559
+
+https://www.cnblogs.com/panblack/p/secure_ssh_auto_block.html
+
+https://blog.csdn.net/weixin_52270081/article/details/121496140
+
+### 参考0：
+
+这里使用了一个软件：**fail2ban**。它可以在尝试失败一定次数后，禁止其登录一段时间，让尝试破解的黑客付出超长的时间代价。
+
+#### 教程1：
+
+1、安装
+
+```bash
+sudo apt update
+sudo apt install fail2ban
+```
+
+2、修改配置(如端口)
+
+```bash
+# 复制配置配置文件，local文件的配置会覆盖默认conf文件的配置。
+sudo cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
+
+#编辑local配置文件
+sudo vim /etc/fail2ban/jail.local
+```
+
+如果用的默认22端口，则不需要配置；若改过，则在下面填写对应端口：
+
+```bash
+[sshd]
+port=8022
+```
+
+ 3、启动
+
+```bash
+sudo service fail2ban start
+```
+
+4、查看日志
+
+```bash
+sudo cat /var/log/fail2ban.log
+```
+
+5、将IP从黑名单中移除：
+
+```bash
+fail2ban-client set sshd unbanip 8.8.8.8
+```
+
+#### √教程2：
+
+安装fail2ban：
+
+```sh
+sudo apt-get update
+sudo apt-get install auditd # 按照审计模块
+sudo apt-get install fail2ban
+```
+
+复制默认配置文件以创建一个本地配置文件（这样在软件更新时不会覆盖你的设置）：
+
+```sh
+sudo cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
+```
+
+**配置fail2ban sshd模块**
+
+```bash
+vi /etc/fail2ban/jail.local
+```
+
+在 `[sshd]` 模块中加入如下配置
+
+```sh
+[sshd]
+enabled = true
+port = ssh
+filter = sshd
+logpath = /var/log/auth.log
+findtime = 86400      ; 检测周期设置为24小时
+maxretry = 24         ; 首次封禁之前允许的最大尝试次数
+bantime = 86400       ; 初始封禁时间设置为24小时
+
+# 以下配置定义了增量封禁的规则
+bantime.increment = true     ; 启用增量封锁
+bantime.factor = 1           ; 封禁时间增加因子
+bantime.maxtime = 7776000    ; 封禁时间的最大值90天
+bantime.multipliers = 1 3 5 15 30 90    ; 禁时间的增加倍数
+```
+
+配置解释
+
+```txt
+# 配置注意
+port = ssh 默认设置为ssh，但如果你更改了ssh端口 请直接使用ssh的端口
+
+# 功能解释:
+24小时内 如果尝试失败24次则出发封禁，首次封锁为24小时。
+
+# 增量封锁
+因为启用增量封锁，所以首次封锁结束后开始进入增量：
+首次解封后再次触发封锁  1天
+第2次解封后再次触发封锁 3天
+第3次解封后再次触发封锁 5天
+第4次解封后再次触发封锁 15天
+第5次解封后再次触发封锁 30天
+第6次解封后再次触发封锁 90天
+第7次解封后再次触发封锁 90天
+...
+
+# 增量注意
+开启了增量部分后一定要配置一个 bantime.maxtime 最大限制，反正出现配置失误、程序bug导致封锁循环
+```
+
+**常用命令**
+
+**配置检查**
+
+测试`/etc/fail2ban/jail.local`配置是否正确主要包含两个步骤：检查配置文件的语法正确性，以及确保`fail2ban`服务能够成功启动并且按照配置规则运行。
+
+**步骤 1: 检查配置文件的语法**
+
+可以使用`fail2ban-client`命令来测试配置文件的语法是否正确。运行以下命令：
+
+```sh
+sudo fail2ban-client -t
+```
+
+如果配置文件没有语法错误，你将看到这样的输出：
+
+```plaintext
+Configuration test is successful
+```
+
+如果有错误，`fail2ban-client`会显示相关的错误信息，你可以据此调整配置文件。
+
+**新主机安装fail2ban无法启动，提示：**
+
+```
+Failed during configuration: Have not found any log file for sshd jail
+```
+
+原因应该是fail2ban默认开启ssh监控，却找不到ssh的日志。
+
+网上搜索发现有人在GitHub上给出了解决方案。在jail设置里面加上以下内容即可顺利启动：
+
+```
+[DEFAULT]
+backend = systemd
+```
+
+软件默认设置是auto，但似乎无法判定系统使用了systemd，只好手动指定。
+
+注意尽量不要修改/etc/fail2ban/jail.conf，而是在/etc/fail2ban/jail.d/里面新建一个文件来写自己的设置。
+
+**步骤 2: 启动`fail2ban`服务并检查状态**
+
+如果配置文件的语法检查没有问题，你可以尝试重启`fail2ban`服务，并检查其状态以确保服务正在运行：
+
+```sh
+sudo systemctl restart fail2ban
+sudo systemctl status fail2ban
+
+# 开机自启动
+sudo systemctl enable fail2ban
+```
+
+如果服务启动成功，状态应该显示为`active (running)`。
+
+**步骤 3: 检查封禁规则是否生效**
+
+一旦你确认`fail2ban`服务正在正常运行，你可以通过以下方式检查封禁规则是否生效：
+
+- 尝试使用错误的密钥或密码从不同的IP地址登录SSH服务，确保超过你设置的`maxretry`次数。
+- 观察是否按照配置的规则封禁了该IP地址。
+
+查看`fail2ban`的日志文件：
+
+```bash
+sudo tail -f /var/log/fail2ban.log
+```
+
+这个命令会显示实时更新的`fail2ban`日志，你可以在这里查看到相关的封禁行为。
+
+- 使用`fail2ban-client`命令查看当前被封禁的IP列表：
+
+```bash
+sudo fail2ban-client status sshd
+```
+
+这将显示`sshd`监视下的封禁状态，包括当前被封禁的IP地址列表。
+
+通过这些步骤，你可以验证`/etc/fail2ban/jail.local`配置是否正确并且`fail2ban`服务是否按照预期在运行。记得在测试时要谨慎，以避免意外地封禁自己的IP地址。
+
+**设置白名单**
+
+设置白名单的步骤：
+
+1. 打开你的`fail2ban`配置文件（通常建议编辑`jail.local`而不是`jail.conf`，因为`.local`文件会覆盖`.conf`文件中的设置）：
+
+```bash
+sudo vi /etc/fail2ban/jail.local
+```
+
+1. 在文件中找到`[DEFAULT]`部分，然后添加或修改`ignoreip`选项。你可以添加单个IP地址、子网或多个IP地址（用空格分隔）。例如：
+
+```bash
+[DEFAULT]
+   ignoreip = 127.0.0.1/8 192.168.0.0/16 200.0.113.1
+```
+
+这个配置告诉`fail2ban`忽略来自本地回环地址、整个本地子网`192.168.0.0/16`，以及特定IP`203.0.113.1`的失败尝试。
+
+1. 保存并关闭配置文件。
+2. 重启`fail2ban`服务以应用更改：
+
+```bash
+sudo systemctl restart fail2ban
+```
+
+设置完成后，`fail2ban`将不会对`ignoreip`中列出的IP地址采取任何封禁动作。这对于确保公司的出口IP或你自己的IP不被意外封禁非常有用。然而，要小心使用这个选项，因为如果攻击者能够伪造白名单上的IP地址，他们可能会绕过`fail2ban`的保护。
+
+
+
+
+
+### 参考1：
+
+ubuntu三个文件日志介绍：
+1：/var/run/utmp：记录当前正在登录系统的用户信息，默认由who和w记录当前登录用户的信息，uptime记录系统启动时间；
+
+2：/var/log/wtmp：记录当前正在登录和历史登录系统的用户信息，默认由last命令查看；
+
+3：/var/log/btmp：记录失败的登录尝试信息，默认由lastb命令查看。
+
+ubuntu查看失败登录记录，只需要
+
+```bash
+sudo lastb
+#或者
+sudo lastb -n 30 #查看最新前30条
+
+sudo lastb |awk '{print $3}'|sort |uniq -c
+
+#这条命令，可以得到登录失败大于4次的IP，及需要加入黑名单的IP名单。
+sudo lastb |awk '{print $3}'|sort |uniq -c|awk '{if ($1 > 4) print $2}'
+```
+
+开始写脚本，黑名单文件位置为`/etc/hosts.deny`，Ubuntu格式为`ALL: IP` 的方式添加才有效
+
+```bash
+#!/bin/bash
+#set -x
+list=$(sudo lastb |awk '{print $3}'|sort |uniq -c|awk '{if ($1 > 4) print $2}')
+for ip in ${list}
+do
+	echo ALL: ${ip} >> /etc/hosts.deny #加入黑名单
+	echo > /var/log/btmp	#清空失败记录，防止脚本下次执行重复统计IP
+done
+```
+
+脚本定时任务：
+
+```bash
+crontab -e
+#内容为每1小时执行一次脚本
+* */1 * * * sudo bash /home/ubuntu/ssh_deny.sh
+123
+```
+
+完成，服务器也每啥东西，为了测试，我将ssh端口改回默认的22端口，开始钓鱼，等过几个小时，看看`/etc/hosts.deny`黑名单有没有增加IP。
+
+
+
+### 参考2：
+
+SSH 登录失败的内容会记录到/var/log/secure文件。据此，只需要从/var/log/secure文件中提取IP地址，如果次数达到10次则将该IP写到 /etc/hosts.deny中，禁止这些IP访问主机。脚本如下secure_ssh.sh：
+
+```bash
+#! /bin/bash
+cat /var/log/secure|awk '/Failed/{print $(NF-3)}'|sort|uniq -c|awk '{print $2"="$1;}' > /usr/local/bin/black.list
+for i in `cat  /usr/local/bin/black.list`
+do
+  IP=`echo $i |awk -F= '{print $1}'`
+  NUM=`echo $i|awk -F= '{print $2}'`
+  if [ ${#NUM} -gt 1 ]; then
+    grep $IP /etc/hosts.deny > /dev/null
+    if [ $? -gt 0 ];then
+      echo "sshd:$IP:deny" >> /etc/hosts.deny
+    fi
+  fi
+done
+```
+
+将secure_ssh.[sh脚本](https://so.csdn.net/so/search?q=sh脚本&spm=1001.2101.3001.7020)放入cron计划任务，每1小时执行一次。
+
+```bash
+# crontab -e
+0 */1 * * *  sh /usr/local/bin/secure_ssh.sh
+```
 
 
 
@@ -1361,6 +1731,84 @@ ExecStop=/usr/bin/pkill -f my-spring-boot-app.jar
 WantedBy=multi-user.target
 #服务会在 default.target 启动后启动，也可修改为multi-user.target
 ```
+
+imageShareMis的配置：
+
+```yml
+[Unit]
+Description=imageShareMis
+#名称描述
+After=syslog.target 
+#告诉 systemd 在哪个主要系统服务后启动本服务
+
+[Service]
+User=root 
+#应用程序运行的用户
+WorkingDirectory=/home/ubuntu/imageShareMis/ 
+#应用程序的工作目录
+Group=root
+#组信息
+ExecStart=/usr/bin/java -Xms256m -Xmx512m -jar /home/ubuntu/imageShareMis/imagesharemis.jar --server.port=49996 --spring.datasource.url="jdbc:mysql://127.0.0.1:43080/image_share_prod?characterEncoding=utf8&serverTimezone=UTC" --spring.datasource.username="imageuser1" --spring.datasource.password="7[yfe2ojdf" --spring.web.resources.static-locations="classpath:static/,file:/mnt/sda1/imageShare/resources/"
+#或直接使用脚本sh文件：/mnt/toshiba/server/run/systemd_v1_0_1_localhost.sh
+SuccessExitStatus=143 
+#应用程序退出时的退出状态码，设置为 143 表示systemctl stop 命令下服务可以快速关闭
+TimeoutStopSec=10 
+#表示在关闭服务前等待的时间
+Restart=always 
+#设置服务崩溃时自动重启服务
+RestartSec=5 
+#在崩溃后五秒重试
+LimitNOFILE=4096 
+#表示服务最多可以打开 4096 个文件
+ExecStop=/usr/bin/pkill -f imagesharemis.jar 
+#执行 systemctl 时执行的命令
+#ExecStop=/bin/kill -15 $MAINPID
+
+[Install]
+WantedBy=multi-user.target
+#服务会在 default.target 启动后启动，也可修改为multi-user.target
+
+```
+
+ImageViewer的配置：
+
+```yml
+[Unit]
+Description=ImageViewer
+#名称描述
+After=syslog.target 
+#告诉 systemd 在哪个主要系统服务后启动本服务
+
+[Service]
+User=root 
+#应用程序运行的用户
+WorkingDirectory=/home/ubuntu/ImageViewer/ 
+#应用程序的工作目录
+Group=root 
+#组信息
+ExecStart=/usr/bin/java -Xms256m -Xmx512m -jar /home/ubuntu/ImageViewer/ImageViewer.jar --server.port=49999 --spring.datasource.url="jdbc:mysql://127.0.0.1:43080/image_viewer?characterEncoding=utf8&serverTimezone=UTC" --spring.datasource.username="imageuser1" --spring.datasource.password="7[yfe2ojdf"  --spring.web.resources.static-locations="classpath:static/,file:/mnt/sda1/imageShare/resources/"
+#或直接使用脚本sh文件：/mnt/toshiba/server/run/systemd_v1_0_1_localhost.sh
+SuccessExitStatus=143 
+#应用程序退出时的退出状态码，设置为 143 表示systemctl stop 命令下服务可以快速关闭
+TimeoutStopSec=10 
+#表示在关闭服务前等待的时间
+Restart=always 
+#设置服务崩溃时自动重启服务
+RestartSec=5 
+#在崩溃后五秒重试
+LimitNOFILE=4096 
+#表示服务最多可以打开 4096 个文件
+ExecStop=/usr/bin/pkill -f ImageViewer.jar 
+#执行 systemctl 时执行的命令
+#ExecStop=/bin/kill -15 $MAINPID
+
+[Install]
+WantedBy=multi-user.target
+#服务会在 default.target 启动后启动，也可修改为multi-user.target
+
+```
+
+
 
 3、重新加载 systemd 配置
 

@@ -46,6 +46,27 @@
 更新固件，选择小米r3g第二个。先刷initramfs。然后进入openwrt后，更新固件，再刷squahfs。</p>
 <p><strong>root密码password</strong></p>
 </section>
+<section id="opkg">
+<h1>配置opkg源<a class="headerlink" href="#opkg" title="Link to this heading">¶</a></h1>
+<p>可以直接在luci：系统-&gt;软件包进行配置。</p>
+<p>常用的那个固件，对应源配置为：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#版本号改19.07.6成你自己的,在luci状态界面查看版本或者命令: cat /etc/openwrt_*</span>
+
+src/gz<span class="w"> </span>openwrt_core<span class="w"> </span>https://mirrors.tuna.tsinghua.edu.cn/openwrt/releases/18.06.8/targets/ramips/mt7621/packages
+src/gz<span class="w"> </span>openwrt_base<span class="w"> </span>https://mirrors.tuna.tsinghua.edu.cn/openwrt/releases/18.06.8/packages/mipsel_24kc/base
+src/gz<span class="w"> </span>openwrt_luci<span class="w"> </span>https://mirrors.tuna.tsinghua.edu.cn/openwrt/releases/18.06.8/packages/mipsel_24kc/luci
+src/gz<span class="w"> </span>openwrt_packages<span class="w"> </span>https://mirrors.tuna.tsinghua.edu.cn/openwrt/releases/18.06.8/packages/mipsel_24kc/packages
+src/gz<span class="w"> </span>openwrt_routing<span class="w"> </span>https://mirrors.tuna.tsinghua.edu.cn/openwrt/releases/18.06.8/packages/mipsel_24kc/routing
+src/gz<span class="w"> </span>openwrt_telephony<span class="w"> </span>https://mirrors.tuna.tsinghua.edu.cn/openwrt/releases/18.06.8/packages/mipsel_24kc/telephony
+</pre></div>
+</div>
+</section>
+<section id="openvpn-client">
+<h1>openvpn-client<a class="headerlink" href="#openvpn-client" title="Link to this heading">¶</a></h1>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>opkg<span class="w"> </span>install<span class="w"> </span>openvpn-openssl<span class="w"> </span>luci-app-openvpn<span class="w"> </span>openssl-util
+</pre></div>
+</div>
+</section>
 <section id="id1">
 <h1>修改主题<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#</span>
@@ -294,6 +315,8 @@ WebInterface Yes +DefaultLanguage zh
     <h3><a href="index.html">目录</a></h3>
     <ul>
 <li><a class="reference internal" href="#">Mi Router 3G 刷固件</a></li>
+<li><a class="reference internal" href="#opkg">配置opkg源</a></li>
+<li><a class="reference internal" href="#openvpn-client">openvpn-client</a></li>
 <li><a class="reference internal" href="#id1">修改主题</a></li>
 <li><a class="reference internal" href="#wanlanmac">修改wan和lan的mac</a></li>
 <li><a class="reference internal" href="#cups">CUPS</a></li>

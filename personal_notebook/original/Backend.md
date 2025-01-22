@@ -1,0 +1,16 @@
+# mysql8.4 master log报错：
+
+使用：
+
+```sql
+SHOW BINARY LOGS;
+
+PURGE BINARY LOGS TO 'binlog.000001';
+
+PURGE BINARY LOGS BEFORE '2025-01-22 00:00:00';
+
+FLUSH LOGS;
+
+SHOW BINARY LOGS;
+```
+

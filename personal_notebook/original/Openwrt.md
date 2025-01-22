@@ -18,6 +18,40 @@ mtd -r write /tmp/breed-mt7621-xiaomi-r3g-r3p.bin Bootloader
 
 
 
+# 配置opkg源
+
+可以直接在luci：系统->软件包进行配置。
+
+常用的那个固件，对应源配置为：
+
+```bash
+#版本号改19.07.6成你自己的,在luci状态界面查看版本或者命令: cat /etc/openwrt_*
+
+src/gz openwrt_core https://mirrors.tuna.tsinghua.edu.cn/openwrt/releases/18.06.8/targets/ramips/mt7621/packages
+src/gz openwrt_base https://mirrors.tuna.tsinghua.edu.cn/openwrt/releases/18.06.8/packages/mipsel_24kc/base
+src/gz openwrt_luci https://mirrors.tuna.tsinghua.edu.cn/openwrt/releases/18.06.8/packages/mipsel_24kc/luci
+src/gz openwrt_packages https://mirrors.tuna.tsinghua.edu.cn/openwrt/releases/18.06.8/packages/mipsel_24kc/packages
+src/gz openwrt_routing https://mirrors.tuna.tsinghua.edu.cn/openwrt/releases/18.06.8/packages/mipsel_24kc/routing
+src/gz openwrt_telephony https://mirrors.tuna.tsinghua.edu.cn/openwrt/releases/18.06.8/packages/mipsel_24kc/telephony
+
+```
+
+
+
+
+
+# openvpn-client
+
+```bash
+opkg install openvpn-openssl luci-app-openvpn openssl-util
+```
+
+
+
+
+
+
+
 # 修改主题
 
 ```bash
@@ -28,6 +62,10 @@ opkg install luci-theme-ifit_2021-5-29.ipk
 #
 opkg install luci-theme-neobird_1.99-202201272020_all.ipk
 ```
+
+
+
+
 
 
 
