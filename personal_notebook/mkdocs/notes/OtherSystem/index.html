@@ -497,6 +497,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#proxmoxlocal-lvm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Proxmox的local-lvm改文件存储，提升运行速度
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#proxmox-virtual-environmentpvedocker" class="md-nav__link">
     <span class="md-ellipsis">
       Proxmox Virtual Environment（PVE）安装、docker配置等
@@ -1403,6 +1412,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#proxmoxlocal-lvm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Proxmox的local-lvm改文件存储，提升运行速度
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#proxmox-virtual-environmentpvedocker" class="md-nav__link">
     <span class="md-ellipsis">
       Proxmox Virtual Environment（PVE）安装、docker配置等
@@ -1746,6 +1764,40 @@
 5120表示指定OSDataSzie为5GB，再按enter回车进行正常安装即可；当然了，如果觉得5G小了点，那就分8G 10G都可以。</p>
 <h4 id="pvetools">PVEtools</h4>
 <p>https://github.com/ivanhao/pvetools</p>
+<h4 id="proxmoxlocal-lvm"><a href="https://www.cnblogs.com/doracloud/p/16874171.html">Proxmox的local-lvm改文件存储，提升运行速度</a></h4>
+<p>https://www.cnblogs.com/doracloud/p/16874171.html</p>
+<p>Proxmox的缺省安装会创建 local 和 local-lvm 两个存储。其中local大约磁盘容量的10%，存储类别为目录。 local-lvm的存储类别为 lvm-thin。</p>
+<p>实际使用中，发现大批量创建虚拟机时，lvm-thin的效率比目录的效率低，影响系统的IO性能。 主要的原因应该是 lvm-thin 模式下，缺少了文件层的缓存机制。影响了IO效率。</p>
+<p>比如双路服务器，使用960G SSD企业硬盘做为存储，如果采用lvm-thin机制，使用 DoraCloud桌面云创建50个桌面，需要超过10分钟。如果采用目录存储，创建速度会提升不少。</p>
+<p>有些Proxmox 用户喜欢删除 local-lvm，把所有的磁盘空间都分配给 local 。对于这种操作，我们不推荐。 因为 local 存储上有proxmox的系统文件。如果虚拟机的磁盘也保存在local上，如果遇到磁盘空间耗尽的情况，可能导致 proxmox 的系统也无法启动。 影响系统稳定性，给生产环境的长期运行带来隐患。</p>
+<p>本文主要介绍如何将缺省安装的 local-lvm 存储改成 目录机制。</p>
+<p><strong>第一步：从Proxmox Web界面，删除 local-lvm</strong></p>
+<p>登录 PVE web界面，在 数据中心-&gt;存储中，选择 local-lvm，然后点击删除。</p>
+<pre><code>pvesh delete  /storage/local-lvm
+</code></pre>
+<p><strong>第二步：通过命令删除 lvm，新建lvm，并创建文件系统。</strong></p>
+<p>1、登录 Proxmox的 ssh。</p>
+<p>2、卸载并删除 lvm-thin</p>
+<pre><code>umount /dev/pve/data
+lvremove /dev/pve/data
+</code></pre>
+<p>按Y 确认删除。</p>
+<p>3、检查磁盘剩余空间</p>
+<pre><code>vgdisplay pve | grep Free
+</code></pre>
+<p>4、创建新的lvm</p>
+<p>注意，请使用上一步的空闲空间的数字92482替换下面的数字。</p>
+<pre><code>lvcreate -l 92482 -n data pve
+</code></pre>
+<p>5、格式化，并挂载文件系统。</p>
+<pre><code>mkfs.ext4 /dev/pve/data
+mkdir /mnt/data
+mount /dev/pve/data /mnt/data
+</code></pre>
+<p>6、最后配置 fstab，确保重启时，可以挂载文件系统</p>
+<pre><code>nano /etc/fstab
+/dev/pve/data /mnt/data ext4 defaults 0 0
+</code></pre>
 <h4 id="proxmox-virtual-environmentpvedocker">Proxmox Virtual Environment（PVE）安装、docker配置等</h4>
 <h5 id="1">1.镜像下载</h5>
 <p>https://www.proxmox.com/en/downloads</p>
