@@ -30,6 +30,19 @@ sudo update-grub
 
 
 
+# 修改主机名
+
+```bash
+cd /etc
+sudo vi /etc/hostname
+```
+
+
+
+
+
+
+
 # 忘记密码重置
 
 （1）启动Ubuntu系统，按住shift不松，进入GRUB界面。
@@ -1748,7 +1761,7 @@ WorkingDirectory=/home/ubuntu/imageShareMis/
 #应用程序的工作目录
 Group=root
 #组信息
-ExecStart=/usr/bin/java -Xms256m -Xmx512m -jar /home/ubuntu/imageShareMis/imagesharemis.jar --server.port=49996 --spring.datasource.url="jdbc:mysql://127.0.0.1:43080/image_share_prod?characterEncoding=utf8&serverTimezone=UTC" --spring.datasource.username="imageuser1" --spring.datasource.password="7[yfe2ojdf" --spring.web.resources.static-locations="classpath:static/,file:/mnt/sda1/imageShare/resources/"
+ExecStart=/usr/bin/java -Xms256m -Xmx512m -jar /home/ubuntu/imageShareMis/imagesharemis.jar --server.port=49996 --spring.datasource.url="jdbc:mysql://127.0.0.1:3306/image_share_prod?characterEncoding=utf8&serverTimezone=UTC" --spring.datasource.username="aaaaaaaaaaaaaa" --spring.datasource.password="aaaaaaaaaaaa" --spring.web.resources.static-locations="classpath:static/,file:/mnt/sda1/imageShare/resources/"
 #或直接使用脚本sh文件：/mnt/toshiba/server/run/systemd_v1_0_1_localhost.sh
 SuccessExitStatus=143 
 #应用程序退出时的退出状态码，设置为 143 表示systemctl stop 命令下服务可以快速关闭
@@ -1786,7 +1799,7 @@ WorkingDirectory=/home/ubuntu/ImageViewer/
 #应用程序的工作目录
 Group=root 
 #组信息
-ExecStart=/usr/bin/java -Xms256m -Xmx512m -jar /home/ubuntu/ImageViewer/ImageViewer.jar --server.port=49999 --spring.datasource.url="jdbc:mysql://127.0.0.1:43080/image_viewer?characterEncoding=utf8&serverTimezone=UTC" --spring.datasource.username="imageuser1" --spring.datasource.password="7[yfe2ojdf"  --spring.web.resources.static-locations="classpath:static/,file:/mnt/sda1/imageShare/resources/"
+ExecStart=/usr/bin/java -Xms256m -Xmx512m -jar /home/ubuntu/ImageViewer/ImageViewer.jar --server.port=49999 --spring.datasource.url="jdbc:mysql://127.0.0.1:3306/image_viewer?characterEncoding=utf8&serverTimezone=UTC" --spring.datasource.username="aaaaaaaaaaaaaa" --spring.datasource.password="aaaaaaaaaaaaaaa"  --spring.web.resources.static-locations="classpath:static/,file:/mnt/sda1/imageShare/resources/"
 #或直接使用脚本sh文件：/mnt/toshiba/server/run/systemd_v1_0_1_localhost.sh
 SuccessExitStatus=143 
 #应用程序退出时的退出状态码，设置为 143 表示systemctl stop 命令下服务可以快速关闭

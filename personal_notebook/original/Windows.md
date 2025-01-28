@@ -959,3 +959,39 @@ Dism.exe /online /Cleanup-Image /StartComponentCleanup /ResetBase
 ```
 
 更多命令参数，请参阅 [DISM 操作系统包（.cab 或 .msu）服务命令行选项 Microsoft Learn](https://learn.microsoft.com/zh-cn/windows-hardware/manufacture/desktop/dism-operating-system-package-servicing-command-line-options?view=windows-11) 文档
+
+
+
+
+
+
+
+
+
+
+
+
+
+# 彻底关闭 Windows 10 自动更新
+
+## 1. 组策略禁用 Windows 更新
+
+Win键+R，输入 **gpedit.msc**，启动**组策略**编辑器。
+左侧选择 [本地计算机配置] -> [管理模板] -> [Windows 组件] -> [Windows 更新]，禁用右侧的 [配置自动更新] 和 [启用通过自动更新建议的更新] 选项。
+
+## 2. 停用 BITS 服务
+
+BITS 服务的英文全称为 **Background Intelligent Transfer Service**，其使用空闲的网络带宽在后台传送文件。禁用该服务，则依赖于BITS的任何应用程序（如 Windows 更新）将无法自动下载程序和其他信息。具体配置方式，如下：
+Win键+R，输入 **services.msc**，启动**服务**配置窗口。
+找到 **Background Intelligent Transfer Service**，将**启动类型**配置为**禁用**。
+
+## 3. 设置 [更新与安全性]，关闭从其他电脑下载更新
+
+[开始] -> [设置] -> [更新和安全]，进入 [Windows 更新] 配置界面，选择 [高级选项] -> [传递优化]，关闭 [允许从其他电脑下载] 。
+
+
+
+
+
+
+

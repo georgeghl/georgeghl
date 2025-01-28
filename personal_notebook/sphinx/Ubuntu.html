@@ -52,7 +52,14 @@ GRUB_TIMEOUT为在页面停留时间，根据自己的需要更改。</p>
 </div>
 </section>
 <section id="id1">
-<h1>忘记密码重置<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
+<h1>修改主机名<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/etc
+sudo<span class="w"> </span>vi<span class="w"> </span>/etc/hostname
+</pre></div>
+</div>
+</section>
+<section id="id2">
+<h1>忘记密码重置<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h1>
 <p>（1）启动Ubuntu系统，按住shift不松，进入GRUB界面。</p>
 <p>（2）通过上下左右键移动选择，选择Ubuntu高级选项（或者是此单词Ubuntu Advanced），按Enter键回车即可。</p>
 <p>（3）选择Ubuntu，with linux 5.8.0-36（recovery mode）（选择您所显示的最高版本选项即可，不必纠结版本），Enter键回车，（可能需要按 <strong>e</strong> 键至出新界面为止）。</p>
@@ -73,41 +80,321 @@ sudo<span class="w"> </span>usermod<span class="w"> </span>-a<span class="w"> </
 </pre></div>
 </div>
 </section>
-<section id="id2">
-<h1>指定 sudo 会话的时间<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h1>
+<section id="id3">
+<h1>指定 sudo 会话的时间<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h1>
 <p>在终端中，输入以下命令来编辑 sudoers 文件。</p>
-<div class="highlight-undefined notranslate"><div class="highlight"><pre><span></span>sudo visudo
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>visudo
 </pre></div>
 </div>
 <p>请记住，请勿使用任何文本编辑器编辑 sudoers 文件。相反，请使用上述方法来实现此目的。</p>
 <p>当提示输入密码时，输入 sudo 用户的密码。默认情况下，Sudoers 文件将在 nano 编辑器中打开，如以下屏幕截图所示。现在在 sudoers 文件中查找以下行：</p>
-<div class="highlight-undefined notranslate"><div class="highlight"><pre><span></span>Defaults env_reset
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Defaults<span class="w"> </span>env_reset
 </pre></div>
 </div>
 <p>编辑上面的行，在其末尾添加 <strong>timestamp_timeout=x</strong> 。它应该是这样的：</p>
-<div class="highlight-undefined notranslate"><div class="highlight"><pre><span></span>Defaults env_reset timestamp_timeout=x
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Defaults<span class="w"> </span>env_reset<span class="w"> </span><span class="nv">timestamp_timeout</span><span class="o">=</span>x
 </pre></div>
 </div>
 <p>其中 x 是再次询问 sudo 密码之前等待的超时值。如果您希望系统每次执行 sudo 命令时都询问密码，请将 x 的值设置为 0。如果您希望系统从不询问 sudo 密码，则将 x 的值设置为 -1。</p>
 <p>在这里，我们希望将 sudo 提示符的超时值从 15 分钟减少到 5 分钟。为此，我们将 x 替换为 5，如下所示：</p>
-<div class="highlight-undefined notranslate"><div class="highlight"><pre><span></span>Defaults env_reset,timestamp_timeout=5
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Defaults<span class="w"> </span>env_reset,timestamp_timeout<span class="o">=</span><span class="m">5</span>
 </pre></div>
 </div>
 <p>完成后，按 Ctrl+o 和 Ctrl+x 同时保存并退出文件。</p>
-<section id="id3">
-<h2>将 sudo 会话设置为持续到终端关闭<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
+<section id="id4">
+<h2>将 sudo 会话设置为持续到终端关闭<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
 <p>使用单个命令，您可以允许终端会话持续到您关闭终端为止，无论终端保持打开状态多长时间。执行以下命令后，系统将不会提示您输入 sudo 命令的密码。</p>
-<div class="highlight-undefined notranslate"><div class="highlight"><pre><span></span>sudo -s
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>-s
 </pre></div>
 </div>
 </section>
-<section id="id4">
-<h2>终止 sudo 会话<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
+<section id="id5">
+<h2>终止 sudo 会话<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h2>
 <p>输入 sudo 的密码后，您甚至可以在 sudoers 文件中定义的超时限制之前暂停 sudo 会话。为此，请使用以下命令：</p>
-<div class="highlight-undefined notranslate"><div class="highlight"><pre><span></span>sudo –k
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>–k
 </pre></div>
 </div>
 <p>请注意，如果您在终端会话期间运行“sudo –s”命令，上述命令将不会终止会话。</p>
+</section>
+</section>
+<section id="root">
+<h1>禁止/允许root远程登录<a class="headerlink" href="#root" title="Link to this heading">¶</a></h1>
+<p>​    一般攻击者只知道有个root用户，不知道你自己创建了哪些用户，所以可以禁止root远程登录，他也没法了。</p>
+<p>​    打开配置文件，修改PermitRootLogin项改为no，保存重启SSH。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>vim<span class="w"> </span>/etc/ssh/sshd_config
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>service<span class="w"> </span>ssh<span class="w"> </span>restart
+</pre></div>
+</div>
+</section>
+<section id="ssh">
+<h1>修改SSH端口<a class="headerlink" href="#ssh" title="Link to this heading">¶</a></h1>
+<p>打开配置文件，修改Port项改为8022（自定义的端口），保存重启SSH。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>vim<span class="w"> </span>/etc/ssh/sshd_config
+</pre></div>
+</div>
+</section>
+<section id="ip-hosts-allow-deny-ssh">
+<h1>允许/禁止ip访问(hosts.allow/deny)、ssh 禁止多次失败后访问<a class="headerlink" href="#ip-hosts-allow-deny-ssh" title="Link to this heading">¶</a></h1>
+<section id="ip">
+<h2>先设置ip白名单：<a class="headerlink" href="#ip" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">/etc/hosts.allow</span></code> 中添加：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sshd:192.168.
+sshd:192.168.110.
+sshd:10.80.
+sshd:10.80.12.
+</pre></div>
+</div>
+<p>含义分别是允许IP段192.168、192.168.110。</p>
+<p><code class="docutils literal notranslate"><span class="pre">/etc/hosts.deny</span></code> 中添加：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#你的需要禁止的ip</span>
+<span class="c1">#例如</span>
+<span class="c1">#no sshd</span>
+<span class="c1"># sshd : ALL</span>
+</pre></div>
+</div>
+</section>
+<section id="id6">
+<h2>设置定期自动从日志中提取失败ip，并禁止<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h2>
+<p>参考：</p>
+<p>https://cloud.tencent.com/developer/article/1997321</p>
+<p>https://www.insilen.com/archives/53.html</p>
+<p>https://blog.csdn.net/qq_39726772/article/details/122416559</p>
+<p>https://www.cnblogs.com/panblack/p/secure_ssh_auto_block.html</p>
+<p>https://blog.csdn.net/weixin_52270081/article/details/121496140</p>
+<section id="id7">
+<h3>参考0：<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h3>
+<p>这里使用了一个软件：<strong>fail2ban</strong>。它可以在尝试失败一定次数后，禁止其登录一段时间，让尝试破解的黑客付出超长的时间代价。</p>
+<section id="id8">
+<h4>教程1：<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h4>
+<p>1、安装</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>update
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>fail2ban
+</pre></div>
+</div>
+<p>2、修改配置(如端口)</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 复制配置配置文件，local文件的配置会覆盖默认conf文件的配置。</span>
+sudo<span class="w"> </span>cp<span class="w"> </span>/etc/fail2ban/jail.conf<span class="w"> </span>/etc/fail2ban/jail.local
+
+<span class="c1">#编辑local配置文件</span>
+sudo<span class="w"> </span>vim<span class="w"> </span>/etc/fail2ban/jail.local
+</pre></div>
+</div>
+<p>如果用的默认22端口，则不需要配置；若改过，则在下面填写对应端口：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>sshd<span class="o">]</span>
+<span class="nv">port</span><span class="o">=</span><span class="m">8022</span>
+</pre></div>
+</div>
+<p>3、启动</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>service<span class="w"> </span>fail2ban<span class="w"> </span>start
+</pre></div>
+</div>
+<p>4、查看日志</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>cat<span class="w"> </span>/var/log/fail2ban.log
+</pre></div>
+</div>
+<p>5、将IP从黑名单中移除：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>fail2ban-client<span class="w"> </span><span class="nb">set</span><span class="w"> </span>sshd<span class="w"> </span>unbanip<span class="w"> </span><span class="m">8</span>.8.8.8
+</pre></div>
+</div>
+</section>
+<section id="id9">
+<h4>√教程2：<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h4>
+<p>安装fail2ban：</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>update
+sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>auditd<span class="w"> </span><span class="c1"># 按照审计模块</span>
+sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>fail2ban
+</pre></div>
+</div>
+<p>复制默认配置文件以创建一个本地配置文件（这样在软件更新时不会覆盖你的设置）：</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>cp<span class="w"> </span>/etc/fail2ban/jail.conf<span class="w"> </span>/etc/fail2ban/jail.local
+</pre></div>
+</div>
+<p><strong>配置fail2ban sshd模块</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vi<span class="w"> </span>/etc/fail2ban/jail.local
+</pre></div>
+</div>
+<p>在 <code class="docutils literal notranslate"><span class="pre">[sshd]</span></code> 模块中加入如下配置</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>sshd<span class="o">]</span>
+<span class="nv">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span>
+<span class="nv">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>ssh
+<span class="nv">filter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>sshd
+<span class="nv">logpath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>/var/log/auth.log
+<span class="nv">findtime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">86400</span><span class="w">      </span><span class="p">;</span><span class="w"> </span>检测周期设置为24小时
+<span class="nv">maxretry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">24</span><span class="w">         </span><span class="p">;</span><span class="w"> </span>首次封禁之前允许的最大尝试次数
+<span class="nv">bantime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">86400</span><span class="w">       </span><span class="p">;</span><span class="w"> </span>初始封禁时间设置为24小时
+
+<span class="c1"># 以下配置定义了增量封禁的规则</span>
+bantime.increment<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="w">     </span><span class="p">;</span><span class="w"> </span>启用增量封锁
+bantime.factor<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="w">           </span><span class="p">;</span><span class="w"> </span>封禁时间增加因子
+bantime.maxtime<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">7776000</span><span class="w">    </span><span class="p">;</span><span class="w"> </span>封禁时间的最大值90天
+bantime.multipliers<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="m">15</span><span class="w"> </span><span class="m">30</span><span class="w"> </span><span class="m">90</span><span class="w">    </span><span class="p">;</span><span class="w"> </span>禁时间的增加倍数
+</pre></div>
+</div>
+<p>配置解释</p>
+<div class="highlight-txt notranslate"><div class="highlight"><pre><span></span># 配置注意
+port = ssh 默认设置为ssh，但如果你更改了ssh端口 请直接使用ssh的端口
+
+# 功能解释:
+24小时内 如果尝试失败24次则出发封禁，首次封锁为24小时。
+
+# 增量封锁
+因为启用增量封锁，所以首次封锁结束后开始进入增量：
+首次解封后再次触发封锁  1天
+第2次解封后再次触发封锁 3天
+第3次解封后再次触发封锁 5天
+第4次解封后再次触发封锁 15天
+第5次解封后再次触发封锁 30天
+第6次解封后再次触发封锁 90天
+第7次解封后再次触发封锁 90天
+...
+
+# 增量注意
+开启了增量部分后一定要配置一个 bantime.maxtime 最大限制，反正出现配置失误、程序bug导致封锁循环
+</pre></div>
+</div>
+<p><strong>常用命令</strong></p>
+<p><strong>配置检查</strong></p>
+<p>测试<code class="docutils literal notranslate"><span class="pre">/etc/fail2ban/jail.local</span></code>配置是否正确主要包含两个步骤：检查配置文件的语法正确性，以及确保<code class="docutils literal notranslate"><span class="pre">fail2ban</span></code>服务能够成功启动并且按照配置规则运行。</p>
+<p><strong>步骤 1: 检查配置文件的语法</strong></p>
+<p>可以使用<code class="docutils literal notranslate"><span class="pre">fail2ban-client</span></code>命令来测试配置文件的语法是否正确。运行以下命令：</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>fail2ban-client<span class="w"> </span>-t
+</pre></div>
+</div>
+<p>如果配置文件没有语法错误，你将看到这样的输出：</p>
+<div class="highlight-plaintext notranslate"><div class="highlight"><pre><span></span>Configuration test is successful
+</pre></div>
+</div>
+<p>如果有错误，<code class="docutils literal notranslate"><span class="pre">fail2ban-client</span></code>会显示相关的错误信息，你可以据此调整配置文件。</p>
+<p><strong>新主机安装fail2ban无法启动，提示：</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Failed</span> <span class="n">during</span> <span class="n">configuration</span><span class="p">:</span> <span class="n">Have</span> <span class="ow">not</span> <span class="n">found</span> <span class="nb">any</span> <span class="n">log</span> <span class="n">file</span> <span class="k">for</span> <span class="n">sshd</span> <span class="n">jail</span>
+</pre></div>
+</div>
+<p>原因应该是fail2ban默认开启ssh监控，却找不到ssh的日志。</p>
+<p>网上搜索发现有人在GitHub上给出了解决方案。在jail设置里面加上以下内容即可顺利启动：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">DEFAULT</span><span class="p">]</span>
+<span class="n">backend</span> <span class="o">=</span> <span class="n">systemd</span>
+</pre></div>
+</div>
+<p>软件默认设置是auto，但似乎无法判定系统使用了systemd，只好手动指定。</p>
+<p>注意尽量不要修改/etc/fail2ban/jail.conf，而是在/etc/fail2ban/jail.d/里面新建一个文件来写自己的设置。</p>
+<p><strong>步骤 2: 启动<code class="docutils literal notranslate"><span class="pre">fail2ban</span></code>服务并检查状态</strong></p>
+<p>如果配置文件的语法检查没有问题，你可以尝试重启<code class="docutils literal notranslate"><span class="pre">fail2ban</span></code>服务，并检查其状态以确保服务正在运行：</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>fail2ban
+sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>fail2ban
+
+<span class="c1"># 开机自启动</span>
+sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>fail2ban
+</pre></div>
+</div>
+<p>如果服务启动成功，状态应该显示为<code class="docutils literal notranslate"><span class="pre">active</span> <span class="pre">(running)</span></code>。</p>
+<p><strong>步骤 3: 检查封禁规则是否生效</strong></p>
+<p>一旦你确认<code class="docutils literal notranslate"><span class="pre">fail2ban</span></code>服务正在正常运行，你可以通过以下方式检查封禁规则是否生效：</p>
+<ul class="simple">
+<li><p>尝试使用错误的密钥或密码从不同的IP地址登录SSH服务，确保超过你设置的<code class="docutils literal notranslate"><span class="pre">maxretry</span></code>次数。</p></li>
+<li><p>观察是否按照配置的规则封禁了该IP地址。</p></li>
+</ul>
+<p>查看<code class="docutils literal notranslate"><span class="pre">fail2ban</span></code>的日志文件：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>tail<span class="w"> </span>-f<span class="w"> </span>/var/log/fail2ban.log
+</pre></div>
+</div>
+<p>这个命令会显示实时更新的<code class="docutils literal notranslate"><span class="pre">fail2ban</span></code>日志，你可以在这里查看到相关的封禁行为。</p>
+<ul class="simple">
+<li><p>使用<code class="docutils literal notranslate"><span class="pre">fail2ban-client</span></code>命令查看当前被封禁的IP列表：</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>fail2ban-client<span class="w"> </span>status<span class="w"> </span>sshd
+</pre></div>
+</div>
+<p>这将显示<code class="docutils literal notranslate"><span class="pre">sshd</span></code>监视下的封禁状态，包括当前被封禁的IP地址列表。</p>
+<p>通过这些步骤，你可以验证<code class="docutils literal notranslate"><span class="pre">/etc/fail2ban/jail.local</span></code>配置是否正确并且<code class="docutils literal notranslate"><span class="pre">fail2ban</span></code>服务是否按照预期在运行。记得在测试时要谨慎，以避免意外地封禁自己的IP地址。</p>
+<p><strong>设置白名单</strong></p>
+<p>设置白名单的步骤：</p>
+<ol class="simple">
+<li><p>打开你的<code class="docutils literal notranslate"><span class="pre">fail2ban</span></code>配置文件（通常建议编辑<code class="docutils literal notranslate"><span class="pre">jail.local</span></code>而不是<code class="docutils literal notranslate"><span class="pre">jail.conf</span></code>，因为<code class="docutils literal notranslate"><span class="pre">.local</span></code>文件会覆盖<code class="docutils literal notranslate"><span class="pre">.conf</span></code>文件中的设置）：</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>vi<span class="w"> </span>/etc/fail2ban/jail.local
+</pre></div>
+</div>
+<ol class="simple">
+<li><p>在文件中找到<code class="docutils literal notranslate"><span class="pre">[DEFAULT]</span></code>部分，然后添加或修改<code class="docutils literal notranslate"><span class="pre">ignoreip</span></code>选项。你可以添加单个IP地址、子网或多个IP地址（用空格分隔）。例如：</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>DEFAULT<span class="o">]</span>
+<span class="w">   </span><span class="nv">ignoreip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">127</span>.0.0.1/8<span class="w"> </span><span class="m">192</span>.168.0.0/16<span class="w"> </span><span class="m">200</span>.0.113.1
+</pre></div>
+</div>
+<p>这个配置告诉<code class="docutils literal notranslate"><span class="pre">fail2ban</span></code>忽略来自本地回环地址、整个本地子网<code class="docutils literal notranslate"><span class="pre">192.168.0.0/16</span></code>，以及特定IP<code class="docutils literal notranslate"><span class="pre">203.0.113.1</span></code>的失败尝试。</p>
+<ol class="simple">
+<li><p>保存并关闭配置文件。</p></li>
+<li><p>重启<code class="docutils literal notranslate"><span class="pre">fail2ban</span></code>服务以应用更改：</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>fail2ban
+</pre></div>
+</div>
+<p>设置完成后，<code class="docutils literal notranslate"><span class="pre">fail2ban</span></code>将不会对<code class="docutils literal notranslate"><span class="pre">ignoreip</span></code>中列出的IP地址采取任何封禁动作。这对于确保公司的出口IP或你自己的IP不被意外封禁非常有用。然而，要小心使用这个选项，因为如果攻击者能够伪造白名单上的IP地址，他们可能会绕过<code class="docutils literal notranslate"><span class="pre">fail2ban</span></code>的保护。</p>
+</section>
+</section>
+<section id="id10">
+<h3>参考1：<a class="headerlink" href="#id10" title="Link to this heading">¶</a></h3>
+<p>ubuntu三个文件日志介绍：
+1：/var/run/utmp：记录当前正在登录系统的用户信息，默认由who和w记录当前登录用户的信息，uptime记录系统启动时间；</p>
+<p>2：/var/log/wtmp：记录当前正在登录和历史登录系统的用户信息，默认由last命令查看；</p>
+<p>3：/var/log/btmp：记录失败的登录尝试信息，默认由lastb命令查看。</p>
+<p>ubuntu查看失败登录记录，只需要</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>lastb
+<span class="c1">#或者</span>
+sudo<span class="w"> </span>lastb<span class="w"> </span>-n<span class="w"> </span><span class="m">30</span><span class="w"> </span><span class="c1">#查看最新前30条</span>
+
+sudo<span class="w"> </span>lastb<span class="w"> </span><span class="p">|</span>awk<span class="w"> </span><span class="s1">&#39;{print $3}&#39;</span><span class="p">|</span>sort<span class="w"> </span><span class="p">|</span>uniq<span class="w"> </span>-c
+
+<span class="c1">#这条命令，可以得到登录失败大于4次的IP，及需要加入黑名单的IP名单。</span>
+sudo<span class="w"> </span>lastb<span class="w"> </span><span class="p">|</span>awk<span class="w"> </span><span class="s1">&#39;{print $3}&#39;</span><span class="p">|</span>sort<span class="w"> </span><span class="p">|</span>uniq<span class="w"> </span>-c<span class="p">|</span>awk<span class="w"> </span><span class="s1">&#39;{if ($1 &gt; 4) print $2}&#39;</span>
+</pre></div>
+</div>
+<p>开始写脚本，黑名单文件位置为<code class="docutils literal notranslate"><span class="pre">/etc/hosts.deny</span></code>，Ubuntu格式为<code class="docutils literal notranslate"><span class="pre">ALL:</span> <span class="pre">IP</span></code> 的方式添加才有效</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="c1">#set -x</span>
+<span class="nv">list</span><span class="o">=</span><span class="k">$(</span>sudo<span class="w"> </span>lastb<span class="w"> </span><span class="p">|</span>awk<span class="w"> </span><span class="s1">&#39;{print $3}&#39;</span><span class="p">|</span>sort<span class="w"> </span><span class="p">|</span>uniq<span class="w"> </span>-c<span class="p">|</span>awk<span class="w"> </span><span class="s1">&#39;{if ($1 &gt; 4) print $2}&#39;</span><span class="k">)</span>
+<span class="k">for</span><span class="w"> </span>ip<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="si">${</span><span class="nv">list</span><span class="si">}</span>
+<span class="k">do</span>
+<span class="w">	</span><span class="nb">echo</span><span class="w"> </span>ALL:<span class="w"> </span><span class="si">${</span><span class="nv">ip</span><span class="si">}</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>/etc/hosts.deny<span class="w"> </span><span class="c1">#加入黑名单</span>
+<span class="w">	</span><span class="nb">echo</span><span class="w"> </span>&gt;<span class="w"> </span>/var/log/btmp<span class="w">	</span><span class="c1">#清空失败记录，防止脚本下次执行重复统计IP</span>
+<span class="k">done</span>
+</pre></div>
+</div>
+<p>脚本定时任务：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>crontab<span class="w"> </span>-e
+<span class="c1">#内容为每1小时执行一次脚本</span>
+*<span class="w"> </span>*/1<span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span>sudo<span class="w"> </span>bash<span class="w"> </span>/home/ubuntu/ssh_deny.sh
+<span class="m">123</span>
+</pre></div>
+</div>
+<p>完成，服务器也每啥东西，为了测试，我将ssh端口改回默认的22端口，开始钓鱼，等过几个小时，看看<code class="docutils literal notranslate"><span class="pre">/etc/hosts.deny</span></code>黑名单有没有增加IP。</p>
+</section>
+<section id="id11">
+<h3>参考2：<a class="headerlink" href="#id11" title="Link to this heading">¶</a></h3>
+<p>SSH 登录失败的内容会记录到/var/log/secure文件。据此，只需要从/var/log/secure文件中提取IP地址，如果次数达到10次则将该IP写到 /etc/hosts.deny中，禁止这些IP访问主机。脚本如下secure_ssh.sh：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#! /bin/bash</span>
+cat<span class="w"> </span>/var/log/secure<span class="p">|</span>awk<span class="w"> </span><span class="s1">&#39;/Failed/{print $(NF-3)}&#39;</span><span class="p">|</span>sort<span class="p">|</span>uniq<span class="w"> </span>-c<span class="p">|</span>awk<span class="w"> </span><span class="s1">&#39;{print $2&quot;=&quot;$1;}&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>/usr/local/bin/black.list
+<span class="k">for</span><span class="w"> </span>i<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="sb">`</span>cat<span class="w">  </span>/usr/local/bin/black.list<span class="sb">`</span>
+<span class="k">do</span>
+<span class="w">  </span><span class="nv">IP</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span><span class="w"> </span><span class="nv">$i</span><span class="w"> </span><span class="p">|</span>awk<span class="w"> </span>-F<span class="o">=</span><span class="w"> </span><span class="s1">&#39;{print $1}&#39;</span><span class="sb">`</span>
+<span class="w">  </span><span class="nv">NUM</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span><span class="w"> </span><span class="nv">$i</span><span class="p">|</span>awk<span class="w"> </span>-F<span class="o">=</span><span class="w"> </span><span class="s1">&#39;{print $2}&#39;</span><span class="sb">`</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="si">${#</span><span class="nv">NUM</span><span class="si">}</span><span class="w"> </span>-gt<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span>grep<span class="w"> </span><span class="nv">$IP</span><span class="w"> </span>/etc/hosts.deny<span class="w"> </span>&gt;<span class="w"> </span>/dev/null
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="nv">$?</span><span class="w"> </span>-gt<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="k">then</span>
+<span class="w">      </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;sshd:</span><span class="nv">$IP</span><span class="s2">:deny&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>/etc/hosts.deny
+<span class="w">    </span><span class="k">fi</span>
+<span class="w">  </span><span class="k">fi</span>
+<span class="k">done</span>
+</pre></div>
+</div>
+<p>将secure_ssh.<a class="reference external" href="https://so.csdn.net/so/search?q=sh%E8%84%9A%E6%9C%AC&amp;spm=1001.2101.3001.7020">sh脚本</a>放入cron计划任务，每1小时执行一次。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># crontab -e</span>
+<span class="m">0</span><span class="w"> </span>*/1<span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span>*<span class="w">  </span>sh<span class="w"> </span>/usr/local/bin/secure_ssh.sh
+</pre></div>
+</div>
+</section>
 </section>
 </section>
 <section id="webadmin">
@@ -131,8 +418,8 @@ sudo<span class="w"> </span>usermod<span class="w"> </span>-a<span class="w"> </
 sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>cockpit
 </pre></div>
 </div>
-<section id="id5">
-<h2>Cockpit监听端口和地址<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h2>
+<section id="id12">
+<h2>Cockpit监听端口和地址<a class="headerlink" href="#id12" title="Link to this heading">¶</a></h2>
 <p>https://cloud-atlas.readthedocs.io/zh-cn/latest/linux/server/cockpit/cockpit_port_address.html#cockpit</p>
 <p>Cockpit的 <code class="docutils literal notranslate"><span class="pre">cockpit-ws</span></code> 组件默认配置的端口是 <code class="docutils literal notranslate"><span class="pre">9090</span></code> ，这个端口是和 <a class="reference external" href="https://cloud-atlas.readthedocs.io/zh-cn/latest/kubernetes/monitor/prometheus/index.html#prometheus">Prometheus监控</a> 默认端口是重合的，这会导致 <a class="reference external" href="https://cloud-atlas.readthedocs.io/zh-cn/latest/kubernetes/monitor/prometheus/prometheus_startup.html#prometheus-startup">Prometheus快速起步</a> 部署在主机上的 Prometheus 启动失败。</p>
 <p>比较简单的方法是调整 <code class="docutils literal notranslate"><span class="pre">cockpit</span></code> 的TCP监听端口</p>
@@ -158,8 +445,8 @@ sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class=
 </section>
 <section id="ubuntunetplan-ip">
 <h1>Ubuntu使用netplan，修改设置静态IP<a class="headerlink" href="#ubuntunetplan-ip" title="Link to this heading">¶</a></h1>
-<section id="ip">
-<h2>第1步： 查看当前主机的网卡名，当前ip, 子网掩码，网关地址<a class="headerlink" href="#ip" title="Link to this heading">¶</a></h2>
+<section id="id13">
+<h2>第1步： 查看当前主机的网卡名，当前ip, 子网掩码，网关地址<a class="headerlink" href="#id13" title="Link to this heading">¶</a></h2>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ifconfig
 route<span class="w"> </span>-n
 </pre></div>
@@ -172,8 +459,8 @@ sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> <
 <p>查看当前主机的网卡名，当前ip, 子网掩码，网关地址</p>
 <p>如上图所示：网卡名为 <strong>enp0s5</strong>, 当前ip <strong>10.211.55.6</strong>, 子网掩码 <strong>255.255.255.0</strong>， 网关地址 <strong>10.211.55.1</strong></p>
 </section>
-<section id="id6">
-<h2>第2步： 修改配置文件<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h2>
+<section id="id14">
+<h2>第2步： 修改配置文件<a class="headerlink" href="#id14" title="Link to this heading">¶</a></h2>
 <p>mac地址查询：<a class="reference external" href="oui.txt">oui</a>   或   <a class="reference external" href="Openwrt.html#%E4%BF%AE%E6%94%B9wan%E5%92%8Clan%E7%9A%84mac">Openwrt.html#%E4%BF%AE%E6%94%B9wan%E5%92%8Clan%E7%9A%84mac</a></p>
 <p>进入配置文件夹</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/etc/netplan
@@ -211,8 +498,8 @@ network:
 </pre></div>
 </div>
 </section>
-<section id="id7">
-<h2>第3步： 使配置生效<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h2>
+<section id="id15">
+<h2>第3步： 使配置生效<a class="headerlink" href="#id15" title="Link to this heading">¶</a></h2>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>netplan<span class="w"> </span>apply
 </pre></div>
 </div>
@@ -450,8 +737,8 @@ Acquire::https::Proxy<span class="w"> </span><span class="s2">&quot;http://init@
 </pre></div>
 </div>
 </section>
-<section id="id8">
-<h1>Ubuntu代理服务器<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h1>
+<section id="id16">
+<h1>Ubuntu代理服务器<a class="headerlink" href="#id16" title="Link to this heading">¶</a></h1>
 <section id="clash-for-windows">
 <h2>Clash for Windows<a class="headerlink" href="#clash-for-windows" title="Link to this heading">¶</a></h2>
 <p>直接下载解压即可。记得sudo chmod +x cfw。</p>
@@ -519,8 +806,8 @@ sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="
 </li>
 </ul>
 <p>5、为确保万无一失，打开 Ubuntu 的“设置”管理，在“网络”内将“网络代理”的“自动”改为“手动”，根据以下内容进行填写 HTTP、HTTPS 和 Socks 地址，或：参考以下内容</p>
-<section id="id9">
-<h3>Clash for Linux 完整参考内容：<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h3>
+<section id="id17">
+<h3>Clash for Linux 完整参考内容：<a class="headerlink" href="#id17" title="Link to this heading">¶</a></h3>
 <section id="clash">
 <h4>Clash 下载<a class="headerlink" href="#clash" title="Link to this heading">¶</a></h4>
 <p>在 Clash <a class="reference external" href="https://github.com/Dreamacro/clash/releases">release</a> 页面下载相应的版本，对于 Ubuntu 一般使用 <a class="reference external" href="https://github.com/Dreamacro/clash/releases/download/v1.14.0/clash-linux-amd64-v1.14.0.gz">clash-linux-amd64</a> 版本：</p>
@@ -543,8 +830,8 @@ mv<span class="w"> </span>clash-linux-amd64-v1.14.0<span class="w"> </span>clash
 <blockquote>
 <div><p><code class="docutils literal notranslate"><span class="pre">Country.mmdb</span></code> 文件利用 GeoIP2 服务能识别互联网用户的地点位置，以供规则分流时使用。</p>
 </div></blockquote>
-<section id="id10">
-<h5>配置文件<a class="headerlink" href="#id10" title="Link to this heading">¶</a></h5>
+<section id="id18">
+<h5>配置文件<a class="headerlink" href="#id18" title="Link to this heading">¶</a></h5>
 <p>一般的网络服务提供了 Clash 订阅链接，可以直接下载链接指向的文件内容，保存到 <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code> 中。或者使用订阅转换服务（如该<a class="reference external" href="https://converter.niallapi.top/">链接</a>。也可以自行搭建，可参考<a class="reference external" href="https://codeswift.top/posts/docker-subscription-converter/">该文章</a>），将其它订阅转换为 Clash 订阅。</p>
 <p>这里推荐使用订阅转换服务，转换后的配置文件已添加更为强大的分流规则。就可以将 Clash 一直保持后台运行，自动分流，且会自动选择最优节点。</p>
 <blockquote>
@@ -609,8 +896,8 @@ sudo<span class="w"> </span>cp<span class="w"> </span>Country.mmdb<span class="w
 sudo<span class="w"> </span>journalctl<span class="w"> </span>-xe
 </pre></div>
 </div>
-<section id="id11">
-<h4>使用代理<a class="headerlink" href="#id11" title="Link to this heading">¶</a></h4>
+<section id="id19">
+<h4>使用代理<a class="headerlink" href="#id19" title="Link to this heading">¶</a></h4>
 <section id="export">
 <h5>利用 <code class="docutils literal notranslate"><span class="pre">Export</span></code> 命令使用代理<a class="headerlink" href="#export" title="Link to this heading">¶</a></h5>
 <p>Clash 运行后，其在后台监听某一端口。Ubuntu 下使用代理，需要 <code class="docutils literal notranslate"><span class="pre">export</span></code> 命令。根据 config 配置文可以查看到件Clash 代理端口（订阅转换后，端口为7890），设置系统代理命令为：</p>
@@ -630,8 +917,8 @@ sudo<span class="w"> </span>journalctl<span class="w"> </span>-xe
 <h5>DashBoard 外部控制<a class="headerlink" href="#dashboard" title="Link to this heading">¶</a></h5>
 <p>外部控制端口为 9090，因此也可以访问该<a class="reference external" href="http://clash.razord.top/">链接</a>，输入 IP 地址（需本机可以访问的 IP）以及端口号 9090，来进入 Clash Dashboard 进行节点的选择。也可以在服务器自行搭建 Clash Dashboard，请参见<a class="reference external" href="https://github.com/Dreamacro/clash-dashboard">该项目</a>。不过 Clash Dashboard 用处不大，使用<strong>订阅转换</strong>后的配置文件包含了自动选择的功能，Clash 会自动选择延迟最低的节点。</p>
 </section>
-<section id="id12">
-<h5>设置密码<a class="headerlink" href="#id12" title="Link to this heading">¶</a></h5>
+<section id="id20">
+<h5>设置密码<a class="headerlink" href="#id20" title="Link to this heading">¶</a></h5>
 <p><code class="docutils literal notranslate"><span class="pre">export</span></code> 命令其他用户执行后也可以使用该代理，此时通过可以更换代理端口、添加密码等措施加以限制。修改 <code class="docutils literal notranslate"><span class="pre">/etc/clash/config.yaml</span></code> 文件部分配置：</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">mixed-port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">12345</span>
 <span class="nt">authentication</span><span class="p">:</span>
@@ -769,8 +1056,8 @@ dnsTunneling=false
 </section>
 <section id="ubuntu-ntfs">
 <h1>Ubuntu自动挂载磁盘分区(NTFS)<a class="headerlink" href="#ubuntu-ntfs" title="Link to this heading">¶</a></h1>
-<section id="id13">
-<h2>方式一<a class="headerlink" href="#id13" title="Link to this heading">¶</a></h2>
+<section id="id21">
+<h2>方式一<a class="headerlink" href="#id21" title="Link to this heading">¶</a></h2>
 <p>安装ubuntu后才发现分配给ubuntu系统的磁盘容量根本不够，打算将windows的磁盘空间挤出来给ubuntu用，或者后续添加硬盘，挂载到ubuntu.</p>
 <ol class="simple">
 <li><p>在windows系统中，控制面板进入磁盘管理，选择要挤出空间的分区，右键压缩磁盘得到适当的空闲磁盘空间，结束后会得到free space（空闲未分配的分区）。</p></li>
@@ -870,8 +1157,8 @@ tmpfs            1604316       20   1604296   1% /run/user/1000
 <p>设置文件夹权限为所有者为本用户xc。权限为创建与删除。
 退出，就OK了。</p>
 </section>
-<section id="id14">
-<h2>方式二(推荐)<a class="headerlink" href="#id14" title="Link to this heading">¶</a></h2>
+<section id="id22">
+<h2>方式二(推荐)<a class="headerlink" href="#id22" title="Link to this heading">¶</a></h2>
 <p>ubuntu 20.04挂载ntfs磁盘步骤如下：</p>
 <ul class="simple">
 <li><p>查看当前用户id和组id，记下uid和gid</p></li>
@@ -1039,8 +1326,8 @@ sudo<span class="w"> </span>reboot
 </pre></div>
 </div>
 </section>
-<section id="id15">
-<h1>ubuntu 如何放开端口<a class="headerlink" href="#id15" title="Link to this heading">¶</a></h1>
+<section id="id23">
+<h1>ubuntu 如何放开端口<a class="headerlink" href="#id23" title="Link to this heading">¶</a></h1>
 <p>在 Ubuntu 上放开端口，可以通过以下步骤进行操作：</p>
 <ol class="simple">
 <li><p>使用 root 用户或具有管理员权限的用户登录到 Ubuntu 系统。</p></li>
@@ -1105,6 +1392,76 @@ sudo<span class="w"> </span>reboot
 <span class="c1">#服务会在 default.target 启动后启动，也可修改为multi-user.target</span>
 </pre></div>
 </div>
+<p>imageShareMis的配置：</p>
+<div class="highlight-yml notranslate"><div class="highlight"><pre><span></span>[Unit]
+Description=imageShareMis
+#名称描述
+After=syslog.target 
+#告诉 systemd 在哪个主要系统服务后启动本服务
+
+[Service]
+User=root 
+#应用程序运行的用户
+WorkingDirectory=/home/ubuntu/imageShareMis/ 
+#应用程序的工作目录
+Group=root
+#组信息
+ExecStart=/usr/bin/java -Xms256m -Xmx512m -jar /home/ubuntu/imageShareMis/imagesharemis.jar --server.port=49996 --spring.datasource.url=&quot;jdbc:mysql://127.0.0.1:3306/image_share_prod?characterEncoding=utf8&amp;serverTimezone=UTC&quot; --spring.datasource.username=&quot;aaaaaaaaaaaaaa&quot; --spring.datasource.password=&quot;aaaaaaaaaaaa&quot; --spring.web.resources.static-locations=&quot;classpath:static/,file:/mnt/sda1/imageShare/resources/&quot;
+#或直接使用脚本sh文件：/mnt/toshiba/server/run/systemd_v1_0_1_localhost.sh
+SuccessExitStatus=143 
+#应用程序退出时的退出状态码，设置为 143 表示systemctl stop 命令下服务可以快速关闭
+TimeoutStopSec=10 
+#表示在关闭服务前等待的时间
+Restart=always 
+#设置服务崩溃时自动重启服务
+RestartSec=5 
+#在崩溃后五秒重试
+LimitNOFILE=4096 
+#表示服务最多可以打开 4096 个文件
+ExecStop=/usr/bin/pkill -f imagesharemis.jar 
+#执行 systemctl 时执行的命令
+#ExecStop=/bin/kill -15 $MAINPID
+
+[Install]
+WantedBy=multi-user.target
+#服务会在 default.target 启动后启动，也可修改为multi-user.target
+</pre></div>
+</div>
+<p>ImageViewer的配置：</p>
+<div class="highlight-yml notranslate"><div class="highlight"><pre><span></span>[Unit]
+Description=ImageViewer
+#名称描述
+After=syslog.target 
+#告诉 systemd 在哪个主要系统服务后启动本服务
+
+[Service]
+User=root 
+#应用程序运行的用户
+WorkingDirectory=/home/ubuntu/ImageViewer/ 
+#应用程序的工作目录
+Group=root 
+#组信息
+ExecStart=/usr/bin/java -Xms256m -Xmx512m -jar /home/ubuntu/ImageViewer/ImageViewer.jar --server.port=49999 --spring.datasource.url=&quot;jdbc:mysql://127.0.0.1:3306/image_viewer?characterEncoding=utf8&amp;serverTimezone=UTC&quot; --spring.datasource.username=&quot;aaaaaaaaaaaaaa&quot; --spring.datasource.password=&quot;aaaaaaaaaaaaaaa&quot;  --spring.web.resources.static-locations=&quot;classpath:static/,file:/mnt/sda1/imageShare/resources/&quot;
+#或直接使用脚本sh文件：/mnt/toshiba/server/run/systemd_v1_0_1_localhost.sh
+SuccessExitStatus=143 
+#应用程序退出时的退出状态码，设置为 143 表示systemctl stop 命令下服务可以快速关闭
+TimeoutStopSec=10 
+#表示在关闭服务前等待的时间
+Restart=always 
+#设置服务崩溃时自动重启服务
+RestartSec=5 
+#在崩溃后五秒重试
+LimitNOFILE=4096 
+#表示服务最多可以打开 4096 个文件
+ExecStop=/usr/bin/pkill -f ImageViewer.jar 
+#执行 systemctl 时执行的命令
+#ExecStop=/bin/kill -15 $MAINPID
+
+[Install]
+WantedBy=multi-user.target
+#服务会在 default.target 启动后启动，也可修改为multi-user.target
+</pre></div>
+</div>
 <p>3、重新加载 systemd 配置</p>
 <p>添加服务文件后，需要重新加载 systemd 配置以更新系统。使用以下命令重新加载 systemd 配置：</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>systemctl<span class="w"> </span>daemon-reload
@@ -1128,10 +1485,10 @@ sudo<span class="w"> </span>systemctl<span class="w"> </span>disable<span class=
 </pre></div>
 </div>
 </section>
-<section id="id16">
-<h1>开机自动运行命令<a class="headerlink" href="#id16" title="Link to this heading">¶</a></h1>
-<section id="id17">
-<h2>第0种添加系统启动脚本方式：<a class="headerlink" href="#id17" title="Link to this heading">¶</a></h2>
+<section id="id24">
+<h1>开机自动运行命令<a class="headerlink" href="#id24" title="Link to this heading">¶</a></h1>
+<section id="id25">
+<h2>第0种添加系统启动脚本方式：<a class="headerlink" href="#id25" title="Link to this heading">¶</a></h2>
 <p>Ubuntu 20.04的服务管理是基于<a class="reference external" href="https://github.com/systemd/systemd">systemd</a>的，因此设置服务自启动最推荐的方法是创建一个systemd服务文件，配置好要执行的服务。过程如下:</p>
 <ol class="simple">
 <li><p>创建我们需要开机自启动的脚本，例如/mnt/toshiba/server/run/run_v1_0_1_localhost.sh，其内容如下：</p></li>
@@ -1227,8 +1584,8 @@ sudo<span class="w"> </span>update-rc.d<span class="w"> </span>-f<span class="w"
 </pre></div>
 </div>
 </section>
-<section id="id18">
-<h2>第二种添加系统启动脚本方式：<a class="headerlink" href="#id18" title="Link to this heading">¶</a></h2>
+<section id="id26">
+<h2>第二种添加系统启动脚本方式：<a class="headerlink" href="#id26" title="Link to this heading">¶</a></h2>
 <p>0x01创建rc.local</p>
 <p>ubuntu-18.04以后 默认是没有 /etc/rc.local 这个文件的，需要自己创建</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>touch<span class="w"> </span>/etc/rc.local<span class="w"> </span>
@@ -1283,8 +1640,8 @@ Failed to connect to bus: Host is down</p>
 </pre></div>
 </div>
 </section>
-<section id="id19">
-<h1>Ubuntu关闭盖子/按电源键/按休眠键功能，关闭盖子不休眠<a class="headerlink" href="#id19" title="Link to this heading">¶</a></h1>
+<section id="id27">
+<h1>Ubuntu关闭盖子/按电源键/按休眠键功能，关闭盖子不休眠<a class="headerlink" href="#id27" title="Link to this heading">¶</a></h1>
 <p><code class="docutils literal notranslate"><span class="pre">HandlePowerKey</span></code>: 按下电源键后的行为，默认power off</p>
 <p><code class="docutils literal notranslate"><span class="pre">HandleSleepKey</span></code>: 按下挂起键后的行为，默认suspend</p>
 <p><code class="docutils literal notranslate"><span class="pre">HandleHibernateKey</span></code>: 按下休眠键后的行为，默认hibernate</p>
@@ -1399,8 +1756,8 @@ sudo<span class="w"> </span>service<span class="w"> </span>systemd-logind<span c
 </pre></div>
 </div>
 </section>
-<section id="id20">
-<h1>Linux美化输出<a class="headerlink" href="#id20" title="Link to this heading">¶</a></h1>
+<section id="id28">
+<h1>Linux美化输出<a class="headerlink" href="#id28" title="Link to this heading">¶</a></h1>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#一个在 Linux 终端中输出彩虹特效的命令行工具</span>
 sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>lolcat
 
@@ -1409,8 +1766,8 @@ sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> <
 </pre></div>
 </div>
 </section>
-<section id="id21">
-<h1>Linux命令行多终端方案<a class="headerlink" href="#id21" title="Link to this heading">¶</a></h1>
+<section id="id29">
+<h1>Linux命令行多终端方案<a class="headerlink" href="#id29" title="Link to this heading">¶</a></h1>
 <p>tmux 由会话（session），窗口（window），面板（pane）组织起每个 shell 的输入框。会话用于区分不同的工作；窗口是会话中以显示屏为单位的不同的页；而面板则是一个窗口上被白线分割的不同区域。熟练掌握会话，窗口，面板之间的切换，可以极大提高使用效率。</p>
 <p>下面先行讲解这一工具的用法：</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>tmux
@@ -1465,14 +1822,14 @@ tmux
 <section id="ubuntu-vim">
 <h1>Ubuntu vim上下左右键乱码<a class="headerlink" href="#ubuntu-vim" title="Link to this heading">¶</a></h1>
 <p>新装的ubuntu系统，在使用vi命令操作文件时，按上下左右键时不正常工作，而是出现ABCD现象，以下列举三种方式解决：</p>
-<section id="id22">
-<h2>方式一<a class="headerlink" href="#id22" title="Link to this heading">¶</a></h2>
+<section id="id30">
+<h2>方式一<a class="headerlink" href="#id30" title="Link to this heading">¶</a></h2>
 <p>普通用户下，执行 <code class="docutils literal notranslate"><span class="pre">cp</span> <span class="pre">/etc/vim/vimrc</span> <span class="pre">~/.vimrc</span></code> ，然后关闭终端，重新打开终端就可以正常使用 <code class="docutils literal notranslate"><span class="pre">vi</span></code> 命令</p>
 <p>但是这种方式有一个缺陷：如果编辑一个只能 <code class="docutils literal notranslate"><span class="pre">sudo</span></code> （管理员）权限的文件时，不能发挥作用</p>
 <p>比如执行 <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">vi</span> <span class="pre">/etc/apt/source.list</span></code> 命令时，无法正常使用上下左右键</p>
 </section>
-<section id="id23">
-<h2>方式二<a class="headerlink" href="#id23" title="Link to this heading">¶</a></h2>
+<section id="id31">
+<h2>方式二<a class="headerlink" href="#id31" title="Link to this heading">¶</a></h2>
 <p>安装<a class="reference external" href="https://so.csdn.net/so/search?q=vim&amp;spm=1001.2101.3001.7020">vim</a>编辑器，执行 <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">vim</span></code>，如果没有出现错误，再次进入vi 尝试一下，看看有没有修改过来，如果出现以下错误：
 <code class="docutils literal notranslate"><span class="pre">E:</span> <span class="pre">Package</span> <span class="pre">'vim'</span> <span class="pre">has</span> <span class="pre">no</span> <span class="pre">installation</span> <span class="pre">candidat</span></code></p>
 <p>则依次执行</p>
@@ -1483,8 +1840,8 @@ sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w
 </div>
 <p>再次使用 <code class="docutils literal notranslate"><span class="pre">vi</span></code> 编辑文件，就能正常使用上下左右键啦！</p>
 </section>
-<section id="id24">
-<h2>方式三<a class="headerlink" href="#id24" title="Link to this heading">¶</a></h2>
+<section id="id32">
+<h2>方式三<a class="headerlink" href="#id32" title="Link to this heading">¶</a></h2>
 <p>列举一个笨方法:如果方式一无法解决，使用方式二时系统源又无法安装 <code class="docutils literal notranslate"><span class="pre">vim</span></code> ，可以使用方式三，保准解决</p>
 <p>1.换系统源</p>
 <p>使用 <code class="docutils literal notranslate"><span class="pre">vi</span></code> 命令，在普通模式下，按 <code class="docutils literal notranslate"><span class="pre">shift+:</span></code> 进入命令模式，之后输入 <code class="docutils literal notranslate"><span class="pre">%d</span></code> 清空文件内容，从其他地方复制国内源到此文件中，保存文件退出</p>
@@ -1500,10 +1857,10 @@ sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w
 </section>
 </section>
 </section>
-<section id="id25">
-<h1>常用命令<a class="headerlink" href="#id25" title="Link to this heading">¶</a></h1>
-<section id="id26">
-<h2>打包/解压<a class="headerlink" href="#id26" title="Link to this heading">¶</a></h2>
+<section id="id33">
+<h1>常用命令<a class="headerlink" href="#id33" title="Link to this heading">¶</a></h1>
+<section id="id34">
+<h2>打包/解压<a class="headerlink" href="#id34" title="Link to this heading">¶</a></h2>
 <p>速查:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1">#压缩文件:压缩 a.c文件为test.tar.gz</span>
 tar<span class="w"> </span>-czvf<span class="w"> </span>test.tar.gz<span class="w"> </span>a.c
@@ -1699,8 +2056,8 @@ unzip<span class="w"> </span>./abc.zip
 </pre></div>
 </div>
 </section>
-<section id="id27">
-<h2>复制/移动&amp;重命名/删除<a class="headerlink" href="#id27" title="Link to this heading">¶</a></h2>
+<section id="id35">
+<h2>复制/移动&amp;重命名/删除<a class="headerlink" href="#id35" title="Link to this heading">¶</a></h2>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>cp<span class="w"> </span><span class="o">[</span>options<span class="o">]</span><span class="w"> </span><span class="nb">source</span><span class="w"> </span>dest
 cp<span class="w"> </span><span class="o">[</span>options<span class="o">]</span><span class="w"> </span>source...<span class="w"> </span>directory
 <span class="c1">#-a：此选项通常在复制目录时使用，它保留链接、文件属性，并复制目录下的所有内容。其作用等于dpR参数组合。</span>
@@ -1773,22 +2130,39 @@ pstree<span class="w"> </span><span class="o">[</span>-a<span class="o">]</span>
     <h3><a href="index.html">目录</a></h3>
     <ul>
 <li><a class="reference internal" href="#">Ubuntu修改Grub默认启动Windows</a></li>
-<li><a class="reference internal" href="#id1">忘记密码重置</a></li>
+<li><a class="reference internal" href="#id1">修改主机名</a></li>
+<li><a class="reference internal" href="#id2">忘记密码重置</a></li>
 <li><a class="reference internal" href="#sudo">添加新sudo用户</a></li>
-<li><a class="reference internal" href="#id2">指定 sudo 会话的时间</a><ul>
-<li><a class="reference internal" href="#id3">将 sudo 会话设置为持续到终端关闭</a></li>
-<li><a class="reference internal" href="#id4">终止 sudo 会话</a></li>
+<li><a class="reference internal" href="#id3">指定 sudo 会话的时间</a><ul>
+<li><a class="reference internal" href="#id4">将 sudo 会话设置为持续到终端关闭</a></li>
+<li><a class="reference internal" href="#id5">终止 sudo 会话</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#root">禁止/允许root远程登录</a></li>
+<li><a class="reference internal" href="#ssh">修改SSH端口</a></li>
+<li><a class="reference internal" href="#ip-hosts-allow-deny-ssh">允许/禁止ip访问(hosts.allow/deny)、ssh 禁止多次失败后访问</a><ul>
+<li><a class="reference internal" href="#ip">先设置ip白名单：</a></li>
+<li><a class="reference internal" href="#id6">设置定期自动从日志中提取失败ip，并禁止</a><ul>
+<li><a class="reference internal" href="#id7">参考0：</a><ul>
+<li><a class="reference internal" href="#id8">教程1：</a></li>
+<li><a class="reference internal" href="#id9">√教程2：</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id10">参考1：</a></li>
+<li><a class="reference internal" href="#id11">参考2：</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a class="reference internal" href="#webadmin">运维面板——Webadmin</a></li>
 <li><a class="reference internal" href="#cockpit">运维面板——Cockpit</a><ul>
-<li><a class="reference internal" href="#id5">Cockpit监听端口和地址</a></li>
+<li><a class="reference internal" href="#id12">Cockpit监听端口和地址</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#ubuntunetplan-ip">Ubuntu使用netplan，修改设置静态IP</a><ul>
-<li><a class="reference internal" href="#ip">第1步： 查看当前主机的网卡名，当前ip, 子网掩码，网关地址</a></li>
-<li><a class="reference internal" href="#id6">第2步： 修改配置文件</a></li>
-<li><a class="reference internal" href="#id7">第3步： 使配置生效</a></li>
+<li><a class="reference internal" href="#id13">第1步： 查看当前主机的网卡名，当前ip, 子网掩码，网关地址</a></li>
+<li><a class="reference internal" href="#id14">第2步： 修改配置文件</a></li>
+<li><a class="reference internal" href="#id15">第3步： 使配置生效</a></li>
 <li><a class="reference internal" href="#thinserveryaml">thinServer的yaml配置文件内容</a></li>
 <li><a class="reference internal" href="#mac">修改MAC地址</a></li>
 </ul>
@@ -1800,12 +2174,12 @@ pstree<span class="w"> </span><span class="o">[</span>-a<span class="o">]</span>
 <li><a class="reference internal" href="#ubuntu">Ubuntu开机默认进入图形界面/字符界面</a></li>
 <li><a class="reference internal" href="#ubuntugrub-grubrescue">Ubuntu开机grub/grubRescue手动启动</a></li>
 <li><a class="reference internal" href="#apt">apt走代理</a></li>
-<li><a class="reference internal" href="#id8">Ubuntu代理服务器</a><ul>
+<li><a class="reference internal" href="#id16">Ubuntu代理服务器</a><ul>
 <li><a class="reference internal" href="#clash-for-windows">Clash for Windows</a></li>
 <li><a class="reference internal" href="#clash-for-linux">√Clash for Linux</a><ul>
-<li><a class="reference internal" href="#id9">Clash for Linux 完整参考内容：</a><ul>
+<li><a class="reference internal" href="#id17">Clash for Linux 完整参考内容：</a><ul>
 <li><a class="reference internal" href="#clash">Clash 下载</a><ul>
-<li><a class="reference internal" href="#id10">配置文件</a></li>
+<li><a class="reference internal" href="#id18">配置文件</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#clash-as-a-daemon">Clash as a daemon</a><ul>
@@ -1815,10 +2189,10 @@ pstree<span class="w"> </span><span class="o">[</span>-a<span class="o">]</span>
 </ul>
 </li>
 <li><a class="reference internal" href="#systemctl">使用 systemctl</a><ul>
-<li><a class="reference internal" href="#id11">使用代理</a><ul>
+<li><a class="reference internal" href="#id19">使用代理</a><ul>
 <li><a class="reference internal" href="#export">利用 <code class="docutils literal notranslate"><span class="pre">Export</span></code> 命令使用代理</a></li>
 <li><a class="reference internal" href="#dashboard">DashBoard 外部控制</a></li>
-<li><a class="reference internal" href="#id12">设置密码</a></li>
+<li><a class="reference internal" href="#id20">设置密码</a></li>
 <li><a class="reference internal" href="#tun">TUN 模式</a></li>
 </ul>
 </li>
@@ -1831,37 +2205,37 @@ pstree<span class="w"> </span><span class="o">[</span>-a<span class="o">]</span>
 </ul>
 </li>
 <li><a class="reference internal" href="#ubuntu-ntfs">Ubuntu自动挂载磁盘分区(NTFS)</a><ul>
-<li><a class="reference internal" href="#id13">方式一</a></li>
-<li><a class="reference internal" href="#id14">方式二(推荐)</a></li>
+<li><a class="reference internal" href="#id21">方式一</a></li>
+<li><a class="reference internal" href="#id22">方式二(推荐)</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#ubuntu20-04-dummy-output-intel">解决ubuntu20.04系统不发出声音、显示伪输出（dummy output）的问题(Intel板载声卡)</a></li>
 <li><a class="reference internal" href="#fail2ban-ssh">安装和配置 Fail2ban 以保护 SSH</a></li>
-<li><a class="reference internal" href="#id15">ubuntu 如何放开端口</a></li>
+<li><a class="reference internal" href="#id23">ubuntu 如何放开端口</a></li>
 <li><a class="reference internal" href="#springboot-systemd">springboot 服务制作成 systemd 服务</a></li>
-<li><a class="reference internal" href="#id16">开机自动运行命令</a><ul>
-<li><a class="reference internal" href="#id17">第0种添加系统启动脚本方式：</a></li>
+<li><a class="reference internal" href="#id24">开机自动运行命令</a><ul>
+<li><a class="reference internal" href="#id25">第0种添加系统启动脚本方式：</a></li>
 <li><a class="reference internal" href="#shell">第一种shell脚本方式</a></li>
-<li><a class="reference internal" href="#id18">第二种添加系统启动脚本方式：</a></li>
+<li><a class="reference internal" href="#id26">第二种添加系统启动脚本方式：</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#wsl-ubuntu-systemctl">WSL Ubuntu systemctl报错</a></li>
-<li><a class="reference internal" href="#id19">Ubuntu关闭盖子/按电源键/按休眠键功能，关闭盖子不休眠</a></li>
+<li><a class="reference internal" href="#id27">Ubuntu关闭盖子/按电源键/按休眠键功能，关闭盖子不休眠</a></li>
 <li><a class="reference internal" href="#linux">Linux资源监控</a></li>
-<li><a class="reference internal" href="#id20">Linux美化输出</a></li>
-<li><a class="reference internal" href="#id21">Linux命令行多终端方案</a></li>
+<li><a class="reference internal" href="#id28">Linux美化输出</a></li>
+<li><a class="reference internal" href="#id29">Linux命令行多终端方案</a></li>
 <li><a class="reference internal" href="#ubuntu-vim">Ubuntu vim上下左右键乱码</a><ul>
-<li><a class="reference internal" href="#id22">方式一</a></li>
-<li><a class="reference internal" href="#id23">方式二</a></li>
-<li><a class="reference internal" href="#id24">方式三</a><ul>
+<li><a class="reference internal" href="#id30">方式一</a></li>
+<li><a class="reference internal" href="#id31">方式二</a></li>
+<li><a class="reference internal" href="#id32">方式三</a><ul>
 <li><a class="reference internal" href="#vivim">正常使用vi或vim编辑文件</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id25">常用命令</a><ul>
-<li><a class="reference internal" href="#id26">打包/解压</a></li>
-<li><a class="reference internal" href="#id27">复制/移动&amp;重命名/删除</a></li>
+<li><a class="reference internal" href="#id33">常用命令</a><ul>
+<li><a class="reference internal" href="#id34">打包/解压</a></li>
+<li><a class="reference internal" href="#id35">复制/移动&amp;重命名/删除</a></li>
 <li><a class="reference internal" href="#kill">后台运行/显示进程/kill进程</a></li>
 </ul>
 </li>
