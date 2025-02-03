@@ -665,6 +665,15 @@
         <li class="md-nav__item">
   <a href="#docker_1" class="md-nav__link">
     <span class="md-ellipsis">
+      docker国内镜像
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#docker_2" class="md-nav__link">
+    <span class="md-ellipsis">
       docker走代理
     </span>
   </a>
@@ -969,6 +978,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.禁止更新：
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1130,6 +1148,21 @@
       calibre-web部署
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="calibre-web部署">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#user-group-identifiers" class="md-nav__link">
+    <span class="md-ellipsis">
+      User / Group Identifiers
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1454,6 +1487,15 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#qbittorrent" class="md-nav__link">
+    <span class="md-ellipsis">
+      qbittorrent
+    </span>
+  </a>
   
 </li>
       
@@ -2013,6 +2055,15 @@
         <li class="md-nav__item">
   <a href="#docker_1" class="md-nav__link">
     <span class="md-ellipsis">
+      docker国内镜像
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#docker_2" class="md-nav__link">
+    <span class="md-ellipsis">
       docker走代理
     </span>
   </a>
@@ -2317,6 +2368,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.禁止更新：
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2478,6 +2538,21 @@
       calibre-web部署
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="calibre-web部署">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#user-group-identifiers" class="md-nav__link">
+    <span class="md-ellipsis">
+      User / Group Identifiers
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -2805,6 +2880,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#qbittorrent" class="md-nav__link">
+    <span class="md-ellipsis">
+      qbittorrent
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3043,7 +3127,19 @@ sudo yum install docker-ce
 <p>直接使用apt-get install</p>
 <pre><code class="language-bash">sudo apt-get install docker-compose
 </code></pre>
-<h4 id="docker_1">docker走代理</h4>
+<h4 id="docker_1">docker国内镜像</h4>
+<p>https://fast360.xyz/</p>
+<p>https://www.cnblogs.com/OneSeting/p/18532166</p>
+<p>https://cloud.tencent.com/developer/article/2485043</p>
+<p>https://xuanyuan.me/blog/archives/1154</p>
+<p>在<code>/etc/docker/daemon.json</code>中添加镜像地址，如：</p>
+<pre><code class="language-json">{
+    &quot;registry-mirrors&quot;: [
+        &quot;https://hub.fast360.xyz&quot;
+    ]
+}
+</code></pre>
+<h4 id="docker_2">docker走代理</h4>
 <pre><code class="language-bash">sudo cd /etc/systemd/system/
 #创建配置文件
 sudo mkdir docker.service.d
@@ -3995,6 +4091,22 @@ sudo docker pull kodcloud/kodexplorer:4.52
 
 sudo docker run -itd --name kodexplorer-default --restart=always -v /mnt/toshiba/docker/kodexplorer-default:/var/www/html -p 8237:80 kodcloud/kodexplorer:4.52
 </code></pre>
+<h5 id="3">3.禁止更新：</h5>
+<p>https://www.jianshu.com/p/65961c08b73d</p>
+<p>去更新操作</p>
+<ul>
+<li>进入你的KodExplorer的根目录, 并找到版本号文件
+  KodTest文件夹是我的根目录, 所以我的版本号文件在 <code>KodTest/config/version.php</code></li>
+<li>打开version.php, 将其中的版本号改为<code>100.520</code> 并保存. (这个只要是大于官网最新版本就行)
+  [图片上传失败...(image-14b990-1590122980697)]</li>
+<li>之后, 进入你的KodExplorer, 这时已经不再提醒更新了.</li>
+</ul>
+<hr />
+<p>版权信息修改</p>
+<ul>
+<li>版权信息文件位于<code>KodTest/config/i18n/zh-CN/main.php</code>目录下, 相关代码在288行左右. 建议没有基础的小白不要自行修改. (KodExplorer的新版本的版权信息位置可能会更改)</li>
+<li>注意: 修改版权信息字样是, 登录会弹出窗口提醒版权信息已修改. 这个弹窗的文件和代码位置目前我还没找到. 所以解决办法可以使不去除版权字样, 但在版权字样前加自己想要的文字, 之后多打几个空格, 这样版权字样没被去除但是版权字样也不会出现. (因为被空格挤出了屏幕)</li>
+</ul>
 <h4 id="nextcloud">nextcloud部署</h4>
 <h5 id="_11">部署命令</h5>
 <p>拉取镜像</p>
@@ -4121,6 +4233,16 @@ sudo docker run -d -p 11935:1935 -p 18080:8080 alqutami/rtmp-hls
 <h4 id="calibre-web">calibre-web部署</h4>
 <p>初次启动时的 <a href="./File/metadata.db">metadata.db</a> 在File目录中。</p>
 <pre><code class="language-bash">sudo docker pull linuxserver/calibre-web:0.6.21
+</code></pre>
+<h6 id="user-group-identifiers">User / Group Identifiers</h6>
+<p><strong>注：必须使用正确的id，否则会导致目录无读写权限</strong></p>
+<p>When using volumes (<code>-v</code> flags), permissions issues can arise between the host OS and the container, we avoid this issue by allowing you to specify the user <code>PUID</code> and group <code>PGID</code>.</p>
+<p>Ensure any volume directories on the host are owned by the same user you specify and any permissions issues will vanish like magic.</p>
+<p>In this instance <code>PUID=1000</code> and <code>PGID=1000</code>, to find yours use <code>id your_user</code> as below:</p>
+<pre><code class="language-bash">id your_user
+</code></pre>
+<p>Example output:</p>
+<pre><code class="language-text">uid=1000(your_user) gid=1000(your_user) groups=1000(your_user)
 </code></pre>
 <p><strong>docker-compose (recommended, <a href="https://docs.linuxserver.io/general/docker-compose">click here for more info</a>)</strong></p>
 <pre><code class="language-yaml">---
@@ -5324,6 +5446,99 @@ docker restart openvpn
 <li><strong><em>*Logs:*</em></strong> Access Server forwards logs to Docker, so it can't handle logging in the Access Server configuration. See the Docker logging documentation to set up rotation, forwarding, etc.</li>
 <li><strong><em>*IPv6:*</em></strong> We don't recommend Access Server inside a Docker container if you plan to use IPv6 for VPN clients because IPv6 support in the Docker network toolset is limited/experimental.</li>
 </ul>
+<h4 id="qbittorrent">qbittorrent</h4>
+<p>linuxserver/qbittorrent</p>
+<pre><code class="language-bash">sudo docker pull linuxserver/qbittorrent:amd64-5.0.3-libtorrentv1
+</code></pre>
+<pre><code class="language-bash">sudo mkdir -p /mnt/sda1/docker/qbittorrent-default/appdata
+sudo mkdir -p /mnt/sda1/docker/qbittorrent-default/downloads
+</code></pre>
+<p>docker-compose</p>
+<pre><code class="language-yaml">---
+services:
+  qbittorrent:
+    image: linuxserver/qbittorrent:amd64-5.0.3-libtorrentv1
+    container_name: qbittorrent
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - WEBUI_PORT=8080
+      - TORRENTING_PORT=6881
+    volumes:
+      - /mnt/sda1/docker/qbittorrent-default/appdata:/config
+      - /mnt/sda1/docker/qbittorrent-default/downloads:/downloads #optional
+    ports:
+      - 8080:8080
+      - 6881:6881
+      - 6881:6881/udp
+    restart: unless-stopped
+
+</code></pre>
+<p>docker-cli:</p>
+<p>这里映射55555端口用于传输。</p>
+<pre><code class="language-bash">sudo docker run -itd --name=qbittorrent-default -e PUID=1000 -e PGID=1000 -e TZ=Etc/UTC -e WEBUI_PORT=48238 -e TORRENTING_PORT=46881 -p 48238:48238 -p 46881:46881 -p 46881:46881/udp -p 55555:55555 -v /mnt/sda1/docker/qbittorrent-default/appdata:/config -v /mnt/sda1/docker/qbittorrent-default/downloads:/downloads --restart unless-stopped linuxserver/qbittorrent:amd64-5.0.3-libtorrentv1
+</code></pre>
+<p><strong>Parameters</strong></p>
+<p>Containers are configured using parameters passed at runtime (such as those above). These parameters are separated by a colon and indicate <code>&lt;external&gt;:&lt;internal&gt;</code> respectively. For example, <code>-p 8080:80</code> would expose port <code>80</code> from inside the container to be accessible from the host's IP on port <code>8080</code> outside the container.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Parameter</th>
+<th style="text-align: left;">Function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><code>-p 8080:8080</code></td>
+<td style="text-align: left;">WebUI</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>-p 6881:6881</code></td>
+<td style="text-align: left;">tcp connection port</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>-p 6881:6881/udp</code></td>
+<td style="text-align: left;">udp connection port</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>-e PUID=1000</code></td>
+<td style="text-align: left;">for UserID - see below for explanation</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>-e PGID=1000</code></td>
+<td style="text-align: left;">for GroupID - see below for explanation</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>-e TZ=Etc/UTC</code></td>
+<td style="text-align: left;">specify a timezone to use, see this <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List">list⁠</a>.</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>-e WEBUI_PORT=8080</code></td>
+<td style="text-align: left;">for changing the port of the web UI, see below for explanation</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>-e TORRENTING_PORT=6881</code></td>
+<td style="text-align: left;">for changing the port of tcp/udp connection, see below for explanation</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>-v /config</code></td>
+<td style="text-align: left;">Contains all relevant configuration files.</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>-v /downloads</code></td>
+<td style="text-align: left;">Location of downloads on disk.</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>--read-only=true</code></td>
+<td style="text-align: left;">Run container with a read-only filesystem. Please <a href="https://docs.linuxserver.io/misc/read-only/">read the docs⁠</a>.</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>--user=1000:1000</code></td>
+<td style="text-align: left;">Run container with a non-root user. Please <a href="https://docs.linuxserver.io/misc/non-root/">read the docs⁠</a>.</td>
+</tr>
+</tbody>
+</table>
 
 
 

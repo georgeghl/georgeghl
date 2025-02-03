@@ -1422,6 +1422,27 @@ sudo docker pull kodcloud/kodexplorer:4.52
 sudo docker run -itd --name kodexplorer-default --restart=always -v /mnt/toshiba/docker/kodexplorer-default:/var/www/html -p 8237:80 kodcloud/kodexplorer:4.52
 ```
 
+## 3.禁止更新：
+
+https://www.jianshu.com/p/65961c08b73d
+
+去更新操作
+
+- 进入你的KodExplorer的根目录, 并找到版本号文件
+  KodTest文件夹是我的根目录, 所以我的版本号文件在 `KodTest/config/version.php`
+- 打开version.php, 将其中的版本号改为`100.520` 并保存. (这个只要是大于官网最新版本就行)
+  [图片上传失败...(image-14b990-1590122980697)]
+- 之后, 进入你的KodExplorer, 这时已经不再提醒更新了.
+
+------
+
+版权信息修改
+
+- 版权信息文件位于`KodTest/config/i18n/zh-CN/main.php`目录下, 相关代码在288行左右. 建议没有基础的小白不要自行修改. (KodExplorer的新版本的版权信息位置可能会更改)
+- 注意: 修改版权信息字样是, 登录会弹出窗口提醒版权信息已修改. 这个弹窗的文件和代码位置目前我还没找到. 所以解决办法可以使不去除版权字样, 但在版权字样前加自己想要的文字, 之后多打几个空格, 这样版权字样没被去除但是版权字样也不会出现. (因为被空格挤出了屏幕)
+
+
+
 
 
 

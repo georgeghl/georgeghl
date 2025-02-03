@@ -757,6 +757,48 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#windows-10" class="md-nav__link">
+    <span class="md-ellipsis">
+      彻底关闭 Windows 10 自动更新
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="彻底关闭 Windows 10 自动更新">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 组策略禁用 Windows 更新
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-bits" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 停用 BITS 服务
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 设置 [更新与安全性]，关闭从其他电脑下载更新
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1726,6 +1768,48 @@
       使用 DISM 安全清理 C 盘 WinSxS 文件夹空间
     </span>
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#windows-10" class="md-nav__link">
+    <span class="md-ellipsis">
+      彻底关闭 Windows 10 自动更新
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="彻底关闭 Windows 10 自动更新">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 组策略禁用 Windows 更新
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-bits" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 停用 BITS 服务
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 设置 [更新与安全性]，关闭从其他电脑下载更新
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -2762,6 +2846,16 @@ Windows 资源管理器报告的组件存储大小 : 9.09 GB
 <pre><code class="language-bash">Dism.exe /online /Cleanup-Image /StartComponentCleanup /ResetBase
 </code></pre>
 <p>更多命令参数，请参阅 <a href="https://learn.microsoft.com/zh-cn/windows-hardware/manufacture/desktop/dism-operating-system-package-servicing-command-line-options?view=windows-11">DISM 操作系统包（.cab 或 .msu）服务命令行选项 Microsoft Learn</a> 文档</p>
+<h4 id="windows-10">彻底关闭 Windows 10 自动更新</h4>
+<h5 id="1-windows">1. 组策略禁用 Windows 更新</h5>
+<p>Win键+R，输入 <strong>gpedit.msc</strong>，启动<strong>组策略</strong>编辑器。
+左侧选择 [本地计算机配置] -&gt; [管理模板] -&gt; [Windows 组件] -&gt; [Windows 更新]，禁用右侧的 [配置自动更新] 和 [启用通过自动更新建议的更新] 选项。</p>
+<h5 id="2-bits">2. 停用 BITS 服务</h5>
+<p>BITS 服务的英文全称为 <strong>Background Intelligent Transfer Service</strong>，其使用空闲的网络带宽在后台传送文件。禁用该服务，则依赖于BITS的任何应用程序（如 Windows 更新）将无法自动下载程序和其他信息。具体配置方式，如下：
+Win键+R，输入 <strong>services.msc</strong>，启动<strong>服务</strong>配置窗口。
+找到 <strong>Background Intelligent Transfer Service</strong>，将<strong>启动类型</strong>配置为<strong>禁用</strong>。</p>
+<h5 id="3_2">3. 设置 [更新与安全性]，关闭从其他电脑下载更新</h5>
+<p>[开始] -&gt; [设置] -&gt; [更新和安全]，进入 [Windows 更新] 配置界面，选择 [高级选项] -&gt; [传递优化]，关闭 [允许从其他电脑下载] 。</p>
 
 
 
