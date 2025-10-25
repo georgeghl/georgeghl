@@ -17,6 +17,157 @@ https://github.com/ivanhao/pvetools
 
 
 
+# PVE调整/mnt/data、root分区大小
+
+## 1.直接删除data，只使用root
+
+```bash
+#先删除/dev/mapper/pve-data
+lvremove /dev/mapper/pve-data
+
+#然后扩充/dev/mapper/pve-root
+lvextend -L +100G /dev/mapper/pve-root
+resize2fs /dev/mapper/pve-root
+```
+
+
+
+
+
+## 2.缩小data，扩大root
+
+```bash
+#先缩小/dev/mapper/pve-data
+#e2fsck -f /dev/mapper/pve-data
+resize2fs 600G /dev/mapper/pve-data
+lvreduce -L 600G /dev/mapper/pve-data
+
+#然后扩充/dev/mapper/pve-root
+lvextend -L +100G /dev/mapper/pve-root
+resize2fs /dev/mapper/pve-root
+```
+
+
+
+
+
+
+
+# **PVE 禁用Swap分区、分给root** 、删除分区并分配给root（请结合下面local-lvm改文件存储部分使用）
+
+https://waylee.net/thread-2430-1-1.html
+
+**1.临时禁用 Swap**
+你可以通过以下命令来临时禁用 Swap：
+
+```undefined
+swapoff -a
+```
+
+此命令会禁用所有的 Swap 分区和 Swap 文件。禁用后，它会立即生效，但系统重启后 Swap 会再次启用。
+**2. 永久禁用 Swap**
+为了永久禁用 Swap，可以编辑 /etc/fstab 文件，将 Swap 分区的挂载项注释掉。
+步骤如下：
+**2.1. 编辑 /etc/fstab**
+使用你喜欢的文本编辑器（例如 vim 或 nano）打开 /etc/fstab 文件：
+
+```undefined
+vim /etc/fstab
+```
+
+找到类似于以下内容的行：
+
+```undefined
+/dev/sdX     swap      swap    defaults    0   0
+```
+
+或者：
+
+```undefined
+UUID=xxxxxx  swap      swap    defaults    0   0
+```
+
+将这行前面加上 #，注释掉这行，使它看起来像这样：
+
+```python
+# /dev/sdX     swap      swap    defaults    0   0
+```
+
+**2.2. 保存并退出编辑器。**
+**2.3. 验证 Swap 是否已禁用**
+
+```undefined
+free -h
+```
+
+或者：
+
+```lua
+swapon --show
+```
+
+如果没有 Swap 信息，则表示 Swap 已被成功禁用。
+**2.4 删除PVE的Swap分区**
+
+```undefined
+fdisk -l
+```
+
+显示为
+
+```python
+Disk /dev/mapper/pve-swap: 8 GiB, 8589934592 bytes, 16777216 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 16384 bytes / 131072 bytes
+Disk /dev/mapper/pve-root: 223.88 GiB, 240392339456 bytes, 469516288 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+```
+
+**2.5 移除掉交换分区**
+
+```undefined
+lvremove /dev/mapper/pve-swap
+```
+
+
+**2.6 执行pvdisplay查看已经分配的容量**
+
+```lua
+# 查看 Allocated PE 确认可以分配的容量
+➜  ~ pvdisplay
+  --- Physical volume ---
+  PV Name               /dev/nvme0n1p3
+  VG Name               pve
+  PV Size               231.88 GiB / not usable 2.16 MiB
+  Allocatable           yes 
+  PE Size               4.00 MiB
+  Total PE              59362
+  Free PE               2048
+  Allocated PE          57314
+  PV UUID               OzlpbK-sbRD-QnrV-q0oD-3IJ7-2sxB-R6Xulb
+```
+
+**2.7 给根目录分配多8G磁盘**
+
+```undefined
+lvextend -L +8G /dev/mapper/pve-root
+```
+
+
+**2.8 resize2fs 后才能使用**
+
+```undefined
+resize2fs /dev/mapper/pve-root
+```
+
+
+
+
+
+
+
 # [Proxmox的local-lvm改文件存储，提升运行速度](https://www.cnblogs.com/doracloud/p/16874171.html)
 
 https://www.cnblogs.com/doracloud/p/16874171.html
@@ -678,6 +829,24 @@ echo /dev/sda1 /mnt/sda1 ext4 defaults 1 2 >> /etc/fstab
 选择“数据中心”(这块一定要注意不是选择PVE)存储 - 添加 - 目录
 
 ID可以随便填，目录就是刚才创建好的/mnt/sda1，内容**全选**，其它默认点击添加。
+
+
+
+
+
+
+
+# pve dhcp
+
+1. **登录到PVE服务器的命令行界面**：可以通过直接连接键盘和显示器或通过SSH进行。
+2. **备份原始网络配置文件**：以防万一。 *sudo cp /etc/network/interfaces /etc/network/interfaces.bak*
+3. **使用文本编辑器打开网络配置文件**： *sudo nano /etc/network/interfaces*
+4. **找到主网络接口并修改配置**：将*static*更改为*dhcp*，并删除或注释掉*address*、*netmask*和*gateway*行。修改后的配置应如下所示： *auto lo iface lo inet loopback iface enp1s0 inet manual auto vmbr0 iface vmbr0 inet dhcp # address 192.168.124.17/24 # gateway 192.168.124.1 bridge-ports enp1s0 bridge-stp off bridge-fd 0*
+5. **保存更改并重启网络服务**： *sudo systemctl restart networking*
+
+
+
+
 
 
 

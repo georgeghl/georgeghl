@@ -322,6 +322,72 @@ export https_proxy="127.0.0.1:7890"
 
 
 
+# 修改 docker 容器的目录映射
+
+https://cloud.tencent.com/developer/article/1750909
+
+## 1.直接删除，重新创建容器
+
+## 2.修改容器配置文件
+
+暂停 Docker 服务
+
+```
+systemctl stop docker
+```
+
+进入 Docker 容器配置文件目录下
+
+```
+cd /var/lib/docker/containers/
+ls
+```
+
+进入某个容器的配置文件目录下，容器ID 就是文件夹名称，可通过 docker ps -aq 来查看，不过这是缩写，对照起来看就行。
+
+修改 config.v2.json，修改其中映射目录相关路径。
+
+重新启动 Docker 服务。
+
+## 3.使用 docker commit 命令
+
+停止 Docker 容器
+
+```
+docker stop tomcat7
+```
+
+使用 commit 构建新镜像
+
+```
+docker commit tomcat7 new_tomcat7
+docker images
+```
+
+使用新镜像重新创建一个 Docker 容器
+
+```
+docker run -d -p 9999:8080 -i --name tomcat77 -v /usr/local/tomcat/webapps:/usr/local/tomcat/webapps tomcat:7
+```
+
+修改新容器的名字
+
+如果新容器想用回旧容器的名字，需要先删了旧容器，再改名
+
+```
+docker rm -f tomcat7
+docker rename tomcat77 tomcat7
+docker ps
+```
+
+
+
+
+
+
+
+
+
 # Portainer(docker面板)
 
 ```bash
@@ -333,17 +399,17 @@ sudo docker pull portainer/portainer-ce:latest
 
 ```bash
 #不映射数据
-sudo docker run -d -p 8000:8000 -p 9443:9443 -p 9000:9000 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer-ce:latest
+sudo docker run -d -p 8000:8000 -p 9443:9443 -p 9000:9000 --name portainer-default --restart=always -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer-ce:latest
 ```
 
 ```bash
 #映射数据至指定目录
-sudo mkdir -p /mnt/toshiba/docker/portainer-default/
-sudo chown ubuntu /mnt/toshiba/docker/portainer-default/
-sudo docker run -d -p 8000:8000 -p 9443:9443 -p 9000:9000 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /mnt/toshiba/docker/portainer-default:/data portainer/portainer-ce:latest
+sudo mkdir -p /home/ubuntu/docker/portainer-default/
+sudo chown ubuntu /home/ubuntu/docker/portainer-default/
+sudo docker run -d -p 48000:8000 -p 49443:9443 -p 49000:9000 --name portainer-default --restart=unless-stopped -v /var/run/docker.sock:/var/run/docker.sock -v /home/ubuntu/docker/portainer-default:/data portainer/portainer-ce:latest
 ```
 
-创建完毕后，访问9000端口。
+创建完毕后，访问49000端口。
 
 
 
@@ -371,18 +437,22 @@ sudo docker run -itd --name uptime-kuma-default -p 13001:3001  elestio/uptime-ku
 
 ```bash
 sudo docker pull minio/minio:latest
-sudo mkdir -p /mnt/toshiba/docker/minio-default/data
-sudo chown ubuntu /mnt/toshiba/docker/minio-default/data
-sudo mkdir -p /mnt/toshiba/docker/minio-default/config
-sudo chown ubuntu /mnt/toshiba/docker/minio-default/config
+sudo mkdir -p /mnt/sda1/docker/minio-default/data
+sudo chown ubuntu /mnt/sda1/docker/minio-default/data
+sudo mkdir -p /mnt/sda1/docker/minio-default/config
+sudo chown ubuntu /mnt/sda1/docker/minio-default/config
 # 指定用户名和密码
-sudo docker run -itd --restart=always --name minio-default -p 9900:9000 -p 9901:9001 -v /mnt/toshiba/docker/minio-default/data:/data -v /mnt/toshiba/docker/minio-default/config:/root/.minio -e "MINIO_ROOT_USER=minioadmin" -e "MINIO_ROOT_PASSWORD=10203090" minio/minio:latest server /data --console-address ":9001"
+sudo docker run -itd --restart=unless-stopped --name minio-default -p 49900:9000 -p 49901:9001 -v /mnt/sda1/docker/minio-default/data:/data -v /mnt/sda1/docker/minio-default/config:/root/.minio -e "MINIO_ROOT_USER=minioadmin" -e "MINIO_ROOT_PASSWORD=abcd123456" minio/minio:latest server /data --console-address ":9001"
 
 
 # 不指定用户名和密码，默认为minioadmin,minioadmin
-sudo docker run -itd --restart=always --name minio-default -p 9900:9000 -p 9901:9001 -v /mnt/toshiba/docker/minio-default/data:/data -v /mnt/toshiba/docker/minio-default/config:/root/.minio minio/minio:latest server /data --console-address ":9001"
+sudo docker run -itd --restart=unless-stopped --name minio-default -p 49900:9000 -p 49901:9001 -v /mnt/sda1/docker/minio-default/data:/data -v /mnt/sda1/docker/minio-default/config:/root/.minio minio/minio:latest server /data --console-address ":9001"
 
+# 配置与存储分离
+mkdir -p /mnt/sda1/docker/minio-default/data
+mkdir -p /home/ubuntu/docker/minio-default/config
 
+docker run -itd --restart=unless-stopped --name minio-default -p 49900:9000 -p 49901:9001 -v /mnt/sda1/docker/minio-default/data:/data -v /home/ubuntu/docker/minio-default/config:/root/.minio  -e "MINIO_ROOT_USER=minioadmin" -e "MINIO_ROOT_PASSWORD=a0b0c1d2minio" quay.io/minio/minio:RELEASE.2025-01-18T00-31-37Z server /data --console-address ":9001"
 ```
 
 
@@ -486,6 +556,246 @@ sudo mkdir -p /home/ubuntu/docker/code-server/config/
 
 docker run -d --name=code-server -e PUID=1000 -e PGID=1000 -e TZ=Etc/UTC -e PASSWORD=password -e SUDO_PASSWORD=password -e DEFAULT_WORKSPACE=/config/workspace -p 8240:8443 -v /home/ubuntu/docker/code-server/config:/config --restart unless-stopped linuxserver/code-server:latest
 ```
+
+https://hub.docker.com/r/linuxserver/code-server
+
+**Usage**
+
+To help you get started creating a container from this image you can either use docker-compose or the docker cli.
+
+> [!NOTE] Unless a parameter is flaged as 'optional', it is *mandatory* and a value must be provided.
+
+**docker-compose (recommended, [click here for more info⁠](https://docs.linuxserver.io/general/docker-compose))**
+
+```yaml
+---
+services:
+  code-server:
+    image: lscr.io/linuxserver/code-server:latest
+    container_name: code-server
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - PASSWORD=password #optional
+      - HASHED_PASSWORD= #optional
+      - SUDO_PASSWORD=password #optional
+      - SUDO_PASSWORD_HASH= #optional
+      - PROXY_DOMAIN=code-server.my.domain #optional
+      - DEFAULT_WORKSPACE=/config/workspace #optional
+    volumes:
+      - /path/to/code-server/config:/config
+    ports:
+      - 8443:8443
+    restart: unless-stopped
+```
+
+**docker cli ([click here for more info⁠](https://docs.docker.com/engine/reference/commandline/cli/))**
+
+```bash
+docker run -d \
+  --name=code-server \
+  -e PUID=1000 \
+  -e PGID=1000 \
+  -e TZ=Etc/UTC \
+  -e PASSWORD=password `#optional` \
+  -e HASHED_PASSWORD= `#optional` \
+  -e SUDO_PASSWORD=password `#optional` \
+  -e SUDO_PASSWORD_HASH= `#optional` \
+  -e PROXY_DOMAIN=code-server.my.domain `#optional` \
+  -e DEFAULT_WORKSPACE=/config/workspace `#optional` \
+  -p 8443:8443 \
+  -v /path/to/code-server/config:/config \
+  --restart unless-stopped \
+  lscr.io/linuxserver/code-server:latest
+```
+
+```shell
+mkdir -p /mnt/data/docker/code-server-default/config
+
+docker run -itd --name=code-server-default -e PUID=0 -e GUID=0 -e TZ=Asia/Shanghai -e PASSWORD=abcd123456 -e SUDO_PASSWORD=abcd123456 -e DEFAULT_WORKSPACE=/config/workspace -p 8252:8443 -v /mnt/data/docker/code-server-default/config:/config/workspace --restart=unless-stopped linuxserver/code-server:4.92.2
+```
+
+
+
+**Parameters**
+
+Containers are configured using parameters passed at runtime (such as those above). These parameters are separated by a colon and indicate `<external>:<internal>` respectively. For example, `-p 8080:80` would expose port `80` from inside the container to be accessible from the host's IP on port `8080` outside the container.
+
+|                Parameter                 | Function                                                     |
+| :--------------------------------------: | :----------------------------------------------------------- |
+|              `-p 8443:8443`              | web gui                                                      |
+|              `-e PUID=1000`              | for UserID - see below for explanation                       |
+|              `-e PGID=1000`              | for GroupID - see below for explanation                      |
+|             `-e TZ=Etc/UTC`              | specify a timezone to use, see this [list⁠](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List). |
+|          `-e PASSWORD=password`          | Optional web gui password, if `PASSWORD` or `HASHED_PASSWORD` is not provided, there will be no auth. |
+|          `-e HASHED_PASSWORD=`           | Optional web gui password, overrides `PASSWORD`, instructions on how to create it is below. |
+|       `-e SUDO_PASSWORD=password`        | If this optional variable is set, user will have sudo access in the code-server terminal with the specified password. |
+|         `-e SUDO_PASSWORD_HASH=`         | Optionally set sudo password via hash (takes priority over `SUDO_PASSWORD` var). Format is `$type$salt$hashed`. |
+| `-e PROXY_DOMAIN=code-server.my.domain`  | If this optional variable is set, this domain will be proxied for subdomain proxying. See [Documentation⁠](https://github.com/coder/code-server/blob/main/docs/guide.md#using-a-subdomain) |
+| `-e DEFAULT_WORKSPACE=/config/workspace` | If this optional variable is set, code-server will open this directory by default |
+|               `-v /config`               | Contains all relevant configuration files.                   |
+
+**Environment variables from files (Docker secrets)**
+
+You can set any environment variable from a file by using a special prepend `FILE__`.
+
+As an example:
+
+```bash
+-e FILE__MYVAR=/run/secrets/mysecretvariable
+```
+
+Will set the environment variable `MYVAR` based on the contents of the `/run/secrets/mysecretvariable` file.
+
+**Umask for running applications**
+
+For all of our images we provide the ability to override the default umask settings for services started within the containers using the optional `-e UMASK=022` setting. Keep in mind umask is not chmod it subtracts from permissions based on it's value it does not add. Please read up [here⁠](https://en.wikipedia.org/wiki/Umask) before asking for support.
+
+**User / Group Identifiers**
+
+When using volumes (`-v` flags), permissions issues can arise between the host OS and the container, we avoid this issue by allowing you to specify the user `PUID` and group `PGID`.
+
+Ensure any volume directories on the host are owned by the same user you specify and any permissions issues will vanish like magic.
+
+In this instance `PUID=1000` and `PGID=1000`, to find yours use `id your_user` as below:
+
+```bash
+id your_user
+```
+
+Example output:
+
+```text
+uid=1000(your_user) gid=1000(your_user) groups=1000(your_user)
+```
+
+**Docker Mods**
+
+[![Docker Mods](./img/yamlcolor=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&label=code-server&query=%2524.mods%5B%27code-server%27%5D.mod_count&url=https%253A%252F%252Fraw.githubusercontent.com%252Flinuxserver%252Fdocker-mods%252Fmaster%252Fmod-list.svg+xml)](https://mods.linuxserver.io/?mod=code-server)[![Docker Universal Mods](./img/yamlcolor=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&label=universal&query=%2524.mods%5B%27universal%27%5D.mod_count&url=https%253A%252F%252Fraw.githubusercontent.com%252Flinuxserver%252Fdocker-mods%252Fmaster%252Fmod-list.svg+xml)](https://mods.linuxserver.io/?mod=universal)
+
+We publish various [Docker Mods⁠](https://github.com/linuxserver/docker-mods) to enable additional functionality within the containers. The list of Mods available for this image (if any) as well as universal mods that can be applied to any one of our images can be accessed via the dynamic badges above.
+
+**Support Info**
+
+- Shell access whilst the container is running:
+
+  ```bash
+  docker exec -it code-server /bin/bash
+  ```
+
+- To monitor the logs of the container in realtime:
+
+  ```bash
+  docker logs -f code-server
+  ```
+
+- Container version number:
+
+  ```bash
+  docker inspect -f '{{ index .Config.Labels "build_version" }}' code-server
+  ```
+
+- Image version number:
+
+  ```bash
+  docker inspect -f '{{ index .Config.Labels "build_version" }}' lscr.io/linuxserver/code-server:latest
+  ```
+
+**Updating Info**
+
+Most of our images are static, versioned, and require an image update and container recreation to update the app inside. With some exceptions (noted in the relevant readme.md), we do not recommend or support updating apps inside the container. Please consult the [Application Setup](https://hub.docker.com/r/linuxserver/code-server#application-setup) section above to see if it is recommended for the image.
+
+Below are the instructions for updating containers:
+
+**Via Docker Compose**
+
+- Update images:
+
+  - All images:
+
+    ```bash
+    docker-compose pull
+    ```
+
+  - Single image:
+
+    ```bash
+    docker-compose pull code-server
+    ```
+
+- Update containers:
+
+  - All containers:
+
+    ```bash
+    docker-compose up -d
+    ```
+
+  - Single container:
+
+    ```bash
+    docker-compose up -d code-server
+    ```
+
+- You can also remove the old dangling images:
+
+  ```bash
+  docker image prune
+  ```
+
+**Via Docker Run**
+
+- Update the image:
+
+  ```bash
+  docker pull lscr.io/linuxserver/code-server:latest
+  ```
+
+- Stop the running container:
+
+  ```bash
+  docker stop code-server
+  ```
+
+- Delete the container:
+
+  ```bash
+  docker rm code-server
+  ```
+
+- Recreate a new container with the same docker run parameters as instructed above (if mapped correctly to a host folder, your `/config` folder and settings will be preserved)
+
+- You can also remove the old dangling images:
+
+  ```bash
+  docker image prune
+  ```
+
+**Image Update Notifications - Diun (Docker Image Update Notifier)**
+
+> [!TIP] We recommend [Diun⁠](https://crazymax.dev/diun/) for update notifications. Other tools that automatically update containers unattended are not recommended or supported.
+
+**Building locally**
+
+If you want to make local modifications to these images for development purposes or just to customize the logic:
+
+```bash
+git clone https://github.com/linuxserver/docker-code-server.git
+cd docker-code-server
+docker build \
+  --no-cache \
+  --pull \
+  -t lscr.io/linuxserver/code-server:latest .
+```
+
+The ARM variants can be built on x86_64 hardware and vice versa using `lscr.io/linuxserver/qemu-static`
+
+```bash
+docker run --rm --privileged lscr.io/linuxserver/qemu-static --reset
+```
+
+Once registered you can define the dockerfile to use with `-f Dockerfile.aarch64`.
 
 
 
@@ -676,10 +986,10 @@ sudo docker pull httpd
 
 ```shell
 #创建映射目录
-sudo mkdir -p /home/ubuntu/docker/httpd-default/htdocs
-sudo mkdir -p /home/ubuntu/docker/httpd-default/conf
-sudo touch /home/ubuntu/docker/httpd-default/conf/httpd.conf
-sudo mkdir -p /home/ubuntu/docker/httpd-default/logs
+sudo mkdir -p /mnt/sda1/docker/httpd-default/htdocs
+sudo mkdir -p /mnt/sda1/docker/httpd-default/conf
+sudo touch /mnt/sda1/docker/httpd-default/conf/httpd.conf
+sudo mkdir -p /mnt/sda1/docker/httpd-default/logs
 
 #编辑httpd.conf文件内容
 '''
@@ -1237,8 +1547,8 @@ SSLRandomSeed connect builtin
 
 
 #启动容器
-sudo docker run -itd --name httpd-default -p 8234:80 --restart=always -v /home/ubuntu/docker/httpd-default/htdocs:/usr/local/apache2/htdocs -v /home/ubuntu/docker/httpd-default/conf/httpd.conf:/usr/local/apache2/conf/httpd.conf -v /home/ubuntu/docker/httpd-default/logs:/usr/local/apache2/logs httpd
-#sudo docker run -itd --name httpd-default -p 8234:80 --restart=always -v /home/ubuntu/docker/httpd-default/htdocs:/usr/local/apache2/htdocs -v /home/ubuntu/docker/httpd-default/conf:/usr/local/apache2/conf -v /home/ubuntu/docker/httpd-default/logs:/usr/local/apache2/logs httpd
+sudo docker run -itd --name httpd-default -p 8234:80 --restart=always -v /mnt/sda1/docker/httpd-default/htdocs:/usr/local/apache2/htdocs -v /mnt/sda1/docker/httpd-default/conf/httpd.conf:/usr/local/apache2/conf/httpd.conf -v /mnt/sda1/docker/httpd-default/logs:/usr/local/apache2/logs httpd
+#sudo docker run -itd --name httpd-default -p 8234:80 --restart=always -v /mnt/sda1/docker/httpd-default/htdocs:/usr/local/apache2/htdocs -v /mnt/sda1/docker/httpd-default/conf:/usr/local/apache2/conf -v /mnt/sda1/docker/httpd-default/logs:/usr/local/apache2/logs httpd
 ```
 
 
@@ -1316,7 +1626,7 @@ htpasswd -m .htpasswd your_user_name
 # htaccess中，添加对应用户名，使用空格分隔
 require user admin your_user_name1 your_user_name2
 
-#若使用映射到主机的目录，则为： htpasswd -c /home/ubuntu/docker/httpd-default/htdocs/.htpasswd admin
+#若使用映射到主机的目录，则为： htpasswd -c /mnt/sda1/docker/httpd-default/htdocs/.htpasswd admin
 #输入密码
 # 或：/usr/local/apache2/bin/htpasswd -c /usr/local/apache2/htdocs/.htpasswd admin
 #退出容器
@@ -1371,11 +1681,11 @@ sudo docker pull deluan/navidrome:pr-2818
 
 ```bash
 #latest version
-sudo docker run -itd --name navidrome-default -v /mnt/toshiba/docker/httpd-default/htdocs:/music -v /mnt/toshiba/docker/navidrome-default:/data --restart=unless-stopped --user $(id -u):$(id -g) -p 8236:4533 -e ND_LOGLEVEL=info deluan/navidrome:latest
+sudo docker run -itd --name navidrome-default -v /mnt/toshiba/docker/httpd-default/htdocs:/music -v /mnt/toshiba/docker/navidrome-default:/data --restart=unless-stopped --user $(id -u):$(id -g) -p 48236:4533 -e ND_LOGLEVEL=info deluan/navidrome:latest
 
 
 #custom version, e.g.pr-2818
-sudo docker run -itd --name navidrome-default -v /mnt/toshiba/docker/httpd-default/htdocs:/music -v /mnt/toshiba/docker/navidrome-default:/data --restart=unless-stopped --user $(id -u):$(id -g) -p 8236:4533 -e ND_LOGLEVEL=info deluan/navidrome:pr-2818
+sudo docker run -itd --name navidrome-default -v /mnt/sda1/docker/httpd-default/htdocs:/music -v /mnt/sda1/docker/navidrome-default:/data --restart=unless-stopped --user $(id -u):$(id -g) -p 48236:4533 -e ND_LOGLEVEL=info deluan/navidrome:pr-2818
 ```
 
 
@@ -1389,6 +1699,29 @@ sudo mkdir -p /home/ubuntu/docker/jellyfin-default/movies
 
 sudo docker run -d --name=jellyfin-default -e PUID=1000 -e PGID=1000 -e TZ=Etc/UTC -p 8096:8096 -p 8920:8920 -p 7359:7359  -p 1900:1900 -v /home/ubuntu/docker/jellyfin-default/library:/config -v /home/ubuntu:/data/tvshows -v /home/ubuntu:/data/movies -v /:/data/root --restart unless-stopped  linuxserver/jellyfin:10.9.10
 
+#sudo docker run -d --name=jellyfin-default -e PUID=1000 -e PGID=1000 -e TZ=Etc/UTC -p 8096:8096 -p 8920:8920 -p 7359:7359  -p 1900:1900 -v /home/ubuntu/docker/jellyfin-default/library:/config -v /home/ubuntu/docker/jellyfin-default/tvseries:/data/tvshows -v /home/ubuntu/docker/jellyfin-default/movies:/data/movies --restart unless-stopped  lscr.io/linuxserver/jellyfin:10.9.10
+```
+
+
+
+
+
+# emby
+
+```bash
+sudo mkdir -p /home/ubuntu/docker/emby-default/library
+sudo mkdir -p /home/ubuntu/docker/emby-default/tvseries
+sudo mkdir -p /home/ubuntu/docker/emby-default/movies
+
+sudo docker run -d --name=emby-default -e PUID=0 -e PGID=0 -e TZ=Asia/Shanghai -p 48096:8096 -p 48920:8920 -p 47359:7359  -p 41900:1900 -v /home/ubuntu/docker/emby-default/library:/config -v /home/ubuntu/docker/emby-default/tvseries:/data/tvshows -v /home/ubuntu/docker/emby-default/movies:/data/movies -v /:/data/root --restart unless-stopped  lovechen/embyserver:4.7.14.0
+
+
+# 数据存储到/mnt/sda1
+sudo mkdir -p /mnt/sda1/docker/emby-default/library
+sudo mkdir -p /mnt/sda1/docker/emby-default/tvseries
+sudo mkdir -p /mnt/sda1/docker/emby-default/movies
+
+sudo docker run -d --name=emby-default -e PUID=0 -e PGID=0 -e TZ=Asia/Shanghai -p 48096:8096 -p 48920:8920 -p 47359:7359  -p 41900:1900 -v /mnt/sda1/docker/emby-default/library:/config -v /mnt/sda1/docker/emby-default/tvseries:/data/tvshows -v /mnt/sda1/docker/emby-default/movies:/data/movies -v /:/data/root --restart unless-stopped  lovechen/embyserver:4.7.14.0
 #sudo docker run -d --name=jellyfin-default -e PUID=1000 -e PGID=1000 -e TZ=Etc/UTC -p 8096:8096 -p 8920:8920 -p 7359:7359  -p 1900:1900 -v /home/ubuntu/docker/jellyfin-default/library:/config -v /home/ubuntu/docker/jellyfin-default/tvseries:/data/tvshows -v /home/ubuntu/docker/jellyfin-default/movies:/data/movies --restart unless-stopped  lscr.io/linuxserver/jellyfin:10.9.10
 ```
 
@@ -1482,6 +1815,12 @@ exit;
 sudo mkdir -p /home/ubuntu/docker/nextcloud-default/nextcloud/html
 #启动容器
 sudo docker run -itd --restart always --name nextcloud-default --link mysql5-default:db -p 8235:80 -v /home/ubuntu/docker/nextcloud-default/nextcloud/html:/var/www/html nextcloud
+
+#数据和配置分离
+mkdir -p /mnt/sda1/docker/nextcloud-default/html/data
+mkdir -p /home/ubuntu/docker/nextcloud-default/html
+#启动容器
+docker run -itd --restart unless-stopped --name nextcloud-default --link mysql-default:db -p 48235:80 -v /mnt/sda1/docker/nextcloud-default/html/data:/var/www/html/data -v /home/ubuntu/docker/nextcloud-default/html:/var/www/html nextcloud:30.0.5
 ```
 
 运行后，配置时数据库名可任意（最好写和上述匹配的mysql5-default），主机名称和端口号写db。
@@ -1491,7 +1830,7 @@ sudo docker run -itd --restart always --name nextcloud-default --link mysql5-def
 解决办法：config.php 添加 ‘check_data_directory_permissions’ => false
 
 ```php
-'check_data_directory_permissions' => false
+'check_data_directory_permissions' => false,
 ```
 
 ## Nextcloud 通过不被信任的域名访问 动态IP解决方案，允许所有IP访问
@@ -1519,7 +1858,146 @@ sudo docker run -itd --restart always --name nextcloud-default --link mysql5-def
 
 解释：$_SERVER[‘SERVER_NAME’] 为获得当前访问的域名或IP，最初只设置了server_name，后来在查看cron任务时，发现在cli模式下是无法获得的，所以增加了cli模式判断，cli模式直接给个本地IP忽悠程序，正常模式将当前访问的域名或IP动态的添加的信任的域名中。
 
+### 修改注册时的默认语言和时区
 
+ 在`/home/nextcloud/config/config.php`中追加以下内容，实现用户注册时自动设置语言和区域：
+
+```ini
+'default_language' => 'zh_CN',
+'default_locale' => 'zh',
+```
+
+ 重启`nc`服务。
+
+
+
+
+
+# Patched OnlyOffice
+
+```bash
+mkdir -p /mnt/data/docker/oo-ce-docker-license-default/logs
+mkdir -p /mnt/data/docker/oo-ce-docker-license-default/data
+
+docker run --name=oo-ce-docker-license-default -itd -p 8248:80 -p 8249:443 -v /mnt/data/docker/oo-ce-docker-license-default/logs:/var/log/onlyoffice -v /mnt/data/docker/oo-ce-docker-license-default/data:/var/www/onlyoffice/Data  alehoho/oo-ce-docker-license:6.3.1.32
+```
+
+
+
+# OnlyOffice魔改版
+
+```bash
+mkdir -p /mnt/sda1/docker/onlyoffice-frost1123-default/logs
+mkdir -p /mnt/sda1/docker/onlyoffice-frost1123-default/data
+
+docker run --name=onlyoffice-frost1123-default -itd -p 48250:80 -p 48251:443 -e JWT_ENABLED=true -v /mnt/sda1/docker/onlyoffice-frost1123-default/logs:/var/log/onlyoffice -v /mnt/sda1/docker/onlyoffice-frost1123-default/data:/var/www/onlyoffice/Data frost1123/office:7.3.3.40
+```
+
+然后访问8250，根据命令查看JWT_TOKEN。
+
+或者加参数`-e JWT_SECRET=`，手动指定密钥。
+
+# OnlyOffice
+
+```bash
+mkdir -p /mnt/data/docker/onlyoffice-documentserver-default/logs
+mkdir -p /mnt/data/docker/onlyoffice-documentserver-default/data
+
+sudo docker run -i -t -d --name=onlyoffice-documentserver-default -p 8246:80 -p 8247:443 -v /mnt/data/docker/onlyoffice-documentserver-default/logs:/var/log/onlyoffice  -v /mnt/data/docker/onlyoffice-documentserver-default/data:/var/www/onlyoffice/Data  onlyoffice/documentserver:8.3.1.1
+```
+
+## HTTPS
+
+Running ONLYOFFICE Document Server using HTTPS
+
+```bash
+#sudo docker run -i -t -d -p 443:443 -v /app/onlyoffice/DocumentServer/data:/var/www/onlyoffice/Data  onlyoffice/documentserver
+```
+
+Access to the onlyoffice application can be secured using SSL so as to prevent unauthorized access. While a CA certified SSL certificate allows for verification of trust via the CA, a self signed certificates can also provide an equal level of trust verification as long as each client takes some additional steps to verify the identity of your website. Below the instructions on achieving this are provided.
+
+To secure the application via SSL basically two things are needed:
+
+- **Private key (.key)**
+- **SSL certificate (.crt)**
+
+So you need to create and install the following files:
+
+```bash
+    #/app/onlyoffice/DocumentServer/data/certs/onlyoffice.key
+    #/app/onlyoffice/DocumentServer/data/certs/onlyoffice.crt
+```
+
+When using CA certified certificates, these files are provided to you by the CA. When using self-signed certificates you need to generate these files yourself. Skip the following section if you are have CA certified SSL certificates.
+
+**Generation of Self Signed Certificates**
+
+Generation of self-signed SSL certificates involves a simple 3 step procedure.
+
+**STEP 1**: Create the server private key
+
+```bash
+openssl genrsa -out onlyoffice.key 2048
+```
+
+**STEP 2**: Create the certificate signing request (CSR)
+
+```bash
+openssl req -new -key onlyoffice.key -out onlyoffice.csr
+```
+
+**STEP 3**: Sign the certificate using the private key and CSR
+
+```bash
+openssl x509 -req -days 365 -in onlyoffice.csr -signkey onlyoffice.key -out onlyoffice.crt
+```
+
+You have now generated an SSL certificate that's valid for 365 days.
+
+**Strengthening the server security**
+
+This section provides you with instructions to [strengthen your server security⁠](https://raymii.org/s/tutorials/Strong_SSL_Security_On_nginx.html). To achieve this you need to generate stronger DHE parameters.
+
+```bash
+openssl dhparam -out dhparam.pem 2048
+```
+
+**Installation of the SSL Certificates**
+
+Out of the four files generated above, you need to install the `onlyoffice.key`, `onlyoffice.crt` and `dhparam.pem` files at the onlyoffice server. The CSR file is not needed, but do make sure you safely backup the file (in case you ever need it again).
+
+The default path that the onlyoffice application is configured to look for the SSL certificates is at `/var/www/onlyoffice/Data/certs`, this can however be changed using the `SSL_KEY_PATH`, `SSL_CERTIFICATE_PATH` and `SSL_DHPARAM_PATH` configuration options.
+
+The `/var/www/onlyoffice/Data/` path is the path of the data store, which means that you have to create a folder named certs inside `/app/onlyoffice/DocumentServer/data/` and copy the files into it and as a measure of security you will update the permission on the `onlyoffice.key` file to only be readable by the owner.
+
+```bash
+#mkdir -p /app/onlyoffice/DocumentServer/data/certs
+#cp onlyoffice.key /app/onlyoffice/DocumentServer/data/certs/
+#cp onlyoffice.crt /app/onlyoffice/DocumentServer/data/certs/
+#cp dhparam.pem /app/onlyoffice/DocumentServer/data/certs/
+#chmod 400 /app/onlyoffice/DocumentServer/data/certs/onlyoffice.key
+
+mkdir -p /mnt/data/docker/onlyoffice-documentserver-default/data/certs
+cp onlyoffice.key /mnt/data/docker/onlyoffice-documentserver-default/data/certs/
+cp onlyoffice.crt /mnt/data/docker/onlyoffice-documentserver-default/data/certs/
+cp dhparam.pem /mnt/data/docker/onlyoffice-documentserver-default/data/certs/
+chmod 400 /mnt/data/docker/onlyoffice-documentserver-default/data/certs/onlyoffice.key
+```
+
+You are now just one step away from having our application secured.
+
+**Available Configuration Parameters**
+
+*Please refer the docker run command options for the `--env-file` flag where you can specify all required environment variables in a single file. This will save you from writing a potentially long docker run command.*
+
+Below is the complete list of parameters that can be set using environment variables.
+
+- **ONLYOFFICE_HTTPS_HSTS_ENABLED**: Advanced configuration option for turning off the HSTS configuration. Applicable only when SSL is in use. Defaults to `true`.
+- **ONLYOFFICE_HTTPS_HSTS_MAXAGE**: Advanced configuration option for setting the HSTS max-age in the onlyoffice nginx vHost configuration. Applicable only when SSL is in use. Defaults to `31536000`.
+- **SSL_CERTIFICATE_PATH**: The path to the SSL certificate to use. Defaults to `/var/www/onlyoffice/Data/certs/onlyoffice.crt`.
+- **SSL_KEY_PATH**: The path to the SSL certificate's private key. Defaults to `/var/www/onlyoffice/Data/certs/onlyoffice.key`.
+- **SSL_DHPARAM_PATH**: The path to the Diffie-Hellman parameter. Defaults to `/var/www/onlyoffice/Data/certs/dhparam.pem`.
+- **SSL_VERIFY_CLIENT**: Enable verification of client certificates using the `CA_CERTIFICATES_PATH` file. Defaults to `false`
 
 
 
@@ -1622,7 +2100,7 @@ sudo docker run -itd --user root -p 9003:8888 -v /home/ubuntu/docker/jupyter-bas
 #此命令中密码为abcd1234
 ```
 
-以下是映射到端口8765，默认密码a0b0c1d2：
+以下是映射到端口8765，默认密码abcd123456：
 
 ```bash
 sudo mkdir -p /home/ubuntu/docker/jupyter-base-notebook-default
@@ -1638,6 +2116,350 @@ sudo docker run -itd --user root -p 8765:8888 -v /home/ubuntu/docker/jupyter-bas
 ```bash
 pip install jupyterlab-language-pack-zh-CN
 ```
+
+
+
+# jupyterhub/jupyterhub
+
+https://hub.docker.com/r/jupyterhub/jupyterhub
+
+A starter [**docker image for JupyterHub**⁠](https://quay.io/repository/jupyterhub/jupyterhub) gives a baseline deployment of JupyterHub using Docker.
+
+**Important:** This `quay.io/jupyterhub/jupyterhub` image contains only the Hub itself, with no configuration. In general, one needs to make a derivative image, with at least a `jupyterhub_config.py` setting up an Authenticator and/or a Spawner. To run the single-user servers, which may be on the same system as the Hub or not, Jupyter Notebook version 4 or greater must be installed.
+
+The JupyterHub docker image can be started with the following command:
+
+```bash
+docker run -p 8000:8000 -d --name jupyterhub quay.io/jupyterhub/jupyterhub jupyterhub
+```
+
+This command will create a container named `jupyterhub` that you can **stop and resume** with `docker stop/start`.
+
+The Hub service will be listening on all interfaces at port 8000, which makes this a good choice for **testing JupyterHub on your desktop or laptop**.
+
+If you want to run docker on a computer that has a public IP then you should (as in MUST) **secure it with ssl** by adding ssl options to your docker configuration or by using an ssl enabled proxy.
+
+[Mounting volumes⁠](https://docs.docker.com/engine/admin/volumes/volumes/) will allow you to **store data outside the docker image (host system) so it will be persistent**, even when you start a new image.
+
+The command `docker exec -it jupyterhub bash` will spawn a root shell in your docker container. You can **use the root shell to create system users in the container**. These accounts will be used for authentication in JupyterHub's default configuration.
+
+
+
+## Docker中安装Jupyterhub实现多用户使用
+
+https://blog.csdn.net/qq_44809829/article/details/139441011
+
+先创建容器：
+
+```shell
+sudo -s
+mkdir -p /home/ubuntu/docker/jupyterhub-default/home
+mkdir -p /home/ubuntu/docker/jupyterhub-default/jupyterhub
+
+docker run -p 65305:8000 -itd --name jupyterhub-default -v /home/ubuntu/docker/jupyterhub-default/jupyterhub:/srv/jupyterhub -v /home/ubuntu/docker/jupyterhub-default/home:/home --restart=unless-stopped quay.io/jupyterhub/jupyterhub:5.2.1
+```
+
+(
+
+**Generate a default config file**
+
+On startup, JupyterHub will look by default for a configuration file, `jupyterhub_config.py`, in the current working directory.
+
+To generate a default config file, `jupyterhub_config.py`:
+
+```
+jupyterhub --generate-config
+```
+
+This default `jupyterhub_config.py` file contains comments and guidance for all configuration variables and their default values. We recommend storing configuration files in the standard UNIX filesystem location, i.e. `/etc/jupyterhub`.
+
+**Start with a specific config file**
+
+You can load a specific config file and start JupyterHub using:
+
+```shell
+#jupyterhub -f /path/to/jupyterhub_config.py
+
+jupyterhub -f /srv/jupyterhub/jupyterhub_config.py
+```
+
+If you have stored your configuration file in the recommended UNIX filesystem location, `/etc/jupyterhub`, the following command will start JupyterHub using the configuration file:
+
+```shell
+jupyterhub -f /etc/jupyterhub/jupyterhub_config.py
+```
+
+The IPython documentation provides additional information on the [config system](https://ipython.readthedocs.io/en/stable/development/config.html) that Jupyter uses.
+
+)
+
+**2. 进入容器**
+
+```shell
+docker exec -it jupyterhub-default /bin/bash  
+```
+
+**3. 环境配置**
+
+```shell
+apt-get update &&
+apt-get install -y python3-venv vim &&
+jupyterhub --generate-config &&
+chmod 777 /home
+```
+
+**4. 用户配置**
+
+```shell
+useradd admin
+passwd admin
+chmod 777 /home
+su admin
+python3 -m pip install jupyterlab notebook -i https://pypi.tuna.tsinghua.edu.cn/simple
+python3 -m pip install jupyterhub-nativeauthenticator -i https://pypi.tuna.tsinghua.edu.cn/simple
+
+exit
+```
+
+**5.编辑[配置文件](https://so.csdn.net/so/search?q=配置文件&spm=1001.2101.3001.7020)**
+
+配置内容[复制到](https://so.csdn.net/so/search?q=复制到&spm=1001.2101.3001.7020)配置文件里面即可
+
+```shell
+# 允许所有可以成功验证对 Hub 访问权限的用户
+c.Authenticator.allow_all = True
+c.Authenticator.allow_existing_users = True
+
+# 设置管理员用户
+c.Authenticator.admin_users = {'admin'}
+
+# 允许 root 用户启动 JupyterLab
+c.Spawner.args = ['--allow-root', '--NotebookApp.terminals_enabled=False']
+
+# 设置单用户服务器的监听 IP 地址
+c.Spawner.ip = '0.0.0.0'
+
+# 设置默认启动 URL 为 JupyterLab
+c.Spawner.default_url = '/lab'
+
+# 设置单用户服务器的工作目录
+c.Spawner.notebook_dir = '~'
+
+# 设置启动命令为 JupyterLab
+c.Spawner.cmd = ['jupyter-labhub']
+
+# 允许创建系统用户
+c.LocalAuthenticator.create_system_users = True
+
+# 配置使用 NativeAuthenticator
+c.JupyterHub.authenticator_class = 'nativeauthenticator.NativeAuthenticator'
+
+# 配置用户的工作目录
+c.LocalProcessSpawner.notebook_dir = '/home/{username}/notebooks'
+
+# 导入所需模块
+import os
+import subprocess
+
+# 定义 pre_spawn_hook 函数，用于在用户服务器启动之前创建用户目录
+def create_user_directory(spawner):
+    username = spawner.user.name
+    user_home = f"/home/{username}"
+    user_notebook_dir = os.path.join(user_home, "notebooks")
+
+    # 检查用户是否存在
+    try:
+        subprocess.check_call(['id', username])
+    except subprocess.CalledProcessError:
+        # 用户不存在，创建用户
+        subprocess.check_call(['useradd', '-m', username])
+
+    # 创建用户的 notebook 目录
+    if not os.path.exists(user_notebook_dir):
+        os.makedirs(user_notebook_dir)
+        subprocess.check_call(['chown', '-R', f'{username}:{username}', user_home])
+
+# 配置使用 LocalProcessSpawner
+c.JupyterHub.spawner_class = 'jupyterhub.spawner.LocalProcessSpawner'
+
+# 配置 pre_spawn_hook
+c.Spawner.pre_spawn_hook = create_user_directory
+
+# 配置自定义模板路径
+import nativeauthenticator
+c.JupyterHub.template_paths = [f"{os.path.dirname(nativeauthenticator.__file__)}/templates/"]
+
+# 配置服务，如 idle-culler
+c.JupyterHub.services = [
+    {
+        'name': 'idle-culler',
+        'command': ['python3', '-m', 'jupyterhub_idle_culler', '--timeout=3600'],
+        'admin': True  # 1.5.0 需要服务管理员权限
+    }
+]
+```
+
+
+
+
+
+
+
+
+
+
+
+# jupyter notebook
+
+## jupyter/nbviewer
+
+Jupyter Notebook Viewer
+
+https://hub.docker.com/r/jupyter/nbviewer
+
+**Quick Run**
+
+If you have `docker` installed, you can pull and run the currently built version of the Docker container by
+
+```shell
+$ docker pull jupyter/nbviewer
+$ docker run -p 8080:8080 jupyter/nbviewer
+```
+
+It automatically gets built with each push to `master`, so you'll always be able to get the freshest copy.
+
+For speed and friendliness to GitHub, be sure to set `GITHUB_OAUTH_KEY` and `GITHUB_OAUTH_SECRET`:
+
+```shell
+$ docker run -p 8080:8080 -e 'GITHUB_OAUTH_KEY=YOURKEY' \
+                          -e 'GITHUB_OAUTH_SECRET=YOURSECRET' \
+                          jupyter/nbviewer
+```
+
+Or to use your GitHub personal access token, you can just set `GITHUB_API_TOKEN`.
+
+**GitHub Enterprise**
+
+To use nbviewer on your own GitHub Enterprise instance you need to set `GITHUB_API_URL`. The relevant [API endpoints for GitHub Enterprise⁠](https://developer.github.com/v3/enterprise/) are prefixed with `http://hostname/api/v3`. You must also specify your `OAUTH` or `API_TOKEN` as explained above. For example:
+
+```shell
+$ docker run -p 8080:8080 -e 'GITHUB_OAUTH_KEY=YOURKEY' \
+                          -e 'GITHUB_OAUTH_SECRET=YOURSECRET' \
+                          -e 'GITHUB_API_URL=https://ghe.example.com/api/v3/' \
+                          jupyter/nbviewer
+```
+
+With this configured all GitHub API requests will go to your Enterprise instance so you can view all of your internal notebooks.
+
+**Base URL**
+
+If the environment variable `JUPYTERHUB_SERVICE_PREFIX` is specified, then NBViewer *always* uses the value of this environment variable as the base URL.
+
+In the case that there is no value for `JUPYTERHUB_SERVICE_PREFIX`, then as a backup the value of the `--base-url` flag passed to the `python -m nbviewer` command on the command line will be used as the base URL.
+
+**Local Development**
+
+**With Docker**
+
+You can build a docker image that uses your local branch.
+
+**Build**
+
+```shell
+$ cd <path to repo>
+$ docker build -t nbviewer .
+```
+
+**Run**
+
+```shell
+$ cd <path to repo>
+$ docker run -p 8080:8080 nbviewer
+```
+
+**With Docker Compose**
+
+The Notebook Viewer uses `memcached` in production. To locally try out this setup, a [docker-compose⁠](https://docs.docker.com/compose/) configuration is provided to easily start/stop the `nbviewer` and `memcached` containers together from your current branch. You will need to install `docker` prior to this.
+
+**Run**
+
+```shell
+$ cd <path to repo>
+$ pip install docker-compose
+$ docker-compose up
+```
+
+**Local Installation**
+
+The Notebook Viewer requires several binary packages to be installed on your system. The primary ones are `libmemcached-dev libcurl4-openssl-dev pandoc libevent-dev libgnutls28-dev`. Package names may differ on your system, see [salt-states⁠](https://github.com/rgbkrk/salt-states-nbviewer/blob/master/nbviewer/init.sls) for more details.
+
+If they are installed, you can install the required Python packages via pip.
+
+```shell
+$ cd <path to repo>
+$ pip install -r requirements.txt
+```
+
+**Static Assets**
+
+Static assets are maintained with `bower` and `less` (which require having `npm` installed), and the `invoke` python module.
+
+```shell
+$ cd <path to repo>
+$ pip install -r requirements-dev.txt
+$ npm install
+$ invoke bower
+$ invoke less [-d]
+```
+
+This will download the relevant assets into `nbviewer/static/components` and create the built assets in `nbviewer/static/build`.
+
+Pass `-d` or `--debug` to `invoke less` to create a CSS sourcemap, useful for debugging.
+
+**Running Locally**
+
+```shell
+$ cd <path to repo>
+$ python -m nbviewer --debug --no-cache
+```
+
+This will automatically relaunch the server if a change is detected on a python file, and not cache any results. You can then just do the modifications you like to the source code and/or the templates then refresh the pages.
+
+## jupyter/pyspark-notebook
+
+Jupyter Notebook Python, Spark Stack
+
+https://hub.docker.com/r/jupyter/pyspark-notebook
+
+DigestOS|ARCH|Compressed size|tags
+
+3159c3aa2e9a|linux/amd64|1.68 GB|x86_64-ubuntu-22.04, x86_64-spark-3.5.0, x86_64-python-3.11.6, x86_64-python-3.11, x86_64-notebook-7.0.6, x86_64-lab-4.0.7, x86_64-java-17.0.8.1, x86_64-hub-4.0.2, x86_64-hadoop-3, x86_64-7cce21edff82, x86_64-2023-10-20
+
+## jupyter/scipy-notebook
+
+Jupyter Notebook Scientific Python Stack
+
+https://hub.docker.com/r/jupyter/scipy-notebook
+
+## jupyter/datascience-notebook
+
+Jupyter Notebook Data Science Stack
+
+https://hub.docker.com/r/jupyter/datascience-notebook
+
+## jupyter/minimal-notebook
+
+Minimal Jupyter Notebook Stack
+
+https://hub.docker.com/r/jupyter/minimal-notebook
+
+## jupyter/base-notebook
+
+Base Jupyter Notebook Stack
+
+https://hub.docker.com/r/jupyter/base-notebook
+
+
 
 
 
@@ -1720,9 +2542,9 @@ services:
 **docker cli ([click here for more info](https://docs.docker.com/engine/reference/commandline/cli/))**
 
 ```bash
-sudo mkdir -p /mnt/toshiba/docker/calibre-web-default/data
-sudo mkdir -p /mnt/toshiba/docker/calibre-web-default/library
-sudo docker run -d --name=calibre-web-default -e PUID=1000 -e PGID=1000 -e TZ=Etc/UTC -e DOCKER_MODS=linuxserver/mods:universal-calibre `#optional` -e OAUTHLIB_RELAX_TOKEN_SCOPE=1 `#optional` -p 8239:8083 -v /mnt/toshiba/docker/calibre-web-default/data:/config -v /mnt/toshiba/docker/calibre-web-default/library:/books --restart unless-stopped linuxserver/calibre-web:0.6.21
+sudo mkdir -p /mnt/sda1/docker/calibre-web-default/data
+sudo mkdir -p /mnt/sda1/docker/calibre-web-default/library
+sudo docker run -d --name=calibre-web-default -e PUID=0 -e PGID=0 -e TZ=Asia/Shanghai -e DOCKER_MODS=linuxserver/mods:universal-calibre -e OAUTHLIB_RELAX_TOKEN_SCOPE=1 -p 48239:8083 -v /mnt/sda1/docker/calibre-web-default/data:/config -v /mnt/sda1/docker/calibre-web-default/library:/books --restart unless-stopped linuxserver/calibre-web:0.6.21
 ```
 
 **Parameters**
@@ -1873,7 +2695,7 @@ sudo docker-compose rm
 
 **(不推荐使用这里的步骤，请参阅最顶部的docker和docker-compose安装教程)**
 
-### 1.1、安装docker
+**1.1、安装docker**
 
 (如果机器中已经安装过docker，可以直接跳过)
 
@@ -1952,7 +2774,7 @@ sudo sudo vi /etc/hosts
 192.30.255.112  github.com git
 ```
 
-### 1.2、安装docker-Compose
+**1.2、安装docker-Compose**
 
 (如果已经安装过docker-compose，可以直接跳过)
 
@@ -1968,7 +2790,7 @@ sudo docker-compose --version
 
 先创建一个文件夹用来存放配置文件，集群的安装路径也会是这个文件夹，所以想好放在哪里比较好，我的路径是：/home/ubuntu/docker/sparkcluster_hdfs/
 
-### 2.1、编辑hadoop.env配置文件
+**2.1、编辑hadoop.env配置文件**
 
 进入你创建的目录编辑hadoop.env配置文件，我这里是/home/sparkcluster_hdfs目录：
 
@@ -2006,7 +2828,7 @@ YARN_CONF_yarn_resourcemanager_scheduler_address=resourcemanager:8030
 YARN_CONF_yarn_resourcemanager_resource___tracker_address=resourcemanager:8031
 ```
 
-### 2.2、编辑docker-compose.yml编排配置文件
+**2.2、编辑docker-compose.yml编排配置文件**
 
 还是在/home/sparkcluster_hdfs目录编辑docker-compose.yml编排配置文件：
 
@@ -2019,7 +2841,7 @@ sudo vi docker-compose.yml
 复制以下内容进去保存
 注意：spark的worker数量，以及worker内存的分配，都可以通过修改docker-compose.yml文件来调整。
 
-#### 1、此为（3datanode+6worker）的yml文件示例
+**1、此为（3datanode+6worker）的yml文件示例**
 
 ```yaml
 version: "2.2"
@@ -2292,7 +3114,7 @@ services:
       - ./data/worker6:/tmp/data
 ```
 
-#### 2、此为（2datanode+3worker）的yml文件示例
+**2、此为（2datanode+3worker）的yml文件示例**
 
 ```yml
 version: "2.2"
@@ -2475,7 +3297,7 @@ services:
 
 ```
 
-### 2.3、执行docker-compose命令，一键搭建集群
+**2.3、执行docker-compose命令，一键搭建集群**
 
 还是在/home/sparkcluster_hdfs目录下，执行命令：
 
@@ -2485,7 +3307,7 @@ sudo docker-compose up -d
 
 接下来静候命令执行完成，整个spark和hdfs集群环境就搭建好了。
 
-### 2.4、查看集群环境
+**2.4、查看集群环境**
 
 在/home/sparkcluster_hdfs目录查看容器情况：
 
@@ -2534,7 +3356,7 @@ docker 本身对容器的启动是不区分顺序的，也就是你可以认为 
 
 写一个系统服务（将 spark和hdfs集群 配置为 systemd 的 service），将 docker-compose up -d 纳入启动命令中，将 docker-compose stop纳入停止命令中，这样将服务配置为随系统启动即可。
 
-### 3.1、自定义系统服务
+**3.1、自定义系统服务**
 
 进入到/usr/lib/systemd/system/目录，并编辑一个spark和hdfs集群的服务配置文件（这里我把文件命名为：sparkcluster_hdfs.service）:
 
@@ -2569,7 +3391,7 @@ WantedBy=multi-user.target
 这里面的路径只能是绝对路径！！！
 docker-compose 的绝对路径，可以通过命令 which docker-compose 查看。
 
-### 3.2、设置服务为随系统自启
+**3.2、设置服务为随系统自启**
 
 设置开机自启
 
@@ -2597,7 +3419,246 @@ sudo systemctl start sparkcluster_hdfs
 
 
 
+# nginx
+
+```shell
+mkdir -p /home/ubuntu/docker/nginx-80/conf
+mkdir -p /home/ubuntu/docker/nginx-80/conf/conf.d
+mkdir -p /home/ubuntu/docker/nginx-80/log
+mkdir -p /home/ubuntu/docker/nginx-80/html
+#touch /mnt/data/docker/nginx-80/conf/nginx.conf
+
+
+docker run -p 80:80 -p 443:443 --name nginx-80 -v /home/ubuntu/docker/nginx-80/conf/nginx.conf:/etc/nginx/nginx.conf -v /home/ubuntu/docker/nginx-80/conf/conf.d:/etc/nginx/conf.d -v /home/ubuntu/docker/nginx-80/log:/var/log/nginx -v /home/ubuntu/docker/nginx-80/html:/usr/share/nginx/html -itd nginx:latest
+```
+
+## Nginx配置负载均衡（反向代理）
+
+```nginx
+upstream myapp {
+	server localhost:48234;
+	server localhost:48235;
+	server localhost:48236;
+}
+
+
+server {
+    listen       80;
+    server_name  sblpzx.asia;
+
+    location /myapp {
+   		proxy_pass http://myapp;
+    }
+}
+
+```
+
+
+
+
+
+
+
+## [Nginx 配置反向代理](https://www.cnblogs.com/zhengqing/p/11256417.html)
+
+
+
+**反向代理作用**
+
+隐藏服务器信息 -> 保证内网的安全，通常将反向代理作为公网访问地址，web服务器是内网，即通过nginx配置外网访问web服务器内网
+
+**举例**
+
+比如小编的码云个人博客地址为：http://zhengqingya.gitee.io/blog/ ，现在小编想通过自己的服务器地址 http://www.zhengqing520.com/blog/ 来访问到码云上面个人博客的地址，并且访问地址是自己的服务器ip或者域名地址，这时候我们就可以通过Nginx配置反向代理来实现 ~
+
+我们可以通过 **proxy_pass** 来配置
+
+**（1）找到nginx配置文件 nginx.conf**
+
+**温馨小提示**
+
+小编是通过docker拉取的nginx，默认配置文件是nginx.conf中引入包含的default.conf文件
+也就是说nginx.conf配置文件中有如下一个配置
+
+```nginx
+include /etc/nginx/conf.d/*.conf;
+```
+
+**（2）修改配置 -> 实现反向代理**
+
+> 注：这里小编将我的default.conf配置文件中的内容提到nginx.conf配置文件中来实现
+> 即注释 include /etc/nginx/conf.d/*.conf;
+
+**简单配置**
+
+比如 www.zhengqing520.com 转发到 [http://zhengqingya.gitee.io](http://zhengqingya.gitee.io/)
+
+```nginx
+server {
+    listen       80;
+    server_name  www.zhengqing520.com;# 服务器地址或绑定域名
+
+    location / { # 访问80端口后的所有路径都转发到 proxy_pass 配置的ip中
+        root   /usr/share/nginx/html;
+        index  index.html index.htm;
+   		proxy_pass http://zhengqingya.gitee.io; # 配置反向代理的ip地址和端口号 【注：url地址需加上http:// 或 https://】
+    }
+}
+```
+
+**复杂配置**
+
+根据不同的后缀名访问不同的服务器地址
+
+1. www.zhengqing520.com/api 转发到 http://www.zhengqing520.com:9528/api/
+2. www.zhengqing520.com/blog/ 转发到 http://zhengqingya.gitee.io/blog/
+
+```nginx
+server {
+    listen       80;
+    server_name  www.zhengqing520.com;# 服务器地址或绑定域名
+ 
+    location ^~ /api {  # ^~/api 表示匹配前缀为api的请求
+        proxy_pass  http://www.zhengqing520.com:9528/api/;  # 注：proxy_pass的结尾有/， -> 效果：会在请求时将/api/*后面的路径直接拼接到后面
+  
+        # proxy_set_header作用：设置发送到后端服务器(上面proxy_pass)的请求头值  
+            # 【当Host设置为 $http_host 时，则不改变请求头的值;
+            #   当Host设置为 $proxy_host 时，则会重新设置请求头中的Host信息;
+            #   当为$host变量时，它的值在请求包含Host请求头时为Host字段的值，在请求未携带Host请求头时为虚拟主机的主域名;
+            #   当为$host:$proxy_port时，即携带端口发送 ex: $host:8080 】
+        proxy_set_header Host $host; 
+  
+        proxy_set_header X-Real-IP $remote_addr; # 在web服务器端获得用户的真实ip 需配置条件①    【 $remote_addr值 = 用户ip 】
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;# 在web服务器端获得用户的真实ip 需配置条件②
+        proxy_set_header REMOTE-HOST $remote_addr;
+        # proxy_set_header X-Forwarded-For $http_x_forwarded_for; # $http_x_forwarded_for变量 = X-Forwarded-For变量
+    }
+
+    location ^~ /blog/ { # ^~/blog/ 表示匹配前缀为blog/后的请求
+        proxy_pass  http://zhengqingya.gitee.io/blog/; 
+  
+        proxy_set_header Host $proxy_host; # 改变请求头值 -> 转发到码云才会成功
+        proxy_set_header  X-Real-IP  $remote_addr;
+        proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-NginX-Proxy true;
+    }
+}
+```
+
+**三、总结**
+
+这里再给出一下小编nginx配置文件中的全部内容以供参考
+
+```nginx
+user  nginx;
+worker_processes  1;
+
+error_log  /var/log/nginx/error.log warn;
+pid        /var/run/nginx.pid;
+
+events {
+    worker_connections  1024;
+}
+
+http {
+    include       /etc/nginx/mime.types;
+    default_type  application/octet-stream;
+
+    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                      '$status $body_bytes_sent "$http_referer" '
+                      '"$http_user_agent" "$http_x_forwarded_for"';
+
+    access_log  /var/log/nginx/access.log  main;
+
+    sendfile        on;
+    #tcp_nopush     on;
+
+    keepalive_timeout  65;
+
+    #gzip  on;
+
+    # include /etc/nginx/conf.d/*.conf; # 引入default.conf配置文件
+  
+    server {
+        listen       80;
+        server_name  www.zhengqing520.com;# 服务器地址或绑定域名
+
+        #charset koi8-r;
+        #access_log  /var/log/nginx/host.access.log  main;
+        
+        # start ---------------------------------------------------------------------------------------------
+    
+        location / {
+            root   /usr/share/nginx/html;
+            try_files $uri $uri/ @router;
+            index  index.html index.htm;
+            # proxy_pass http://zhengqingya.gitee.io; # 代理的ip地址和端口号
+            # proxy_connect_timeout 600; #代理的连接超时时间（单位：毫秒）
+            # proxy_read_timeout 600; #代理的读取资源超时时间（单位：毫秒）
+        } 
+
+        location @router {
+            rewrite ^.*$ /index.html last;  
+        }
+
+        location ^~ /api {  # ^~/api/表示匹配前缀为api的请求
+            proxy_pass  http://www.zhengqing520.com:9528/api/;  # 注：proxy_pass的结尾有/， -> 效果：会在请求时将/api/*后面的路径直接拼接到后面
+      
+            # proxy_set_header作用：设置发送到后端服务器(上面proxy_pass)的请求头值  
+                # 【当Host设置为 $http_host 时，则不改变请求头的值;
+                #   当Host设置为 $proxy_host 时，则会重新设置请求头中的Host信息;
+                #   当为$host变量时，它的值在请求包含Host请求头时为Host字段的值，在请求未携带Host请求头时为虚拟主机的主域名;
+                #   当为$host:$proxy_port时，即携带端口发送 ex: $host:8080 】
+            proxy_set_header Host $host; 
+      
+            proxy_set_header X-Real-IP $remote_addr; # 在web服务器端获得用户的真实ip 需配置条件①    【 $remote_addr值 = 用户ip 】
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;# 在web服务器端获得用户的真实ip 需配置条件②
+            proxy_set_header REMOTE-HOST $remote_addr;
+            # proxy_set_header X-Forwarded-For $http_x_forwarded_for; # $http_x_forwarded_for变量 = X-Forwarded-For变量
+        }
+    
+        location ^~ /blog/ { # ^~/blog/ 表示匹配前缀为blog/后的请求
+            proxy_pass  http://zhengqingya.gitee.io/blog/;   
+      
+            proxy_set_header Host $proxy_host; # 改变请求头值 -> 转发到码云才会成功
+            proxy_set_header  X-Real-IP  $remote_addr;
+            proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-NginX-Proxy true;
+        }
+       
+        # end ---------------------------------------------------------------------------------------------
+
+        #error_page  404              /404.html;
+
+        # redirect server error pages to the static page /50x.html
+        #
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html {
+            root   /usr/share/nginx/html;
+        }
+
+   }
+}
+```
+
+
+
+
+
+
+
 # nginx-proxy-manager
+
+Default Admin User:
+
+```
+Email:    admin@example.com
+Password: changeme
+```
+
+Immediately after logging in with this default user you will be asked to modify your details and change your password.
+
+
 
 ```bash
 sudo docker pull jc21/nginx-proxy-manager:2.12.2
@@ -2611,7 +3672,7 @@ sudo docker pull zoeyvid/npmplus:434
 
 docker-compose方式：
 
-```
+```yaml
 version: '3'
 services:
   app:
@@ -2626,14 +3687,311 @@ services:
       - ./letsencrypt:/etc/letsencrypt
 ```
 
-```
+```shell
 docker-compose up -d
  
 #如果使用的是 docker-compose-plugin
 docker compose up -d
 ```
 
+Here is an example of what your `docker-compose.yml` will look like when using a **MariaDB** container:
 
+```yaml
+services:
+  app:
+    image: 'jc21/nginx-proxy-manager:latest'
+    restart: unless-stopped
+    ports:
+      # These ports are in format <host-port>:<container-port>
+      - '80:80' # Public HTTP Port
+      - '443:443' # Public HTTPS Port
+      - '81:81' # Admin Web Port
+      # Add any other Stream port you want to expose
+      # - '21:21' # FTP
+    environment:
+      # Mysql/Maria connection parameters:
+      DB_MYSQL_HOST: "db"
+      DB_MYSQL_PORT: 3306
+      DB_MYSQL_USER: "npm"
+      DB_MYSQL_PASSWORD: "npm"
+      DB_MYSQL_NAME: "npm"
+      # Uncomment this if IPv6 is not enabled on your host
+      # DISABLE_IPV6: 'true'
+    volumes:
+      - ./data:/data
+      - ./letsencrypt:/etc/letsencrypt
+    depends_on:
+      - db
+
+  db:
+    image: 'jc21/mariadb-aria:latest'
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: 'npm'
+      MYSQL_DATABASE: 'npm'
+      MYSQL_USER: 'npm'
+      MYSQL_PASSWORD: 'npm'
+      MARIADB_AUTO_UPGRADE: '1'
+    volumes:
+      - ./mysql:/var/lib/mysql
+```
+
+Here is an example of what your `docker-compose.yml` will look like when using a **SQLite** container:
+
+```yaml
+services:
+  app:
+    image: 'jc21/nginx-proxy-manager:latest'
+    restart: unless-stopped
+    ports:
+      # These ports are in format <host-port>:<container-port>
+      - '80:80' # Public HTTP Port
+      - '443:443' # Public HTTPS Port
+      - '81:81' # Admin Web Port
+      # Add any other Stream port you want to expose
+      # - '21:21' # FTP
+
+    environment:
+      # Uncomment this if you want to change the location of
+      # the SQLite DB file within the container
+      DB_SQLITE_FILE: "/data/database.sqlite"
+
+      # Uncomment this if IPv6 is not enabled on your host
+      # DISABLE_IPV6: 'true'
+
+    volumes:
+      - ./data:/data
+      - ./letsencrypt:/etc/letsencrypt
+```
+
+Here is an example of what your `docker-compose.yml` will look like when using a **Postgres** container:
+
+```yaml
+services:
+  app:
+    image: 'jc21/nginx-proxy-manager:latest'
+    restart: unless-stopped
+    ports:
+      # These ports are in format <host-port>:<container-port>
+      - '80:80' # Public HTTP Port
+      - '443:443' # Public HTTPS Port
+      - '81:81' # Admin Web Port
+      # Add any other Stream port you want to expose
+      # - '21:21' # FTP
+    environment:
+      # Postgres parameters:
+      DB_POSTGRES_HOST: 'db'
+      DB_POSTGRES_PORT: '5432'
+      DB_POSTGRES_USER: 'npm'
+      DB_POSTGRES_PASSWORD: 'npmpass'
+      DB_POSTGRES_NAME: 'npm'
+      # Uncomment this if IPv6 is not enabled on your host
+      # DISABLE_IPV6: 'true'
+    volumes:
+      - ./data:/data
+      - ./letsencrypt:/etc/letsencrypt
+    depends_on:
+      - db
+
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: 'npm'
+      POSTGRES_PASSWORD: 'npmpass'
+      POSTGRES_DB: 'npm'
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
+```
+
+
+
+# Nginx UI
+
+**Deploy with Docker**
+
+1. [Install Docker.⁠](https://docs.docker.com/install/)
+2. Then deploy nginx-ui like this:
+
+```bash
+docker run -dit --name=nginx-ui --restart=always -e TZ=Asia/Shanghai -v /mnt/user/appdata/nginx:/etc/nginx -v /mnt/user/appdata/nginx-ui:/etc/nginx-ui -p 8080:80 -p 8443:443 uozi/nginx-ui:latest
+```
+
+1. When your docker container is running, Log in to nginx-ui panel with `http://<your_server_ip>:8080/install`.
+
+**Deploy with Docker-Compose**
+
+1. [Install Docker-Compose.⁠](https://docs.docker.com/compose/install/)
+2. Create a docker-compose.yml file like this:
+
+```yml
+services:
+    nginx-ui:
+        stdin_open: true
+        tty: true
+        container_name: nginx-ui
+        restart: always
+        environment:
+            - TZ=Asia/Shanghai
+        volumes:
+            - '/mnt/user/appdata/nginx:/etc/nginx'
+            - '/mnt/user/appdata/nginx-ui:/etc/nginx-ui'
+            - '/var/www:/var/www'
+        ports:
+            - 8080:80
+            - 8443:443
+        image: 'uozi/nginx-ui:latest'
+```
+
+1. Then creat your container by:
+
+```bash
+docker compose up -d
+```
+
+1. When your docker container is running, Log in to nginx-ui panel with `http://<your_server_ip>:8080/install`.
+
+**Example of Nginx Reverse Proxy Configuration**
+
+```nginx
+server {
+    listen          80;
+    listen          [::]:80;
+
+    server_name     <your_server_name>;
+    rewrite ^(.*)$  https://$host$1 permanent;
+}
+
+map $http_upgrade $connection_upgrade {
+    default upgrade;
+    ''      close;
+}
+
+server {
+    listen  443       ssl;
+    listen  [::]:443  ssl;
+    http2   on;
+
+    server_name         <your_server_name>;
+
+    ssl_certificate     /path/to/ssl_cert;
+    ssl_certificate_key /path/to/ssl_cert_key;
+
+    location / {
+        proxy_set_header    Host                $host;
+        proxy_set_header    X-Real-IP           $remote_addr;
+        proxy_set_header    X-Forwarded-For     $proxy_add_x_forwarded_for;
+        proxy_set_header    X-Forwarded-Proto   $scheme;
+        proxy_http_version  1.1;
+        proxy_set_header    Upgrade             $http_upgrade;
+        proxy_set_header    Connection          $connection_upgrade;
+        proxy_pass          http://127.0.0.1:9000/;
+    }
+}
+```
+
+
+
+
+
+# linuxserver/letsencrypt
+
+https://hub.docker.com/r/linuxserver/letsencrypt
+
+**docker**
+
+```
+docker create \
+  --name=swag \
+  --cap-add=NET_ADMIN \
+  -e PUID=1000 \
+  -e PGID=1000 \
+  -e TZ=Europe/London \
+  -e URL=yourdomain.url \
+  -e SUBDOMAINS=www, \
+  -e VALIDATION=http \
+  -e DNSPLUGIN=cloudflare `#optional` \
+  -e PROPAGATION= `#optional` \
+  -e DUCKDNSTOKEN= `#optional` \
+  -e EMAIL= `#optional` \
+  -e ONLY_SUBDOMAINS=false `#optional` \
+  -e EXTRA_DOMAINS= `#optional` \
+  -e STAGING=false `#optional` \
+  -p 443:443 \
+  -p 80:80 `#optional` \
+  -v /path/to/appdata/config:/config \
+  --restart unless-stopped \
+  linuxserver/letsencrypt
+```
+
+**docker-compose**
+
+Compatible with docker-compose v2 schemas.
+
+```
+---
+version: "2.1"
+services:
+  swag:
+    image: linuxserver/letsencrypt
+    container_name: swag
+    cap_add:
+      - NET_ADMIN
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+      - URL=yourdomain.url
+      - SUBDOMAINS=www,
+      - VALIDATION=http
+      - DNSPLUGIN=cloudflare #optional
+      - PROPAGATION= #optional
+      - DUCKDNSTOKEN= #optional
+      - EMAIL= #optional
+      - ONLY_SUBDOMAINS=false #optional
+      - EXTRA_DOMAINS= #optional
+      - STAGING=false #optional
+    volumes:
+      - /path/to/appdata/config:/config
+    ports:
+      - 443:443
+      - 80:80 #optional
+    restart: unless-stopped
+```
+
+**Parameters**
+
+Container images are configured using parameters passed at runtime (such as those above). These parameters are separated by a colon and indicate `<external>:<internal>` respectively. For example, `-p 8080:80` would expose port `80` from inside the container to be accessible from the host's IP on port `8080` outside the container.
+
+| Parameter                  | Function                                                     |
+| -------------------------- | ------------------------------------------------------------ |
+| `-p 443`                   | Https port                                                   |
+| `-p 80`                    | Http port (required for http validation and http -> https redirect) |
+| `-e PUID=1000`             | for UserID - see below for explanation                       |
+| `-e PGID=1000`             | for GroupID - see below for explanation                      |
+| `-e TZ=Europe/London`      | Specify a timezone to use EG Europe/London.                  |
+| `-e URL=yourdomain.url`    | Top url you have control over (`customdomain.com` if you own it, or `customsubdomain.ddnsprovider.com` if dynamic dns). |
+| `-e SUBDOMAINS=www,`       | Subdomains you'd like the cert to cover (comma separated, no spaces) ie. `www,ftp,cloud`. For a wildcard cert, set this *exactly* to `wildcard` (wildcard cert is available via `dns` and `duckdns` validation only) |
+| `-e VALIDATION=http`       | Certbot validation method to use, options are `http`, `dns` or `duckdns` (`dns` method also requires `DNSPLUGIN` variable set) (`duckdns` method requires `DUCKDNSTOKEN` variable set, and the `SUBDOMAINS` variable must be either empty or set to `wildcard`). |
+| `-e DNSPLUGIN=cloudflare`  | Required if `VALIDATION` is set to `dns`. Options are `aliyun`, `cloudflare`, `cloudxns`, `cpanel`, `digitalocean`, `dnsimple`, `dnsmadeeasy`, `domeneshop`, `gandi`, `google`, `inwx`, `linode`, `luadns`, `nsone`, `ovh`, `rfc2136`, `route53` and `transip`. Also need to enter the credentials into the corresponding ini (or json for some plugins) file under `/config/dns-conf`. |
+| `-e PROPAGATION=`          | Optionally override (in seconds) the default propagation time for the dns plugins. |
+| `-e DUCKDNSTOKEN=`         | Required if `VALIDATION` is set to `duckdns`. Retrieve your token from [https://www.duckdns.org](https://www.duckdns.org/) |
+| `-e EMAIL=`                | Optional e-mail address used for cert expiration notifications. |
+| `-e ONLY_SUBDOMAINS=false` | If you wish to get certs only for certain subdomains, but not the main domain (main domain may be hosted on another machine and cannot be validated), set this to `true` |
+| `-e EXTRA_DOMAINS=`        | Additional fully qualified domain names (comma separated, no spaces) ie. `extradomain.com,subdomain.anotherdomain.org,*.anotherdomain.org` |
+| `-e STAGING=false`         | Set to `true` to retrieve certs in staging mode. Rate limits will be much higher, but the resulting cert will not pass the browser's security test. Only to be used for testing purposes. |
+| `-v /config`               | All the config files including the webroot reside here.      |
+
+**Environment variables from files (Docker secrets)**
+
+You can set any environment variable from a file by using a special prepend `FILE__`.
+
+As an example:
+
+```
+-e FILE__PASSWORD=/run/secrets/mysecretpassword
+```
+
+Will set the environment variable `PASSWORD` based on the contents of the `/run/secrets/mysecretpassword` file.
 
 
 
@@ -3100,6 +4458,17 @@ The following are known issues or limitations if you deploy Access Server from a
 
 
 
+# qBittorrent-ee
+
+```bash
+mkdir -p /mnt/sda1/docker/qbittorrent-ee/appdata
+mkdir -p /mnt/sda1/docker/qbittorrent-ee/downloads
+
+docker run -itd --name=qbittorrent-ee -e PUID=0 -e PGID=0 -e TZ=Asia/Shanghai -e WEBUI_PORT=8080 -e TORRENTING_PORT=46881 -p 48240:8080 -p 46881:46881 -p 46881:46881/udp -p 55555:55555 -v /mnt/sda1/docker/qbittorrent-ee/appdata:/config -v /mnt/sda1/docker/qbittorrent-ee/downloads:/downloads --restart unless-stopped superng6/qbittorrentee:5.0.3.10 
+```
+
+
+
 
 
 # qbittorrent
@@ -3168,6 +4537,1620 @@ Containers are configured using parameters passed at runtime (such as those abov
 |      `-v /downloads`      | Location of downloads on disk.                               |
 |    `--read-only=true`     | Run container with a read-only filesystem. Please [read the docs⁠](https://docs.linuxserver.io/misc/read-only/). |
 |    `--user=1000:1000`     | Run container with a non-root user. Please [read the docs⁠](https://docs.linuxserver.io/misc/non-root/). |
+
+
+
+
+
+
+
+
+
+# linuxserver/librespeed
+
+**注：PUID和GUID不要使用0，否则会报502错误！**
+
+## docker-compose
+
+ (recommended, [click here for more info⁠](https://docs.linuxserver.io/general/docker-compose))
+
+```yaml
+---
+services:
+  librespeed:
+    image: lscr.io/linuxserver/librespeed:latest
+    container_name: librespeed
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - PASSWORD=PASSWORD
+      - CUSTOM_RESULTS=false #optional
+      - DB_TYPE=sqlite #optional
+      - DB_NAME=DB_NAME #optional
+      - DB_HOSTNAME=DB_HOSTNAME #optional
+      - DB_USERNAME=DB_USERNAME #optional
+      - DB_PASSWORD=DB_PASSWORD #optional
+      - DB_PORT=DB_PORT #optional
+      - IPINFO_APIKEY=ACCESS_TOKEN #optional
+    volumes:
+      - /path/to/librespeed/config:/config
+    ports:
+      - 80:80
+    restart: unless-stopped
+```
+
+## docker cli 
+
+**注：PUID和GUID不要使用0，否则会报502错误！**
+
+([click here for more info⁠](https://docs.docker.com/engine/reference/commandline/cli/))
+
+```bash
+#using sqlite
+docker run -itd --name=librespeed-default -e PUID=1000 -e PGID=1000 -e TZ=Asia/Shanghai -e PASSWORD=123456 -e DB_TYPE=sqlite -e CUSTOM_RESULTS=false -e IPINFO_APIKEY=ACCESS_TOKEN -p 65533:80 -v /home/ubuntu/docker/librespeed-default/config:/config --restart unless-stopped linuxserver/librespeed:5.4.1
+
+#using mysql
+docker run -itd --name=librespeed-default -e PUID=0 -e PGID=0 -e TZ=Asia/Shanghai -e PASSWORD=PASSWORD -e CUSTOM_RESULTS=false -e DB_TYPE=mysql -e DB_NAME=DB_NAME -e DB_HOSTNAME=DB_HOSTNAME -e DB_USERNAME=DB_USERNAME -e DB_PASSWORD=DB_PASSWORD -e DB_PORT=DB_PORT -e IPINFO_APIKEY=ACCESS_TOKEN -p 80:80 -v /path/to/librespeed/config:/config --restart unless-stopped linuxserver/librespeed:5.4.1
+```
+
+## 修改、美化首页
+
+修改config/www/index.html
+
+```html
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no" />
+	<meta charset="UTF-8" />
+	<link rel="shortcut icon" href="favicon.ico">
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+	<script type="text/javascript" src="speedtest.js"></script>
+	<script type="text/javascript">
+		function I(i) { return document.getElementById(i); }
+		//INITIALIZE SPEEDTEST
+		var s = new Speedtest(); //create speedtest object
+		s.setParameter("telemetry_level", "basic"); //enable telemetry
+		var meterBk = /Trident.*rv:(\d+\.\d+)/i.test(navigator.userAgent) ? "#EAEAEA" : "#80808040";
+		var dlColor = "#6060AA",
+			ulColor = "#616161";
+		var progColor = meterBk;
+		//CODE FOR GAUGES
+		function drawMeter(c, amount, bk, fg, progress, prog) {
+			var ctx = c.getContext("2d");
+			var dp = window.devicePixelRatio || 1;
+			var cw = c.clientWidth * dp, ch = c.clientHeight * dp;
+			var sizScale = ch * 0.0055;
+			if (c.width == cw && c.height == ch) {
+				ctx.clearRect(0, 0, cw, ch);
+			} else {
+				c.width = cw;
+				c.height = ch;
+			}
+			ctx.beginPath();
+			ctx.strokeStyle = bk;
+			ctx.lineWidth = 12 * sizScale;
+			ctx.arc(c.width / 2, c.height - 58 * sizScale, c.height / 1.8 - ctx.lineWidth, -Math.PI * 1.1, Math.PI * 0.1);
+			ctx.stroke();
+			ctx.beginPath();
+			ctx.strokeStyle = fg;
+			ctx.lineWidth = 12 * sizScale;
+			ctx.arc(c.width / 2, c.height - 58 * sizScale, c.height / 1.8 - ctx.lineWidth, -Math.PI * 1.1, amount * Math.PI * 1.2 - Math.PI * 1.1);
+			ctx.stroke();
+			if (typeof progress !== "undefined") {
+				ctx.fillStyle = prog;
+				ctx.fillRect(c.width * 0.3, c.height - 16 * sizScale, c.width * 0.4 * progress, 4 * sizScale);
+			}
+		}
+		function mbpsToAmount(s) {
+			return 1 - (1 / (Math.pow(1.3, Math.sqrt(s))));
+		}
+		function format(d) {
+			d = Number(d);
+			if (d < 10) return d.toFixed(2);
+			if (d < 100) return d.toFixed(1);
+			return d.toFixed(0);
+		}
+		//UI CODE
+		var uiData = null;
+		function startStop() {
+			if (s.getState() == 3) {
+				//speedtest is running, abort
+				s.abort();
+				data = null;
+				I("startStopBtn").className = "";
+				initUI();
+			} else {
+				//test is not running, begin
+				I("startStopBtn").className = "running";
+				I("shareArea").style.display = "none";
+				s.onupdate = function (data) {
+					uiData = data;
+				};
+				s.onend = function (aborted) {
+					I("startStopBtn").className = "";
+					updateUI(true);
+					if (!aborted) {
+						//if testId is present, show sharing panel, otherwise do nothing
+						try {
+							var testId = uiData.testId;
+							if (testId != null) {
+								var shareURL = window.location.href.substring(0, window.location.href.lastIndexOf("/")) + "/results/?id=" + testId;
+								I("resultsImg").src = shareURL;
+								I("resultsURL").value = shareURL;
+								I("testId").innerHTML = testId;
+								I("shareArea").style.display = "";
+							}
+						} catch (e) { }
+					}
+				};
+				s.start();
+			}
+		}
+		//this function reads the data sent back by the test and updates the UI
+		function updateUI(forced) {
+			if (!forced && s.getState() != 3) return;
+			if (uiData == null) return;
+			var status = uiData.testState;
+			I("ip").textContent = uiData.clientIp;
+			I("dlText").textContent = (status == 1 && uiData.dlStatus == 0) ? "..." : format(uiData.dlStatus);
+			drawMeter(I("dlMeter"), mbpsToAmount(Number(uiData.dlStatus * (status == 1 ? oscillate() : 1))), meterBk, dlColor, Number(uiData.dlProgress), progColor);
+			I("ulText").textContent = (status == 3 && uiData.ulStatus == 0) ? "..." : format(uiData.ulStatus);
+			drawMeter(I("ulMeter"), mbpsToAmount(Number(uiData.ulStatus * (status == 3 ? oscillate() : 1))), meterBk, ulColor, Number(uiData.ulProgress), progColor);
+			I("pingText").textContent = format(uiData.pingStatus);
+			I("jitText").textContent = format(uiData.jitterStatus);
+		}
+		function oscillate() {
+			return 1 + 0.02 * Math.sin(Date.now() / 100);
+		}
+		//update the UI every frame
+		window.requestAnimationFrame = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.msRequestAnimationFrame || (function (callback, element) { setTimeout(callback, 1000 / 60); });
+		function frame() {
+			requestAnimationFrame(frame);
+			updateUI();
+		}
+		frame(); //start frame loop
+		//function to (re)initialize UI
+		function initUI() {
+			drawMeter(I("dlMeter"), 0, meterBk, dlColor, 0);
+			drawMeter(I("ulMeter"), 0, meterBk, ulColor, 0);
+			I("dlText").textContent = "";
+			I("ulText").textContent = "";
+			I("pingText").textContent = "";
+			I("jitText").textContent = "";
+			I("ip").textContent = "";
+		}
+	</script>
+	<style type="text/css">
+		html,
+		body {
+			border: none;
+			padding: 0;
+			margin: 0;
+			background: #f5f5f5;
+			color: #333;
+			font-family: 'Poppins', sans-serif;
+		}
+
+		body {
+			text-align: center;
+			padding: 2em;
+		}
+
+		h1 {
+			color: #444;
+			font-size: 2.5em;
+			margin-bottom: 1em;
+		}
+
+		#startStopBtn {
+			display: inline-block;
+			margin: 0 auto;
+			color: #fff;
+			background: linear-gradient(135deg, #6060FF, #8040FF);
+			border: none;
+			border-radius: 2em;
+			transition: all 0.3s;
+			box-sizing: border-box;
+			width: 10em;
+			height: 3em;
+			line-height: 3em;
+			cursor: pointer;
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+			font-size: 1em;
+			font-weight: 600;
+		}
+
+		#startStopBtn:hover {
+			box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+			transform: translateY(-2px);
+		}
+
+		#startStopBtn.running {
+			background: linear-gradient(135deg, #FF3030, #FF6060);
+		}
+
+		#startStopBtn:before {
+			content: "开始测速";
+		}
+
+		#startStopBtn.running:before {
+			content: "停止测速";
+		}
+
+		#test {
+			margin-top: 2em;
+			margin-bottom: 12em;
+		}
+
+		div.testArea {
+			display: inline-block;
+			width: 16em;
+			height: 12.5em;
+			position: relative;
+			box-sizing: border-box;
+			background: #fff;
+			border-radius: 10px;
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+			margin: 1em;
+			padding: 1em;
+		}
+
+		div.testArea2 {
+			display: inline-block;
+			width: 14em;
+			height: 7em;
+			position: relative;
+			box-sizing: border-box;
+			text-align: center;
+			background: #fff;
+			border-radius: 10px;
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+			margin: 1em;
+			padding: 1em;
+		}
+
+		div.testArea div.testName {
+			position: absolute;
+			top: 0.1em;
+			left: 0;
+			width: 100%;
+			font-size: 1.4em;
+			z-index: 9;
+			color: #6060AA;
+		}
+
+		div.testArea2 div.testName {
+			display: block;
+			text-align: center;
+			font-size: 1.4em;
+			color: #6060AA;
+		}
+
+		div.testArea div.meterText {
+			position: absolute;
+			bottom: 1.55em;
+			left: 0;
+			width: 100%;
+			font-size: 2.5em;
+			z-index: 9;
+			color: #6060AA;
+		}
+
+		div.testArea2 div.meterText {
+			display: inline-block;
+			font-size: 2.5em;
+			color: #6060AA;
+		}
+
+		div.meterText:empty:before {
+			content: "0.00";
+		}
+
+		div.testArea div.unit {
+			position: absolute;
+			bottom: 2em;
+			left: 0;
+			width: 100%;
+			z-index: 9;
+			color: #888;
+		}
+
+		div.testArea2 div.unit {
+			display: inline-block;
+			color: #888;
+		}
+
+		div.testArea canvas {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			z-index: 1;
+		}
+
+		div.testGroup {
+			display: flex;
+			justify-content: center;
+			flex-wrap: wrap;
+			margin: 0 auto;
+		}
+
+		#shareArea {
+			width: 95%;
+			max-width: 40em;
+			margin: 0 auto;
+			margin-top: 2em;
+			background: #fff;
+			border-radius: 10px;
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+			padding: 1em;
+		}
+
+		#shareArea>* {
+			display: block;
+			width: 100%;
+			height: auto;
+			margin: 0.25em 0;
+		}
+
+		#privacyPolicy {
+			position: fixed;
+			top: 2em;
+			bottom: 2em;
+			left: 2em;
+			right: 2em;
+			overflow-y: auto;
+			width: auto;
+			height: auto;
+			box-shadow: 0 0 3em 1em rgba(0, 0, 0, 0.2);
+			z-index: 999999;
+			text-align: left;
+			background-color: #fff;
+			padding: 2em;
+			border-radius: 10px;
+		}
+
+		a.privacy {
+			text-align: center;
+			font-size: 0.8em;
+			color: #888;
+			display: block;
+			margin-top: 1em;
+		}
+
+		@media all and (max-width:40em) {
+			body {
+				font-size: 0.8em;
+			}
+		}
+	</style>
+	<title>局域网测速/LibreSpeed Speedtest</title>
+</head>
+
+<body>
+	<h1>局域网测速/LibreSpeed Speedtest</h1>
+	<div id="testWrapper">
+		<div id="startStopBtn" onclick="startStop()"></div><br />
+		<a class="privacy" href="#" onclick="I('privacyPolicy').style.display=''">隐私政策/Privacy</a>
+		<div id="test">
+			<div class="testGroup">
+				<div class="testArea2">
+					<div class="testName">延迟/Ping</div>
+					<div id="pingText" class="meterText" style="color:#AA6060"></div>
+					<div class="unit">ms</div>
+				</div>
+				<div class="testArea2">
+					<div class="testName">抖动/Jitter</div>
+					<div id="jitText" class="meterText" style="color:#AA6060"></div>
+					<div class="unit">ms</div>
+				</div>
+			</div>
+			<div class="testGroup">
+				<div class="testArea">
+					<div class="testName">下载/Download</div>
+					<canvas id="dlMeter" class="meter"></canvas>
+					<div id="dlText" class="meterText"></div>
+					<div class="unit">Mbps</div>
+				</div>
+				<div class="testArea">
+					<div class="testName">上传/Upload</div>
+					<canvas id="ulMeter" class="meter"></canvas>
+					<div id="ulText" class="meterText"></div>
+					<div class="unit">Mbps</div>
+				</div>
+			</div>
+			<div id="ipArea">
+				<span id="ip"></span>
+			</div>
+			<div id="shareArea" style="display:none">
+				<h3>分享测速结果/Share results</h3>
+				<p>Test ID: <span id="testId"></span></p>
+				<input type="text" value="" id="resultsURL" readonly="readonly"
+					onclick="this.select();this.focus();this.select();document.execCommand('copy');alert('Link copied')" />
+				<img src="" id="resultsImg" />
+			</div>
+		</div>
+	</div>
+	<div id="privacyPolicy" style="display:none">
+		<h2>Privacy Policy</h2>
+		<p>This HTML5 Speedtest server is configured with telemetry enabled.</p>
+		<h4>What data we collect</h4>
+		<p>
+			At the end of the test, the following data is collected and stored:
+		<ul>
+			<li>Test ID</li>
+			<li>Time of testing</li>
+			<li>Test results (download and upload speed, ping and jitter)</li>
+			<li>IP address</li>
+			<li>ISP information</li>
+			<li>Approximate location (inferred from IP address, not GPS)</li>
+			<li>User agent and browser locale</li>
+			<li>Test log (contains no personal information)</li>
+		</ul>
+		</p>
+		<h4>How we use the data</h4>
+		<p>
+			Data collected through this service is used to:
+		<ul>
+			<li>Allow sharing of test results (sharable image for forums, etc.)</li>
+			<li>To improve the service offered to you (for instance, to detect problems on our side)</li>
+		</ul>
+		No personal information is disclosed to third parties.
+		</p>
+		<h4>Your consent</h4>
+		<p>
+			By starting the test, you consent to the terms of this privacy policy.
+		</p>
+		<h4>Data removal</h4>
+		<p>
+			If you want to have your information deleted, you need to provide either the ID of the test or your IP
+			address. This is the only way to identify your data, without this information we won't be able to comply
+			with your request.<br /><br />
+			Contact the web admin for all deletion requests.
+		</p>
+		<br /><br />
+		<a class="privacy" href="#" onclick="I('privacyPolicy').style.display='none'">Close</a><br />
+	</div>
+	<script type="text/javascript">setTimeout(function () { initUI() }, 100);</script>
+</body>
+
+</html>
+```
+
+
+
+
+
+## Parameters
+
+Containers are configured using parameters passed at runtime (such as those above). These parameters are separated by a colon and indicate `<external>:<internal>` respectively. For example, `-p 8080:80` would expose port `80` from inside the container to be accessible from the host's IP on port `8080` outside the container.
+
+|            Parameter            | Function                                                     |
+| :-----------------------------: | :----------------------------------------------------------- |
+|           `-p 80:80`            | web gui                                                      |
+|         `-e PUID=1000`          | for UserID - see below for explanation                       |
+|         `-e PGID=1000`          | for GroupID - see below for explanation                      |
+|         `-e TZ=Etc/UTC`         | specify a timezone to use, see this [list⁠](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List). |
+|     `-e PASSWORD=PASSWORD`      | Set the password for the results database.                   |
+|    `-e CUSTOM_RESULTS=false`    | (optional) set to `true` to enable custom results page in `/config/www/results/index.php`. |
+|       `-e DB_TYPE=sqlite`       | Defaults to `sqlite`, can also be set to `mysql` or `postgresql`. |
+|      `-e DB_NAME=DB_NAME`       | Database name. Required for mysql and pgsql.                 |
+|  `-e DB_HOSTNAME=DB_HOSTNAME`   | Database address. Required for mysql and pgsql.              |
+|  `-e DB_USERNAME=DB_USERNAME`   | Database username. Required for mysql and pgsql.             |
+|  `-e DB_PASSWORD=DB_PASSWORD`   | Database password. Required for mysql and pgsql.             |
+|      `-e DB_PORT=DB_PORT`       | Database port. Required for mysql.                           |
+| `-e IPINFO_APIKEY=ACCESS_TOKEN` | Access token from ipinfo.io. Required for detailed IP information. |
+|          `-v /config`           | Persistent config files                                      |
+
+
+
+
+
+# cloudreve
+
+## Docker
+
+> 使用之前，请确保您知道 docker 的工作机制，在一般情况下，上述部署流程已经能够覆盖绝大多数使用场景。
+
+我们提供官方的 docker image，支持三种架构 `armv7`, `arm64` 以及 `amd64`, 你可以使用以下命令部署
+
+**创建目录结构**
+
+请**确保**运行之前：
+
+> 1. 手动创建 `conf.ini` 空文件或者符合 Cloudreve 配置文件规范的 `conf.ini`, 并将 `<path_to_your_config> `替换为该路径
+> 2. 手动创建 `cloudreve.db` 空文件, 并将 `<path_to_your_db> `替换为该路径
+> 3. 手动创建 `uploads` 文件夹, 并将 `<path_to_your_uploads>` 替换为该路径
+> 4. 手动创建 `avatar` 文件夹，并将 `<path_to_your_avatar>` 替换为该路径
+
+或者，直接使用以下命令创建：
+
+复制
+
+```
+mkdir -vp cloudreve/{uploads,avatar} \
+&& touch cloudreve/conf.ini \
+&& touch cloudreve/cloudreve.db
+
+mkdir -p cloudreve-default/uploads
+mkdir -p cloudreve-default/avatar
+cd cloudreve-default
+touch conf.ini
+touch cloudreve.db
+```
+
+**运行**
+
+然后，运行 docker container：
+
+复制
+
+```bash
+docker run -d \
+-p 5212:5212 \
+--mount type=bind,source=<path_to_your_config>,target=/cloudreve/conf.ini \
+--mount type=bind,source=<path_to_your_db>,target=/cloudreve/cloudreve.db \
+-v <path_to_your_uploads>:/cloudreve/uploads \
+-v <path_to_your_avatar>:/cloudreve/avatar \
+cloudreve/cloudreve:latest
+
+mkdir -p cloudreve-default/uploads
+mkdir -p cloudreve-default/avatar
+cd cloudreve-default
+touch conf.ini
+touch cloudreve.db
+
+docker run -d --name cloudreve-default -p 48245:5212 -v /mnt/sda1/docker/cloudreve-default/conf.ini:/cloudreve/conf.ini -v /mnt/sda1/docker/cloudreve-default/cloudreve.db:/cloudreve/cloudreve.db -v /mnt/sda1/docker/cloudreve-default/uploads:/cloudreve/uploads -v /mnt/sda1/docker/cloudreve-default/avatar:/cloudreve/avatar cloudreve/cloudreve:3.8.3
+
+mkdir -p /home/ubuntu/docker/cloudreve-default/
+mkdir -p /mnt/sda1/docker/cloudreve-default/uploads/
+mkdir -p /mnt/sda1/docker/cloudreve-default/avatar/
+touch /home/ubuntu/docker/cloudreve-default/conf.ini
+touch /home/ubuntu/docker/cloudreve-default/cloudreve.db
+
+docker run -d --name cloudreve-default -p 48245:5212 -v /home/ubuntu/docker/cloudreve-default/conf.ini:/cloudreve/conf.ini -v /home/ubuntu/docker/cloudreve-default/cloudreve.db:/cloudreve/cloudreve.db -v /mnt/sda1/docker/cloudreve-default/uploads:/cloudreve/uploads -v /mnt/sda1/docker/cloudreve-default/avatar:/cloudreve/avatar cloudreve/cloudreve:3.8.3
+```
+
+## Docker Compose
+
+除此之外，我们还提供 `docker compose` 部署，并且整合了离线下载服务 在此之前，需要创建 `data` 目录作为离线下载临时中转目录
+
+**创建目录结构**
+
+复制
+
+```
+mkdir -vp cloudreve/{uploads,avatar} \
+&& touch cloudreve/conf.ini \
+&& touch cloudreve/cloudreve.db \
+&& mkdir -p aria2/config \
+&& mkdir -p data/aria2 \
+&& chmod -R 777 data/aria2
+```
+
+**运行**
+
+然后将以下文件保存为 `docker-compose.yml`，放置于当前目录，与 cloudreve 同一层级，同时，修改文件中的 `RPC_SECRET`
+
+复制
+
+```
+version: "3.8"
+services:
+  cloudreve:
+    container_name: cloudreve
+    image: cloudreve/cloudreve:latest
+    restart: unless-stopped
+    ports:
+      - "5212:5212"
+    volumes:
+      - temp_data:/data
+      - ./cloudreve/uploads:/cloudreve/uploads
+      - ./cloudreve/conf.ini:/cloudreve/conf.ini
+      - ./cloudreve/cloudreve.db:/cloudreve/cloudreve.db
+      - ./cloudreve/avatar:/cloudreve/avatar
+    depends_on:
+      - aria2
+  aria2:
+    container_name: aria2
+    image: p3terx/aria2-pro
+    restart: unless-stopped
+    environment:
+      - RPC_SECRET=your_aria_rpc_token
+      - RPC_PORT=6800
+    volumes:
+      - ./aria2/config:/config
+      - temp_data:/data
+volumes:
+  temp_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: $PWD/data
+      o: bind
+```
+
+运行镜像
+
+复制
+
+```
+# 后台运行模式，可以从 docker/docker-compose 的日志中获取默认管理员账户用户名和密码
+docker-compose up -d
+
+# 或者，直接运行，log 将会直接输出在当前控制台中，请注意退出之后保持当前容器运行
+docker-compose up
+```
+
+在之后的控制面板中，按照如下配置
+
+1. **[不可修改]** RPC 服务器地址 => `http://aria2:6800`
+2. **[可修改, 需保持和 docker-compose.yml 文件一致]** RPC 授权令牌 => `your_aria_rpc_token`
+3. **[不可修改]** Aria2 用作临时下载目录的 节点上的绝对路径 => `/data`
+
+**更新**
+
+关闭当前运行的容器，此步骤不会删除挂载的配置文件以及相关目录
+
+复制
+
+```
+docker-compose down
+```
+
+如果此前已经拉取 docker 镜像，使用以下命令获取最新镜像
+
+复制
+
+```
+docker pull cloudreve/cloudreve
+```
+
+重复运行步骤即可
+
+
+
+
+
+
+
+# immich
+
+https://immich.app/docs/install/requirements
+
+https://github.com/imagegenius/docker-immich/
+
+### Docker Compose
+
+
+
+```
+---
+services:
+  immich:
+    image: ghcr.io/imagegenius/immich:latest
+    container_name: immich
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - DB_HOSTNAME=192.168.1.x
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=postgres
+      - DB_DATABASE_NAME=immich
+      - REDIS_HOSTNAME=192.168.1.x
+      - DB_PORT=5432 #optional
+      - REDIS_PORT=6379 #optional
+      - REDIS_PASSWORD= #optional
+      - MACHINE_LEARNING_HOST=0.0.0.0 #optional
+      - MACHINE_LEARNING_PORT=3003 #optional
+      - MACHINE_LEARNING_WORKERS=1 #optional
+      - MACHINE_LEARNING_WORKER_TIMEOUT=120 #optional
+    volumes:
+      - path_to_appdata:/config
+      - path_to_photos:/photos
+      - path_to_libraries:/libraries #optional
+    ports:
+      - 8080:8080
+    restart: unless-stopped
+
+# This container requires an external application to be run separately.
+# By default, ports for the databases are opened, be careful when deploying it
+# Redis:
+  redis:
+    image: redis
+    ports:
+      - 6379:6379
+    container_name: redis
+# PostgreSQL 14:
+  postgres14:
+    image: tensorchord/pgvecto-rs:pg14-v0.2.0
+    ports:
+      - 5432:5432
+    container_name: postgres14
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: immich
+    volumes:
+      - path_to_postgres:/var/lib/postgresql/data
+```
+
+### Docker CLI ([Click here for more info](https://docs.docker.com/engine/reference/commandline/cli/))
+
+```shell
+mkdir -p /mnt/data/docker/immich-default/config
+mkdir -p /mnt/data/docker/immich-default/photos
+mkdir -p /mnt/data/docker/immich-default/libraries
+
+docker run -itd --name=immich-default -e PUID=0 -e GUID=0 -e TZ=Asia/Shanghai -e REDIS_HOSTNAME=192.168.0.154 -e REDIS_PORT=56379 -e DB_HOSTNAME=192.168.0.154 -e DB_USERNAME=immich -e DB_PASSWORD=1145141919810 -e DB_PORT=55432 -e DB_DATABASE_NAME=immich -p 8255:8080 -v /mnt/data/docker/immich-default/config:/config -v /mnt/data/docker/immich-default/photos:/photos -v /mnt/data/docker/immich-default/libraries:/libraries ghcr.io/imagegenius/immich:1.119.1-noml
+```
+
+
+
+```shell
+docker run -d \
+  --name=immich \
+  -e PUID=1000 \
+  -e PGID=1000 \
+  -e TZ=Etc/UTC \
+  -e DB_HOSTNAME=192.168.1.x \
+  -e DB_USERNAME=postgres \
+  -e DB_PASSWORD=postgres \
+  -e DB_DATABASE_NAME=immich \
+  -e REDIS_HOSTNAME=192.168.1.x \
+  -e DB_PORT=5432 `#optional` \
+  -e REDIS_PORT=6379 `#optional` \
+  -e REDIS_PASSWORD= `#optional` \
+  -e MACHINE_LEARNING_HOST=0.0.0.0 `#optional` \
+  -e MACHINE_LEARNING_PORT=3003 `#optional` \
+  -e MACHINE_LEARNING_WORKERS=1 `#optional` \
+  -e MACHINE_LEARNING_WORKER_TIMEOUT=120 `#optional` \
+  -p 8080:8080 \
+  -v path_to_appdata:/config \
+  -v path_to_photos:/photos \
+  -v path_to_libraries:/libraries `#optional` \
+  --restart unless-stopped \
+  ghcr.io/imagegenius/immich:latest
+
+# This container requires an external application to be run separately.
+# By default, ports for the databases are opened, be careful when deploying it
+# Redis:
+docker run -d \
+  --name=redis \
+  -p 6379:6379 \
+  redis
+
+# PostgreSQL 14:
+docker run -d \
+  --name=postgres14 \
+  -e POSTGRES_USER=postgres \
+  -e POSTGRES_PASSWORD=postgres \
+  -e POSTGRES_DB=immich \
+  -v path_to_postgres:/var/lib/postgresql/data \
+  -p 5432:5432 \
+  tensorchord/pgvecto-rs:pg14-v0.2.0
+```
+
+
+
+
+
+
+
+# postgres
+
+https://hub.docker.com/_/postgres
+
+
+
+```bash
+sudo mkdir -p/mnt/data/docker/postgres-default/data
+sudo docker run -itd --name=postgres-default -e POSTGRES_PASSWORD=abcd123456 -e PGDATA=/var/lib/postgresql/data/pgdata -p 55432:5432 -v /mnt/data/docker/postgres-default/data:/var/lib/postgresql/data/pgdata postgres:17.3
+```
+
+
+
+**start a postgres instance**
+
+```console
+$ docker run --name some-postgres -e POSTGRES_PASSWORD=mysecretpassword -d postgres
+```
+
+The default `postgres` user and database are created in the entrypoint with `initdb`.
+
+> The postgres database is a default database meant for use by users, utilities and third party applications.
+>
+> [postgresql.org/docs⁠](https://www.postgresql.org/docs/14/app-initdb.html)
+
+**... or via `psql`**
+
+```console
+$ docker run -it --rm --network some-network postgres psql -h some-postgres -U postgres
+psql (14.3)
+Type "help" for help.
+
+postgres=# SELECT 1;
+ ?column? 
+----------
+        1
+(1 row)
+```
+
+**... via [`docker-compose`⁠](https://github.com/docker/compose) or [`docker stack deploy`⁠](https://docs.docker.com/engine/reference/commandline/stack_deploy/)**
+
+Example `docker-compose.yml` for `postgres`:
+
+```yaml
+# Use postgres/example user/password credentials
+version: '3.9'
+
+services:
+
+  db:
+    image: postgres
+    restart: always
+    # set shared memory limit when using docker-compose
+    shm_size: 128mb
+    # or set shared memory limit when deploy via swarm stack
+    #volumes:
+    #  - type: tmpfs
+    #    target: /dev/shm
+    #    tmpfs:
+    #      size: 134217728 # 128*2^20 bytes = 128Mb
+    environment:
+      POSTGRES_PASSWORD: example
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+```
+
+[![Try in PWD](./img/button.png)](http://play-with-docker.com/?stack=https://raw.githubusercontent.com/docker-library/docs/f254f585ba82d2e19d794100dd7bca71fb1c02e7/postgres/stack.yml)
+
+Run `docker stack deploy -c stack.yml postgres` (or `docker-compose -f stack.yml up`), wait for it to initialize completely, and visit `http://swarm-ip:8080`, `http://localhost:8080`, or `http://host-ip:8080` (as appropriate).
+
+**Environment Variables**
+
+The PostgreSQL image uses several environment variables which are easy to miss. The only variable required is `POSTGRES_PASSWORD`, the rest are optional.
+
+**Warning**: the Docker specific variables will only have an effect if you start the container with a data directory that is empty; any pre-existing database will be left untouched on container startup.
+
+**`POSTGRES_PASSWORD`**
+
+This environment variable is required for you to use the PostgreSQL image. It must not be empty or undefined. This environment variable sets the superuser password for PostgreSQL. The default superuser is defined by the `POSTGRES_USER` environment variable.
+
+**Note 1:** The PostgreSQL image sets up `trust` authentication locally so you may notice a password is not required when connecting from `localhost` (inside the same container). However, a password will be required if connecting from a different host/container.
+
+**Note 2:** This variable defines the superuser password in the PostgreSQL instance, as set by the `initdb` script during initial container startup. It has no effect on the `PGPASSWORD` environment variable that may be used by the `psql` client at runtime, as described at [https://www.postgresql.org/docs/14/libpq-envars.html⁠](https://www.postgresql.org/docs/14/libpq-envars.html). `PGPASSWORD`, if used, will be specified as a separate environment variable.
+
+**`POSTGRES_USER`**
+
+This optional environment variable is used in conjunction with `POSTGRES_PASSWORD` to set a user and its password. This variable will create the specified user with superuser power and a database with the same name. If it is not specified, then the default user of `postgres` will be used.
+
+Be aware that if this parameter is specified, PostgreSQL will still show `The files belonging to this database system will be owned by user "postgres"` during initialization. This refers to the Linux system user (from `/etc/passwd` in the image) that the `postgres` daemon runs as, and as such is unrelated to the `POSTGRES_USER` option. See the section titled "Arbitrary `--user` Notes" for more details.
+
+**`POSTGRES_DB`**
+
+This optional environment variable can be used to define a different name for the default database that is created when the image is first started. If it is not specified, then the value of `POSTGRES_USER` will be used.
+
+**`POSTGRES_INITDB_ARGS`**
+
+This optional environment variable can be used to send arguments to `postgres initdb`. The value is a space separated string of arguments as `postgres initdb` would expect them. This is useful for adding functionality like data page checksums: `-e POSTGRES_INITDB_ARGS="--data-checksums"`.
+
+**`POSTGRES_INITDB_WALDIR`**
+
+This optional environment variable can be used to define another location for the Postgres transaction log. By default the transaction log is stored in a subdirectory of the main Postgres data folder (`PGDATA`). Sometimes it can be desireable to store the transaction log in a different directory which may be backed by storage with different performance or reliability characteristics.
+
+**Note:** on PostgreSQL 9.x, this variable is `POSTGRES_INITDB_XLOGDIR` (reflecting [the changed name of the `--xlogdir` flag to `--waldir` in PostgreSQL 10+⁠](https://wiki.postgresql.org/wiki/New_in_postgres_10#Renaming_of_.22xlog.22_to_.22wal.22_Globally_.28and_location.2Flsn.29)).
+
+**`POSTGRES_HOST_AUTH_METHOD`**
+
+This optional variable can be used to control the `auth-method` for `host` connections for `all` databases, `all` users, and `all` addresses. If unspecified then [`scram-sha-256` password authentication⁠](https://www.postgresql.org/docs/14/auth-password.html) is used (in 14+; `md5` in older releases). On an uninitialized database, this will populate `pg_hba.conf` via this approximate line:
+
+```console
+echo "host all all all $POSTGRES_HOST_AUTH_METHOD" >> pg_hba.conf
+```
+
+See the PostgreSQL documentation on [`pg_hba.conf`⁠](https://www.postgresql.org/docs/14/auth-pg-hba-conf.html) for more information about possible values and their meanings.
+
+**Note 1:** It is not recommended to use `trust` since it allows anyone to connect without a password, even if one is set (like via `POSTGRES_PASSWORD`). For more information see the PostgreSQL documentation on [*Trust Authentication*⁠](https://www.postgresql.org/docs/14/auth-trust.html).
+
+**Note 2:** If you set `POSTGRES_HOST_AUTH_METHOD` to `trust`, then `POSTGRES_PASSWORD` is not required.
+
+**Note 3:** If you set this to an alternative value (such as `scram-sha-256`), you might need additional `POSTGRES_INITDB_ARGS` for the database to initialize correctly (such as `POSTGRES_INITDB_ARGS=--auth-host=scram-sha-256`).
+
+**`PGDATA`**
+
+> **Important Note:** Mount the data volume at `/var/lib/postgresql/data` and not at `/var/lib/postgresql` because mounts at the latter path WILL NOT PERSIST database data when the container is re-created. The Dockerfile that builds the image declares a volume at `/var/lib/postgresql/data` and if no data volume is mounted at that path then the container runtime will automatically create an [anonymous volume⁠](https://docs.docker.com/engine/storage/#volumes) that is not reused across container re-creations. Data will be written to the anonymous volume rather than your intended data volume and won't persist when the container is deleted and re-created.
+
+This optional variable can be used to define another location - like a subdirectory - for the database files. The default is `/var/lib/postgresql/data`. If the data volume you're using is a filesystem mountpoint (like with GCE persistent disks), or remote folder that cannot be chowned to the `postgres` user (like some NFS mounts), or contains folders/files (e.g. `lost+found`), Postgres `initdb` requires a subdirectory to be created within the mountpoint to contain the data.
+
+For example:
+
+```console
+$ docker run -d \
+	--name some-postgres \
+	-e POSTGRES_PASSWORD=mysecretpassword \
+	-e PGDATA=/var/lib/postgresql/data/pgdata \
+	-v /custom/mount:/var/lib/postgresql/data \
+	postgres
+```
+
+This is an environment variable that is not Docker specific. Because the variable is used by the `postgres` server binary (see the [PostgreSQL docs⁠](https://www.postgresql.org/docs/14/app-postgres.html#id-1.9.5.14.7)), the entrypoint script takes it into account.
+
+**Docker Secrets**
+
+As an alternative to passing sensitive information via environment variables, `_FILE` may be appended to some of the previously listed environment variables, causing the initialization script to load the values for those variables from files present in the container. In particular, this can be used to load passwords from Docker secrets stored in `/run/secrets/<secret_name>` files. For example:
+
+```console
+$ docker run --name some-postgres -e POSTGRES_PASSWORD_FILE=/run/secrets/postgres-passwd -d postgres
+```
+
+Currently, this is only supported for `POSTGRES_INITDB_ARGS`, `POSTGRES_PASSWORD`, `POSTGRES_USER`, and `POSTGRES_DB`.
+
+**Initialization scripts**
+
+If you would like to do additional initialization in an image derived from this one, add one or more `*.sql`, `*.sql.gz`, or `*.sh` scripts under `/docker-entrypoint-initdb.d` (creating the directory if necessary). After the entrypoint calls `initdb` to create the default `postgres` user and database, it will run any `*.sql` files, run any executable `*.sh` scripts, and source any non-executable `*.sh` scripts found in that directory to do further initialization before starting the service.
+
+**Warning**: scripts in `/docker-entrypoint-initdb.d` are only run if you start the container with a data directory that is empty; any pre-existing database will be left untouched on container startup. One common problem is that if one of your `/docker-entrypoint-initdb.d` scripts fails (which will cause the entrypoint script to exit) and your orchestrator restarts the container with the already initialized data directory, it will not continue on with your scripts.
+
+For example, to add an additional user and database, add the following to `/docker-entrypoint-initdb.d/init-user-db.sh`:
+
+```bash
+#!/bin/bash
+set -e
+
+psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-EOSQL
+	CREATE USER docker;
+	CREATE DATABASE docker;
+	GRANT ALL PRIVILEGES ON DATABASE docker TO docker;
+EOSQL
+```
+
+These initialization files will be executed in sorted name order as defined by the current locale, which defaults to `en_US.utf8`. Any `*.sql` files will be executed by `POSTGRES_USER`, which defaults to the `postgres` superuser. It is recommended that any `psql` commands that are run inside of a `*.sh` script be executed as `POSTGRES_USER` by using the `--username "$POSTGRES_USER"` flag. This user will be able to connect without a password due to the presence of `trust` authentication for Unix socket connections made inside the container.
+
+Additionally, as of [docker-library/postgres#253⁠](https://github.com/docker-library/postgres/pull/253), these initialization scripts are run as the `postgres` user (or as the "semi-arbitrary user" specified with the `--user` flag to `docker run`; see the section titled "Arbitrary `--user` Notes" for more details). Also, as of [docker-library/postgres#440⁠](https://github.com/docker-library/postgres/pull/440), the temporary daemon started for these initialization scripts listens only on the Unix socket, so any `psql` usage should drop the hostname portion (see [docker-library/postgres#474 (comment)⁠](https://github.com/docker-library/postgres/issues/474#issuecomment-416914741) for example).
+
+**Database Configuration**
+
+There are many ways to set PostgreSQL server configuration. For information on what is available to configure, see the [PostgreSQL docs⁠](https://www.postgresql.org/docs/14/runtime-config.html) for the specific version of PostgreSQL that you are running. Here are a few options for setting configuration:
+
+- Use a custom config file. Create a config file and get it into the container. If you need a starting place for your config file you can use the sample provided by PostgreSQL which is available in the container at `/usr/share/postgresql/postgresql.conf.sample` (`/usr/local/share/postgresql/postgresql.conf.sample` in Alpine variants).
+
+  - **Important note:** you must set `listen_addresses = '*'`so that other containers will be able to access postgres.
+
+  ```console
+  $ # get the default config
+  $ docker run -i --rm postgres cat /usr/share/postgresql/postgresql.conf.sample > my-postgres.conf
+  
+  $ # customize the config
+  
+  $ # run postgres with custom config
+  $ docker run -d --name some-postgres -v "$PWD/my-postgres.conf":/etc/postgresql/postgresql.conf -e POSTGRES_PASSWORD=mysecretpassword postgres -c 'config_file=/etc/postgresql/postgresql.conf'
+  ```
+
+- Set options directly on the run line. The entrypoint script is made so that any options passed to the docker command will be passed along to the `postgres` server daemon. From the [PostgreSQL docs⁠](https://www.postgresql.org/docs/14/app-postgres.html#id-1.9.5.14.6.3) we see that any option available in a `.conf` file can be set via `-c`.
+
+  ```console
+  $ docker run -d --name some-postgres -e POSTGRES_PASSWORD=mysecretpassword postgres -c shared_buffers=256MB -c max_connections=200
+  ```
+
+**Locale Customization**
+
+You can extend the Debian-based images with a simple `Dockerfile` to set a different locale. The following example will set the default locale to `de_DE.utf8`:
+
+```dockerfile
+FROM postgres:14.3
+RUN localedef -i de_DE -c -f UTF-8 -A /usr/share/locale/locale.alias de_DE.UTF-8
+ENV LANG de_DE.utf8
+```
+
+Since database initialization only happens on container startup, this allows us to set the language before it is created.
+
+Also of note, Alpine-based variants starting with Postgres 15 support [ICU locales⁠](https://www.postgresql.org/docs/15/locale.html#id-1.6.11.3.7). Previous Postgres versions based on alpine do *not* support locales; see ["Character sets and locale" in the musl documentation⁠](https://wiki.musl-libc.org/functional-differences-from-glibc.html#Character-sets-and-locale) for more details.
+
+You can set locales in the Alpine-based images with `POSTGRES_INITDB_ARGS` to set a different locale. The following example will set the default locale for a newly initialized database to `de_DE.utf8`:
+
+```console
+$ docker run -d -e LANG=de_DE.utf8 -e POSTGRES_INITDB_ARGS="--locale-provider=icu --icu-locale=de-DE" -e POSTGRES_PASSWORD=mysecretpassword postgres:15-alpine 
+```
+
+**Additional Extensions**
+
+When using the default (Debian-based) variants, installing additional extensions (such as PostGIS) should be as simple as installing the relevant packages (see [github.com/postgis/docker-postgis⁠](https://github.com/postgis/docker-postgis/blob/81a0b55/14-3.2/Dockerfile) for a concrete example).
+
+When using the Alpine variants, any postgres extension not listed in [postgres-contrib⁠](https://www.postgresql.org/docs/14/contrib.html) will need to be compiled in your own image (again, see [github.com/postgis/docker-postgis⁠](https://github.com/postgis/docker-postgis/blob/81a0b55/14-3.2/alpine/Dockerfile) for a concrete example).
+
+
+
+
+
+# Redis
+
+```
+mkdir -p /mnt/data/docker/redis-default/data
+mkdir -p /mnt/data/docker/redis-default/conf
+touch /mnt/data/docker/redis-default/conf/redis.conf
+vi /mnt/data/docker/redis-default/conf/redis.conf
+```
+
+修改 /mnt/data/docker/redis-default/conf/redis.conf
+
+```
+protected-mode no
+bind 0.0.0.0
+```
+
+运行：
+
+```bash
+docker run -itd --restart=unless-stopped --log-opt max-size=100m --log-opt max-file=2 -p 56379:6379 --name=redis-default -v /mnt/data/docker/redis-default/conf:/usr/local/etc/redis -v /mnt/data/docker/redis-default/data:/data   redis redis-server /usr/local/etc/redis/redis.conf redis:7.4.2
+```
+
+**How to use this image**
+
+**Start a redis instance**
+
+```console
+$ docker run --name some-redis -d redis
+```
+
+**Start with persistent storage**
+
+```console
+$ docker run --name some-redis -d redis redis-server --save 60 1 --loglevel warning
+```
+
+There are several different persistence strategies to choose from. This one will save a snapshot of the DB every 60 seconds if at least 1 write operation was performed (it will also lead to more logs, so the `loglevel` option may be desirable). If persistence is enabled, data is stored in the `VOLUME /data`, which can be used with `--volumes-from some-volume-container` or `-v /docker/host/dir:/data` (see [docs.docker volumes⁠](https://docs.docker.com/engine/tutorials/dockervolumes/)).
+
+For more about Redis persistence, see [the official Redis documentation⁠](https://redis.io/docs/latest/operate/oss_and_stack/management/persistence/).
+
+**Connecting via `redis-cli`**
+
+```console
+$ docker run -it --network some-network --rm redis redis-cli -h some-redis
+```
+
+**Additionally, if you want to use your own redis.conf ...**
+
+You can create your own Dockerfile that adds a redis.conf from the context into /data/, like so.
+
+```dockerfile
+FROM redis
+COPY redis.conf /usr/local/etc/redis/redis.conf
+CMD [ "redis-server", "/usr/local/etc/redis/redis.conf" ]
+```
+
+Alternatively, you can specify something along the same lines with `docker run` options.
+
+```console
+docker run -v /myredis/conf:/usr/local/etc/redis --name myredis redis redis-server /usr/local/etc/redis/redis.conf
+```
+
+Where `/myredis/conf/` is a local directory containing your `redis.conf` file. Using this method means that there is no need for you to have a Dockerfile for your redis container.
+
+The mapped directory should be writable, as depending on the configuration and mode of operation, Redis may need to create additional configuration files or rewrite existing ones.
+
+**Image Variants**
+
+The `redis` images come in many flavors, each designed for a specific use case.
+
+**`redis:<version>`**
+
+This is the defacto image. If you are unsure about what your needs are, you probably want to use this one. It is designed to be used both as a throw away container (mount your source code and start the container to start your app), as well as the base to build other images off of.
+
+Some of these tags may have names like bookworm in them. These are the suite code names for releases of [Debian⁠](https://wiki.debian.org/DebianReleases) and indicate which release the image is based on. If your image needs to install any additional packages beyond what comes with the image, you'll likely want to specify one of these explicitly to minimize breakage when there are new releases of Debian.
+
+**`redis:<version>-alpine`**
+
+This image is based on the popular [Alpine Linux project⁠](https://alpinelinux.org/), available in [the `alpine` official image](https://hub.docker.com/_/alpine). Alpine Linux is much smaller than most distribution base images (~5MB), and thus leads to much slimmer images in general.
+
+This variant is useful when final image size being as small as possible is your primary concern. The main caveat to note is that it does use [musl libc⁠](https://musl.libc.org/) instead of [glibc and friends⁠](https://www.etalabs.net/compare_libcs.html), so software will often run into issues depending on the depth of their libc requirements/assumptions. See [this Hacker News comment thread⁠](https://news.ycombinator.com/item?id=10782897) for more discussion of the issues that might arise and some pro/con comparisons of using Alpine-based images.
+
+To minimize image size, it's uncommon for additional related tools (such as `git` or `bash`) to be included in Alpine-based images. Using this image as a base, add the things you need in your own Dockerfile (see the [`alpine` image description](https://hub.docker.com/_/alpine/) for examples of how to install packages if you are unfamiliar).
+
+
+
+
+
+# bitnami/redis
+
+https://hub.docker.com/r/bitnami/redis
+
+**Get this image**
+
+The recommended way to get the Bitnami Redis(R) Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/redis).
+
+```console
+docker pull bitnami/redis:latest
+```
+
+To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/redis/tags/) in the Docker Hub Registry.
+
+```console
+docker pull bitnami/redis:[TAG]
+```
+
+If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
+
+```console
+git clone https://github.com/bitnami/containers.git
+cd bitnami/APP/VERSION/OPERATING-SYSTEM
+docker build -t bitnami/APP:latest .
+```
+
+**Persisting your database**
+
+Redis(R) provides a different range of [persistence options⁠](https://redis.io/topics/persistence). This contanier uses *AOF persistence by default* but it is easy to overwrite that configuration in a `docker-compose.yaml` file with this entry `command: /opt/bitnami/scripts/redis/run.sh --appendonly no`. Alternatively, you may use the `REDIS_AOF_ENABLED` env variable as explained in [Disabling AOF persistence⁠](https://github.com/bitnami/containers/blob/main/bitnami/redis#disabling-aof-persistence).
+
+If you remove the container all your data will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
+
+For persistence you should mount a directory at the `/bitnami` path. If the mounted directory is empty, it will be initialized on the first run.
+
+```console
+docker run \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -v /path/to/redis-persistence:/bitnami/redis/data \
+    bitnami/redis:latest
+```
+
+You can also do this by modifying the [`docker-compose.yml`⁠](https://github.com/bitnami/containers/blob/main/bitnami/redis/docker-compose.yml) file present in this repository:
+
+```yaml
+services:
+  redis:
+  ...
+    volumes:
+      - /path/to/redis-persistence:/bitnami/redis/data
+  ...
+```
+
+> NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
+
+**Connecting to other containers**
+
+Using [Docker container networking⁠](https://docs.docker.com/engine/userguide/networking/), a Redis(R) server running inside a container can easily be accessed by your application containers.
+
+Containers attached to the same network can communicate with each other using the container name as the hostname.
+
+**Using the Command Line**
+
+In this example, we will create a Redis(R) client instance that will connect to the server instance that is running on the same docker network as the client.
+
+**Step 1: Create a network**
+
+```console
+docker network create app-tier --driver bridge
+```
+
+**Step 2: Launch the Redis(R) server instance**
+
+Use the `--network app-tier` argument to the `docker run` command to attach the Redis(R) container to the `app-tier` network.
+
+```console
+docker run -d --name redis-server \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    --network app-tier \
+    bitnami/redis:latest
+```
+
+**Step 3: Launch your Redis(R) client instance**
+
+Finally we create a new container instance to launch the Redis(R) client and connect to the server created in the previous step:
+
+```console
+docker run -it --rm \
+    --network app-tier \
+    bitnami/redis:latest redis-cli -h redis-server
+```
+
+**Using a Docker Compose file**
+
+When not specified, Docker Compose automatically sets up a new network and attaches all deployed services to that network. However, we will explicitly define a new `bridge` network named `app-tier`. In this example we assume that you want to connect to the Redis(R) server from your own custom application image which is identified in the following snippet by the service name `myapp`.
+
+```yaml
+version: '2'
+
+networks:
+  app-tier:
+    driver: bridge
+
+services:
+  redis:
+    image: 'bitnami/redis:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    networks:
+      - app-tier
+  myapp:
+    image: 'YOUR_APPLICATION_IMAGE'
+    networks:
+      - app-tier
+```
+
+> **IMPORTANT**:
+>
+> 1. Please update the **YOUR_APPLICATION_IMAGE_** placeholder in the above snippet with your application image
+> 2. In your application container, use the hostname `redis` to connect to the Redis(R) server
+
+Launch the containers using:
+
+```console
+docker-compose up -d
+```
+
+**Configuration**
+
+**Environment variables**
+
+**Customizable environment variables**
+
+| Name                             | Description                                      | Default Value                              |
+| :------------------------------- | :----------------------------------------------- | :----------------------------------------- |
+| `REDIS_DATA_DIR`                 | Redis data directory                             | `${REDIS_VOLUME_DIR}/data`                 |
+| `REDIS_OVERRIDES_FILE`           | Redis config overrides file                      | `${REDIS_MOUNTED_CONF_DIR}/overrides.conf` |
+| `REDIS_DISABLE_COMMANDS`         | Commands to disable in Redis                     | `nil`                                      |
+| `REDIS_DATABASE`                 | Default Redis database                           | `redis`                                    |
+| `REDIS_AOF_ENABLED`              | Enable AOF                                       | `yes`                                      |
+| `REDIS_RDB_POLICY`               | Enable RDB policy persitence                     | `nil`                                      |
+| `REDIS_RDB_POLICY_DISABLED`      | Allows to enable RDB policy persistence          | `no`                                       |
+| `REDIS_MASTER_HOST`              | Redis master host (used by slaves)               | `nil`                                      |
+| `REDIS_MASTER_PORT_NUMBER`       | Redis master host port (used by slaves)          | `6379`                                     |
+| `REDIS_PORT_NUMBER`              | Redis port number                                | `$REDIS_DEFAULT_PORT_NUMBER`               |
+| `REDIS_ALLOW_REMOTE_CONNECTIONS` | Allow remote connection to the service           | `yes`                                      |
+| `REDIS_REPLICATION_MODE`         | Redis replication mode (values: master, slave)   | `nil`                                      |
+| `REDIS_REPLICA_IP`               | The replication announce ip                      | `nil`                                      |
+| `REDIS_REPLICA_PORT`             | The replication announce port                    | `nil`                                      |
+| `REDIS_EXTRA_FLAGS`              | Additional flags pass to 'redis-server' commands | `nil`                                      |
+| `ALLOW_EMPTY_PASSWORD`           | Allow password-less access                       | `no`                                       |
+| `REDIS_PASSWORD`                 | Password for Redis                               | `nil`                                      |
+| `REDIS_MASTER_PASSWORD`          | Redis master node password                       | `nil`                                      |
+| `REDIS_ACLFILE`                  | Redis ACL file                                   | `nil`                                      |
+| `REDIS_IO_THREADS_DO_READS`      | Enable multithreading when reading socket        | `nil`                                      |
+| `REDIS_IO_THREADS`               | Number of threads                                | `nil`                                      |
+| `REDIS_TLS_ENABLED`              | Enable TLS                                       | `no`                                       |
+| `REDIS_TLS_PORT_NUMBER`          | Redis TLS port (requires REDIS_ENABLE_TLS=yes)   | `6379`                                     |
+| `REDIS_TLS_CERT_FILE`            | Redis TLS certificate file                       | `nil`                                      |
+| `REDIS_TLS_CA_DIR`               | Directory containing TLS CA certificates         | `nil`                                      |
+| `REDIS_TLS_KEY_FILE`             | Redis TLS key file                               | `nil`                                      |
+| `REDIS_TLS_KEY_FILE_PASS`        | Redis TLS key file passphrase                    | `nil`                                      |
+| `REDIS_TLS_CA_FILE`              | Redis TLS CA file                                | `nil`                                      |
+| `REDIS_TLS_DH_PARAMS_FILE`       | Redis TLS DH parameter file                      | `nil`                                      |
+| `REDIS_TLS_AUTH_CLIENTS`         | Enable Redis TLS client authentication           | `yes`                                      |
+| `REDIS_SENTINEL_MASTER_NAME`     | Redis Sentinel master name                       | `nil`                                      |
+| `REDIS_SENTINEL_HOST`            | Redis Sentinel host                              | `nil`                                      |
+| `REDIS_SENTINEL_PORT_NUMBER`     | Redis Sentinel host port (used by slaves)        | `26379`                                    |
+
+**Read-only environment variables**
+
+| Name                        | Description                           | Value                           |
+| :-------------------------- | :------------------------------------ | :------------------------------ |
+| `REDIS_VOLUME_DIR`          | Persistence base directory            | `/bitnami/redis`                |
+| `REDIS_BASE_DIR`            | Redis installation directory          | `${BITNAMI_ROOT_DIR}/redis`     |
+| `REDIS_CONF_DIR`            | Redis configuration directory         | `${REDIS_BASE_DIR}/etc`         |
+| `REDIS_DEFAULT_CONF_DIR`    | Redis default configuration directory | `${REDIS_BASE_DIR}/etc.default` |
+| `REDIS_MOUNTED_CONF_DIR`    | Redis mounted configuration directory | `${REDIS_BASE_DIR}/mounted-etc` |
+| `REDIS_CONF_FILE`           | Redis configuration file              | `${REDIS_CONF_DIR}/redis.conf`  |
+| `REDIS_LOG_DIR`             | Redis logs directory                  | `${REDIS_BASE_DIR}/logs`        |
+| `REDIS_LOG_FILE`            | Redis log file                        | `${REDIS_LOG_DIR}/redis.log`    |
+| `REDIS_TMP_DIR`             | Redis temporary directory             | `${REDIS_BASE_DIR}/tmp`         |
+| `REDIS_PID_FILE`            | Redis PID file                        | `${REDIS_TMP_DIR}/redis.pid`    |
+| `REDIS_BIN_DIR`             | Redis executables directory           | `${REDIS_BASE_DIR}/bin`         |
+| `REDIS_DAEMON_USER`         | Redis system user                     | `redis`                         |
+| `REDIS_DAEMON_GROUP`        | Redis system group                    | `redis`                         |
+| `REDIS_DEFAULT_PORT_NUMBER` | Redis port number (Build time)        | `6379`                          |
+
+**Disabling Redis(R) commands**
+
+For security reasons, you may want to disable some commands. You can specify them by using the following environment variable on the first run:
+
+- `REDIS_DISABLE_COMMANDS`: Comma-separated list of Redis(R) commands to disable. Defaults to empty.
+
+```console
+docker run --name redis -e REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL,CONFIG bitnami/redis:latest
+```
+
+Alternatively, modify the [`docker-compose.yml`⁠](https://github.com/bitnami/containers/blob/main/bitnami/redis/docker-compose.yml) file present in this repository:
+
+```yaml
+services:
+  redis:
+  ...
+    environment:
+      - REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL,CONFIG
+  ...
+```
+
+As specified in the docker-compose, `FLUSHDB` and `FLUSHALL` commands are disabled. Comment out or remove the environment variable if you don't want to disable any commands:
+
+```yaml
+services:
+  redis:
+  ...
+    environment:
+      # - REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
+  ...
+```
+
+**Passing extra command-line flags to redis-server startup**
+
+Passing extra command-line flags to the redis service command is possible by adding them as arguments to *run.sh* script:
+
+```console
+docker run --name redis -e ALLOW_EMPTY_PASSWORD=yes bitnami/redis:latest /opt/bitnami/scripts/redis/run.sh --maxmemory 100mb
+```
+
+Alternatively, modify the [`docker-compose.yml`⁠](https://github.com/bitnami/containers/blob/main/bitnami/redis/docker-compose.yml) file present in this repository:
+
+```yaml
+services:
+  redis:
+  ...
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    command: /opt/bitnami/scripts/redis/run.sh --maxmemory 100mb
+  ...
+```
+
+Refer to the [Redis(R) documentation⁠](https://redis.io/topics/config#passing-arguments-via-the-command-line) for the complete list of arguments.
+
+**Setting the server password on first run**
+
+Passing the `REDIS_PASSWORD` environment variable when running the image for the first time will set the Redis(R) server password to the value of `REDIS_PASSWORD` (or the content of the file specified in `REDIS_PASSWORD_FILE`).
+
+```console
+docker run --name redis -e REDIS_PASSWORD=password123 bitnami/redis:latest
+```
+
+Alternatively, modify the [`docker-compose.yml`⁠](https://github.com/bitnami/containers/blob/main/bitnami/redis/docker-compose.yml) file present in this repository:
+
+```yaml
+services:
+  redis:
+  ...
+    environment:
+      - REDIS_PASSWORD=password123
+  ...
+```
+
+**NOTE**: The at sign (`@`) is not supported for `REDIS_PASSWORD`.
+
+**Warning** The Redis(R) database is always configured with remote access enabled. It's suggested that the `REDIS_PASSWORD` env variable is always specified to set a password. In case you want to access the database without a password set the environment variable `ALLOW_EMPTY_PASSWORD=yes`. **This is recommended only for development**.
+
+**Allowing empty passwords**
+
+By default the Redis(R) image expects all the available passwords to be set. In order to allow empty passwords, it is necessary to set the `ALLOW_EMPTY_PASSWORD=yes` env variable. This env variable is only recommended for testing or development purposes. We strongly recommend specifying the `REDIS_PASSWORD` for any other scenario.
+
+```console
+docker run --name redis -e ALLOW_EMPTY_PASSWORD=yes bitnami/redis:latest
+```
+
+Alternatively, modify the [`docker-compose.yml`⁠](https://github.com/bitnami/containers/blob/main/bitnami/redis/docker-compose.yml) file present in this repository:
+
+```yaml
+services:
+  redis:
+  ...
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+  ...
+```
+
+**Enabling/Setting multithreading**
+
+Redis 6.0 features a [new multi-threading model⁠](https://segmentfault.com/a/1190000040376111/en). You can set both `io-threads` and `io-threads-do-reads` though the env vars `REDIS_IO_THREADS` and `REDIS_IO_THREADS_DO_READS`
+
+```console
+docker run --name redis -e REDIS_IO_THREADS=4 -e REDIS_IO_THREADS_DO_READS=yes bitnami/redis:latest
+```
+
+**Disabling AOF persistence**
+
+Redis(R) offers different [options⁠](https://redis.io/topics/persistence) when it comes to persistence. By default, this image is set up to use the AOF (Append Only File) approach. Should you need to change this behaviour, setting the `REDIS_AOF_ENABLED=no` env variable will disable this feature.
+
+```console
+docker run --name redis -e REDIS_AOF_ENABLED=no bitnami/redis:latest
+```
+
+Alternatively, modify the [`docker-compose.yml`⁠](https://github.com/bitnami/containers/blob/main/bitnami/redis/docker-compose.yml) file present in this repository:
+
+```yaml
+services:
+  redis:
+  ...
+    environment:
+      - REDIS_AOF_ENABLED=no
+  ...
+```
+
+**Enabling Access Control List**
+
+Redis(R) offers [ACL⁠](https://redis.io/topics/acl) since 6.0 which allows certain connections to be limited in terms of the commands that can be executed and the keys that can be accessed. We strongly recommend enabling ACL in production by specifiying the `REDIS_ACLFILE`.
+
+```console
+docker run -name redis -e REDIS_ACLFILE=/opt/bitnami/redis/mounted-etc/users.acl -v /path/to/users.acl:/opt/bitnami/redis/mounted-etc/users.acl bitnami/redis:latest
+```
+
+Alternatively, modify the [`docker-compose.yml`⁠](https://github.com/bitnami/containers/blob/main/bitnami/redis/docker-compose.yml) file present in this repository:
+
+```yaml
+services:
+  redis:
+  ...
+    environment:
+      - REDIS_ACLFILE=/opt/bitnami/redis/mounted-etc/users.acl
+    volumes:
+      - /path/to/users.acl:/opt/bitnami/redis/mounted-etc/users.acl
+  ...
+```
+
+**Setting up a standalone instance**
+
+By default, this image is set up to launch Redis(R) in standalone mode on port 6379. Should you need to change this behavior, setting the `REDIS_PORT_NUMBER` environment variable will modify the port number. This is not to be confused with `REDIS_MASTER_PORT_NUMBER` or `REDIS_REPLICA_PORT` environment variables that are applicable in replication mode.
+
+```console
+docker run --name redis -e REDIS_PORT_NUMBER=7000 -p 7000:7000 bitnami/redis:latest
+```
+
+Alternatively, modify the [`docker-compose.yml`⁠](https://github.com/bitnami/containers/blob/main/bitnami/redis/docker-compose.yml) file present in this repository:
+
+```yaml
+services:
+  redis:
+  ...
+    environment:
+      - REDIS_PORT_NUMBER=7000
+    ...
+    ports:
+      - '7000:7000'
+  ....
+```
+
+**Setting up replication**
+
+A [replication⁠](http://redis.io/topics/replication) cluster can easily be setup with the Bitnami Redis(R) Docker Image using the following environment variables:
+
+- `REDIS_REPLICATION_MODE`: The replication mode. Possible values `master`/`slave`. No defaults.
+- `REDIS_REPLICA_IP`: The replication announce ip. Defaults to `$(get_machine_ip)` which return the ip of the container.
+- `REDIS_REPLICA_PORT`: The replication announce port. Defaults to `REDIS_MASTER_PORT_NUMBER`.
+- `REDIS_MASTER_HOST`: Hostname/IP of replication master (replica node parameter). No defaults.
+- `REDIS_MASTER_PORT_NUMBER`: Server port of the replication master (replica node parameter). Defaults to `6379`.
+- `REDIS_MASTER_PASSWORD`: Password to authenticate with the master (replica node parameter). No defaults. As an alternative, you can mount a file with the password and set the `REDIS_MASTER_PASSWORD_FILE` variable.
+
+In a replication cluster you can have one master and zero or more replicas. When replication is enabled the master node is in read-write mode, while the replicas are in read-only mode. For best performance its advisable to limit the reads to the replicas.
+
+**Step 1: Create the replication master**
+
+The first step is to start the Redis(R) master.
+
+```console
+docker run --name redis-master \
+  -e REDIS_REPLICATION_MODE=master \
+  -e REDIS_PASSWORD=masterpassword123 \
+  bitnami/redis:latest
+```
+
+In the above command the container is configured as the `master` using the `REDIS_REPLICATION_MODE` parameter. The `REDIS_PASSWORD` parameter enables authentication on the Redis(R) master.
+
+**Step 2: Create the replica node**
+
+Next we start a Redis(R) replica container.
+
+```console
+docker run --name redis-replica \
+  --link redis-master:master \
+  -e REDIS_REPLICATION_MODE=slave \
+  -e REDIS_MASTER_HOST=master \
+  -e REDIS_MASTER_PORT_NUMBER=6379 \
+  -e REDIS_MASTER_PASSWORD=masterpassword123 \
+  -e REDIS_PASSWORD=password123 \
+  bitnami/redis:latest
+```
+
+In the above command the container is configured as a `slave` using the `REDIS_REPLICATION_MODE` parameter. The `REDIS_MASTER_HOST`, `REDIS_MASTER_PORT_NUMBER` and `REDIS_MASTER_PASSWORD` parameters are used connect and authenticate with the Redis(R) master. The `REDIS_PASSWORD` parameter enables authentication on the Redis(R) replica.
+
+You now have a two node Redis(R) master/replica replication cluster up and running which can be scaled by adding/removing replicas.
+
+If the Redis(R) master goes down you can reconfigure a replica to become a master using:
+
+```console
+docker exec redis-replica redis-cli -a password123 SLAVEOF NO ONE
+```
+
+> **Note**: The configuration of the other replicas in the cluster needs to be updated so that they are aware of the new master. In our example, this would involve restarting the other replicas with `--link redis-replica:master`.
+
+With Docker Compose the master/replica mode can be setup using:
+
+```yaml
+version: '2'
+
+services:
+  redis-master:
+    image: 'bitnami/redis:latest'
+    ports:
+      - '6379'
+    environment:
+      - REDIS_REPLICATION_MODE=master
+      - REDIS_PASSWORD=my_master_password
+    volumes:
+      - '/path/to/redis-persistence:/bitnami'
+
+  redis-replica:
+    image: 'bitnami/redis:
+
+_Note: the README for this container is longer than the DockerHub length limit of 25000, so it has been trimmed. The full README can be found at https://github.com/bitnami/containers/blob/main/bitnami/redis/README.md_
+```
+
+
+
+
+
+# music-tag-web
+
+https://xiers-organization.gitbook.io/music-tag-web-v2/kuai-su-kai-shi/docker-bu-shu
+
+```shell
+docker pull xhongc/music_tag_web:latest
+
+mkdir -p /mnt/sda1/docker/music-tag-web-default/config
+
+docker run -itd -p 48260:8002 -v /mnt/sda1/docker/httpd-default/htdocs/Music:/app/media -v /mnt/sda1/docker/music-tag-web-default/config:/app/data --name=music-tag-web-default --restart=unless-stopped xhongc/music_tag_web:latest 
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

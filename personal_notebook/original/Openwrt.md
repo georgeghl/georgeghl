@@ -235,6 +235,8 @@ B4:22:00
 #FUJIFILM Business Innovation Corp.
 08:00:37
 1C:7D:22
+#NEC Corporation
+D4:92:34
 ```
 
 
@@ -305,6 +307,227 @@ B4:22:00
 # 安装ipk包
 
 opkg install *.ipk
+
+
+
+
+
+
+
+# x86安装(pve)
+
+新建虚拟机，不需要添加磁盘、光盘。
+
+上传openwrt的img镜像到指定存储区，如data（/mnt/data/）
+
+新建完毕后，使用pve的终端运行：
+
+```shell
+qm importdisk 100 /mnt/data/template/iso/openwrt-xx-xx-xx.img data
+```
+
+然后在虚拟机的设置-硬件中启用该新增的磁盘，在选项-引导顺序中启用并将该磁盘放在首位。
+
+开机。等一会。
+
+按Enter，出现shell。
+
+## 添加/指定/配置wan口，配置br-lan的ip
+
+```shell
+cd /etc/config/
+cp network network.BAK
+vi network
+
+```
+
+修改/添加以下内容：
+
+```yml
+# 配置lan
+
+# (1)以下是192.168.x.x类型的私有局域网配置：
+config interface 'lan'
+	option type 'bridge'
+	option ifname 'eth0'
+	option proto 'static'
+	option ipaddr '192.168.123.1'
+	option netmask '255.255.255.0'
+	option delegate '0'
+
+
+
+
+
+# 配置wan
+config interface 'wan'
+	option ifname 'eth1'
+	option proto 'dhcp'
+	option metric '64'
+	option delegate '0'
+	
+config interface 'wan6'
+	option proto 'dhcp6'
+	option ifname 'eth1'
+	option delegate '0'
+	option reqaddress 'none'
+	option reqprefix 'no'
+	
+```
+
+## 允许wan口访问/管理
+
+```shell
+cd /etc/config/
+cp firewall firewall.BAK
+vi firewall
+```
+
+然后修改(添加)：
+
+```yml
+config rule
+    option src 'wan'
+    option dest_port '80'
+    option target 'ACCEPT'
+    option proto 'tcp'
+    option name 'Allow-Remote-HTTP'
+```
+
+最后：
+
+```shell
+/etc/init.d/firewall restart
+```
+
+# [在PVE下安装OpenWrt并配置旁路由](https://neverup.cn/p/pve-openwrt-1/)
+
+**下载OpenWrt固件**
+
+因为我用的是X86小主机，所以本教程以X86为例，其他的架构也大同小异。
+
+首先，打开[OpenWrt官网](https://downloads.openwrt.org/)（有动手能力的小伙伴也可以尝试自己编译固件）。我这里选择了OpenWrt 24.10.0。点击`targets`。往下滑，找到`X86`。继续点击`64`。下载最上面的`generic-ext4-combined-efi.img.gz`。
+
+**在PVE中安装OpenWrt**
+
+登录PVE后台，然后点击右上角的`创建虚拟机`。随便起一个名称。`VM ID`这里需要记一下，等会要用。然后点击下一步。这里选择`不使用任何介质`。然后点击下一步,这里的设置保持默认即可。点击下一步，这里直接`删除磁盘`。点击下一步，这里的类别改成`host`（这样运行效率更高），插槽和核心按需修改。点击下一步，这里的内存按需分配，一般512MB-1024MB就够了。（这里可以点`高级`，然后把`Ballooning设备`（动态分配内存）取消勾选）。点击下一步，这里保持默认。最后检查一下所有信息是否有误，点击完成。不过这时候还不能直接运行（硬盘还没配置呢）
+
+**img格式转化为gcow2**
+
+为了适配PVE，这里需要把img格式转化为qcow2格式。首先使用SSH工具登录PVE，这里我使用的SSH工具是MobaXterm。为方便后续操作，把下载的文件重命名为`openwrt-24.10.0.img`。把`openwrt-24.10.0.img`上传：
+
+```
+qm importdisk 100 /mnt/data/template/iso/openwrt-xx-xx-xx.img data
+```
+
+提示successfully 说明转化成功。
+
+**OpenWrt的初次开机安装**
+
+回到PVE中，找到`硬件`这里的`未使用的磁盘`，双击一下。点击`添加`。然后点击左侧的`选项`，双击`引导顺序`。勾选`scsi0(刚才添加到硬盘)`，然后`移动到第一项`，最后点击OK。在控制台中点击`Start Now`开机。修改OpenWrt的IP。在控制台中，输入`vi /etc/config/network`。然后需要把192.168.1.1改成你需要的ip（按i即可编辑）改完之后，按Esc（图片所示），输入`:wq`，回车。然后输入`reboot`，重启系统。
+
+**OpenWrt的初步配置**
+
+在浏览器输入IP（你刚才修改的）访问OpenWrt。点`Log in`登录（密码为空）确定可以访问后，回到PVE，找到`选项`，把`开机自启动`勾选上。OpenWrt已经安装好了，下面开始OpenWrt的初步配置。修改密码、配置网络。
+
+首先，点击Network，然后点击子菜单Interfaces。点击Edit，填写主路由的IP，设置DNS，因为是旁路由，先把DHCP关了。最后一定要点击`Save Apply`（保存并应用）。
+
+更换opkg为国内源，点击导航栏上的`System`，然后点击子菜单`Software`。点击`Configure opkg`。然后用下面的内容覆盖原有的/etc/opkg/distfeeds.conf，然后点击OK。
+
+```
+src/gz openwrt_core https://mirrors.tuna.tsinghua.edu.cn/openwrt/releases/24.10.0/targets/x86/64/packages
+src/gz openwrt_base https://mirrors.tuna.tsinghua.edu.cn/openwrt/releases/24.10.0/packages/x86_64/base
+src/gz openwrt_luci https://mirrors.tuna.tsinghua.edu.cn/openwrt/releases/24.10.0/packages/x86_64/luci
+src/gz openwrt_packages https://mirrors.tuna.tsinghua.edu.cn/openwrt/releases/24.10.0/packages/x86_64/packages
+src/gz openwrt_routing https://mirrors.tuna.tsinghua.edu.cn/openwrt/releases/24.10.0/packages/x86_64/routing
+src/gz openwrt_telephony https://mirrors.tuna.tsinghua.edu.cn/openwrt/releases/24.10.0/packages/x86_64/telephony
+```
+
+然后点击`Update lists…`。然后自己刷新一下页面，如果下面出现了软件包，说明配置好了。
+
+安装argo主题：在Software中搜索框依次搜索并安装`luci-compat`、`luci-lib-ipkg`、`luci-i18n-base-zh-cn`，
+
+然后下载文件https://github.com/jerrykuku/luci-theme-argon/releases/download/v2.3.2/luci-theme-argon_2.3.2-r20250207_all.ipk，再上传文件（Upload Package），最后刷新一下就OK了。
+
+**旁路由配置**
+
+来到`防火墙`，取消勾选`启用SYN-flood防御`，然后把`入站数据，出站数据，转发`都改成`接受`。往下滑，找到`区域`。把`wan`口`删除`，`lan`口勾选`IP动态伪装`。最后点击`保存并应用`。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

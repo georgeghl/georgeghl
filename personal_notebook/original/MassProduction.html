@@ -1,0 +1,841 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+
+<link href='https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700,700italic&subset=latin,cyrillic-ext,cyrillic,latin-ext' rel='stylesheet' type='text/css' /><style type='text/css'>html {overflow-x: initial !important;}:root { --bg-color:#ffffff; --text-color:#333333; --select-text-bg-color:#B5D6FC; --select-text-font-color:auto; --monospace:"Lucida Console",Consolas,"Courier",monospace; --title-bar-height:20px; }
+.mac-os-11 { --title-bar-height:28px; }
+html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+h1, h2, h3, h4, h5 { white-space: pre-wrap; }
+body { margin: 0px; padding: 0px; height: auto; inset: 0px; font-size: 1rem; line-height: 1.42857; overflow-x: hidden; background: inherit; tab-size: 4; }
+iframe { margin: auto; }
+a.url { word-break: break-all; }
+a:active, a:hover { outline: 0px; }
+.in-text-selection, ::selection { text-shadow: none; background: var(--select-text-bg-color); color: var(--select-text-font-color); }
+#write { margin: 0px auto; height: auto; width: inherit; word-break: normal; overflow-wrap: break-word; position: relative; white-space: normal; overflow-x: visible; padding-top: 36px; }
+#write.first-line-indent p { text-indent: 2em; }
+#write.first-line-indent li p, #write.first-line-indent p * { text-indent: 0px; }
+#write.first-line-indent li { margin-left: 2em; }
+.for-image #write { padding-left: 8px; padding-right: 8px; }
+body.typora-export { padding-left: 30px; padding-right: 30px; }
+.typora-export .footnote-line, .typora-export li, .typora-export p { white-space: pre-wrap; }
+.typora-export .task-list-item input { pointer-events: none; }
+@media screen and (max-width: 500px) {
+  body.typora-export { padding-left: 0px; padding-right: 0px; }
+  #write { padding-left: 20px; padding-right: 20px; }
+}
+#write li > figure:last-child { margin-bottom: 0.5rem; }
+#write ol, #write ul { position: relative; }
+img { max-width: 100%; vertical-align: middle; image-orientation: from-image; }
+button, input, select, textarea { color: inherit; font: inherit; }
+input[type="checkbox"], input[type="radio"] { line-height: normal; padding: 0px; }
+*, ::after, ::before { box-sizing: border-box; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre { width: inherit; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p { position: relative; }
+p { line-height: inherit; }
+h1, h2, h3, h4, h5, h6 { break-after: avoid-page; break-inside: avoid; orphans: 4; }
+p { orphans: 4; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1rem; }
+.md-math-block, .md-rawblock, h1, h2, h3, h4, h5, h6, p { margin-top: 1rem; margin-bottom: 1rem; }
+.hidden { display: none; }
+.md-blockmeta { color: rgb(204, 204, 204); font-weight: 700; font-style: italic; }
+a { cursor: pointer; }
+sup.md-footnote { padding: 2px 4px; background-color: rgba(238, 238, 238, 0.7); color: rgb(85, 85, 85); border-radius: 4px; cursor: pointer; }
+sup.md-footnote a, sup.md-footnote a:hover { color: inherit; text-transform: inherit; text-decoration: inherit; }
+#write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; }
+figure { overflow-x: auto; margin: 1.2em 0px; max-width: calc(100% + 16px); padding: 0px; }
+figure > table { margin: 0px; }
+thead, tr { break-inside: avoid; break-after: auto; }
+thead { display: table-header-group; }
+table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; break-inside: auto; text-align: left; }
+table.md-table td { min-width: 32px; }
+.CodeMirror-gutters { border-right: 0px; background-color: inherit; }
+.CodeMirror-linenumber { user-select: none; }
+.CodeMirror { text-align: left; }
+.CodeMirror-placeholder { opacity: 0.3; }
+.CodeMirror pre { padding: 0px 4px; }
+.CodeMirror-lines { padding: 0px; }
+div.hr:focus { cursor: none; }
+#write pre { white-space: pre-wrap; }
+#write.fences-no-line-wrapping pre { white-space: pre; }
+#write pre.ty-contain-cm { white-space: normal; }
+.CodeMirror-gutters { margin-right: 4px; }
+.md-fences { font-size: 0.9rem; display: block; break-inside: avoid; text-align: left; overflow: visible; white-space: pre; background: inherit; position: relative !important; }
+.md-fences-adv-panel { width: 100%; margin-top: 10px; text-align: center; padding-top: 0px; padding-bottom: 8px; overflow-x: auto; }
+#write .md-fences.mock-cm { white-space: pre-wrap; }
+.md-fences.md-fences-with-lineno { padding-left: 0px; }
+#write.fences-no-line-wrapping .md-fences.mock-cm { white-space: pre; overflow-x: auto; }
+.md-fences.mock-cm.md-fences-with-lineno { padding-left: 8px; }
+.CodeMirror-line, twitterwidget { break-inside: avoid; }
+svg { break-inside: avoid; }
+.footnotes { opacity: 0.8; font-size: 0.9rem; margin-top: 1em; margin-bottom: 1em; }
+.footnotes + .footnotes { margin-top: 0px; }
+.md-reset { margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: top; background: 0px 0px; text-decoration: none; text-shadow: none; float: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; -webkit-tap-highlight-color: transparent; line-height: normal; font-weight: 400; text-align: left; box-sizing: content-box; direction: ltr; }
+li div { padding-top: 0px; }
+blockquote { margin: 1rem 0px; }
+li .mathjax-block, li p { margin: 0.5rem 0px; }
+li blockquote { margin: 1rem 0px; }
+li { margin: 0px; position: relative; }
+blockquote > :last-child { margin-bottom: 0px; }
+blockquote > :first-child, li > :first-child { margin-top: 0px; }
+.footnotes-area { color: rgb(136, 136, 136); margin-top: 0.714rem; padding-bottom: 0.143rem; white-space: normal; }
+#write .footnote-line { white-space: pre-wrap; }
+@media print {
+  body, html { border: 1px solid transparent; height: 99%; break-after: avoid; break-before: avoid; font-variant-ligatures: no-common-ligatures; }
+  #write { margin-top: 0px; border-color: transparent !important; padding-top: 0px !important; padding-bottom: 0px !important; }
+  .typora-export * { -webkit-print-color-adjust: exact; }
+  .typora-export #write { break-after: avoid; }
+  .typora-export #write::after { height: 0px; }
+  .is-mac table { break-inside: avoid; }
+  #write > p:nth-child(1) { margin-top: 0px; }
+  .typora-export-show-outline .typora-export-sidebar { display: none; }
+  figure { overflow-x: visible; }
+}
+.footnote-line { margin-top: 0.714em; font-size: 0.7em; }
+a img, img a { cursor: pointer; }
+pre.md-meta-block { font-size: 0.8rem; min-height: 0.8rem; white-space: pre-wrap; background: rgb(204, 204, 204); display: block; overflow-x: hidden; }
+p > .md-image:only-child:not(.md-img-error) img, p > img:only-child { display: block; margin: auto; }
+#write.first-line-indent p > .md-image:only-child:not(.md-img-error) img { left: -2em; position: relative; }
+p > .md-image:only-child { display: inline-block; width: 100%; }
+#write .MathJax_Display { margin: 0.8em 0px 0px; }
+.md-math-block { width: 100%; }
+.md-math-block:not(:empty)::after { display: none; }
+.MathJax_ref { fill: currentcolor; }
+[contenteditable="true"]:active, [contenteditable="true"]:focus, [contenteditable="false"]:active, [contenteditable="false"]:focus { outline: 0px; box-shadow: none; }
+.md-task-list-item { position: relative; list-style-type: none; }
+.task-list-item.md-task-list-item { padding-left: 0px; }
+.md-task-list-item > input { position: absolute; top: 0px; left: 0px; margin-left: -1.2em; margin-top: calc(1em - 10px); border: none; }
+.math { font-size: 1rem; }
+.md-toc { min-height: 3.58rem; position: relative; font-size: 0.9rem; border-radius: 10px; }
+.md-toc-content { position: relative; margin-left: 0px; }
+.md-toc-content::after, .md-toc::after { display: none; }
+.md-toc-item { display: block; color: rgb(65, 131, 196); }
+.md-toc-item a { text-decoration: none; }
+.md-toc-inner:hover { text-decoration: underline; }
+.md-toc-inner { display: inline-block; cursor: pointer; }
+.md-toc-h1 .md-toc-inner { margin-left: 0px; font-weight: 700; }
+.md-toc-h2 .md-toc-inner { margin-left: 2em; }
+.md-toc-h3 .md-toc-inner { margin-left: 4em; }
+.md-toc-h4 .md-toc-inner { margin-left: 6em; }
+.md-toc-h5 .md-toc-inner { margin-left: 8em; }
+.md-toc-h6 .md-toc-inner { margin-left: 10em; }
+@media screen and (max-width: 48em) {
+  .md-toc-h3 .md-toc-inner { margin-left: 3.5em; }
+  .md-toc-h4 .md-toc-inner { margin-left: 5em; }
+  .md-toc-h5 .md-toc-inner { margin-left: 6.5em; }
+  .md-toc-h6 .md-toc-inner { margin-left: 8em; }
+}
+a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
+.footnote-line a:not(.reversefootnote) { color: inherit; }
+.reversefootnote { font-family: ui-monospace, sans-serif; }
+.md-attr { display: none; }
+.md-fn-count::after { content: "."; }
+code, pre, samp, tt { font-family: var(--monospace); }
+kbd { margin: 0px 0.1em; padding: 0.1em 0.6em; font-size: 0.8em; color: rgb(36, 39, 41); background: rgb(255, 255, 255); border: 1px solid rgb(173, 179, 185); border-radius: 3px; box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; white-space: nowrap; vertical-align: middle; }
+.md-comment { color: rgb(162, 127, 3); opacity: 0.6; font-family: var(--monospace); }
+code { text-align: left; vertical-align: initial; }
+a.md-print-anchor { white-space: pre !important; border-width: initial !important; border-style: none !important; border-color: initial !important; display: inline-block !important; position: absolute !important; width: 1px !important; right: 0px !important; outline: 0px !important; background: 0px 0px !important; text-decoration: initial !important; text-shadow: initial !important; }
+.os-windows.monocolor-emoji .md-emoji { font-family: "Segoe UI Symbol", sans-serif; }
+.md-diagram-panel > svg { max-width: 100%; }
+[lang="flow"] svg, [lang="mermaid"] svg { max-width: 100%; height: auto; }
+[lang="mermaid"] .node text { font-size: 1rem; }
+table tr th { border-bottom: 0px; }
+video { max-width: 100%; display: block; margin: 0px auto; }
+iframe { max-width: 100%; width: 100%; border: none; }
+.highlight td, .highlight tr { border: 0px; }
+mark { background: rgb(255, 255, 0); color: rgb(0, 0, 0); }
+.md-html-inline .md-plain, .md-html-inline strong, mark .md-inline-math, mark strong { color: inherit; }
+.md-expand mark .md-meta { opacity: 0.3 !important; }
+mark .md-meta { color: rgb(0, 0, 0); }
+@media print {
+  .typora-export h1, .typora-export h2, .typora-export h3, .typora-export h4, .typora-export h5, .typora-export h6 { break-inside: avoid; }
+}
+.md-diagram-panel .messageText { stroke: none !important; }
+.md-diagram-panel .start-state { fill: var(--node-fill); }
+.md-diagram-panel .edgeLabel rect { opacity: 1 !important; }
+.md-fences.md-fences-math { font-size: 1em; }
+.md-fences-advanced:not(.md-focus) { padding: 0px; white-space: nowrap; border: 0px; }
+.md-fences-advanced:not(.md-focus) { background: inherit; }
+.typora-export-show-outline .typora-export-content { max-width: 1440px; margin: auto; display: flex; flex-direction: row; }
+.typora-export-sidebar { width: 300px; font-size: 0.8rem; margin-top: 80px; margin-right: 18px; }
+.typora-export-show-outline #write { --webkit-flex:2; flex: 2 1 0%; }
+.typora-export-sidebar .outline-content { position: fixed; top: 0px; max-height: 100%; overflow: hidden auto; padding-bottom: 30px; padding-top: 60px; width: 300px; }
+@media screen and (max-width: 1024px) {
+  .typora-export-sidebar, .typora-export-sidebar .outline-content { width: 240px; }
+}
+@media screen and (max-width: 800px) {
+  .typora-export-sidebar { display: none; }
+}
+.outline-content li, .outline-content ul { margin-left: 0px; margin-right: 0px; padding-left: 0px; padding-right: 0px; list-style: none; overflow-wrap: anywhere; }
+.outline-content ul { margin-top: 0px; margin-bottom: 0px; }
+.outline-content strong { font-weight: 400; }
+.outline-expander { width: 1rem; height: 1.42857rem; position: relative; display: table-cell; vertical-align: middle; cursor: pointer; padding-left: 4px; }
+.outline-expander::before { content: ""; position: relative; font-family: Ionicons; display: inline-block; font-size: 8px; vertical-align: middle; }
+.outline-item { padding-top: 3px; padding-bottom: 3px; cursor: pointer; }
+.outline-expander:hover::before { content: ""; }
+.outline-h1 > .outline-item { padding-left: 0px; }
+.outline-h2 > .outline-item { padding-left: 1em; }
+.outline-h3 > .outline-item { padding-left: 2em; }
+.outline-h4 > .outline-item { padding-left: 3em; }
+.outline-h5 > .outline-item { padding-left: 4em; }
+.outline-h6 > .outline-item { padding-left: 5em; }
+.outline-label { cursor: pointer; display: table-cell; vertical-align: middle; text-decoration: none; color: inherit; }
+.outline-label:hover { text-decoration: underline; }
+.outline-item:hover { border-color: rgb(245, 245, 245); background-color: var(--item-hover-bg-color); }
+.outline-item:hover { margin-left: -28px; margin-right: -28px; border-left: 28px solid transparent; border-right: 28px solid transparent; }
+.outline-item-single .outline-expander::before, .outline-item-single .outline-expander:hover::before { display: none; }
+.outline-item-open > .outline-item > .outline-expander::before { content: ""; }
+.outline-children { display: none; }
+.info-panel-tab-wrapper { display: none; }
+.outline-item-open > .outline-children { display: block; }
+.typora-export .outline-item { padding-top: 1px; padding-bottom: 1px; }
+.typora-export .outline-item:hover { margin-right: -8px; border-right: 8px solid transparent; }
+.typora-export .outline-expander::before { content: "+"; font-family: inherit; top: -1px; }
+.typora-export .outline-expander:hover::before, .typora-export .outline-item-open > .outline-item > .outline-expander::before { content: "−"; }
+.typora-export-collapse-outline .outline-children { display: none; }
+.typora-export-collapse-outline .outline-item-open > .outline-children, .typora-export-no-collapse-outline .outline-children { display: block; }
+.typora-export-no-collapse-outline .outline-expander::before { content: "" !important; }
+.typora-export-show-outline .outline-item-active > .outline-item .outline-label { font-weight: 700; }
+.md-inline-math-container mjx-container { zoom: 0.95; }
+mjx-container { break-inside: avoid; }
+
+
+/* meyer reset -- http://meyerweb.com/eric/tools/css/reset/ , v2.0 | 20110126 | License: none (public domain) */
+
+@include-when-export url(https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700,700italic&subset=latin,cyrillic-ext,cyrillic,latin-ext);
+
+/* =========== */
+
+/* pt-serif-regular - latin */
+/* pt-serif-italic - latin */
+/* pt-serif-700 - latin */
+/* pt-serif-700italic - latin */
+:root {
+	--active-file-bg-color: #dadada;
+	--active-file-bg-color: rgba(32, 43, 51, 0.63);
+	--active-file-text-color: white;
+	--bg-color: #f3f2ee;
+	--text-color: #1f0909;
+	--control-text-color: #444;
+	--rawblock-edit-panel-bd: #e5e5e5;
+
+	--select-text-bg-color: rgba(32, 43, 51, 0.63);
+  --select-text-font-color: white;
+}
+
+pre {
+	--select-text-bg-color: #36284e;
+	--select-text-font-color: #fff;
+}
+
+html {
+	font-size: 16px;
+	-webkit-font-smoothing: antialiased;
+}
+
+html, body {
+	background-color: #f3f2ee;
+	font-family: "PT Serif", 'Times New Roman', Times, serif;
+	color: #1f0909;
+	line-height: 1.5em;
+}
+
+/*#write {
+	overflow-x: auto;
+    max-width: initial;
+	padding-left: calc(50% - 17em);
+    padding-right: calc(50% - 17em);
+}
+
+@media (max-width: 36em) {
+ 	#write {
+ 		padding-left: 1em;
+    	padding-right: 1em;
+ 	}
+}*/
+
+#write {
+	max-width: 40em;
+}
+
+@media only screen and (min-width: 1400px) {
+	#write {
+			max-width: 914px;
+	}
+}
+
+ol li {
+	list-style-type: decimal;
+	list-style-position: outside;
+}
+ul li {
+	list-style-type: disc;
+	list-style-position: outside;
+}
+
+ol,
+ul {
+	list-style: none;
+}
+
+blockquote,
+q {
+	quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/* styles */
+
+/* ====== */
+
+/* headings */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-weight: bold;
+}
+h1 {
+	font-size: 1.875em;
+	/*30 / 16*/
+	line-height: 1.6em;
+	/* 48 / 30*/
+	margin-top: 2em;
+}
+h2,
+h3 {
+	font-size: 1.3125em;
+	/*21 / 16*/
+	line-height: 1.15;
+	/*24 / 21*/
+	margin-top: 2.285714em;
+	/*48 / 21*/
+	margin-bottom: 1.15em;
+	/*24 / 21*/
+}
+h3 {
+	font-weight: normal;
+}
+h4 {
+	font-size: 1.125em;
+	/*18 / 16*/
+	margin-top: 2.67em;
+	/*48 / 18*/
+}
+h5,
+h6 {
+	font-size: 1em;
+	/*16*/
+}
+h1 {
+	border-bottom: 1px solid;
+	margin-bottom: 1.875em;
+	padding-bottom: 0.8125em;
+}
+/* links */
+
+a {
+	text-decoration: none;
+	color: #065588;
+}
+a:hover,
+a:active {
+	text-decoration: underline;
+}
+/* block spacing */
+
+p,
+blockquote,
+.md-fences {
+	margin-bottom: 1.5em;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	margin-bottom: 1.5em;
+}
+/* blockquote */
+
+blockquote {
+	font-style: italic;
+	border-left: 5px solid;
+	margin-left: 2em;
+	padding-left: 1em;
+}
+/* lists */
+
+ul,
+ol {
+	margin: 0 0 1.5em 1.5em;
+}
+/* tables */
+.md-meta,.md-before, .md-after {
+	color:#999;
+}
+
+table {
+	margin-bottom: 1.5em;
+	/*24 / 16*/
+	font-size: 1em;
+	/* width: 100%; */
+}
+thead th,
+tfoot th {
+	padding: .25em .25em .25em .4em;
+	text-transform: uppercase;
+}
+th {
+	text-align: left;
+}
+td {
+	vertical-align: top;
+	padding: .25em .25em .25em .4em;
+}
+
+code,
+.md-fences {
+	background-color: #dadada;
+}
+
+code {
+	padding-left: 2px;
+	padding-right: 2px;
+}
+
+.md-fences {
+	margin-left: 2em;
+	margin-bottom: 3em;
+	padding-left: 1ch;
+	padding-right: 1ch;
+}
+
+pre,
+code,
+tt {
+	font-size: .875em;
+	line-height: 1.714285em;
+}
+/* some fixes */
+
+h1 {
+	line-height: 1.3em;
+	font-weight: normal;
+	margin-bottom: 0.5em;
+}
+
+p + ul,
+p + ol{
+	margin-top: .5em;
+}
+
+h3 + ul,
+h4 + ul,
+h5 + ul,
+h6 + ul,
+h3 + ol,
+h4 + ol,
+h5 + ol,
+h6 + ol {
+	margin-top: .5em;
+}
+
+li > ul,
+li > ol {
+	margin-top: inherit;
+	margin-bottom: 0;
+}
+
+li ol>li {
+	list-style-type: lower-alpha;
+}
+
+li li ol>li{
+	list-style-type: lower-roman;
+}
+
+h2,
+h3 {
+	margin-bottom: .75em;
+}
+hr {
+	border-top: none;
+	border-right: none;
+	border-bottom: 1px solid;
+	border-left: none;
+}
+h1 {
+	border-color: #c5c5c5;
+}
+blockquote {
+	border-color: #bababa;
+	color: #656565;
+}
+
+blockquote ul,
+blockquote ol {
+	margin-left:0;
+}
+
+.ty-table-edit {
+	background-color: transparent;
+}
+thead {
+	background-color: #dadada;
+}
+tr:nth-child(even) {
+	background: #e8e7e7;
+}
+hr {
+	border-color: #c5c5c5;
+}
+.task-list{
+	padding-left: 1rem;
+}
+
+.md-task-list-item {
+	padding-left: 1.5rem;
+	list-style-type: none;
+}
+
+.md-task-list-item > input:before {
+	content: '\221A';
+	display: inline-block;
+	width: 1.25rem;
+  	height: 1.6rem;
+	vertical-align: middle;
+	text-align: center;
+	color: #ddd;
+	background-color: #F3F2EE;
+}
+
+.md-task-list-item > input:checked:before,
+.md-task-list-item > input[checked]:before{
+	color: inherit;
+}
+
+#write pre.md-meta-block {
+	min-height: 1.875rem;
+	color: #555;
+	border: 0px;
+	background: transparent;
+	margin-top: -4px;
+	margin-left: 1em;
+	margin-top: 1em;
+}
+
+.md-image>.md-meta {
+	color: #9B5146;
+}
+
+.md-image>.md-meta{
+	font-family: Menlo, 'Ubuntu Mono', Consolas, 'Courier New', 'Microsoft Yahei', 'Hiragino Sans GB', 'WenQuanYi Micro Hei', serif;
+}
+
+
+#write>h3.md-focus:before{
+	left: -1.5rem;
+	color:#999;
+	border-color:#999;
+}
+#write>h4.md-focus:before{
+	left: -1.5rem;
+	top: .25rem;
+	color:#999;
+	border-color:#999;
+}
+#write>h5.md-focus:before{
+	left: -1.5rem;
+	top: .0.3125rem;
+	color:#999;
+	border-color:#999;
+}
+#write>h6.md-focus:before{
+	left: -1.5rem;
+	top: 0.3125rem;
+	color:#999;
+	border-color:#999;
+}
+
+.md-toc:focus .md-toc-content{
+	margin-top: 19px;
+}
+
+.md-toc-content:empty:before{
+	color: #065588;
+}
+.md-toc-item {
+	color: #065588;
+}
+#write div.md-toc-tooltip {
+	background-color: #f3f2ee;
+}
+
+#typora-sidebar {
+	background-color: #f3f2ee;
+	-webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.375);
+  	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.375);
+}
+
+.pin-outline #typora-sidebar {
+	background: inherit;
+	box-shadow: none;
+	border-right: 1px dashed;
+}
+
+.pin-outline #typora-sidebar:hover .outline-title-wrapper {
+	border-left:1px dashed;
+}
+
+.outline-item:hover {
+  background-color: #dadada;
+  border-left: 28px solid #dadada;
+  border-right: 18px solid #dadada;
+}
+
+.typora-node .outline-item:hover {
+  	border-right: 28px solid #dadada;
+}
+
+.outline-expander:before {
+  content: "\f0da";
+  font-family: FontAwesome;
+  font-size:14px;
+  top: 1px;
+}
+
+.outline-expander:hover:before,
+.outline-item-open>.outline-item>.outline-expander:before {
+  content: "\f0d7";
+}
+
+.modal-content {
+	background-color: #f3f2ee;
+}
+
+.auto-suggest-container ul li {
+	list-style-type: none;
+}
+
+/** UI for electron */
+
+.megamenu-menu,
+#top-titlebar, #top-titlebar *,
+.megamenu-content {
+	background: #f3f2ee;
+	color: #1f0909;
+}
+
+.megamenu-menu-header {
+	border-bottom: 1px dashed #202B33;
+}
+
+.megamenu-menu {
+	box-shadow: none;
+	border-right: 1px dashed;
+}
+
+header, .context-menu, .megamenu-content, footer {
+	font-family: "PT Serif", 'Times New Roman', Times, serif;
+    color: #1f0909;
+}
+
+#megamenu-back-btn {
+	color: #1f0909;
+	border-color: #1f0909;
+}
+
+.megamenu-menu-header #megamenu-menu-header-title:before {
+	color: #1f0909;
+}
+
+.megamenu-menu-list li a:hover, .megamenu-menu-list li a.active {
+	color: inherit;
+	background-color: #e8e7df;
+}
+
+.long-btn:hover {
+	background-color: #e8e7df;
+}
+
+#recent-file-panel tbody tr:nth-child(2n-1) {
+    background-color: transparent !important;
+}
+
+.megamenu-menu-panel tbody tr:hover td:nth-child(2) {
+    color: inherit;
+}
+
+.megamenu-menu-panel .btn {
+	background-color: #D2D1D1;
+}
+
+.btn-default {
+	background-color: transparent;
+}
+
+.typora-sourceview-on #toggle-sourceview-btn,
+.ty-show-word-count #footer-word-count {
+	background: #c7c5c5;
+}
+
+#typora-quick-open {
+    background-color: inherit;
+}
+
+.md-diagram-panel {
+	margin-top: 8px;
+}
+
+.file-list-item-file-name {
+	font-weight: initial;
+}
+
+.file-list-item-summary {
+	opacity: 1;
+}
+
+.file-list-item {
+	color: #777;
+}
+
+.file-list-item.active {
+	background-color: inherit;
+	color: black;
+}
+
+.ty-side-sort-btn.active {
+	background-color: inherit;
+}
+
+.file-list-item.active .file-list-item-file-name  {
+	font-weight: bold;
+}
+
+.file-list-item{
+    opacity:1 !important;
+}
+
+.file-library-node.active>.file-node-background{
+	background-color: rgba(32, 43, 51, 0.63);
+	background-color: var(--active-file-bg-color);
+}
+
+.file-tree-node.active>.file-node-content{
+	color: white;
+	color: var(--active-file-text-color);
+}
+
+.md-task-list-item>input {
+	margin-left: -1.7em;
+	margin-top: calc(1rem - 12px);
+	-webkit-appearance: button;
+}
+
+input {
+	border: 1px solid #aaa;
+}
+
+.megamenu-menu-header #megamenu-menu-header-title,
+.megamenu-menu-header:hover, 
+.megamenu-menu-header:focus {
+	color: inherit;
+}
+
+.dropdown-menu .divider {
+	border-color: #e5e5e5;
+	opacity: 1;
+}
+
+/* https://github.com/typora/typora-issues/issues/2046 */
+.os-windows-7 strong,
+.os-windows-7 strong  {
+	font-weight: 760;
+}
+
+.ty-preferences .btn-default {
+	background: transparent;
+}
+
+.ty-preferences .window-header {
+	border-bottom: 1px dashed #202B33;
+	box-shadow: none;
+}
+
+#sidebar-loading-template, #sidebar-loading-template.file-list-item {
+	color: #777;
+}
+
+.searchpanel-search-option-btn.active {
+	background: #777;
+	color: white;
+}
+
+.export-detail, .light .export-detail, 
+.light .export-item.active, 
+.light .export-items-list-control {
+	background: #e0e0e0;
+	border-radius: 2px;
+	font-weight: 700;
+	color: inherit
+}
+
+
+</style><title>MassProduction</title>
+</head>
+<body class='typora-export os-windows typora-export-show-outline typora-export-no-collapse-outline'><div class='typora-export-content'>
+<div class="typora-export-sidebar"><div class="outline-content"><li class="outline-item-wrapper outline-h1"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#some-useful-links">Some Useful Links</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h1"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#flashid">FlashID</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h1"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#固态主控参数汇总">固态主控参数汇总</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h1"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#3d-nand颗粒对比">3D NAND颗粒对比</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h1 outline-item-open"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#致钛-sc001-active-掉盘修复指南mas0902a-b2c-开卡教程）">致钛 SC001 Active 掉盘修复指南（MAS0902A-B2C 开卡教程）</a></div><ul class="outline-children"><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#准备工作">准备工作</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#操作步骤">操作步骤</a></div><ul class="outline-children"><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#2-进入开卡模式">2. 进入开卡模式</a></div><ul class="outline-children"></ul></li></ul></li><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#注意事项">注意事项</a></div><ul class="outline-children"></ul></li></ul></li><li class="outline-item-wrapper outline-h1"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#sm2263en开卡">SM2263EN开卡</a></div><ul class="outline-children"><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#1短接插电上机">1.短接，插电上机</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#2量产">2.量产</a></div><ul class="outline-children"></ul></li></ul></li></div></div><div id='write'  class=''><h1 id='some-useful-links'><span>Some Useful Links</span></h1><p><span>xfjportal share MPTOOL – Smi AU IS Phision … controller   </span><a href='https://xfjportal.com/' target='_blank' class='url'>https://xfjportal.com/</a></p><p><span>SSD utils (30.03.2025)   </span><a href='http://vlo.name:3000/ssdtool/' target='_blank' class='url'>http://vlo.name:3000/ssdtool/</a></p><p><a href='http://xmrom.kmdns.net:5000/' target='_blank' class='url'>http://xmrom.kmdns.net:5000/</a></p><p><a href='https://flashinfo.top/FlashInfo' target='_blank' class='url'>https://flashinfo.top/FlashInfo</a></p><p><a href='https://flash.microce.com.cn:8888/' target='_blank' class='url'>https://flash.microce.com.cn:8888/</a></p><p><span>SM2320G开卡工具 - EVA存储   </span><a href='https://www.evassd.cn/sm2320g%e5%bc%80%e5%8d%a1%e5%b7%a5%e5%85%b7/' target='_blank' class='url'>https://www.evassd.cn/sm2320g%e5%bc%80%e5%8d%a1%e5%b7%a5%e5%85%b7/</a></p><p><a href='http://tisensen.cn/index.php/archives/37/' target='_blank' class='url'>http://tisensen.cn/index.php/archives/37/</a></p><p><span>固态开卡工具下载站 </span><a href='http://xmrom.kmdns.net:5000/' target='_blank' class='url'>http://xmrom.kmdns.net:5000/</a><span> </span></p><p><span>毛子镜像站 </span><a href='http://usbdev.diyflash.top/' target='_blank' class='url'>http://usbdev.diyflash.top/</a><span> </span></p><p><span>匿名分享站 </span><a href='http://file.diyflash.top/' target='_blank' class='url'>http://file.diyflash.top/</a></p><p>&nbsp;</p><h1 id='flashid'><span>FlashID</span></h1><p><em><strong>品牌选择：</strong></em><br />
+89 //INTEL<br />
+2C //MICRON<br />
+98 //TOSHIBA<br />
+45 //SANDISK<br />
+AD //HYNIX<br />
+EC //SAMSUNG<br />
+9B //YMTC </p><p>&nbsp;</p><p><strong><span>SpecTek</span></strong></p><p><a href='https://www.spectek.com/menus/mark_code.aspx' target='_blank' class='url'>https://www.spectek.com/menus/mark_code.aspx</a></p><p><a href='https://www.mydigit.cn/thread-182785-1-1.html' target='_blank' class='url'>https://www.mydigit.cn/thread-182785-1-1.html</a></p><p><span>原话：</span>
+<span>Grade and Product Definition -AS = Full Spec for SSD (100%)</span>
+<span>-AL = Full Spec for USB/SD and low end SSD (100%)</span>
+<span>-AF = Full Spec for low end USB/SD (100%)</span>
+<span>-AR = Relaxed Spec (see Functional Density)</span>
+<span>-MB = Mixed Bins (35%)</span>
+<span>-ES = Engineering Sample</span>
+<span>-UT = Untested parts</span>
+<span>-S5 = Partially tested, est yield of 50% (EOL 4/15/19)</span>
+<span>-S7 = Partially tested, est yield of 75%</span>
+<span>-S8 = Partially tested, est yield of 85% (EOL 4/15/19)</span>
+<span>-S9 = Partially tested, est yield of 90%</span>
+<span>-SG = Simple Test Passers/Extended Test Failures (EOL 4/15/19)</span>
+<span>-SS = Simple Test Failures (EOL 4/15/19)</span></p><p><span>翻译过的：</span>
+<span>等级和产品定义-AS = SSD的完整规格（100％）</span>
+<span>-AL = USB / SD和低端SSD的完整规格（100％）</span>
+<span>-AF =低端USB / SD的完整规格（100％）</span>
+<span>-AR = 松弛规格（请参见功能密度）</span>
+<span>-MB =混合料桶（35％）</span>
+<span>-ES =工程样品-UT =未经测试的零件</span>
+<span>-S5 =部分测试，最理想的合格率为50％（EOL 4/15/19）</span>
+<span>-S7 =部分测试 ，最理想的合格率为75％</span>
+<span>-S8 =部分测试，最理想的合格率为85％（EOL 4/15/19）</span>
+<span>-S9 =唯一性测试，最理想的合格率为90％</span>
+<span>-SG =简单测试合格者/扩展测试失败（EOL 4 / 15/19）</span>
+<span>-SS =简单测试失败（EOL 4/15/19）</span></p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><h1 id='固态主控参数汇总'><span>固态主控参数汇总</span></h1><p><a href='http://tisensen.cn/index.php/archives/37/' target='_blank' class='url'>http://tisensen.cn/index.php/archives/37/</a></p><p><strong><span>美满电子Marvell主控资料</span></strong></p><figure class='table-figure'><table><thead><tr><th><span>型号</span></th><th><span>等级</span></th><th><span>制程</span></th><th><span>接口</span></th><th><span>最大通道</span></th><th><span>CE通道</span></th><th><span>最大速率</span></th><th><span>缓存</span></th><th><span>最大容量</span></th></tr></thead><tbody><tr><td><span>88SS8014</span></td><td><span>消费/企业</span></td><td><span>TSMC 90nm</span></td><td><span>SATA2</span></td><td><span>8</span></td><td><span>4</span></td><td><span>100MT/s</span></td><td><span>DRAM</span></td><td><span>256GB</span></td></tr><tr><td><span>88SS9174</span></td><td><span>消费/企业</span></td><td><span>TSMC 65nm</span></td><td><span>SATA3</span></td><td><span>8</span></td><td><span>4</span></td><td><span>133MT/s</span></td><td><span>DRAM</span></td><td><span>1TB</span></td></tr><tr><td><span>88SS9175</span></td><td><span>消费</span></td><td><span>TSMC 65nm</span></td><td><span>SATA3</span></td><td><span>4</span></td><td><span>4</span></td><td><span>133MT/s</span></td><td><span>DRAM</span></td><td><span>512GB</span></td></tr><tr><td><span>88SS9187</span></td><td><span>消费/企业</span></td><td><span>TSMC 55nm</span></td><td><span>SATA3</span></td><td><span>8</span></td><td><span>4</span></td><td><span>200MT/s</span></td><td><span>DRAM</span></td><td><span>2TB</span></td></tr><tr><td><span>88SS9188</span></td><td><span>消费</span></td><td><span>TSMC 55nm</span></td><td><span>SATA3</span></td><td><span>4</span></td><td><span>4</span></td><td><span>200MT/s</span></td><td><span>DRAM</span></td><td><span>1TB</span></td></tr><tr><td><span>88SS9189</span></td><td><span>消费/企业</span></td><td><span>TSMC 55nm</span></td><td><span>SATA3</span></td><td><span>8</span></td><td><span>4</span></td><td><span>200MT/s</span></td><td><span>DRAM</span></td><td><span>2TB</span></td></tr><tr><td><span>88SS9190</span></td><td><span>消费</span></td><td><span>TSMC 55nm</span></td><td><span>SATA3</span></td><td><span>4</span></td><td><span>4</span></td><td><span>200MT/s</span></td><td><span>DRAM</span></td><td><span>1TB</span></td></tr><tr><td><span>88SS9192</span></td><td><span>企业(Sandisk)</span></td><td><span>-</span></td><td><span>SATA3</span></td><td><span>8</span></td><td><span>4</span></td><td><span>200MT/s</span></td><td><span>DRAM</span></td><td><span>2TB</span></td></tr><tr><td><span>88SS1074</span></td><td><span>消费/企业</span></td><td><span>TSMC 28nm</span></td><td><span>SATA3</span></td><td><span>4</span></td><td><span>8</span></td><td><span>400MT/s</span></td><td><span>DRAM</span></td><td><span>8TB</span></td></tr><tr><td><span>88SS1079</span></td><td><span>消费</span></td><td><span>TSMC 28nm</span></td><td><span>SATA3</span></td><td><span>4</span></td><td><span>8</span></td><td><span>-</span></td><td><span>DRAM</span></td><td><span>8TB</span></td></tr><tr><td><span>88SS1080</span></td><td><span>消费/企业</span></td><td><span>TSMC 28nm</span></td><td><span>SATA3</span></td><td><span>4</span></td><td><span>8</span></td><td><span>-</span></td><td><span>DRAM</span></td><td><span>8TB</span></td></tr><tr><td><span>88NV1120</span></td><td><span>消费</span></td><td><span>TSMC 28nm</span></td><td><span>SATA3</span></td><td><span>2</span></td><td><span>4</span></td><td><span>400MT/s</span></td><td><span>X</span></td><td><span>1TB</span></td></tr><tr><td><span>88SS9032</span></td><td><span>企业(Toshiba)</span></td><td><span>-</span></td><td><span>SAS2</span></td><td><span>8</span></td><td><span>-</span></td><td><span>-</span></td><td><span>DRAM</span></td><td><span>512GB</span></td></tr><tr><td><span>88SS9036</span></td><td><span>企业(Toshiba)</span></td><td><span>-</span></td><td><span>SAS2</span></td><td><span>8</span></td><td><span>-</span></td><td><span>-</span></td><td><span>DRAM</span></td><td><span>512GB</span></td></tr><tr><td><span>88i1066</span></td><td><span>企业(Seagate)</span></td><td><span>-</span></td><td><span>SAS3</span></td><td><span>8</span></td><td><span>-</span></td><td><span>-</span></td><td><span>DRAM</span></td><td><span>1TB</span></td></tr><tr><td><span>88SS9185</span></td><td><span>企业(SMART)</span></td><td><span>TSMC 55nm</span></td><td><span>SAS2</span></td><td><span>8</span></td><td><span>-</span></td><td><span>-</span></td><td><span>DRAM</span></td><td><span>4TB</span></td></tr><tr><td><span>88SS1085</span></td><td><span>企业(Sandisk)</span></td><td><span>TSMC 28nm</span></td><td><span>SAS3</span></td><td><span>8</span></td><td><span>-</span></td><td><span>-</span></td><td><span>DRAM</span></td><td><span>8TB</span></td></tr><tr><td><span>88NV8120</span></td><td><span>消费</span></td><td><span>-</span></td><td><span>PCIe</span></td><td><span>-</span></td><td><span>-</span></td><td><span>-</span></td><td><span>DRAM</span></td><td><span>-</span></td></tr><tr><td><span>88NV9145</span></td><td><span>企业</span></td><td><span>TSMC 65nm</span></td><td><span>PCIe Gen2x1 (AHCI)</span></td><td><span>4</span></td><td><span>4</span></td><td><span>200MT/s</span></td><td><span>DRAM</span></td><td><span>128GB</span></td></tr><tr><td><span>88SS9183</span></td><td><span>消费</span></td><td><span>TSMC 55nm</span></td><td><span>PCIe Gen2x2 (AHCI)</span></td><td><span>8</span></td><td><span>4</span></td><td><span>400MT/s</span></td><td><span>DRAM</span></td><td><span>512GB</span></td></tr><tr><td><span>88SS9293</span></td><td><span>消费/企业</span></td><td><span>TSMC 40nm</span></td><td><span>PCIe Gen2x4 (AHCI)</span></td><td><span>8</span></td><td><span>4</span></td><td><span>400MT/s</span></td><td><span>DRAM</span></td><td><span>1TB</span></td></tr><tr><td><span>88SS1083</span></td><td><span>消费</span></td><td><span>TSMC 28nm</span></td><td><span>PCIe Gen2x2 (AHCI)SATA</span></td><td><span>8</span></td><td><span>-</span></td><td><span>400MT/s</span></td><td><span>DRAM</span></td><td><span>-</span></td></tr><tr><td><span>88SS1090</span></td><td><span>消费</span></td><td><span>TSMC 28nm</span></td><td><span>PCIe Gen3x4 (NVMe 1.1)</span></td><td><span>2</span></td><td><span>-</span></td><td><span>-</span></td><td><span>-</span></td><td><span>-</span></td></tr><tr><td><span>88SS1093</span></td><td><span>消费/企业</span></td><td><span>TSMC 28nm</span></td><td><span>PCIe Gen3x4 (NVMe 1.2)</span></td><td><span>8</span></td><td><span>8</span></td><td><span>533MT/s</span></td><td><span>DRAM</span></td><td><span>4TB</span></td></tr><tr><td><span>88SS1095</span></td><td><span>消费/企业</span></td><td><span>TSMC 28nm</span></td><td><span>PCIe Gen3x4 (NVMe 1.2)</span></td><td><span>4</span></td><td><span>8</span></td><td><span>533MT/s</span></td><td><span>DRAM</span></td><td><span>2TB</span></td></tr><tr><td><span>88SS1092</span></td><td><span>消费/企业</span></td><td><span>TSMC 28nm</span></td><td><span>PCIe Gen3x4 (NVMe 1.3)</span></td><td><span>8</span></td><td><span>8</span></td><td><span>533MT/s</span></td><td><span>DRAM</span></td><td><span>8TB</span></td></tr><tr><td><span>88NV1140</span></td><td><span>消费</span></td><td><span>TSMC 28nm</span></td><td><span>PCIe Gen3x1 (NVMe 1.3)</span></td><td><span>2</span></td><td><span>4</span></td><td><span>400MT/s</span></td><td><span>HMB</span></td><td><span>1TB</span></td></tr><tr><td><span>88NV1160</span></td><td><span>消费</span></td><td><span>TSMC 28nm</span></td><td><span>PCIe Gen3x2 (NVMe 1.3)</span></td><td><span>4</span></td><td><span>4</span></td><td><span>533MT/s</span></td><td><span>HMB</span></td><td><span>1TB</span></td></tr><tr><td><span>88SS1032 TC58NC1032GTC</span></td><td><span>企业(Toshiba)</span></td><td><span>-</span></td><td><span>PCIe Gen3x4 (NVMe 1.0) SAS3</span></td><td><span>-</span></td><td><span>-</span></td><td><span>-</span></td><td><span>DRAM</span></td><td><span>4TB</span></td></tr><tr><td><span>88SS1033 TC58NC1033GTC</span></td><td><span>企业(Toshiba)</span></td><td><span>-</span></td><td><span>PPCIe Gen3x4 PCIe Gen2x2 (NVMe 1.3) SAS3</span></td><td><span>16</span></td><td><span>-</span></td><td><span>-</span></td><td><span>DRAM</span></td><td><span>32TB</span></td></tr><tr><td><span>88SS1087</span></td><td><span>企业(Sandisk)</span></td><td><span>TSMC 28nm</span></td><td><span>PCIe Gen3x4 (NVMe 1.2)</span></td><td><span>-</span></td><td><span>-</span></td><td><span>-</span></td><td><span>DRAM</span></td><td><span>4TB</span></td></tr><tr><td><span>88SS1098</span></td><td><span>企业</span></td><td><span>TSMC 28nm</span></td><td><span>PCIe Gen3x4 PCIe Gen2x2 (NVMe 1.3)</span></td><td><span>8</span></td><td><span>8</span></td><td><span>800MT/s</span></td><td><span>DRAM</span></td><td><span>8TB</span></td></tr><tr><td><span>88SS1088</span></td><td><span>企业</span></td><td><span>TSMC 28nm</span></td><td><span>PCIe Gen3x4 PCIe Gen2x2 (NVMe 1.3)</span></td><td><span>16</span></td><td><span>8</span></td><td><span>800MT/s</span></td><td><span>DRAM</span></td><td><span>16TB</span></td></tr><tr><td><span>88SS1100</span></td><td><span>消费</span></td><td><span>TSMC 28nm</span></td><td><span>PCIe Gen3x4 (NVMe1.3)</span></td><td><span>8</span></td><td><span>8</span></td><td><span>800MT/s</span></td><td><span>DRAM</span></td><td><span>4TB</span></td></tr><tr><td><span>88SS1084</span></td><td><span>消费</span></td><td><span>TSMC 28nm</span></td><td><span>PCIe Gen3x4 (NVMe1.3)</span></td><td><span>4</span></td><td><span>8</span></td><td><span>800MT/s</span></td><td><span>DRAM</span></td><td><span>4TB</span></td></tr><tr><td><span>88SS1321</span></td><td><span>消费/企业</span></td><td><span>TSMC 12nm</span></td><td><span>PCIe Gen4x4 (NVMe1.4)</span></td><td><span>4</span></td><td><span>8</span></td><td><span>1200MT/s</span></td><td><span>DRAM</span></td><td><span>8TB</span></td></tr><tr><td><span>88SS1322</span></td><td><span>消费/企业</span></td><td><span>TSMC 12nm</span></td><td><span>PCIe Gen4x4 (NVMe1.4)</span></td><td><span>4</span></td><td><span>4</span></td><td><span>1200MT/s</span></td><td><span>HMB</span></td><td><span>4TB</span></td></tr><tr><td><span>88SS1323</span></td><td><span>消费/企业</span></td><td><span>TSMC 12nm</span></td><td><span>PCIe Gen4x2 (NVMe1.4)</span></td><td><span>4</span></td><td><span>4</span></td><td><span>1200MT/s</span></td><td><span>HMB</span></td><td><span>4TB</span></td></tr><tr><td><span>88SS1132 TC58NC1132GTC</span></td><td><span>企业(Toshiba)</span></td><td><span>TSMC 16nm</span></td><td><span>PCIe Gen4x4 PCIe Gen2x2 (NVMe1.4) SAS4</span></td><td><span>16</span></td><td><span>-</span></td><td><span>800MT/s</span></td><td><span>DRAM</span></td><td><span>32TB</span></td></tr><tr><td><span>88SS1137</span></td><td><span>企业</span></td><td><span>TSMC 16nm</span></td><td><span>PCIe Gen5x4 PCIe Gen2x2 (NVMe2.0)</span></td><td><span>16</span></td><td><span>-</span></td><td><span>-</span></td><td><span>DRAM</span></td><td><span>32TB</span></td></tr><tr><td><span>MV-SS1331</span></td><td><span>企业</span></td><td><span>TSMC 12nm</span></td><td><span>PCIe Gen5x4 PCIe Gen2x2 (NVMe2.0)</span></td><td><span>8</span></td><td><span>8</span></td><td><span>1600MT/s</span></td><td><span>DRAM</span></td><td><span>-</span></td></tr><tr><td><span>MV-SS1333</span></td><td><span>企业</span></td><td><span>TSMC 12nm</span></td><td><span>PCIe Gen5x4 PCIe Gen2x2 (NVMe2.0)</span></td><td><span>16</span></td><td><span>8</span></td><td><span>1600MT/s</span></td><td><span>DRAM</span></td><td><span>-</span></td></tr></tbody></table></figure><p><strong><span>群联电子Phison主控资料</span></strong></p><figure class='table-figure'><table><thead><tr><th><span>型号</span></th><th><span>等级</span></th><th><span>制程</span></th><th><span>接口</span></th><th><span>最大通道</span></th><th><span>CE通道</span></th><th><span>最大速率</span></th><th><span>缓存</span></th><th><span>最大容量</span></th></tr></thead><tbody><tr><td><span>S2-PS3102</span></td><td><span>消费</span></td><td><span>160nm</span></td><td><span>SATA2</span></td><td><span>4</span></td><td><span>4</span></td><td><span>-</span></td><td><span>X</span></td><td><span>-</span></td></tr><tr><td><span>S3-PS3016-S3</span></td><td><span>消费</span></td><td><span>90nm</span></td><td><span>SATA2</span></td><td><span>8</span></td><td><span>-</span></td><td><span>-</span></td><td><span>DRAM</span></td><td><span>-</span></td></tr><tr><td><span>S5-PS3105-S5-I</span></td><td><span>消费</span></td><td><span>90nm</span></td><td><span>SATA2</span></td><td><span>8</span></td><td><span>8</span></td><td><span>-</span></td><td><span>DRAM</span></td><td><span>512GB</span></td></tr><tr><td><span>S7-PS3107-S7-D PS3107-S7-J</span></td><td><span>消费</span></td><td><span>90nm</span></td><td><span>SATA2</span></td><td><span>4</span></td><td><span>4</span></td><td><span>-</span></td><td><span>DRAM/X</span></td><td><span>256GB</span></td></tr><tr><td><span>S8-PS3108-S8-I</span></td><td><span>消费</span></td><td><span>UMC 55nm</span></td><td><span>SATA3</span></td><td><span>8</span></td><td><span>8</span></td><td><span>-</span></td><td><span>DRAM</span></td><td><span>1TB</span></td></tr><tr><td><span>S9-PS3109-S9-J PS3109-S9-W</span></td><td><span>消费</span></td><td><span>UMC 55nm</span></td><td><span>SATA3</span></td><td><span>4</span></td><td><span>4</span></td><td><span>-</span></td><td><span>DRAM/X</span></td><td><span>256GB</span></td></tr><tr><td><span>S10-PS3110-S10-X CB</span></td><td><span>消费</span></td><td><span>UMC 55nm</span></td><td><span>SATA3</span></td><td><span>8</span></td><td><span>4</span></td><td><span>-</span></td><td><span>DRAM</span></td><td><span>2TB</span></td></tr><tr><td><span>S10DC-PS3110-S10-X DC</span></td><td><span>企业</span></td><td><span>UMC 55nm</span></td><td><span>SATA3</span></td><td><span>8</span></td><td><span>4</span></td><td><span>-</span></td><td><span>DRAM</span></td><td><span>2TB</span></td></tr><tr><td><span>S10C-PS3110-S10C-12</span></td><td><span>消费</span></td><td><span>UMC 55nm</span></td><td><span>SATA3</span></td><td><span>4</span></td><td><span>4</span></td><td><span>-</span></td><td><span>DRAM</span></td><td><span>1TB</span></td></tr><tr><td><span>S11T-PS3111-S11-13</span></td><td><span>消费</span></td><td><span>UMC 40nm</span></td><td><span>SATA3</span></td><td><span>2</span></td><td><span>8</span></td><td><span>533MT/s</span></td><td><span>X</span></td><td><span>1TB</span></td></tr><tr><td><span>S12-PS3112-S12-27</span></td><td><span>消费</span></td><td><span>TSMC 28nm</span></td><td><span>SATA3</span></td><td><span>8</span></td><td><span>8</span></td><td><span>667MT/s</span></td><td><span>DRAM</span></td><td><span>16TB</span></td></tr><tr><td><span>S12DI-PS3112-S12DI-27</span></td><td><span>工业</span></td><td><span>TSMC 28nm</span></td><td><span>SATA3</span></td><td><span>8</span></td><td><span>8</span></td><td><span>667MT/s</span></td><td><span>DRAM</span></td><td><span>16TB</span></td></tr><tr><td><span>S12DC-PS3112-S12DC-27</span></td><td><span>企业</span></td><td><span>TSMC 28nm</span></td><td><span>SATA3</span></td><td><span>8</span></td><td><span>8</span></td><td><span>667MT/s</span></td><td><span>DRAM</span></td><td><span>16TB</span></td></tr><tr><td><span>S13T-PS3113-S13-31</span></td><td><span>消费</span></td><td><span>TSMC 28nm</span></td><td><span>SATA3</span></td><td><span>-</span></td><td><span>-</span></td><td><span>-</span></td><td><span>X</span></td><td><span>2TB</span></td></tr><tr><td><span>S17T-PS3117-S17 PS3117-S17-13</span></td><td><span>消费</span></td><td><span>UMC 28nm</span></td><td><span>SATA3</span></td><td><span>2</span></td><td><span>8</span></td><td><span>1400MT/s</span></td><td><span>X</span></td><td><span>4TB</span></td></tr><tr><td><span>S17TI-PS3117-S17TI-13</span></td><td><span>工业</span></td><td><span>UMC 28nm</span></td><td><span>SATA3</span></td><td><span>2</span></td><td><span>8</span></td><td><span>1400MT/s</span></td><td><span>X</span></td><td><span>2TB</span></td></tr><tr><td><span>E7-PS5007-11</span></td><td><span>消费</span></td><td><span>TSMC 28nm</span></td><td><span>PCIe Gen3x4 (NVMe1.2)</span></td><td><span>8</span></td><td><span>8</span></td><td><span>-</span></td><td><span>DRAM</span></td><td><span>4TB</span></td></tr><tr><td><span>E7DC-PS5007-E7DC</span></td><td><span>企业</span></td><td><span>TSMC 28nm</span></td><td><span>PCIe Gen3x4 (NVMe1.2)</span></td><td><span>8</span></td><td><span>8</span></td><td><span>-</span></td><td><span>DRAM</span></td><td><span>2TB</span></td></tr><tr><td><span>E8-PS5008-E8-10</span></td><td><span>消费</span></td><td><span>UMC 40nm</span></td><td><span>PCIe Gen3x2 (NVMe1.2)</span></td><td><span>4</span></td><td><span>8</span></td><td><span>-</span></td><td><span>DRAM</span></td><td><span>2TB</span></td></tr><tr><td><span>E8T-PS5008-E8-10</span></td><td><span>消费</span></td><td><span>UMC 40nm</span></td><td><span>PCIe Gen3x2 (NVMe1.3)</span></td><td><span>4</span></td><td><span>8</span></td><td><span>-</span></td><td><span>HMB</span></td><td><span>1TB</span></td></tr><tr><td><span>E12-PS5012-E12-27</span></td><td><span>消费</span></td><td><span>TSMC 28nm</span></td><td><span>PCIe Gen3x4 (NVMe1.3)</span></td><td><span>8</span></td><td><span>4</span></td><td><span>667MT/s</span></td><td><span>DRAM</span></td><td><span>8TB</span></td></tr><tr><td><span>E12DI-PS5012-E12DI-27</span></td><td><span>工业</span></td><td><span>TSMC 28nm</span></td><td><span>PCIe Gen3x4 (NVMe1.3)</span></td><td><span>8</span></td><td><span>4</span></td><td><span>667MT/s</span></td><td><span>DRAM</span></td><td><span>8TB</span></td></tr><tr><td><span>E12DC-PS5012-E12DC-27</span></td><td><span>企业</span></td><td><span>TSMC 28nm</span></td><td><span>PCIe Gen3x4 (NVMe1.3)</span></td><td><span>8</span></td><td><span>4</span></td><td><span>667MT/s</span></td><td><span>DRAM</span></td><td><span>4TB</span></td></tr><tr><td><span>E12C-PS5012-E12C-10</span></td><td><span>消费</span></td><td><span>TSMC 28nm</span></td><td><span>PCIe Gen3x4 (NVMe1.3)</span></td><td><span>4</span></td><td><span>4</span></td><td><span>667MT/s</span></td><td><span>DRAM</span></td><td><span>2TB</span></td></tr><tr><td><span>E12S-PS5012-E12S-32</span></td><td><span>消费</span></td><td><span>TSMC 28nm</span></td><td><span>PCIe Gen3x4 (NVMe1.3)</span></td><td><span>8</span></td><td><span>4</span></td><td><span>667MT/s</span></td><td><span>DRAM</span></td><td><span>8TB</span></td></tr><tr><td><span>E13T-PS5013-E13-31 PS5013-E13-35</span></td><td><span>消费</span></td><td><span>TSMC 28nm</span></td><td><span>PCIe Gen3x4 (NVMe1.3)</span></td><td><span>4</span></td><td><span>4</span></td><td><span>800MT/s</span></td><td><span>HMB</span></td><td><span>2TB</span></td></tr><tr><td><span>E13TI-PS5013-E13TI-31</span></td><td><span>工业</span></td><td><span>TSMC 28nm</span></td><td><span>PCIe Gen3x4 (NVMe1.3)</span></td><td><span>4</span></td><td><span>4</span></td><td><span>800MT/s</span></td><td><span>HMB</span></td><td><span>2TB</span></td></tr><tr><td><span>E15T-PS5015-E15-35</span></td><td><span>消费</span></td><td><span>TSMC 28nm</span></td><td><span>PCIe Gen3x4 (NVMe1.4)</span></td><td><span>4</span></td><td><span>4</span></td><td><span>1200MT/s</span></td><td><span>HMB</span></td><td><span>2TB</span></td></tr><tr><td><span>FX-PS5901-37</span></td><td><span>企业</span></td><td><span>TSMC 28nm</span></td><td><span>PCIe Gen3x4 (NVMe1.3)</span></td><td><span>12</span></td><td><span>-</span></td><td><span>-</span></td><td><span>DRAM</span></td><td><span>4TB</span></td></tr><tr><td><span>E16-PS5016-E16-32</span></td><td><span>消费</span></td><td><span>TSMC 28nm</span></td><td><span>PCIe Gen4x4 (NVMe1.3)</span></td><td><span>8</span></td><td><span>4</span></td><td><span>800MT/s</span></td><td><span>DRAM</span></td><td><span>8TB</span></td></tr><tr><td><span>E18-PS5018-E18-41</span></td><td><span>消费</span></td><td><span>TSMC 12nm</span></td><td><span>PCIe Gen4x4 (NVMe1.4)</span></td><td><span>8</span></td><td><span>4</span></td><td><span>1600MT/s</span></td><td><span>DRAM</span></td><td><span>8TB</span></td></tr><tr><td><span>E18DI-PS5018-E18DI-41</span></td><td><span>工业</span></td><td><span>TSMC 12nm</span></td><td><span>PCIe Gen4x4 (NVMe1.4)</span></td><td><span>8</span></td><td><span>4</span></td><td><span>1600MT/s</span></td><td><span>DRAM</span></td><td><span>4TB</span></td></tr><tr><td><span>E18DC-PS5018-E18DC-41</span></td><td><span>企业</span></td><td><span>TSMC 12nm</span></td><td><span>PCIe Gen4x4 (NVMe1.4)</span></td><td><span>8</span></td><td><span>4</span></td><td><span>1600MT/s</span></td><td><span>DRAM</span></td><td><span>4TB</span></td></tr><tr><td><span>E19T-PS5019-E19-35</span></td><td><span>消费</span></td><td><span>TSMC 28nm</span></td><td><span>PCIe Gen4x4 (NVMe1.4)</span></td><td><span>4</span></td><td><span>4</span></td><td><span>1600MT/s</span></td><td><span>HMB</span></td><td><span>2TB</span></td></tr><tr><td><span>E20-PS5020BB</span></td><td><span>企业</span></td><td><span>TSMC 12nm</span></td><td><span>PCIe Gen4x4 2x2(NVMe1.4)</span></td><td><span>16</span></td><td><span>-</span></td><td><span>-</span></td><td><span>DRAM</span></td><td><span>32TB</span></td></tr><tr><td><span>E21T-PS5021-E21-48</span></td><td><span>消费</span></td><td><span>TSMC 12nm</span></td><td><span>PCIe Gen4x4 (NVMe1.4)</span></td><td><span>4</span></td><td><span>4</span></td><td><span>1600MT/s</span></td><td><span>HMB</span></td><td><span>4TB</span></td></tr><tr><td><span>E21TI-PS5021-E21TI-48</span></td><td><span>消费</span></td><td><span>TSMC 12nm</span></td><td><span>PCIe Gen4x4 (NVMe1.4)</span></td><td><span>4</span></td><td><span>4</span></td><td><span>1600MT/s</span></td><td><span>HMB</span></td><td><span>2TB</span></td></tr><tr><td><span>E22T-PS5022-E22</span></td><td><span>车辆</span></td><td><span>TSMC 12nm</span></td><td><span>PCIe Gen4x4 2x2(NVMe2.0)</span></td><td><span>4</span></td><td><span>4</span></td><td><span>2400MT/s</span></td><td><span>HMB</span></td><td><span>-</span></td></tr><tr><td><span>E25-PS5025-E25-53</span></td><td><span>消费</span></td><td><span>TSMC 12nm</span></td><td><span>PCIe Gen4x4 (NVMe2.0)</span></td><td><span>4</span></td><td><span>4</span></td><td><span>2400MT/s</span></td><td><span>DRAM</span></td><td><span>4TB</span></td></tr><tr><td><span>E26-PS5026-E26-52</span></td><td><span>消费</span></td><td><span>TSMC 12nm</span></td><td><span>PCIe Gen5x4 (NVMe2.0)</span></td><td><span>8</span></td><td><span>4</span></td><td><span>2400MT/s</span></td><td><span>DRAM</span></td><td><span>32TB</span></td></tr><tr><td><span>E26DC-PS5026-E26DC-52</span></td><td><span>企业</span></td><td><span>TSMC 12nm</span></td><td><span>PCIe Gen5x4 (NVMe2.0)</span></td><td><span>8</span></td><td><span>4</span></td><td><span>2400MT/s</span></td><td><span>DRAM</span></td><td><span>8TB</span></td></tr><tr><td><span>E27T-PS5027-E27-61</span></td><td><span>消费</span></td><td><span>TSMC 12nm</span></td><td><span>PCIe Gen4x4 (NVMe2.0)</span></td><td><span>4</span></td><td><span>4</span></td><td><span>3600MT/s</span></td><td><span>HMB</span></td><td><span>8TB</span></td></tr><tr><td><span>E31T-PS5031-E31</span></td><td><span>消费</span></td><td><span>TSMC 7nm</span></td><td><span>PCIe Gen5x4 (NVMe2.0)</span></td><td><span>4</span></td><td><span>4</span></td><td><span>3600MT/s</span></td><td><span>HMB</span></td><td><span>8TB</span></td></tr></tbody></table></figure><p><strong><span>慧荣科技SiliconMotion主控资料</span></strong></p><figure class='table-figure'><table><thead><tr><th><span>型号</span></th><th><span>等级</span></th><th><span>制程</span></th><th><span>接口</span></th><th><span>最大通道</span></th><th><span>CE通道</span></th><th><span>最大速率</span></th><th><span>缓存</span></th><th><span>最大容量</span></th></tr></thead><tbody><tr><td><span>SM2240</span></td><td><span>消费</span></td><td><span>-</span></td><td><span>SATA2</span></td><td><span>4</span></td><td><span>16</span></td><td><span>-</span></td><td><span>X</span></td><td><span>-</span></td></tr><tr><td><span>SM2242</span></td><td><span>消费</span></td><td><span>-</span></td><td><span>SATA2</span></td><td><span>4</span></td><td><span>8</span></td><td><span>-</span></td><td><span>X</span></td><td><span>-</span></td></tr><tr><td><span>SM2244</span></td><td><span>消费</span></td><td><span>130nm</span></td><td><span>SATA2</span></td><td><span>4</span></td><td><span>8</span></td><td><span>200MT/s</span></td><td><span>DRAM</span></td><td><span>-</span></td></tr><tr><td><span>SM2244LT</span></td><td><span>消费</span></td><td><span>130nm</span></td><td><span>SATA2</span></td><td><span>2/4</span></td><td><span>4/8</span></td><td><span>200MT/s</span></td><td><span>X</span></td><td><span>-</span></td></tr><tr><td><span>SM2246</span></td><td><span>消费</span></td><td><span>TSMC 55nm</span></td><td><span>SATA3</span></td><td><span>4</span></td><td><span>1</span></td><td><span>400MT/s</span></td><td><span>DRAM</span></td><td><span>128G</span></td></tr><tr><td><span>SM2246EN</span></td><td><span>消费</span></td><td><span>TSMC 55nm</span></td><td><span>SATA3</span></td><td><span>4</span></td><td><span>8</span></td><td><span>400MT/s</span></td><td><span>DRAM</span></td><td><span>1TB</span></td></tr><tr><td><span>SM2246XT</span></td><td><span>消费</span></td><td><span>TSMC 55nm</span></td><td><span>SATA3</span></td><td><span>2/4</span></td><td><span>2/4</span></td><td><span>400MT/s</span></td><td><span>X</span></td><td><span>512GB</span></td></tr><tr><td><span>SM2250</span></td><td><span>消费</span></td><td><span>-</span></td><td><span>SATA2</span></td><td><span>8</span></td><td><span>8</span></td><td><span>200MT/s</span></td><td><span>DRAM</span></td><td><span>-</span></td></tr><tr><td><span>SM2254</span></td><td><span>消费</span></td><td><span>TSMC 40nm</span></td><td><span>SATA3</span></td><td><span>4</span></td><td><span>8</span></td><td><span>400MT/s</span></td><td><span>DRAM</span></td><td><span>-</span></td></tr><tr><td><span>SM2256</span></td><td><span>消费</span></td><td><span>TSMC 55nm</span></td><td><span>SATA3</span></td><td><span>4</span></td><td><span>8</span></td><td><span>400MT/s</span></td><td><span>DRAM</span></td><td><span>2TB</span></td></tr><tr><td><span>SM2258</span></td><td><span>消费</span></td><td><span>TSMC 40nm</span></td><td><span>SATA3</span></td><td><span>4</span></td><td><span>8</span></td><td><span>400MT/s</span></td><td><span>DRAM</span></td><td><span>2TB</span></td></tr><tr><td><span>SM2258XT</span></td><td><span>消费</span></td><td><span>TSMC 40nm</span></td><td><span>SATA3</span></td><td><span>4</span></td><td><span>4</span></td><td><span>400MT/s</span></td><td><span>X</span></td><td><span>2TB</span></td></tr><tr><td><span>SM2259</span></td><td><span>消费</span></td><td><span>TSMC 40nm</span></td><td><span>SATA3</span></td><td><span>4</span></td><td><span>8</span></td><td><span>800MT/s</span></td><td><span>DRAM</span></td><td><span>4TB</span></td></tr><tr><td><span>SM2259XT</span></td><td><span>消费</span></td><td><span>TSMC 28nm</span></td><td><span>SATA3</span></td><td><span>4</span></td><td><span>4</span></td><td><span>800MT/s</span></td><td><span>X</span></td><td><span>2TB</span></td></tr><tr><td><span>SM2259XT2</span></td><td><span>消费</span></td><td><span>TSMC 28nm</span></td><td><span>SATA3</span></td><td><span>2</span></td><td><span>8</span></td><td><span>800MT/s</span></td><td><span>X</span></td><td><span>2TB</span></td></tr><tr><td><span>SM2271</span></td><td><span>企业</span></td><td><span>TSMC 28nm</span></td><td><span>SATA3</span></td><td><span>8</span></td><td><span>8</span></td><td><span>800MT/s</span></td><td><span>DRAM</span></td><td><span>16TB</span></td></tr><tr><td><span>SM2260</span></td><td><span>消费/企业</span></td><td><span>TSMC 40nm</span></td><td><span>PCIe Gen3x4 (NVMe1.2)</span></td><td><span>8</span></td><td><span>4</span></td><td><span>533MT/s</span></td><td><span>DRAM</span></td><td><span>2TB</span></td></tr><tr><td><span>SM2261XT</span></td><td><span>消费</span></td><td><span>TSMC 28nm</span></td><td><span>PCIe Gen3x2 (NVMe1.4)</span></td><td><span>2</span></td><td><span>8</span></td><td><span>1200MT/s</span></td><td><span>HMB</span></td><td><span>2TB</span></td></tr><tr><td><span>SM2262</span></td><td><span>消费</span></td><td><span>TSMC 28nm</span></td><td><span>PCIe Gen3x4 (NVMe1.3)</span></td><td><span>8</span></td><td><span>4</span></td><td><span>800MT/s</span></td><td><span>DRAM</span></td><td><span>2TB</span></td></tr><tr><td><span>SM2262EN</span></td><td><span>消费</span></td><td><span>TSMC 28nm</span></td><td><span>PCIe Gen3x4 (NVMe1.3)</span></td><td><span>8</span></td><td><span>4</span></td><td><span>800MT/s</span></td><td><span>DRAM</span></td><td><span>2TB</span></td></tr><tr><td><span>SM2263</span></td><td><span>消费</span></td><td><span>TSMC 28nm</span></td><td><span>PCIe Gen3x4 (NVMe1.3)</span></td><td><span>4</span></td><td><span>4</span></td><td><span>667MT/s</span></td><td><span>DRAM</span></td><td><span>2TB</span></td></tr><tr><td><span>SM2263EN</span></td><td><span>消费</span></td><td><span>TSMC 28nm</span></td><td><span>PCIe Gen3x4 (NVMe1.3)</span></td><td><span>4</span></td><td><span>4</span></td><td><span>800MT/s</span></td><td><span>DRAM</span></td><td><span>2TB</span></td></tr><tr><td><span>SM2263XT</span></td><td><span>消费</span></td><td><span>TSMC 28nm</span></td><td><span>PCIe Gen3x4 (NVMe1.3)</span></td><td><span>4</span></td><td><span>4</span></td><td><span>800MT/s</span></td><td><span>HMB</span></td><td><span>2TB</span></td></tr><tr><td><span>SM2263XT-AT</span></td><td><span>车载</span></td><td><span>TSMC 28nm</span></td><td><span>PCIe Gen3x4 (NVMe1.3)</span></td><td><span>4</span></td><td><span>-</span></td><td><span>-</span></td><td><span>HMB</span></td><td><span>1TB</span></td></tr><tr><td><span>SM2264</span></td><td><span>消费</span></td><td><span>TSMC 12nm</span></td><td><span>PCIe Gen4x4 (NVMe1.4)</span></td><td><span>8</span></td><td><span>8</span></td><td><span>1600MT/s</span></td><td><span>DRAM</span></td><td><span>16TB</span></td></tr><tr><td><span>SM2264XT-AT</span></td><td><span>车载</span></td><td><span>TSMC 12nm</span></td><td><span>PCIe Gen4x4 (NVMe1.4)</span></td><td><span>8</span></td><td><span>-</span></td><td><span>1600MT/s</span></td><td><span>HMB</span></td><td><span>1TB</span></td></tr><tr><td><span>SM2265</span></td><td><span>消费</span></td><td><span>TSMC 28nm</span></td><td><span>PCIe Gen3x4 (NVMe1.4)</span></td><td><span>4</span></td><td><span>8</span></td><td><span>1200MT/s</span></td><td><span>DRAM</span></td><td><span>4TB</span></td></tr><tr><td><span>SM2267</span></td><td><span>消费</span></td><td><span>TSMC 28nm</span></td><td><span>PCIe Gen4x4 (NVMe1.4)</span></td><td><span>4</span></td><td><span>8</span></td><td><span>1200MT/s</span></td><td><span>DRAM</span></td><td><span>4TB</span></td></tr><tr><td><span>SM2267XT</span></td><td><span>消费</span></td><td><span>TSMC 28nm</span></td><td><span>PCIe Gen4x4 (NVMe1.4)</span></td><td><span>4</span></td><td><span>4</span></td><td><span>1200MT/s</span></td><td><span>HMB</span></td><td><span>4TB</span></td></tr><tr><td><span>SM2268XT</span></td><td><span>消费</span></td><td><span>TSMC 12nm</span></td><td><span>PCIe Gen4x4 (NVMe2.0)</span></td><td><span>4</span></td><td><span>4</span></td><td><span>3200MT/s</span></td><td><span>HMB</span></td><td><span>4TB</span></td></tr><tr><td><span>SM2268XT-AT</span></td><td><span>车载</span></td><td><span>TSMC 12nm</span></td><td><span>PCIe Gen4x4 (NVMe2.0)</span></td><td><span>4</span></td><td><span>-</span></td><td><span>-</span></td><td><span>HMB</span></td><td><span>1TB</span></td></tr><tr><td><span>SM2269XT</span></td><td><span>消费</span></td><td><span>TSMC 12nm</span></td><td><span>PCIe Gen4x4 (NVMe2.0)</span></td><td><span>4</span></td><td><span>4</span></td><td><span>1600MT/s</span></td><td><span>HMB</span></td><td><span>4TB</span></td></tr><tr><td><span>SM2270</span></td><td><span>企业</span></td><td><span>TSMC 28nm</span></td><td><span>PCIe Gen3x4 3x8(NVMe1.3)</span></td><td><span>16</span></td><td><span>8</span></td><td><span>800MT/s</span></td><td><span>DRAM</span></td><td><span>16TB</span></td></tr><tr><td><span>SM8108</span></td><td><span>企业</span></td><td><span>TSMC 28nm</span></td><td><span>PCIe Gen3x4 (NVMe1.3)</span></td><td><span>8</span></td><td><span>8</span></td><td><span>800MT/s</span></td><td><span>DRAM</span></td><td><span>16TB</span></td></tr><tr><td><span>SM8266</span></td><td><span>企业</span></td><td><span>-</span></td><td><span>PCIe Gen4x4 (NVMe1.4)</span></td><td><span>16</span></td><td><span>8</span></td><td><span>1200MT/s</span></td><td><span>DRAM</span></td><td><span>16TB</span></td></tr><tr><td><span>SM8208</span></td><td><span>企业</span></td><td><span>-</span></td><td><span>PCIe Gen4x4 (NVMe1.4)</span></td><td><span>8</span></td><td><span>-</span></td><td><span>1200MT/s</span></td><td><span>DRAM</span></td><td><span>16TB</span></td></tr><tr><td><span>SM8366</span></td><td><span>企业</span></td><td><span>TSMC 12nm</span></td><td><span>PCIe Gen5x4 2x2(NVMe2.0)</span></td><td><span>16</span></td><td><span>-</span></td><td><span>2400MT/s</span></td><td><span>DRAM</span></td><td><span>128TB</span></td></tr><tr><td><span>SM8308</span></td><td><span>企业</span></td><td><span>TSMC 12nm</span></td><td><span>PCIe Gen5x4 2x2(NVMe2.0)</span></td><td><span>8</span></td><td><span>-</span></td><td><span>2400MT/s</span></td><td><span>DRAM</span></td><td><span>128TB</span></td></tr><tr><td><span>SM2508</span></td><td><span>消费</span></td><td><span>TSMC 6nm</span></td><td><span>PCIe Gen5x4 (NVMe2.0)</span></td><td><span>8</span></td><td><span>-</span></td><td><span>3600MT/s</span></td><td><span>DRAM</span></td><td><span>-</span></td></tr><tr><td><span>SM2504XT</span></td><td><span>消费</span></td><td><span>TSMC 7nm</span></td><td><span>PCIe Gen5x4 (NVMe2.0)</span></td><td><span>4</span></td><td><span>4</span></td><td><span>3600MT/s</span></td><td><span>HMB</span></td><td><span>-</span></td></tr></tbody></table></figure><p><strong><span>联芸科技Maxio主控资料</span></strong></p><figure class='table-figure'><table><thead><tr><th><span>型号</span></th><th><span>等级</span></th><th><span>制程</span></th><th><span>接口</span></th><th><span>最大通道</span></th><th><span>CE通道</span></th><th><span>最大速率</span></th><th><span>缓存</span></th><th><span>最大容量</span></th></tr></thead><tbody><tr><td><span>MAS0601-C</span></td><td><span>消费</span></td><td><span>TSMC 40nm</span></td><td><span>SATA3</span></td><td><span>4</span></td><td><span>8</span></td><td><span>400MT/s</span></td><td><span>DRAM</span></td><td><span>512GB</span></td></tr><tr><td><span>MAS0801-C</span></td><td><span>消费</span></td><td><span>TSMC 40nm</span></td><td><span>SATA3</span></td><td><span>4</span></td><td><span>8</span></td><td><span>400MT/s</span></td><td><span>DRAM</span></td><td><span>2TB</span></td></tr><tr><td><span>MAS0802-C</span></td><td><span>消费</span></td><td><span>TSMC 40nm</span></td><td><span>SATA3</span></td><td><span>4</span></td><td><span>8</span></td><td><span>400MT/s</span></td><td><span>X</span></td><td><span>2TB</span></td></tr><tr><td><span>MAS0901-C</span></td><td><span>消费</span></td><td><span>GF 40nm</span></td><td><span>SATA3</span></td><td><span>4</span></td><td><span>8</span></td><td><span>667MT/s</span></td><td><span>DRAM</span></td><td><span>4TB</span></td></tr><tr><td><span>MAS0901-I</span></td><td><span>工业</span></td><td><span>GF 40nm</span></td><td><span>SATA3</span></td><td><span>4</span></td><td><span>8</span></td><td><span>667MT/s</span></td><td><span>DRAM</span></td><td><span>4TB</span></td></tr><tr><td><span>MAS0901-E</span></td><td><span>企业</span></td><td><span>GF 40nm</span></td><td><span>SATA3</span></td><td><span>4</span></td><td><span>8</span></td><td><span>667MT/s</span></td><td><span>DRAM</span></td><td><span>4TB</span></td></tr><tr><td><span>MAS0902-C</span></td><td><span>消费</span></td><td><span>GF 40nm</span></td><td><span>SATA3</span></td><td><span>4</span></td><td><span>8</span></td><td><span>667MT/s</span></td><td><span>X</span></td><td><span>4TB</span></td></tr><tr><td><span>MAS0902-I</span></td><td><span>工业</span></td><td><span>GF 40nm</span></td><td><span>SATA3</span></td><td><span>4</span></td><td><span>8</span></td><td><span>667MT/s</span></td><td><span>X</span></td><td><span>4TB</span></td></tr><tr><td><span>MAS1101-E</span></td><td><span>企业</span></td><td><span>-</span></td><td><span>SATA3</span></td><td><span>8</span></td><td><span>4/8</span></td><td><span>1200MT/s</span></td><td><span>DRAM</span></td><td><span>8TB</span></td></tr><tr><td><span>MAS1102-C</span></td><td><span>消费</span></td><td><span>-</span></td><td><span>SATA3</span></td><td><span>2</span></td><td><span>8</span></td><td><span>667MT/s</span></td><td><span>X</span></td><td><span>4TB</span></td></tr><tr><td><span>MAS1102-I</span></td><td><span>工业</span></td><td><span>-</span></td><td><span>SATA3</span></td><td><span>2</span></td><td><span>8</span></td><td><span>667MT/s</span></td><td><span>X</span></td><td><span>4TB</span></td></tr><tr><td><span>MAP0901-C</span></td><td><span>消费</span></td><td><span>GF 40nm</span></td><td><span>PCIe Gen3x4 (NVMe1.2)</span></td><td><span>-</span></td><td><span>-</span></td><td><span>667MT/s</span></td><td><span>DRAM</span></td><td><span>4TB</span></td></tr><tr><td><span>MAP0902-C</span></td><td><span>消费</span></td><td><span>GF 40nm</span></td><td><span>PCIe Gen3x4 (NVMe1.2)</span></td><td><span>-</span></td><td><span>-</span></td><td><span>667MT/s</span></td><td><span>HMB</span></td><td><span>4TB</span></td></tr><tr><td><span>MAP1001-C</span></td><td><span>消费</span></td><td><span>TSMC 28nm</span></td><td><span>PCIe Gen3x4 (NVMe1.3)</span></td><td><span>8</span></td><td><span>4</span></td><td><span>800MT/s</span></td><td><span>DRAM</span></td><td><span>8TB</span></td></tr><tr><td><span>MAP1002-C</span></td><td><span>消费</span></td><td><span>TSMC 28nm</span></td><td><span>PCIe Gen3x4 (NVMe1.3)</span></td><td><span>4</span></td><td><span>4</span></td><td><span>800MT/s</span></td><td><span>HMB</span></td><td><span>2TB</span></td></tr><tr><td><span>MAP1002-I</span></td><td><span>工业</span></td><td><span>TSMC 28nm</span></td><td><span>PCIe Gen3x4 (NVMe1.3)</span></td><td><span>4</span></td><td><span>4</span></td><td><span>800MT/s</span></td><td><span>HMB</span></td><td><span>2TB</span></td></tr><tr><td><span>MAP1003-C</span></td><td><span>消费</span></td><td><span>TSMC 28nm</span></td><td><span>PCIe Gen3x4 (NVMe1.3)</span></td><td><span>4</span></td><td><span>4</span></td><td><span>800MT/s</span></td><td><span>DRAM</span></td><td><span>2TB</span></td></tr><tr><td><span>MAP1201-E</span></td><td><span>企业</span></td><td><span>TSMC 22nm</span></td><td><span>PCIe Gen3x4 (NVMe1.3)</span></td><td><span>8</span></td><td><span>4/8</span></td><td><span>1600MT/s</span></td><td><span>DRAM</span></td><td><span>8TB</span></td></tr><tr><td><span>MAP1202-C</span></td><td><span>消费</span></td><td><span>TSMC 22nm</span></td><td><span>PCIe Gen3x4 (NVMe1.4)</span></td><td><span>4</span></td><td><span>4</span></td><td><span>1600MT/s</span></td><td><span>HMB</span></td><td><span>4TB</span></td></tr><tr><td><span>MAP1202-I</span></td><td><span>工业</span></td><td><span>TSMC 22nm</span></td><td><span>PCIe Gen3x4 (NVMe1.4)</span></td><td><span>4</span></td><td><span>4</span></td><td><span>1600MT/s</span></td><td><span>HMB</span></td><td><span>4TB</span></td></tr><tr><td><span>MAP1601-E</span></td><td><span>企业</span></td><td><span>TSMC 12nm</span></td><td><span>PCIe Gen4x4 (NVMe2.0)</span></td><td><span>8</span></td><td><span>4/8</span></td><td><span>2400MT/s</span></td><td><span>DRAM</span></td><td><span>8TB</span></td></tr><tr><td><span>MAP1602-C</span></td><td><span>消费</span></td><td><span>TSMC 12nm</span></td><td><span>PCIe Gen4x4 (NVMe2.0)</span></td><td><span>4</span></td><td><span>4/8</span></td><td><span>2400MT/s</span></td><td><span>HMB</span></td><td><span>4TB</span></td></tr><tr><td><span>MAP1602-I</span></td><td><span>工业</span></td><td><span>TSMC 12nm</span></td><td><span>PCIe Gen4x4 (NVMe2.0)</span></td><td><span>4</span></td><td><span>4/8</span></td><td><span>2400MT/s</span></td><td><span>HMB</span></td><td><span>4TB</span></td></tr><tr><td><span>MAP1802</span></td><td><span>消费/工业</span></td><td><span>-</span></td><td><span>PCIe Gen5x4 (NVMe2.0)</span></td><td><span>4</span></td><td><span>8</span></td><td><span>4800MT/s</span></td><td><span>HMB</span></td><td><span>8TB</span></td></tr><tr><td><span>MAP1806</span></td><td><span>消费/工业</span></td><td><span>-</span></td><td><span>PCIe Gen5x4 (NVMe2.0)</span></td><td><span>8</span></td><td><span>4</span></td><td><span>3600MT/s</span></td><td><span>HMB</span></td><td><span>16TB</span></td></tr><tr><td><span>MAP1803</span></td><td><span>企业</span></td><td><span>-</span></td><td><span>PCIe Gen5x4 (NVMe2.0)</span></td><td><span>16</span></td><td><span>8</span></td><td><span>3200MT/s</span></td><td><span>DRAM</span></td><td><span>64TB</span></td></tr></tbody></table></figure><p><strong><span>英韧科技InnoGrit主控资料</span></strong></p><figure class='table-figure'><table><thead><tr><th><span>型号</span></th><th><span>等级</span></th><th><span>制程</span></th><th><span>接口</span></th><th><span>最大通道</span></th><th><span>CE通道</span></th><th><span>最大速率</span></th><th><span>缓存</span></th><th><span>最大容量</span></th></tr></thead><tbody><tr><td><span>IG5600</span></td><td><span>企业</span></td><td><span>TSMC 12nm</span></td><td><span>SATA3</span></td><td><span>8</span></td><td><span>8</span></td><td><span>1200MT/s</span></td><td><span>DRAM</span></td><td><span>16TB</span></td></tr><tr><td><span>IG5208</span></td><td><span>消费</span></td><td><span>TSMC 28nm</span></td><td><span>PCIe Gen3x2 (NVMe1.3)</span></td><td><span>4</span></td><td><span>4</span></td><td><span>800MT/s</span></td><td><span>HMB</span></td><td><span>2TB</span></td></tr><tr><td><span>IG5216</span></td><td><span>消费</span></td><td><span>TSMC 28nm</span></td><td><span>PCIe Gen3x4 (NVMe1.4)</span></td><td><span>4</span></td><td><span>4</span></td><td><span>1200MT/s</span></td><td><span>HMB</span></td><td><span>2TB</span></td></tr><tr><td><span>IG5220</span></td><td><span>消费</span></td><td><span>TSMC 12nm</span></td><td><span>PCIe Gen4x4 (NVMe1.4)</span></td><td><span>4</span></td><td><span>4/8</span></td><td><span>2400MT/s</span></td><td><span>HMB</span></td><td><span>4TB</span></td></tr><tr><td><span>IG5221</span></td><td><span>消费</span></td><td><span>TSMC 12nm</span></td><td><span>PCIe Gen4x4 (NVMe1.4)</span></td><td><span>4</span></td><td><span>4/8</span></td><td><span>2400MT/s</span></td><td><span>DRAM</span></td><td><span>8TB</span></td></tr><tr><td><span>IG5236</span></td><td><span>消费</span></td><td><span>TSMC 12nm</span></td><td><span>PCIe Gen4x4 (NVMe1.4)</span></td><td><span>8</span></td><td><span>4/8</span></td><td><span>1200MT/s</span></td><td><span>DRAM</span></td><td><span>8TB</span></td></tr><tr><td><span>IG5238</span></td><td><span>消费</span></td><td><span>TSMC 12nm</span></td><td><span>PCIe Gen4x4 (NVMe1.4)</span></td><td><span>8</span></td><td><span>-</span></td><td><span>-</span></td><td><span>DRAM</span></td><td><span>-</span></td></tr><tr><td><span>IG5636</span></td><td><span>企业</span></td><td><span>TSMC 12nm</span></td><td><span>PCIe Gen4x4 (NVMe1.4)</span></td><td><span>8</span></td><td><span>8</span></td><td><span>1200MT/s</span></td><td><span>DRAM</span></td><td><span>16TB</span></td></tr><tr><td><span>IG5638</span></td><td><span>企业</span></td><td><span>TSMC 12nm</span></td><td><span>PCIe Gen4x4 (NVMe1.4)</span></td><td><span>8</span></td><td><span>8</span></td><td><span>2400MT/s</span></td><td><span>DRAM</span></td><td><span>16TB</span></td></tr><tr><td><span>IG5666</span></td><td><span>消费</span></td><td><span>TSMC 12nm</span></td><td><span>PCIe Gen5x4 (NVMe2.0)</span></td><td><span>8</span></td><td><span>8</span></td><td><span>2400MT/s</span></td><td><span>DRAM</span></td><td><span>16TB</span></td></tr><tr><td><span>IG5668</span></td><td><span>企业</span></td><td><span>TSMC 12nm</span></td><td><span>PCIe Gen4x4 (NVMe1.4)</span></td><td><span>16</span></td><td><span>-</span></td><td><span>1200MT/s</span></td><td><span>DRAM</span></td><td><span>32TB</span></td></tr><tr><td><span>IG5669</span></td><td><span>企业</span></td><td><span>TSMC 12nm</span></td><td><span>PCIe Gen5x4 (NVMe2.0)</span></td><td><span>16/18</span></td><td><span>-</span></td><td><span>2667MT/s</span></td><td><span>DRAM</span></td><td><span>32TB</span></td></tr><tr><td><span>YRS820</span></td><td><span>消费</span></td><td><span>-</span></td><td><span>PCIe Gen5x4 (NVMe2.0)</span></td><td><span>8</span></td><td><span>-</span></td><td><span>2667MT</span></td><td><span>DRAM</span></td><td><span>8TB</span></td></tr><tr><td><span>YRS900</span></td><td><span>企业</span></td><td><span>-</span></td><td><span>PCIe Gen5x4 (NVMe2.0)</span></td><td><span>16</span></td><td><span>-</span></td><td><span>2667MT</span></td><td><span>DRAM</span></td><td><span>32TB</span></td></tr></tbody></table></figure><p><strong><span>瑞昱半导体Realtek主控资料</span></strong></p><figure class='table-figure'><table><thead><tr><th><span>型号</span></th><th><span>等级</span></th><th><span>制程</span></th><th><span>接口</span></th><th><span>最大通道</span></th><th><span>CE通道</span></th><th><span>最大速率</span></th><th><span>缓存</span></th><th><span>最大容量</span></th></tr></thead><tbody><tr><td><span>RTS5731</span></td><td><span>消费</span></td><td><span>55nm</span></td><td><span>SATA3</span></td><td><span>8</span></td><td><span>-</span></td><td><span>-</span></td><td><span>DRAM</span></td><td><span>2TB</span></td></tr><tr><td><span>RTS5732DL</span></td><td><span>消费</span></td><td><span>-</span></td><td><span>SATA3</span></td><td><span>2</span></td><td><span>-</span></td><td><span>-</span></td><td><span>X</span></td><td><span>-</span></td></tr><tr><td><span>RTS5732DLQ</span></td><td><span>消费</span></td><td><span>-</span></td><td><span>SATA3</span></td><td><span>2</span></td><td><span>-</span></td><td><span>-</span></td><td><span>X</span></td><td><span>-</span></td></tr><tr><td><span>RTS5733DMQ</span></td><td><span>消费</span></td><td><span>-</span></td><td><span>SATA3</span></td><td><span>2</span></td><td><span>-</span></td><td><span>-</span></td><td><span>X</span></td><td><span>4TB</span></td></tr><tr><td><span>RTS5735DLQ</span></td><td><span>消费</span></td><td><span>-</span></td><td><span>SATA3</span></td><td><span>2</span></td><td><span>8</span></td><td><span>533MT/s</span></td><td><span>X</span></td><td><span>-</span></td></tr><tr><td><span>RTS5735DLT</span></td><td><span>消费</span></td><td><span>-</span></td><td><span>SATA3</span></td><td><span>2</span></td><td><span>-</span></td><td><span>-</span></td><td><span>X</span></td><td><span>-</span></td></tr><tr><td><span>RTS5760</span></td><td><span>消费</span></td><td><span>55nm</span></td><td><span>PCIe Gen3x2 (NVMe1.2)</span></td><td><span>4</span></td><td><span>8</span></td><td><span>-</span></td><td><span>DRAM</span></td><td><span>-</span></td></tr><tr><td><span>RTS5761</span></td><td><span>消费/企业</span></td><td><span>55nm</span></td><td><span>PCIe Gen3x4 (NVMe1.2)&amp;SATA3</span></td><td><span>8</span></td><td><span>8</span></td><td><span>-</span></td><td><span>DRAM</span></td><td><span>-</span></td></tr><tr><td><span>RTS5762</span></td><td><span>消费</span></td><td><span>28nm</span></td><td><span>PCIe Gen3x4 (NVMe1.3)</span></td><td><span>8</span></td><td><span>4</span></td><td><span>667MT/s</span></td><td><span>DRAM</span></td><td><span>-</span></td></tr><tr><td><span>RTS5762DL</span></td><td><span>消费</span></td><td><span>28nm</span></td><td><span>PCIe Gen3x4 (NVMe1.3)</span></td><td><span>4</span></td><td><span>-</span></td><td><span>667MT/s</span></td><td><span>HMB</span></td><td><span>-</span></td></tr><tr><td><span>RTS5763DL</span></td><td><span>消费</span></td><td><span>28nm</span></td><td><span>PCIe Gen3x4 (NVMe1.3)</span></td><td><span>4</span></td><td><span>-</span></td><td><span>-</span></td><td><span>HMB</span></td><td><span>-</span></td></tr><tr><td><span>RTS5765DL</span></td><td><span>消费</span></td><td><span>-</span></td><td><span>PCIe Gen3x4 (NVMe1.4)</span></td><td><span>4</span></td><td><span>-</span></td><td><span>1200MT/s</span></td><td><span>HMB</span></td><td><span>-</span></td></tr><tr><td><span>RTS5766DL</span></td><td><span>消费</span></td><td><span>-</span></td><td><span>PCIe Gen3x4 (NVMe1.4)</span></td><td><span>4</span></td><td><span>4</span></td><td><span>1066MT/s</span></td><td><span>HMB</span></td><td><span>-</span></td></tr><tr><td><span>RTS5768DL</span></td><td><span>消费</span></td><td><span>-</span></td><td><span>PCIe Gen3x4 (NVMe1.4)</span></td><td><span>4</span></td><td><span>-</span></td><td><span>-</span></td><td><span>HMB</span></td><td><span>-</span></td></tr><tr><td><span>RTS5771</span></td><td><span>消费</span></td><td><span>-</span></td><td><span>PCIe Gen4x4 (NVMe1.3)</span></td><td><span>8</span></td><td><span>-</span></td><td><span>1200MT/s</span></td><td><span>DRAM</span></td><td><span>-</span></td></tr><tr><td><span>RTS5771DL</span></td><td><span>消费</span></td><td><span>-</span></td><td><span>PCIe Gen4x4 (NVMe1.4)</span></td><td><span>4</span></td><td><span>4</span></td><td><span>1600MT/s</span></td><td><span>HMB</span></td><td><span>-</span></td></tr><tr><td><span>RTS5772DL</span></td><td><span>消费</span></td><td><span>-</span></td><td><span>PCIe Gen4x4 (NVMe1.4)</span></td><td><span>8</span></td><td><span>4</span></td><td><span>1600MT/s</span></td><td><span>HMB</span></td><td><span>-</span></td></tr><tr><td><span>RTS5776DL</span></td><td><span>消费</span></td><td><span>-</span></td><td><span>PCIe Gen4x4 (NVMe1.4)</span></td><td><span>4</span></td><td><span>4</span></td><td><span>3600MT/s</span></td><td><span>HMB</span></td><td><span>-</span></td></tr><tr><td><span>RTS5781DL</span></td><td><span>消费</span></td><td><span>-</span></td><td><span>PCIe Gen5x4</span></td><td><span>4</span></td><td><span>4</span></td><td><span>3600MT/s</span></td><td><span>HMB</span></td><td><span>-</span></td></tr><tr><td><span>RTS5782</span></td><td><span>消费</span></td><td><span>-</span></td><td><span>PCIe Gen5x4</span></td><td><span>8</span></td><td><span>-</span></td><td><span>3600MT/s</span></td><td><span>DRAM</span></td><td><span>-</span></td></tr></tbody></table></figure><p><strong><span>智微科技JMicron主控资料</span></strong></p><figure class='table-figure'><table><thead><tr><th><span>型号</span></th><th><span>等级</span></th><th><span>制程</span></th><th><span>接口</span></th><th><span>最大通道</span></th><th><span>CE通道</span></th><th><span>最大速率</span></th><th><span>缓存</span></th><th><span>最大容量</span></th></tr></thead><tbody><tr><td><span>JMF601</span></td><td><span>消费</span></td><td><span>UMC 180nm</span></td><td><span>SATA2/USB2.0</span></td><td><span>4</span></td><td><span>16</span></td><td><span>-</span></td><td><span>X</span></td><td><span>64GB</span></td></tr><tr><td><span>JMF602</span></td><td><span>消费</span></td><td><span>UMC 180nm</span></td><td><span>SATA2/USB2.0</span></td><td><span>8</span></td><td><span>32</span></td><td><span>-</span></td><td><span>X</span></td><td><span>256GB</span></td></tr><tr><td><span>JMF604</span></td><td><span>消费</span></td><td><span>UMC 130nm</span></td><td><span>SATA2/USB2.0</span></td><td><span>8</span></td><td><span>16</span></td><td><span>-</span></td><td><span>DRAM</span></td><td><span>256GB</span></td></tr><tr><td><span>JMF605</span></td><td><span>消费</span></td><td><span>UMC 130nm</span></td><td><span>SATA2</span></td><td><span>4</span></td><td><span>4</span></td><td><span>-</span></td><td><span>X</span></td><td><span>128GB</span></td></tr><tr><td><span>JMF606</span></td><td><span>消费</span></td><td><span>-</span></td><td><span>SATA3</span></td><td><span>4</span></td><td><span>4</span></td><td><span>200MT/s</span></td><td><span>X</span></td><td><span>256GB</span></td></tr><tr><td><span>JMF607</span></td><td><span>消费</span></td><td><span>-</span></td><td><span>SATA3</span></td><td><span>2</span></td><td><span>4</span></td><td><span>200MT/s</span></td><td><span>X</span></td><td><span>128GB</span></td></tr><tr><td><span>JMF608</span></td><td><span>消费</span></td><td><span>TSMC 55nm</span></td><td><span>SATA3</span></td><td><span>4</span></td><td><span>4</span></td><td><span>400MT/s</span></td><td><span>X</span></td><td><span>128GB</span></td></tr><tr><td><span>JMF609</span></td><td><span>消费</span></td><td><span>TSMC 55nm</span></td><td><span>SATA3</span></td><td><span>2</span></td><td><span>4</span></td><td><span>400MT/s</span></td><td><span>X</span></td><td><span>128GB</span></td></tr><tr><td><span>JMF60F</span></td><td><span>消费</span></td><td><span>TSMC 55nm</span></td><td><span>SATA3</span></td><td><span>2</span></td><td><span>-</span></td><td><span>400MT/s</span></td><td><span>X</span></td><td><span>256GB</span></td></tr><tr><td><span>JMF611</span></td><td><span>消费</span></td><td><span>UMC 130nm</span></td><td><span>SATA2/USB2.0</span></td><td><span>4</span></td><td><span>-</span></td><td><span>-</span></td><td><span>DRAM</span></td><td><span>-</span></td></tr><tr><td><span>JMF612</span></td><td><span>消费</span></td><td><span>UMC 130nm</span></td><td><span>SATA2/USB2.0</span></td><td><span>8</span></td><td><span>16</span></td><td><span>-</span></td><td><span>DRAM</span></td><td><span>512GB</span></td></tr><tr><td><span>JMF616</span></td><td><span>消费</span></td><td><span>UMC 130nm</span></td><td><span>SATA2/USB2.0</span></td><td><span>8</span></td><td><span>16</span></td><td><span>-</span></td><td><span>DRAM</span></td><td><span>512GB</span></td></tr><tr><td><span>JMF618</span></td><td><span>消费</span></td><td><span>UMC 130nm</span></td><td><span>SATA2</span></td><td><span>8</span></td><td><span>16</span></td><td><span>-</span></td><td><span>DRAM</span></td><td><span>256GB</span></td></tr><tr><td><span>JMF661</span></td><td><span>消费</span></td><td><span>-</span></td><td><span>SATA3</span></td><td><span>4</span></td><td><span>16</span></td><td><span>200MT/s</span></td><td><span>DRAM</span></td><td><span>512GB</span></td></tr><tr><td><span>JMF662</span></td><td><span>消费</span></td><td><span>-</span></td><td><span>SATA3</span></td><td><span>8</span></td><td><span>16</span></td><td><span>200MT/s</span></td><td><span>DRAM</span></td><td><span>512GB</span></td></tr><tr><td><span>JMF665</span></td><td><span>消费</span></td><td><span>-</span></td><td><span>SATA3</span></td><td><span>-</span></td><td><span>-</span></td><td><span>-</span></td><td><span>DRAM</span></td><td><span>-</span></td></tr><tr><td><span>JMF667</span></td><td><span>消费</span></td><td><span>TSMC 55nm</span></td><td><span>SATA3</span></td><td><span>4</span></td><td><span>1</span></td><td><span>400MT/s</span></td><td><span>DRAM</span></td><td><span>32GB</span></td></tr><tr><td><span>JMF667H</span></td><td><span>消费</span></td><td><span>TSMC 55nm</span></td><td><span>SATA3</span></td><td><span>4</span></td><td><span>8</span></td><td><span>400MT/s</span></td><td><span>DRAM</span></td><td><span>256GB</span></td></tr><tr><td><span>JMF668</span></td><td><span>消费</span></td><td><span>-</span></td><td><span>SATA3</span></td><td><span>4</span></td><td><span>16</span></td><td><span>200MT/s</span></td><td><span>DRAM</span></td><td><span>256GB</span></td></tr><tr><td><span>JMF670H</span></td><td><span>消费</span></td><td><span>TSMC 55nm</span></td><td><span>SATA3</span></td><td><span>4</span></td><td><span>8</span></td><td><span>667MT/s</span></td><td><span>DRAM</span></td><td><span>512GB</span></td></tr><tr><td><span>JMF680H</span></td><td><span>消费</span></td><td><span>-</span></td><td><span>SATA3</span></td><td><span>4</span></td><td><span>-</span></td><td><span>667MT/s</span></td><td><span>DRAM</span></td><td><span>2TB</span></td></tr><tr><td><span>JMF810</span></td><td><span>消费</span></td><td><span>-</span></td><td><span>PCIe Gen2x2 AHCI&amp;SATA</span></td><td><span>8</span></td><td><span>-</span></td><td><span>-</span></td><td><span>DRAM</span></td><td><span>512GB</span></td></tr><tr><td><span>JMF811</span></td><td><span>消费</span></td><td><span>-</span></td><td><span>PCIe Gen2x4 (AHCI)</span></td><td><span>8</span></td><td><span>-</span></td><td><span>-</span></td><td><span>DRAM</span></td><td><span>512GB</span></td></tr><tr><td><span>JMF815</span></td><td><span>消费</span></td><td><span>-</span></td><td><span>PCIe Gen3x2 (AHCI)</span></td><td><span>4</span></td><td><span>-</span></td><td><span>667MT/s</span></td><td><span>DRAM</span></td><td><span>2TB</span></td></tr></tbody></table></figure><p><strong><span>得一微电子Yeestor主控资料</span></strong></p><p><span>硅格半导体SiliconGo/大心电子EpoStar</span></p><figure class='table-figure'><table><thead><tr><th><span>型号</span></th><th><span>等级</span></th><th><span>制程</span></th><th><span>接口</span></th><th><span>最大通道</span></th><th><span>CE通道</span></th><th><span>最大速率</span></th><th><span>缓存</span></th><th><span>最大容量</span></th></tr></thead><tbody><tr><td><span>YS9081XT SG9081XT</span></td><td><span>消费</span></td><td><span>TSMC 55nm</span></td><td><span>SATA3</span></td><td><span>4</span></td><td><span>4</span></td><td><span>400MT/s</span></td><td><span>X</span></td><td><span>-</span></td></tr><tr><td><span>YS9083XT</span></td><td><span>消费</span></td><td><span>TSMC 55nm</span></td><td><span>SATA3</span></td><td><span>2</span></td><td><span>4</span></td><td><span>400MT/s</span></td><td><span>X</span></td><td><span>-</span></td></tr><tr><td><span>YS9085N</span></td><td><span>消费</span></td><td><span>TSMC 40nm</span></td><td><span>SATA3</span></td><td><span>2</span></td><td><span>4</span></td><td><span>400MT/s</span></td><td><span>X</span></td><td><span>-</span></td></tr><tr><td><span>YS9082HC</span></td><td><span>消费</span></td><td><span>TSMC 40nm</span></td><td><span>SATA3</span></td><td><span>4</span></td><td><span>4</span></td><td><span>400MT/s</span></td><td><span>X</span></td><td><span>-</span></td></tr><tr><td><span>YS9082HP</span></td><td><span>消费</span></td><td><span>TSMC 40nm</span></td><td><span>SATA3</span></td><td><span>4</span></td><td><span>4</span></td><td><span>400MT/s</span></td><td><span>X</span></td><td><span>-</span></td></tr><tr><td><span>YS9082HT</span></td><td><span>消费</span></td><td><span>TSMC 28nm</span></td><td><span>SATA3</span></td><td><span>4</span></td><td><span>4</span></td><td><span>400MT/s</span></td><td><span>X</span></td><td><span>-</span></td></tr><tr><td><span>YS9201 EP160</span></td><td><span>消费</span></td><td><span>TSMC 40nm</span></td><td><span>PCIe Gen3x2 (NVMe1.3)</span></td><td><span>4</span></td><td><span>8</span></td><td><span>800MT/s</span></td><td><span>DRAM</span></td><td><span>-</span></td></tr><tr><td><span>YS9203 EP280</span></td><td><span>消费/企业</span></td><td><span>TSMC 28nm</span></td><td><span>PCIe Gen3x4 (NVMe1.3)</span></td><td><span>8</span></td><td><span>8</span></td><td><span>800MT/s</span></td><td><span>DRAM</span></td><td><span>-</span></td></tr><tr><td><span>YS9205</span></td><td><span>消费/企业</span></td><td><span>TSMC 28nm</span></td><td><span>PCIe Gen3x4 (NVMe1.4)</span></td><td><span>4</span></td><td><span>4</span></td><td><span>800MT/s</span></td><td><span>DRAM</span></td><td><span>-</span></td></tr><tr><td><span>YS9301</span></td><td><span>消费</span></td><td><span>TSMC 16nm</span></td><td><span>PCIe Gen4x4 (NVMe1.4)</span></td><td><span>4</span></td><td><span>4</span></td><td><span>1200MT/s</span></td><td><span>HMB</span></td><td><span>-</span></td></tr><tr><td><span>YS9303</span></td><td><span>消费</span></td><td><span>TSMC 12nm</span></td><td><span>PCIe Gen4x4 (NVMe2.0)</span></td><td><span>4</span></td><td><span>4</span></td><td><span>3200MT/s</span></td><td><span>HMB</span></td><td><span>-</span></td></tr><tr><td><span>YS9501</span></td><td><span>企业</span></td><td><span>-</span></td><td><span>PCIe Gen5x4 (NVMe2.0)</span></td><td><span>16</span></td><td><span>8</span></td><td><span>2400MT/s</span></td><td><span>DRAM</span></td><td><span>-</span></td></tr></tbody></table></figure><p><strong><span>沛睿微电子RayMX(瑞昱Realtek)主控资料</span></strong></p><figure class='table-figure'><table><thead><tr><th><span>型号</span></th><th><span>等级</span></th><th><span>制程</span></th><th><span>接口</span></th><th><span>最大通道</span></th><th><span>CE通道</span></th><th><span>最大速率</span></th><th><span>缓存</span></th><th><span>最大容量</span></th></tr></thead><tbody><tr><td><span>RM1135</span></td><td><span>消费</span></td><td><span>-</span></td><td><span>SATA3</span></td><td><span>2</span></td><td><span>8</span></td><td><span>533MT/s</span></td><td><span>X</span></td><td><span>-</span></td></tr><tr><td><span>RM1362</span></td><td><span>消费</span></td><td><span>-</span></td><td><span>PCIe Gen3x4 (NVMe1.3)</span></td><td><span>8</span></td><td><span>8</span></td><td><span>667MT/s</span></td><td><span>DRAM</span></td><td><span>-</span></td></tr><tr><td><span>RM1366</span></td><td><span>消费</span></td><td><span>-</span></td><td><span>PCIe Gen3x4 (NVMe1.4)</span></td><td><span>4</span></td><td><span>4</span></td><td><span>1066MT/s</span></td><td><span>HMB</span></td><td><span>-</span></td></tr><tr><td><span>RMS5771</span></td><td><span>消费</span></td><td><span>-</span></td><td><span>PCIe Gen4x4 (NVMe1.4)</span></td><td><span>4</span></td><td><span>4</span></td><td><span>1600MT/s</span></td><td><span>HMB</span></td><td><span>-</span></td></tr><tr><td><span>RMS5772</span></td><td><span>消费</span></td><td><span>-</span></td><td><span>PCIe Gen4x4 (NVMe1.4)</span></td><td><span>8</span></td><td><span>4</span></td><td><span>1600MT/s</span></td><td><span>HMB</span></td><td><span>-</span></td></tr></tbody></table></figure><p><strong><span>国科微电子Goke(芯盛智能XITC)主控资料</span></strong></p><figure class='table-figure'><table><thead><tr><th><span>型号</span></th><th><span>等级</span></th><th><span>制程</span></th><th><span>接口</span></th><th><span>最大通道</span></th><th><span>CE通道</span></th><th><span>最大速率</span></th><th><span>缓存</span></th><th><span>最大容量</span></th></tr></thead><tbody><tr><td><span>GK2101</span></td><td><span>企业</span></td><td><span>40nm</span></td><td><span>PCIe Gen2x4(NVMe1.0)</span></td><td><span>8</span></td><td><span>8</span></td><td><span>333MT/s</span></td><td><span>X</span></td><td><span>2TB</span></td></tr><tr><td><span>GK2102</span></td><td><span>企业</span></td><td><span>40nm</span></td><td><span>SATA3</span></td><td><span>8</span></td><td><span>8</span></td><td><span>333MT/s</span></td><td><span>X</span></td><td><span>2TB</span></td></tr><tr><td><span>GK2301</span></td><td><span>消费/企业</span></td><td><span>40nm</span></td><td><span>SATA3</span></td><td><span>4</span></td><td><span>8</span></td><td><span>400MT/s</span></td><td><span>DRAM</span></td><td><span>4TB</span></td></tr><tr><td><span>GK2302</span></td><td><span>消费/企业</span></td><td><span>SMIC 40nm</span></td><td><span>SATA3</span></td><td><span>4</span></td><td><span>8</span></td><td><span>400MT/s</span></td><td><span>DRAM</span></td><td><span>4TB</span></td></tr><tr><td><span>GK2302v200</span></td><td><span>消费/企业</span></td><td><span>SMIC 40nm</span></td><td><span>SATA3</span></td><td><span>2</span></td><td><span>8</span></td><td><span>533MT/s</span></td><td><span>X</span></td><td><span>4TB</span></td></tr><tr><td><span>XT6110</span></td><td><span>消费/企业</span></td><td><span>UMC 40nm</span></td><td><span>SATA3</span></td><td><span>4</span></td><td><span>8</span></td><td><span>-</span></td><td><span>DRAM</span></td><td><span>4TB</span></td></tr><tr><td><span>XT6111 PS3111-S11</span></td><td><span>消费</span></td><td><span>UMC 40nm</span></td><td><span>SATA3</span></td><td><span>2</span></td><td><span>8</span></td><td><span>533MT/s</span></td><td><span>X</span></td><td><span>4TB</span></td></tr><tr><td><span>XT6120</span></td><td><span>消费/企业</span></td><td><span>TSMC 12nm</span></td><td><span>SATA3</span></td><td><span>8</span></td><td><span>4</span></td><td><span>-</span></td><td><span>DRAM</span></td><td><span>8TB</span></td></tr><tr><td><span>XT6121</span></td><td><span>消费</span></td><td><span>TSMC 12nm</span></td><td><span>SATA3</span></td><td><span>2</span></td><td><span>8</span></td><td><span>-</span></td><td><span>X</span></td><td><span>2TB</span></td></tr><tr><td><span>XT6130</span></td><td><span>消费/企业</span></td><td><span>TSMC 12nm</span></td><td><span>SATA3</span></td><td><span>8</span></td><td><span>4</span></td><td><span>1600MT/s</span></td><td><span>DRAM</span></td><td><span>16TB</span></td></tr><tr><td><span>GK2311 GOKE2311G</span></td><td><span>消费/企业</span></td><td><span>TSMC 28nm</span></td><td><span>PCIe Gen3x4 (NVMe1.3)</span></td><td><span>4</span></td><td><span>8</span></td><td><span>800MT/s</span></td><td><span>DRAM</span></td><td><span>4TB</span></td></tr><tr><td><span>XITC2311 XITC2311G</span></td><td><span>消费/企业</span></td><td><span>TSMC 28nm</span></td><td><span>PCIe Gen3x4 (NVMe1.3)</span></td><td><span>4</span></td><td><span>8</span></td><td><span>800MT/s</span></td><td><span>DRAM</span></td><td><span>8TB</span></td></tr><tr><td><span>XT8110 PS5012-E12S</span></td><td><span>消费</span></td><td><span>TSMC 28nm</span></td><td><span>PCIe Gen3x4 (NVMe1.3)</span></td><td><span>8</span></td><td><span>4</span></td><td><span>667MT/s</span></td><td><span>DRAM</span></td><td><span>8TB</span></td></tr><tr><td><span>XT8111 PS5013-E13</span></td><td><span>消费</span></td><td><span>TSMC 28nm</span></td><td><span>PCIe Gen3x4 (NVMe1.3)</span></td><td><span>4</span></td><td><span>4</span></td><td><span>800MT/s</span></td><td><span>HMB</span></td><td><span>2TB</span></td></tr><tr><td><span>XT8210</span></td><td><span>消费/企业</span></td><td><span>TSMC 12nm</span></td><td><span>PCIe Gen4x4 (NVMe1.4)</span></td><td><span>8</span></td><td><span>4</span></td><td><span>1600MT/s</span></td><td><span>DRAM</span></td><td><span>16TB</span></td></tr></tbody></table></figure><p><strong><span>云莲科技Maxiotek主控资料</span></strong></p><figure class='table-figure'><table><thead><tr><th><span>型号</span></th><th><span>等级</span></th><th><span>制程</span></th><th><span>接口</span></th><th><span>最大通道</span></th><th><span>CE通道</span></th><th><span>最大速率</span></th><th><span>缓存</span></th><th><span>最大容量</span></th></tr></thead><tbody><tr><td><span>MK8113</span></td><td><span>消费</span></td><td><span>TSMC 40nm</span></td><td><span>SATA3</span></td><td><span>4</span></td><td><span>8</span></td><td><span>400MT/s</span></td><td><span>DRAM</span></td><td><span>2TB</span></td></tr><tr><td><span>MK8115</span></td><td><span>消费</span></td><td><span>TSMC 40nm</span></td><td><span>SATA3</span></td><td><span>4</span></td><td><span>8</span></td><td><span>400MT/s</span></td><td><span>X</span></td><td><span>2TB</span></td></tr><tr><td><span>MK8213</span></td><td><span>消费</span></td><td><span>GF 40nm</span></td><td><span>SATA3</span></td><td><span>4</span></td><td><span>8</span></td><td><span>667MT/s</span></td><td><span>DRAM</span></td><td><span>2TB</span></td></tr><tr><td><span>MK8215</span></td><td><span>消费</span></td><td><span>GF 40nm</span></td><td><span>SATA3</span></td><td><span>4</span></td><td><span>8</span></td><td><span>667MT/s</span></td><td><span>X</span></td><td><span>2TB</span></td></tr></tbody></table></figure><p><strong><span>忆芯科技StarBlaze主控资料</span></strong></p><figure class='table-figure'><table><thead><tr><th><span>型号</span></th><th><span>等级</span></th><th><span>制程</span></th><th><span>接口</span></th><th><span>最大通道</span></th><th><span>CE通道</span></th><th><span>最大速率</span></th><th><span>缓存</span></th><th><span>最大容量</span></th></tr></thead><tbody><tr><td><span>MB1000</span></td><td><span>企业</span></td><td><span>TSMC 28nm</span></td><td><span>PCIe Gen3x4 2x2(NVMe1.2)</span></td><td><span>-</span></td><td><span>-</span></td><td><span>-</span></td><td><span>-</span></td><td><span>-</span></td></tr><tr><td><span>STAR1000</span></td><td><span>消费</span></td><td><span>TSMC 28nm</span></td><td><span>PCIe Gen3x4 (NVMe1.2)</span></td><td><span>8</span></td><td><span>-</span></td><td><span>800MT/s</span></td><td><span>DRAM</span></td><td><span>32TB</span></td></tr><tr><td><span>STAR1000P</span></td><td><span>消费/企业</span></td><td><span>TSMC 28nm</span></td><td><span>PCIe Gen3x4 (NVMe1.4)</span></td><td><span>8</span></td><td><span>-</span></td><td><span>800MT/s</span></td><td><span>DRAM</span></td><td><span>32TB</span></td></tr><tr><td><span>STAR1000t-L</span></td><td><span>消费</span></td><td><span>TSMC 28nm</span></td><td><span>PCIe Gen3x4 (NVMe1.2)</span></td><td><span>8</span></td><td><span>-</span></td><td><span>800MT/s</span></td><td><span>HMB</span></td><td><span>2TB</span></td></tr><tr><td><span>STAR2000</span></td><td><span>企业</span></td><td><span>TSMC 12nm</span></td><td><span>PCIe Gen4x4 2x2(NVMe2.0)</span></td><td><span>16</span></td><td><span>-</span></td><td><span>-</span></td><td><span>DRAM</span></td><td><span>128TB</span></td></tr><tr><td><span>STAR1500</span></td><td><span>消费</span></td><td><span>SS 8nm</span></td><td><span>PCIe Gen5x4 (NVMe2.0)</span></td><td><span>8</span></td><td><span>-</span></td><td><span>3600MT/s</span></td><td><span>DRAM</span></td><td><span>-</span></td></tr><tr><td><span>STAR1516</span></td><td><span>企业</span></td><td><span>SS 8nm</span></td><td><span>PCIe Gen5x4 (NVMe2.0)</span></td><td><span>16</span></td><td><span>-</span></td><td><span>3600MT/s</span></td><td><span>DRAM</span></td><td><span>-</span></td></tr></tbody></table></figure><p><strong><span>矽统科技SiS主控资料(联钜科技LinkVast)</span></strong></p><figure class='table-figure'><table><thead><tr><th><span>型号</span></th><th><span>等级</span></th><th><span>制程</span></th><th><span>接口</span></th><th><span>最大通道</span></th><th><span>CE通道</span></th><th><span>最大速率</span></th><th><span>缓存</span></th><th><span>最大容量</span></th></tr></thead><tbody><tr><td><span>LVT815</span></td><td><span>消费</span></td><td><span>110nm</span></td><td><span>SATA2</span></td><td><span>4</span></td><td><span>8</span></td><td><span>-</span></td><td><span>DRAM</span></td><td><span>-</span></td></tr><tr><td><span>LVT820</span></td><td><span>消费</span></td><td><span>110nm</span></td><td><span>SATA2</span></td><td><span>8</span></td><td><span>8</span></td><td><span>-</span></td><td><span>DRAM</span></td><td><span>-</span></td></tr><tr><td><span>SiS750GT</span></td><td><span>消费</span></td><td><span>-</span></td><td><span>SATA3</span></td><td><span>4</span></td><td><span>-</span></td><td><span>-</span></td><td><span>DRAM</span></td><td><span>-</span></td></tr><tr><td><span>SiS750</span></td><td><span>消费</span></td><td><span>-</span></td><td><span>SATA3</span></td><td><span>4</span></td><td><span>-</span></td><td><span>-</span></td><td><span>X</span></td><td><span>-</span></td></tr><tr><td><span>SiS810</span></td><td><span>消费</span></td><td><span>-</span></td><td><span>PCIe Gen3x2 (NVMe1.3)</span></td><td><span>4</span></td><td><span>-</span></td><td><span>-</span></td><td><span>DRAM</span></td><td><span>-</span></td></tr><tr><td><span>SiS832</span></td><td><span>消费</span></td><td><span>-</span></td><td><span>PCIe Gen3x4 (NVMe1.3)</span></td><td><span>4</span></td><td><span>-</span></td><td><span>-</span></td><td><span>DRAM</span></td><td><span>-</span></td></tr><tr><td><span>SiS850</span></td><td><span>消费</span></td><td><span>-</span></td><td><span>PCIe Gen3x4 (NVMe1.3)</span></td><td><span>8</span></td><td><span>-</span></td><td><span>-</span></td><td><span>DRAM</span></td><td><span>-</span></td></tr></tbody></table></figure><p><strong><span>点序科技ASolid主控资料</span></strong></p><figure class='table-figure'><table><thead><tr><th><span>型号</span></th><th><span>等级</span></th><th><span>制程</span></th><th><span>接口</span></th><th><span>最大通道</span></th><th><span>CE通道</span></th><th><span>最大速率</span></th><th><span>缓存</span></th><th><span>最大容量</span></th></tr></thead><tbody><tr><td><span>AS2258</span></td><td><span>消费</span></td><td><span>UMC 40nm</span></td><td><span>SATA3</span></td><td><span>2</span></td><td><span>8</span></td><td><span>800MT/s</span></td><td><span>X</span></td><td><span>-</span></td></tr><tr><td><span>AS2263</span></td><td><span>消费</span></td><td><span>-</span></td><td><span>PCIe Gen3x4 (NVMe1.4)</span></td><td><span>4</span></td><td><span>4</span></td><td><span>800MT/s</span></td><td><span>HMB</span></td><td><span>2TB</span></td></tr></tbody></table></figure><p><strong><span>特纳飞电子TenaFe主控资料</span></strong></p><figure class='table-figure'><table><thead><tr><th><span>型号</span></th><th><span>等级</span></th><th><span>制程</span></th><th><span>接口</span></th><th><span>最大通道</span></th><th><span>CE通道</span></th><th><span>最大速率</span></th><th><span>缓存</span></th><th><span>最大容量</span></th></tr></thead><tbody><tr><td><span>TC2200</span></td><td><span>消费</span></td><td><span>TSMC 12nm</span></td><td><span>PCIe Gen4x4 (NVMe1.4)</span></td><td><span>4</span></td><td><span>4</span></td><td><span>1600MT/s</span></td><td><span>HMB</span></td><td><span>-</span></td></tr><tr><td><span>TC2201</span></td><td><span>消费</span></td><td><span>TSMC 12nm</span></td><td><span>PCIe Gen4x4 (NVMe1.4)</span></td><td><span>4</span></td><td><span>4</span></td><td><span>2400MT/s</span></td><td><span>HMB</span></td><td><span>-</span></td></tr></tbody></table></figure><h1 id='3d-nand颗粒对比'><span>3D NAND颗粒对比</span></h1><p><span>长江存储,三星,海力士,镁光的3D NAND颗粒参数对比，因为各家技术路线不同，该表仅供参考不能反映技术高低</span></p><figure class='table-figure'><table><thead><tr><th><span>名称</span></th><th><span>封装面积(mm²)</span></th><th><span>容量(Gb)</span></th><th><span>密度(Gb/mm²)</span></th><th><span>堆叠层数</span></th><th><span>串叠数</span></th><th><span>WL间距(nm)</span></th><th><span>BL间距(nm)</span></th><th><span>VC高度(μm)</span></th><th><span>填充深度(μm)</span></th></tr></thead><tbody><tr><td><span>YMTC-128L</span></td><td><span>60.42</span></td><td><span>512</span></td><td><span>8.47</span></td><td><span>128</span></td><td><span>2</span></td><td><span>58</span></td><td><span>39</span></td><td><span>8.5</span></td><td><span>8.8</span></td></tr><tr><td><span>YMTC-232L</span></td><td><span>68.15</span></td><td><span>1024</span></td><td><span>15.03</span></td><td><span>232</span></td><td><span>2</span></td><td><span>48</span></td><td><span>39</span></td><td><span>12.4</span></td><td><span>12.7</span></td></tr><tr><td><span>Samsumg-128L</span></td><td><span>73.60</span></td><td><span>512</span></td><td><span>6.96</span></td><td><span>128</span></td><td><span>1</span></td><td><span>44</span></td><td><span>38</span></td><td><span>6.6</span></td><td><span>6.7</span></td></tr><tr><td><span>Samsumg-176L</span></td><td><span>47.10</span></td><td><span>512</span></td><td><span>10.87</span></td><td><span>176</span></td><td><span>2</span></td><td><span>43</span></td><td><span>38</span></td><td><span>8.9</span></td><td><span>9.2</span></td></tr><tr><td><span>SK Hynix-128L</span></td><td><span>63.00</span></td><td><span>512</span></td><td><span>8.13</span></td><td><span>128</span></td><td><span>2</span></td><td><span>52</span></td><td><span>39</span></td><td><span>8.1</span></td><td><span>8</span></td></tr><tr><td><span>SK Hynix-176L</span></td><td><span>46.50</span></td><td><span>512</span></td><td><span>11.01</span></td><td><span>176</span></td><td><span>2</span></td><td><span>45</span></td><td><span>38</span></td><td><span>9.4</span></td><td><span>9.3</span></td></tr><tr><td><span>Micron-128L</span></td><td><span>66.08</span></td><td><span>512</span></td><td><span>7.75</span></td><td><span>128</span></td><td><span>2</span></td><td><span>56</span></td><td><span>38</span></td><td><span>8.6</span></td><td><span>9</span></td></tr><tr><td><span>Micron-176L</span></td><td><span>49.84</span></td><td><span>512</span></td><td><span>10.27</span></td><td><span>176</span></td><td><span>2</span></td><td><span>56</span></td><td><span>38</span></td><td><span>10.7</span></td><td><span>11</span></td></tr></tbody></table></figure><hr /><p><strong><span>长江YMTC存储3D NAND颗粒资料</span></strong></p><p><img src="./img/v2-9a2607ff47037192d9c7b4459a243148_1440w.jpg" referrerpolicy="no-referrer" alt="v2-9a2607ff47037192d9c7b4459a243148_1440w"></p><figure class='table-figure'><table><thead><tr><th><span>名称</span></th><th><span>代号</span></th><th><span>类型</span></th><th><span>层数</span></th><th><span>Die容量</span></th><th><span>架构</span></th><th><span>接口</span></th><th><span>最大封装</span></th></tr></thead><tbody><tr><td><span>DBS大别山</span></td><td><span>X0-A030</span></td><td><span>MLC</span></td><td><span>32</span></td><td><span>64Gbit</span></td><td><span>TCAT</span></td><td><span>ONFI3.0(400MT/s)</span></td><td><span>4Die32GB</span></td></tr><tr><td><span>JGS井冈山</span></td><td><span>X1-9050</span></td><td><span>TLC</span></td><td><span>64</span></td><td><span>256Gbit</span></td><td><span>Xtacking1.0</span></td><td><span>ONFI4.0(800MT/s)</span></td><td><span>16Die512GB</span></td></tr><tr><td><span>TAS泰山</span></td><td><span>X2-9060</span></td><td><span>TLC</span></td><td><span>128</span></td><td><span>512Gbit</span></td><td><span>Xtacking2.0</span></td><td><span>ONFI4.2(1600MT/s)</span></td><td><span>16Die1TB</span></td></tr><tr><td><span>HUS黄山</span></td><td><span>X2-6070</span></td><td><span>QLC</span></td><td><span>128</span></td><td><span>1.33Tbit</span></td><td><span>Xtacking2.0</span></td><td><span>ONFI4.2(1600MT/s)</span></td><td><span>3Die512GB</span></td></tr><tr><td><span>WYS武夷山</span></td><td><span>X3-9060</span></td><td><span>TLC</span></td><td><span>128</span></td><td><span>512Gbit</span></td><td><span>Xtacking3.0</span></td><td><span>ONFI5.0(2400MT/s)</span></td><td><span>16Die1TB</span></td></tr><tr><td><span>WDS武当山</span></td><td><span>X3-9070</span></td><td><span>TLC</span></td><td><span>232</span></td><td><span>1Tbit</span></td><td><span>Xtacking3.0</span></td><td><span>ONFI5.0(2400MT/s)</span></td><td><span>16Die2TB</span></td></tr><tr><td><span>EMS峨眉山</span></td><td><span>X3-6070</span></td><td><span>QLC</span></td><td><span>232</span></td><td><span>1Tbit</span></td><td><span>Xtacking3.0</span></td><td><span>ONFI5.0(2400MT/s)</span></td><td><span>8Die1TB</span></td></tr><tr><td><span>WT五台山</span></td><td><span>X4-9060</span></td><td><span>TLC</span></td><td><span>128</span></td><td><span>512Gbit</span></td><td><span>Xtacking4.0</span></td><td><span>ONFI5.1(3600MT/s)</span></td><td><span>-</span></td></tr></tbody></table></figure><p><strong><span>SAMSUMG三星存储3D V-NAND颗粒资料</span></strong></p><figure class='table-figure'><table><thead><tr><th><span>名称</span></th><th><span>代号</span></th><th><span>量产时间</span></th><th><span>层数</span></th><th><span>Die容量</span></th><th><span>接口</span></th><th><span>Die标识</span></th></tr></thead><tbody><tr><td><span>SSV1</span></td><td><span>V1 MLC</span></td><td><span>2013</span></td><td><span>24</span></td><td><span>128Gbit</span></td><td><span>Toggle2.0(533MT/s)</span></td><td><span>K9GDGD8S/U0M</span></td></tr><tr><td><span>SSV2</span></td><td><span>V2 MLC</span></td><td><span>2015</span></td><td><span>32</span></td><td><span>128Gbit</span></td><td><span>Toggle3.0(1000MT/s)</span></td><td><span>K9GDGD8U0A</span></td></tr><tr><td><span>SSV2</span></td><td><span>V2 TLC</span></td><td><span>2014</span></td><td><span>32</span></td><td><span>128Gbit</span></td><td><span>Toggle3.0(1000MT/s)</span></td><td><span>K9ADGD8S0A K9ADGD8U0C</span></td></tr><tr><td><span>SSV3</span></td><td><span>V3 MLC</span></td><td><span>2016</span></td><td><span>48</span></td><td><span>256Gbit</span></td><td><span>Toggle3.0(1000MT/s)</span></td><td><span>K9GFGD8F/U0M</span></td></tr><tr><td><span>SSV3</span></td><td><span>V3 TLC</span></td><td><span>2015</span></td><td><span>48</span></td><td><span>128Gbit 256Gbit</span></td><td><span>Toggle3.0(1000MT/s)</span></td><td><span>K9ADGD8U0E K9AFGD8U0M</span></td></tr><tr><td><span>SSV4</span></td><td><span>V4 MLC</span></td><td><span>2017</span></td><td><span>64</span></td><td><span>256Gbit</span></td><td><span>Toggle3.0(1000MT/s)</span></td><td><span>K9GFGD8H/J0A</span></td></tr><tr><td><span>SSV4</span></td><td><span>V4 TLC</span></td><td><span>2017</span></td><td><span>64</span></td><td><span>256Gbit 512Gbit</span></td><td><span>Toggle3.0(1000MT/s)</span></td><td><span>K9AFGD8H0A K9AHGD8H/J/U0M</span></td></tr><tr><td><span>SSV4</span></td><td><span>V4 QLC</span></td><td><span>2018</span></td><td><span>64</span></td><td><span>1Tbit</span></td><td><span>Toggle3.0(1000MT/s)</span></td><td><span>K93KGD8U0M</span></td></tr><tr><td><span>SSV5</span></td><td><span>V5 TLC</span></td><td><span>2018</span></td><td><span>92</span></td><td><span>256Gbit 512Gbit</span></td><td><span>Toggle4.0(1400MT/s)</span></td><td><span>K9AFGD8H/J0B K9AHGD8H/J0A</span></td></tr><tr><td><span>SSV5</span></td><td><span>V5 QLC</span></td><td><span>2020</span></td><td><span>92</span></td><td><span>1Tbit</span></td><td><span>Toggle4.0(1200MT/s)</span></td><td><span>K93KGD8J0A</span></td></tr><tr><td><span>SSV6</span></td><td><span>V6 TLC</span></td><td><span>2020</span></td><td><span>128</span></td><td><span>256Gbit 512Gbit</span></td><td><span>Toggle4.0(1400MT/s)</span></td><td><span>K9AFGD8J/U0C K9AHGD8H/J/U0B</span></td></tr><tr><td><span>SSV6P</span></td><td><span>V6 TLC</span></td><td><span>2022</span></td><td><span>133</span></td><td><span>512Gbit</span></td><td><span>Toggle4.0(1600MT/s)</span></td><td><span>K9AHGD8J0E</span></td></tr><tr><td><span>SSV7</span></td><td><span>V7 TLC</span></td><td><span>2022</span></td><td><span>176</span></td><td><span>512Gbit</span></td><td><span>Toggle5.0(2000MT/s)</span></td><td><span>K9AHGD8J/U0D</span></td></tr><tr><td><span>SSV7</span></td><td><span>V7 QLC</span></td><td><span>2023</span></td><td><span>176</span></td><td><span>1Tbit</span></td><td><span>Toggle4.0(1600MT/s)</span></td><td><span>K93KGD8J0C</span></td></tr><tr><td><span>SSV8</span></td><td><span>V8 TLC</span></td><td><span>2023</span></td><td><span>236</span></td><td><span>512Gbit 1Tbit</span></td><td><span>Toggle5.0(2400MT/s)</span></td><td><span>K9AHGD8J0F K9AKGD8J0B</span></td></tr><tr><td><span>Z-NAND G1</span></td><td><span>SLC</span></td><td><span>2018</span></td><td><span>48</span></td><td><span>64Gbit</span></td><td><span>Toggle3.0(1000MT/s)</span></td><td><span>K9FCGD8J0M</span></td></tr></tbody></table></figure><p><strong><span>KIOXIA铠侠存储3D NAND颗粒资料</span></strong></p><figure class='table-figure'><table><thead><tr><th><span>名称</span></th><th><span>代号</span></th><th><span>量产时间</span></th><th><span>类型</span></th><th><span>层数</span></th><th><span>Die容量</span></th><th><span>接口</span></th><th><span>Die标识</span></th></tr></thead><tbody><tr><td><span>BiCS2</span></td><td><span>BiCS2M BiCS2 X2</span></td><td><span>2016</span></td><td><span>MLC</span></td><td><span>48</span></td><td><span>128Gbit</span></td><td><span>Toggle2.0 (533MT/s)</span></td><td><span>-</span></td></tr><tr><td><span>BiCS2</span></td><td><span>BiCS2 BiCS2 X3</span></td><td><span>2016</span></td><td><span>TLC</span></td><td><span>48</span></td><td><span>256Gbit</span></td><td><span>Toggle2.0 (533MT/s)</span></td><td><span>FPL9 256G</span></td></tr><tr><td><span>BiCS3</span></td><td><span>BiCS3 BiCS3 X3</span></td><td><span>2017</span></td><td><span>TLC</span></td><td><span>64</span></td><td><span>128Gbit 256Gbit 512Gbit</span></td><td><span>Toggle2.0 (533MT/s)</span></td><td><span>FRN2 128G FRN1 256G FRN4 512G</span></td></tr><tr><td><span>BiCS3</span></td><td><span>BiCS3Q BiCS3 X4</span></td><td><span>-</span></td><td><span>QLC</span></td><td><span>64</span></td><td><span>768Gbit</span></td><td><span>Toggle2.0 (533MT/s)</span></td><td><span>-</span></td></tr><tr><td><span>BiCS3</span></td><td><span>BiCS3 HDR BiCS3 eX3</span></td><td><span>2018</span></td><td><span>TLC</span></td><td><span>64</span></td><td><span>128Gbit 256Gbit 512Gbit</span></td><td><span>Toggle3.0 (800MT/s)</span></td><td><span>-</span></td></tr><tr><td><span>BiCS4</span></td><td><span>BiCS4 BiCS4 X3</span></td><td><span>2018</span></td><td><span>TLC</span></td><td><span>96</span></td><td><span>256Gbit 512Gbit</span></td><td><span>Toggle3.0 (800MT/s)</span></td><td><span>FST0 256G FSK3 512G</span></td></tr><tr><td><span>BiCS4</span></td><td><span>BiCS4Q BiCS4 X4</span></td><td><span>2019</span></td><td><span>QLC</span></td><td><span>96</span></td><td><span>1.33Tbit</span></td><td><span>Toggle3.0 (800MT/s)</span></td><td><span>FSPO 1.33T</span></td></tr><tr><td><span>BiCS4</span></td><td><span>BiCS4 HDR BiCS4 eX3</span></td><td><span>2020</span></td><td><span>TLC</span></td><td><span>96</span></td><td><span>256Gbit 512Gbit</span></td><td><span>Toggle4.0 (1200MT/s)</span></td><td><span>FSPO 1.33T</span></td></tr><tr><td><span>BiCS4.5</span></td><td><span>BiCS4.5 BiCS4.5 X3</span></td><td><span>2020</span></td><td><span>TLC</span></td><td><span>96</span></td><td><span>256Gbit 512Gbit</span></td><td><span>Toggle4.0 (1200MT/s)</span></td><td><span>FXE4 256G FXE5 512G</span></td></tr><tr><td><span>BiCS5</span></td><td><span>BiCS5 BiCS5 X3</span></td><td><span>2020</span></td><td><span>TLC</span></td><td><span>112</span></td><td><span>512Gbit 1Tbit</span></td><td><span>Toggle4.0 (1200MT/s)</span></td><td><span>FXH8 512G FXN6 1TX3</span></td></tr><tr><td><span>BiCS5</span></td><td><span>BiCS5Q BiCS5 X4</span></td><td><span>2020</span></td><td><span>QLC</span></td><td><span>112</span></td><td><span>1Tbit 1.33 Tbit</span></td><td><span>Toggle4.0 (1200MT/s)</span></td><td><span>FXM9 1TX4</span></td></tr><tr><td><span>BiCS5</span></td><td><span>BiCS5 HDR BiCS5 eX3</span></td><td><span>2022</span></td><td><span>TLC</span></td><td><span>112</span></td><td><span>512Gbit 1Tbit</span></td><td><span>Toggle4.0 (1600MT/s)</span></td><td><span>-</span></td></tr><tr><td><span>BiCS6</span></td><td><span>BiCS6</span></td><td><span>2023</span></td><td><span>TLC&amp;QLC</span></td><td><span>162</span></td><td><span>512Gbit 1Tbit</span></td><td><span>Toggle5.0 (2400MT/s)</span></td><td><span>-</span></td></tr><tr><td><span>XL-FLASH G1</span></td><td><span>LLF G1</span></td><td><span>2020</span></td><td><span>SLC</span></td><td><span>96</span></td><td><span>128Gbit</span></td><td><span>Toggle4.0 (1200MT/s)</span></td><td><span>FSN9 128G</span></td></tr><tr><td><span>XL-FLASH G2</span></td><td><span>LLF G2</span></td><td><span>2023</span></td><td><span>MLC</span></td><td><span>112</span></td><td><span>256Gbit</span></td><td><span>Toggle4.0 (1600MT/s)</span></td><td><span>-</span></td></tr></tbody></table></figure><p><strong><span>SKhynix海力士存储3D NAND颗粒资料</span></strong></p><figure class='table-figure'><table><thead><tr><th><span>名称</span></th><th><span>代号</span></th><th><span>类型</span></th><th><span>层数</span></th><th><span>Die容量</span></th><th><span>架构</span></th><th><span>接口</span></th><th><span>Die标识</span></th></tr></thead><tbody><tr><td><span>HYV2</span></td><td><span>3D V2</span></td><td><span>MLC</span></td><td><span>36</span></td><td><span>128Gbit</span></td><td><span>SP-BiCS</span></td><td><span>Toggle2.0(400MT/s)</span></td><td><span>H27DGS8</span></td></tr><tr><td><span>HYV3</span></td><td><span>3D V3</span></td><td><span>MLC</span></td><td><span>48</span></td><td><span>64Gbit</span></td><td><span>DP-BiCS G1</span></td><td><span>Toggle2.0(400MT/s)</span></td><td><span>-</span></td></tr><tr><td><span>HYV3</span></td><td><span>3D V3</span></td><td><span>TLC</span></td><td><span>48</span></td><td><span>128Gbit 256Gbit</span></td><td><span>DP-BiCS G1</span></td><td><span>Toggle2.0(400MT/s)</span></td><td><span>H27DGLG H27EGLM</span></td></tr><tr><td><span>HYV4</span></td><td><span>3D V4</span></td><td><span>MLC</span></td><td><span>76</span></td><td><span>256Gbit</span></td><td><span>DP-BiCS G2</span></td><td><span>Toggle2.0(800MT/s)</span></td><td><span>H25EMB0</span></td></tr><tr><td><span>HYV4</span></td><td><span>3D V4</span></td><td><span>TLC</span></td><td><span>72</span></td><td><span>256Gbit 512Gbit</span></td><td><span>DP-BiCS G2</span></td><td><span>Toggle2.0(800MT/s)</span></td><td><span>H27EGLM_72L H25FT4MA0</span></td></tr><tr><td><span>HYV5</span></td><td><span>4D V5</span></td><td><span>TLC</span></td><td><span>96</span></td><td><span>512Gbit</span></td><td><span>CTF 4D PuC G1</span></td><td><span>Toggle3.0(1200MT/s)</span></td><td><span>H25FT4MM1</span></td></tr><tr><td><span>HYV5</span></td><td><span>4D V5</span></td><td><span>QLC</span></td><td><span>96</span></td><td><span>1Tbit</span></td><td><span>CTF 4D PuC G1</span></td><td><span>Toggle3.0(800MT/s)</span></td><td><span>H25GQM0</span></td></tr><tr><td><span>HYV6</span></td><td><span>4D V6</span></td><td><span>TLC</span></td><td><span>128</span></td><td><span>512Gbit 1Tbit</span></td><td><span>CTF 4D PuC G2</span></td><td><span>Toggle4.0(1400MT/s)</span></td><td><span>H25FTB0 H25GTM0</span></td></tr><tr><td><span>HYV7</span></td><td><span>4D V7</span></td><td><span>TLC</span></td><td><span>176</span></td><td><span>512Gbit</span></td><td><span>CTF 4D PuC G3</span></td><td><span>Toggle4.0(1600MT/s)</span></td><td><span>H25FTC0</span></td></tr><tr><td><span>HYV7</span></td><td><span>4D V7</span></td><td><span>QLC</span></td><td><span>176</span></td><td><span>1Tbit</span></td><td><span>CTF 4D PuC G3</span></td><td><span>Toggle4.0(1600MT/s)</span></td><td><span>H25GQA0</span></td></tr><tr><td><span>HYV8</span></td><td><span>4D V8</span></td><td><span>TLC</span></td><td><span>238</span></td><td><span>512Gbit 1Tbit</span></td><td><span>CTF 4D PuC G3</span></td><td><span>Toggle5.0(2400MT/s)</span></td><td><span>H25FTD0</span></td></tr><tr><td><span>HYV8</span></td><td><span>4D V8</span></td><td><span>QLC</span></td><td><span>238</span></td><td><span>1Tbit</span></td><td><span>CTF 4D PuC G3</span></td><td><span>Toggle5.0(2400MT/s)</span></td><td><span>-</span></td></tr></tbody></table></figure><p><strong><span>Micron美光存储3D NAND颗粒资料</span></strong></p><figure class='table-figure'><table><thead><tr><th><span>名称</span></th><th><span>代号</span></th><th><span>类型</span></th><th><span>层数</span></th><th><span>Die容量</span></th><th><span>架构</span></th><th><span>接口</span></th><th><span>Die标识</span></th></tr></thead><tbody><tr><td><span>G1(IMFT)</span></td><td><span>100s</span></td><td><span>MLC</span></td><td><span>32</span></td><td><span>64Gbit</span></td><td><span>FG CuA G1</span></td><td><span>ONFI4.0(667MT/s)</span></td><td><span>L04A</span></td></tr><tr><td><span>G1(IMFT)</span></td><td><span>100s</span></td><td><span>MLC</span></td><td><span>32</span></td><td><span>128Gbit</span></td><td><span>FG CuA G1</span></td><td><span>ONFI4.0(667MT/s)</span></td><td><span>L05B</span></td></tr><tr><td><span>G1(IMFT)</span></td><td><span>100s</span></td><td><span>pMLC</span></td><td><span>32</span></td><td><span>256Gbit</span></td><td><span>FG CuA G1</span></td><td><span>ONFI4.0(667MT/s)</span></td><td><span>L06B</span></td></tr><tr><td><span>G1(IMFT)</span></td><td><span>100s</span></td><td><span>TLC</span></td><td><span>32</span></td><td><span>128Gbit</span></td><td><span>FG CuA G1</span></td><td><span>ONFI4.0(667MT/s)</span></td><td><span>B05A</span></td></tr><tr><td><span>G1(IMFT)</span></td><td><span>100s</span></td><td><span>TLC</span></td><td><span>32</span></td><td><span>384Gbit</span></td><td><span>FG CuA G1</span></td><td><span>ONFI4.0(667MT/s)</span></td><td><span>B0KB</span></td></tr><tr><td><span>G2(IMFT)</span></td><td><span>110s</span></td><td><span>TLC</span></td><td><span>64</span></td><td><span>256Gbit</span></td><td><span>FG CuA G2</span></td><td><span>ONFI4.0(800MT/s)</span></td><td><span>B16A/B16C</span></td></tr><tr><td><span>G2(IMFT)</span></td><td><span>110s</span></td><td><span>TLC</span></td><td><span>64</span></td><td><span>512Gbit</span></td><td><span>FG CuA G2</span></td><td><span>ONFI4.0(800MT/s)</span></td><td><span>B17A</span></td></tr><tr><td><span>G2(IMFT)</span></td><td><span>110s</span></td><td><span>pSLC</span></td><td><span>64</span></td><td><span>256Gbit</span></td><td><span>FG CuA G2</span></td><td><span>ONFI4.0</span></td><td><span>M16A (SpecTek)</span></td></tr><tr><td><span>G2(IMFT)</span></td><td><span>110s</span></td><td><span>QLC</span></td><td><span>64</span></td><td><span>1Tbit</span></td><td><span>FG CuA G2</span></td><td><span>ONFI4.0(667MT/s)</span></td><td><span>N18A</span></td></tr><tr><td><span>G3(IMFT)</span></td><td><span>120s</span></td><td><span>TLC</span></td><td><span>96</span></td><td><span>512Gbit</span></td><td><span>FG CuA G3</span></td><td><span>ONFI4.1(800MT/s)</span></td><td><span>B27A</span></td></tr><tr><td><span>G3(IMFT)</span></td><td><span>120s</span></td><td><span>TLC</span></td><td><span>96</span></td><td><span>512Gbit</span></td><td><span>FG CuA G3</span></td><td><span>ONFI4.1(1200MT/s)</span></td><td><span>B27B/B27C</span></td></tr><tr><td><span>G3(IMFT)</span></td><td><span>120s</span></td><td><span>pSLC</span></td><td><span>96</span></td><td><span>256Gbit</span></td><td><span>FG CuA G3</span></td><td><span>ONFI4.1</span></td><td><span>M26A (SpecTek)</span></td></tr><tr><td><span>G3(IMFT)</span></td><td><span>120s</span></td><td><span>QLC</span></td><td><span>96</span></td><td><span>1Tbit</span></td><td><span>FG CuA G3</span></td><td><span>ONFI4.1(800MT/s)</span></td><td><span>N28A</span></td></tr><tr><td><span>G4(CT transition)</span></td><td><span>130s</span></td><td><span>TLC</span></td><td><span>128</span></td><td><span>256Gbit</span></td><td><span>RG CuA G1</span></td><td><span>ONFI4.1(1200MT/s)</span></td><td><span>B36R</span></td></tr><tr><td><span>G4(CT transition)</span></td><td><span>130s</span></td><td><span>TLC</span></td><td><span>128</span></td><td><span>512Gbit</span></td><td><span>RG CuA G1</span></td><td><span>ONFI4.1(1200MT/s)</span></td><td><span>B37R</span></td></tr><tr><td><span>G5</span></td><td><span>140s</span></td><td><span>TLC</span></td><td><span>176</span></td><td><span>512Gbit</span></td><td><span>RG CuA G2</span></td><td><span>ONFI4.2(1600MT/s)</span></td><td><span>B37R</span></td></tr><tr><td><span>G5</span></td><td><span>140s</span></td><td><span>QLC</span></td><td><span>176</span></td><td><span>1Tbit</span></td><td><span>RG CuA G2</span></td><td><span>ONFI4.2(1600MT/s)</span></td><td><span>N48R</span></td></tr><tr><td><span>G6</span></td><td><span>150s</span></td><td><span>TLC</span></td><td><span>232</span></td><td><span>512Gbit</span></td><td><span>RG CuA G3</span></td><td><span>ONFI5.0(2400MT/s)</span></td><td><span>B57R/B57T</span></td></tr><tr><td><span>G6</span></td><td><span>150s</span></td><td><span>TLC</span></td><td><span>232</span></td><td><span>1Tbit</span></td><td><span>RG CuA G3</span></td><td><span>ONFI5.0(2400MT/s)</span></td><td><span>B58R</span></td></tr><tr><td><span>G6</span></td><td><span>150s</span></td><td><span>QLC</span></td><td><span>232</span></td><td><span>1Tbit</span></td><td><span>RG CuA G3</span></td><td><span>ONFI5.0</span></td><td><span>N58R</span></td></tr></tbody></table></figure><p><strong><span>Intel英特尔存储3D NAND颗粒资料</span></strong></p><figure class='table-figure'><table><thead><tr><th><span>名称</span></th><th><span>代号</span></th><th><span>类型</span></th><th><span>层数</span></th><th><span>Die容量</span></th><th><span>架构</span></th><th><span>接口</span></th><th><span>Die标识</span></th></tr></thead><tbody><tr><td><span>G1(IMFT)</span></td><td><span>3D1</span></td><td><span>pMLC</span></td><td><span>32</span></td><td><span>256Gbit</span></td><td><span>FG CuA G1</span></td><td><span>ONFI4.0 (667MT/s)</span></td><td><span>L06B</span></td></tr><tr><td><span>G1(IMFT)</span></td><td><span>3D1</span></td><td><span>TLC</span></td><td><span>32</span></td><td><span>384Gbit</span></td><td><span>FG CuA G1</span></td><td><span>ONFI4.0 (667MT/s)</span></td><td><span>B0KB</span></td></tr><tr><td><span>G2(IMFT)</span></td><td><span>3D2</span></td><td><span>TLC</span></td><td><span>64</span></td><td><span>256Gbit</span></td><td><span>FG CuA G2</span></td><td><span>ONFI4.0 (800MT/s)</span></td><td><span>B16A/B16C</span></td></tr><tr><td><span>G2(IMFT)</span></td><td><span>3D2</span></td><td><span>TLC</span></td><td><span>64</span></td><td><span>512Gbit</span></td><td><span>FG CuA G2</span></td><td><span>ONFI4.0 (800MT/s)</span></td><td><span>B17A</span></td></tr><tr><td><span>G2(IMFT)</span></td><td><span>3D2</span></td><td><span>QLC</span></td><td><span>64</span></td><td><span>1Tbit</span></td><td><span>FG CuA G2</span></td><td><span>ONFI4.0 (667MT/s)</span></td><td><span>N18A</span></td></tr><tr><td><span>G3(IMFT)</span></td><td><span>3D3</span></td><td><span>TLC</span></td><td><span>96</span></td><td><span>512Gbit</span></td><td><span>FG CuA G3</span></td><td><span>ONFI4.1 (800MT/s)</span></td><td><span>B27A</span></td></tr><tr><td><span>G3(IMFT)</span></td><td><span>3D3</span></td><td><span>QLC</span></td><td><span>96</span></td><td><span>1Tbit</span></td><td><span>FG CuA G3</span></td><td><span>ONFI4.1 (800MT/s)</span></td><td><span>N28A</span></td></tr><tr><td><span>G4(Intel)</span></td><td><span>3D4</span></td><td><span>QLC&amp;pTlC</span></td><td><span>144</span></td><td><span>1Tbit</span></td><td><span>FG CuA G4</span></td><td><span>ONFI4.1 (1200MT/s)</span></td><td><span>N38A/N38BS</span></td></tr><tr><td><span>G4(Solidigm)</span></td><td><span>3D4</span></td><td><span>QLC&amp;pTLC</span></td><td><span>144</span></td><td><span>1Tbit</span></td><td><span>FG CuA G4</span></td><td><span>ONFI4.1 (1200MT/s)</span></td><td><span>Q4128A/Q4128B</span></td></tr><tr><td><span>G5</span></td><td><span>3D5</span></td><td><span>QLC&amp;pTLC</span></td><td><span>192</span></td><td><span>1.33Tbit</span></td><td><span>FG CuA G5</span></td><td><span>ONFI4.2 (1600MT/s)</span></td><td><span>Q5171A</span></td></tr></tbody></table></figure><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><h1 id='致钛-sc001-active-掉盘修复指南mas0902a-b2c-开卡教程）'><span>致钛 SC001 Active 掉盘修复指南（MAS0902A-B2C 开卡教程）</span></h1><p><span>最近在使用某品牌的 RTL9201R 主控透明硬盘盒时，我的 512GB 致钛 SC001 固态硬盘出现了掉盘问题。这款硬盘盒虽然价格便宜，但供电设计存在缺陷，在接入 USB 3.0 或 USB 2.0 接口并进行大文件读写时，容易导致硬盘掉盘。具体表现为硬盘突然消失，有时重新插拔或更换电脑也无法识别，而使用其他主控的硬盘盒则能正常工作。</span></p><p><span>在一次写入约 90GB 电视剧文件时，硬盘再次掉盘，且更换其他桥接芯片的硬盘盒也无法识别。由于硬盘已过三年质保期，我决定尝试使用网上流传的开卡工具自行修复。</span></p><h2 id='准备工作'><span>准备工作</span></h2><ol start='' ><li><p><strong><span>开卡工具</span></strong><span>：我测试了两个版本：</span></p><ul><li><p><code>A2-YMTC-0x39-A0.09.017c-SN08413-V2</code><span>：多次尝试均失败</span></p></li><li><p><code>A2-YMTC-0x39-A.0.09.019(RC16)-H200807a-V2</code><span>：成功完成开卡</span></p></li></ul><p><span>建议将工具解压至不含空格和中文字符的目录。</span></p></li><li><p><strong><span>转接板推荐</span></strong><span>：JMS578、JMS576 或 ASM225CM 桥接芯片的转接板（我使用的是 JMS578和ASM225CM ）</span></p></li></ol><h2 id='操作步骤'><span>操作步骤</span></h2><p><strong><span>1. 拆卸硬盘</span></strong></p><p><strong><span>注意</span></strong><span>：拆卸会使易碎贴损坏，导致失去官方保修资格。</span></p><ul><li><p><span>拧下侧面易碎贴下的螺丝</span></p></li><li><p><img src="./img/img_20251024195415.jpg" alt="img_20251024195415" style="zoom: 25%;" /></p></li><li><p><span>使用尖头工具（如螺丝刀）从 SATA 接口旁轻轻撬开电路板</span></p></li><li><p><img src="./img/c3b9b0cdd868c43e88734050ee4a3b8.jpg" alt="c3b9b0cdd868c43e88734050ee4a3b8" style="zoom:25%;" /></p></li><li><p><span>操作时需控制力度，避免损坏电子元件</span></p></li></ul><h3 id='2-进入开卡模式'><span>2. 进入开卡模式</span></h3><ul><li><p><span>找到电路板上的短接点</span></p></li><li><p><span>使用金属物体（如镊子）短接该点</span></p></li><li><p><img src="./img/c858f8de7d1a861d21cb557a40733e9.jpg" alt="c858f8de7d1a861d21cb557a40733e9" style="zoom:25%;" /></p></li><li><p><span>保持短接状态，将硬盘通过转接板连接至电脑</span></p></li><li><p><span>连接成功后移除短接物</span></p></li></ul><p><strong><span>3. 软件设置</span></strong></p><p><strong><span>主界面操作</span></strong><span>：</span></p><ul><li><p><span>以管理员身份运行 </span><code>MXMPSORT_MAS090x_V2.exe</code></p></li><li><p><span>点击左下角 </span><code>Refresh</code><span> 按钮</span></p></li><li><p><img src="./img/sshot-2025-10-24-[18-44-38].png" alt="sshot-2025-10-24-[18-44-38]" style="zoom:80%;" /></p></li><li><p><span>设备列表中出现硬盘后，点击 </span><code>Auto Detect</code><span> 自动识别闪存型号</span></p></li><li><p><span>确认弹出的识别结果后关闭窗口</span></p></li><li><p><img src="./img/sshot-2025-10-24-[18-44-59].png" alt="sshot-2025-10-24-[18-44-59]" style="zoom:80%;" /></p></li></ul><p><strong><span>Test Items 选项卡</span></strong><span>：</span></p><p><img src="./img/sshot-2025-10-24-[18-45-32].png" referrerpolicy="no-referrer" alt="sshot-2025-10-24-[18-45-32]"></p><ul><li><p><span>Tool Type 选择 </span><code>MPT</code></p></li><li><p><span>取消勾选 </span><code>Check GPIO</code></p></li><li><p><span>由于 SC001 是无缓存设计，不勾选 </span><code>Dram Test</code></p></li><li><p><span>Preformat Mode 选择 </span><code>Inherit Sorting BB</code></p></li><li><p><span>其他选项保持默认</span></p></li></ul><p><strong><span>Device Setting 选项卡</span></strong><span>：</span></p><p><img src="./img/sshot-2025-10-24-[18-47-26].png" referrerpolicy="no-referrer" alt="sshot-2025-10-24-[18-47-26]"></p><ul><li><p><span>在 Identify Info 部分填写：</span></p><ul><li><p><span>Model Number(40)：</span><code>ZHITAI SC001 Active 512GB SSD</code></p></li><li><p><span>Firmware Version：如 </span><code>ZT013200</code></p></li><li><p><span>Serial Number：输入硬盘外壳上的序列号</span></p></li><li><p><span>勾选 </span><code>Don&#39;t Auto Increase</code></p></li><li><p><span>根据实际情况设置 Length、Start SN 和 SN Mask</span></p></li></ul></li></ul><p><strong><span>其他选项卡</span></strong><span>：</span></p><ul><li><p><span>SYS FW Setting：保持默认</span></p></li><li><p><span>SORT Setting：如不进行 RDT 测试，无需修改</span></p></li></ul><p><strong><span>4. 读取出厂信息</span></strong></p><ul><li><p><span>进入 Port SortResult 选项卡</span></p></li><li><p><span>点击 </span><code>Scan Sort Result</code><span> 读取出厂 RDT 数据</span></p></li><li><p><img src="./img/sshot-2025-10-24-[18-49-37].png" referrerpolicy="no-referrer" alt="sshot-2025-10-24-[18-49-37]"></p></li><li><p><span>可点击 </span><code>Save All Disk Result</code><span> 保存结果</span></p></li><li><p><span>通过 Result 按钮查看详细 RDT 信息</span></p></li></ul><p><strong><span>5. 开始开卡</span></strong></p><ul><li><p><span>返回 Flash Setting 界面</span></p></li><li><p><span>点击左下角 </span><code>START</code><span> 开始开卡</span></p></li><li><p><strong><span>注意</span></strong><span>：开始后无法中断操作</span></p></li></ul><p><img src="./img/sshot-2025-10-24-[18-53-03].png" alt="sshot-2025-10-24-[18-53-03]" style="zoom: 80%;" /></p><p><span>开卡过程约需 1 分钟，成功后会有提示。断开硬盘连接后重新接入电脑，使用 Crystal Disk Info 等工具即可看到硬盘已恢复正常状态。</span></p><p><img src="./img/sshot-2025-10-24-[18-55-12].png" alt="sshot-2025-10-24-[18-55-12]" style="zoom:80%;" /></p><h2 id='注意事项'><span>注意事项</span></h2><ul><li><p><span>操作前请备份重要数据，开卡过程会清除所有数据</span></p></li><li><p><span>确保供电稳定，避免在开卡过程中断电</span></p></li><li><p><span>如遇问题可尝试更换开卡工具版本或转接板</span></p></li></ul><p><strong><span>免责声明</span></strong><span>：本教程仅提供技术参考，操作有风险，请谨慎进行。如硬盘仍在保修期内，建议优先联系官方售后。</span></p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><h1 id='sm2263en开卡'><span>SM2263EN开卡</span></h1><p><span>慧荣SM2263EN（SM2263AA）开卡，以忆联（Union Memory）AM620 128g版本为例，此版本采用SM2263EN+BiCS4 TLC+Nanya 128M DDR3 DRAM方案。</span></p><p><strong><span>注：开卡推荐使用JMicron JMS583转接板/硬盘盒，以USB接口形式进行。</span></strong></p><h2 id='1短接插电上机'><span>1.短接，插电上机</span></h2><p><span>使用金属物体短接（连接）硬盘尾端的端接孔（一个圆孔，另一个是方孔），这里我使用一小段网线铜芯。确认短接好，将转接板连接到电脑后，即可将金属导体移除。</span></p><p><img src="./img/IMG_20250322_184930.jpg" referrerpolicy="no-referrer" alt="IMG_20250322_184930"></p><p><span>进入Windows的磁盘管理，会弹出窗口初始化磁盘，点击取消 。可以看到有个1GB的未初始化分区。</span></p><p><img src="./img/image-20250322182835058.png" referrerpolicy="no-referrer" alt="image-20250322182835058"></p><p><span>使用Crystal Disk Info则可以看到一块显示未知状态的SM2263磁盘。</span></p><p><img src=".\img\image-20250322182737819.png" referrerpolicy="no-referrer" alt="image-20250322182737819"></p><p><span>以上操作如果无误，则说明成功进入了主控的ROM模式。</span></p><h2 id='2量产'><span>2.量产</span></h2><p><span>解压量产工具至某个特定目录。</span></p><p><span>首先进入</span><code>FAE_Authorization</code><span>文件夹内，运行</span><code>PubKeyInstaller.exe</code><span>安装证书。安装完成后 ，运行</span><code>MPTool</code><span>文件夹下的</span><code>TestAP_SM2263EN_BiCS_Security.exe</code><span>，打开量产工具。主界面如下：</span></p><p><img src="./img/image-20250322183024929.png" referrerpolicy="no-referrer" alt="image-20250322183024929"></p><p>&nbsp;</p><p><img src="./img/image-20250322183443198.png" referrerpolicy="no-referrer" alt="image-20250322183443198"></p><p>&nbsp;</p><p><img src="./img/image-20250322183512411.png" referrerpolicy="no-referrer" alt="image-20250322183512411"></p><p>&nbsp;</p><p><img src="./img/image-20250322183538223.png" referrerpolicy="no-referrer" alt="image-20250322183538223"></p><p>&nbsp;</p><p>&nbsp;</p><p><img src="./img/image-20250322183551383.png" referrerpolicy="no-referrer" alt="image-20250322183551383"></p><p>&nbsp;</p><p>&nbsp;</p><p><img src="./img/image-20250322183039094.png" referrerpolicy="no-referrer" alt="99079"></p><p>&nbsp;</p><p><img src="./img/image-20250322183626798.png" referrerpolicy="no-referrer" alt="image-20250322183626798"></p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div></div>
+
+<script>(function(){function e(e,n,i){document.addEventListener(e,function(e){if(!e.defaultPrevented)for(var t=e.target;t&&t!=this;t=t.parentNode)if(t.matches(n)){!1===i.call(t,e)&&(e.preventDefault(),e.stopPropagation());break}},!1)}var t=document.body.parentElement,i=[],r=null,o=document.body.classList.contains("typora-export-collapse-outline");function a(){return t.scrollTop}e("click",".outline-expander",function(e){var t=this.closest(".outline-item-wrapper").classList;return t.contains("outline-item-open")?t.remove("outline-item-open"):t.add("outline-item-open"),u(),!1}),e("click",".outline-item",function(e){var t=this.querySelector(".outline-label");location.hash="#"+t.getAttribute("href"),o&&((t=this.closest(".outline-item-wrapper").classList).contains("outline-item-open")||t.add("outline-item-open"),d(),t.add("outline-item-active"))});function s(){var e=a();r=null;for(var t=0;t<i.length&&i[t][1]-e<60;t++)r=i[t]}function n(){c=setTimeout(function(){var n;i=[],n=a(),document.querySelector("#write").querySelectorAll("h1, h2, h3, h4, h5, h6").forEach(e=>{var t=e.getAttribute("id");i.push([t,n+e.getBoundingClientRect().y])}),s(),u()},300)}var l,c,d=function(){document.querySelectorAll(".outline-item-active").forEach(e=>e.classList.remove("outline-item-active")),document.querySelectorAll(".outline-item-single.outline-item-open").forEach(e=>e.classList.remove("outline-item-open"))},u=function(){if(r&&(d(),t=document.querySelector('.outline-label[href="#'+(CSS.escape?CSS.escape(r[0]):r[0])+'"]')))if(o){var e=t.closest(".outline-item-open>ul>.outline-item-wrapper");if(e)e.classList.add("outline-item-active");else{for(var t,n=(t=t.closest(".outline-item-wrapper")).parentElement.closest(".outline-item-wrapper");n;)n=(t=n).parentElement.closest(".outline-item-wrapper");t.classList.add("outline-item-active")}}else t.closest(".outline-item-wrapper").classList.add("outline-item-active")};window.addEventListener("scroll",function(e){l&&clearTimeout(l),l=setTimeout(function(){s(),u()},300)});window.addEventListener("resize",function(e){c&&clearTimeout(c),n()}),n()})();</script></body>
+</html>

@@ -83,6 +83,30 @@ USER_BASE = "C:\ProgramData\miniconda3\Scripts"
 pip install urllib3==1.25.11
 ```
 
+
+
+
+
+# Ubuntu上Anaconda手动配置
+
+接下来我们开始手动配置环境，在终端中键入sudo gedit ~/.bashrc，输入密码后就进入了.bashrc文件里，到文件最下方加入：
+
+export PATH="/home/zy190/anaconda3/bin:$PATH"
+
+然后Ctrl+S保存文件，这样就配置好了。为了验证，键入source ~/.bashrc激活环境，再执行
+
+conda list，就有了安装的具体内容。
+
+最后检查一下安装是否真的成功，键入conda --version，如果下方出现了conda的版本号，说明配置成功
+
+
+
+
+
+
+
+
+
 # requests 代理设置
 
 ```python
@@ -120,6 +144,94 @@ result0=requests.get(url=url,proxies=proxies,verify=False)
    [Y] 是(Y)  [A] 全是(A)  [N] 否(N)  [L] 全否(L)  [S] 暂停(S)  [?] 帮助 (默认值为“N”): A
    PS C:\WINDOWS\system32>
    ```
+
+
+
+
+
+
+
+# 解决Anaconda创建环境时报错：PackagesNotFoundError
+
+https://blog.csdn.net/birbcoding/article/details/140438063
+
+报错内容
+
+创建环境时出现以下报错：
+
+```shell
+Channels:
+ - defaults
+ - conda-forge
+Platform: linux-64
+Collecting package metadata (repodata.json): done
+Solving environment: failed
+
+PackagesNotFoundError: The following packages are not available from current channels:
+
+  - python-3.8
+
+Current channels:
+
+  - defaults
+  - https://conda.anaconda.org/conda-forge
+
+To search for alternate channels that may provide the conda package you're
+looking for, navigate to
+
+    https://anaconda.org
+
+and use the search bar at the top of the page.
+12345678910111213141516171819202122
+```
+
+解决方法
+
+为当前用户重新配置`conda-forge`渠道
+
+```shell
+conda config --add channels conda-forge
+conda config --set channel_priority strict
+12
+```
+
+重新创建环境，如：
+
+```shell
+conda create -n open-mmlab python=3.8 -y
+1
+```
+
+`conda config --add channels conda-forge` 和 `conda config --set channel_priority strict` 这两个命令能够解决问题的原理主要涉及到`conda`渠道配置和优先级管理。
+
+原理解析
+
+1. **添加`conda-forge`渠道**：
+
+   ```bash
+   conda config --add channels conda-forge
+   1
+   ```
+
+   这条命令将`conda-forge`渠道添加到`conda`的[配置文件](https://so.csdn.net/so/search?q=配置文件&spm=1001.2101.3001.7020)中。`conda-forge`是一个社区驱动的渠道，提供了大量的软件包，尤其是在`defaults`渠道中找不到的[软件包](https://so.csdn.net/so/search?q=软件包&spm=1001.2101.3001.7020)。通过添加这个渠道，可以扩大可用软件包的范围。
+
+2. **设置渠道优先级**：
+
+   ```bash
+   conda config --set channel_priority strict
+   1
+   ```
+
+   这条命令设置`conda`使用严格的渠道优先级。具体来说，这意味着`conda`将严格按照配置文件中渠道的顺序来搜索和安装软件包。优先级高的渠道中的包会优先被选择，而低优先级的渠道中的包只有在高优先级渠道中找不到时才会被考虑。
+
+为什么这些设置能够解决问题
+
+1. **渠道覆盖范围**：
+   在默认情况下，`conda`配置的渠道可能没有`conda-forge`，或者`conda-forge`的优先级不够高，导致在默认渠道（如`defaults`）中找不到特定版本的软件包（例如`python-3.8`）。通过添加`conda-forge`渠道并设置其优先级，可以确保在更广泛的渠道中搜索软件包，提高找到所需软件包的几率。
+2. **严格优先级**：
+   设置严格的渠道优先级确保了`conda`会首先在高优先级的渠道中搜索所需软件包。如果在高优先级渠道中找不到，才会去低优先级渠道中查找。这种方式可以避免渠道间的冲突，确保选择的软件包版本是最合适的。
+
+通过以上配置，你确保了在安装软件包时会首先查找`conda-forge`渠道，这解决了原来在默认渠道中找不到`python-3.8`的问题，从而成功创建了所需的环境。
 
 
 

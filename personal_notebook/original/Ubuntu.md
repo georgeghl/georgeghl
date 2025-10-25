@@ -280,6 +280,24 @@ enabled = true
 port = ssh
 filter = sshd
 logpath = /var/log/auth.log
+findtime = 86400
+maxretry = 24
+bantime = 86400
+
+bantime.increment = true
+bantime.factor = 1
+bantime.maxtime = 7776000
+bantime.multipliers = 1 3 5 15 30 90
+```
+
+
+
+```sh
+[sshd]
+enabled = true
+port = ssh
+filter = sshd
+logpath = /var/log/auth.log
 findtime = 86400      ; 检测周期设置为24小时
 maxretry = 24         ; 首次封禁之前允许的最大尝试次数
 bantime = 86400       ; 初始封禁时间设置为24小时

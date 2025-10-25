@@ -383,3 +383,48 @@ Sphinx 为我们提供了好多可选的主题，在 [Sphinx Themes](https://lin
 噔噔！打开浏览器，完美～
 
 ![img](./img/v2-39b9b17ca0f291c586c9b3bed55a06b9_1440w.jpg)
+
+
+
+
+
+# [Navicat连接postgresql时出现‘datlastsysoid does not exist‘报错的问题](https://www.cnblogs.com/skyvip/p/18141140)
+
+问题分析
+`Postgres 15` 从pg_database表中删除了 datlastsysoid 字段引发此错误。
+决绝方案
+
+1. 升级navicat
+2. 降级pgsql
+3. 修改dll
+
+实操演示
+
+1 打开 `Navicat` 安装目录，找到libcc.dll文件
+
+2 备份libcc.dll文件，将其复制并粘贴为“libcc.dll.bak”或任何其他名称
+
+3 在任何十六进制编辑器中打开此文件，如果需要，您可以使用在线工具，例如 [https://hexed.it](https://hexed.it/)。这里使用vscode，vscode有个插件`Hex Editor`,安装插件`Hex Editor`。也可以用WinHex。
+
+4 使用vscode右键打开`Navicat`安装目录，找到libcc.dll，点击仍然打开，然后选择十六进制编辑器打开，按住`ctrl+F`搜索在文件中搜索“SELECT DISTINCT datlastsysoid”
+
+5 将“SELECT DISTINCT datlastsysoid”，替换为“SELECT DISTINCT dattablespace”，替换完成按`ctrl+S`保存
+
+6 重启navicat，可以发现，无论老和新版本的pgsql，都可以正常访问了
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

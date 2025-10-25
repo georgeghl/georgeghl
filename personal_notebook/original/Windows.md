@@ -16,6 +16,63 @@
 
 
 
+# 最新win11 24H2 DEV Beta禁用了BypassNRO跳过联网脚本,解决办法
+
+```reg
+reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\OOBE /v BypassNRO /t REG_DWORD /d 1 /f shutdown /r /t 0
+```
+
+## A
+
+https://www.chiphell.com/thread-2684577-1-1.html
+
+ 微软在工作日的最后一天发布了这个影响有点大的更新：删除了对BypassNRO.cmd脚本的支持，在之前可以用OOBE\BypassNRO.cmd来跳过联网启动本地账户，但是现在却不行了，估计几个月后正式版都不能跳过了，现在新的办法
+
+方法一  1按shift+F10打开命令提示符  2. 输入start ms-cxh:localonly  在接下来的窗口输入用户名和密码
+
+方法二  1将下面两行另存为 xxx.cmd脚本，保存到硬盘或U盘
+        reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\OOBE /v BypassNRO /t REG_DWORD /d 1 /f
+        shutdown /r /t 0
+        
+         2按shift+F10打开命令提示符，运行硬盘或U盘上的脚本
+
+## B
+
+https://www.landiannews.com/archives/108570.html
+
+1. 在 OOBE 登录微软账户界面按 Shift+F10 打开命令提示符 (CMD)
+2. 在命令提示符中输入命令 regedit 按回车打开注册表编辑器
+3. 在注册表编辑器中转到如下路径：
+
+```
+HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\OOBE
+```
+
+4. 在 OOBE 文件夹右侧空白处点击鼠标右键选择新建 DWORD32 位值并将其命名为
+
+```
+bypassnro
+```
+
+5. 双击刚刚新建的 bypassnro 将其键值由默认的 0 修改为 1 保存
+6. 在命令提示符窗口输入命令按回车重启系统即可：
+
+```
+shutdown /r
+```
+
+如果你更喜欢通过输入命令修改的话，也可以在命令提示符中直接输入以下注册表修改命令添加，这样就不需要手动打开注册表挨个展开目录添加键值并修改其数据。
+
+```
+reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\OOBE" /v bypassnro /t REG_DWORD /d 1 /f
+```
+
+修改后仍然需要手动输入重启系统命令，重启后系统就有了 bypassnro 设置因此不会再要求用户必须登录微软账户，这时候可以创建本地账户和密码并设置 3 个用于找回密码的安全问题。
+
+
+
+
+
 
 
 # Windows 开启/关闭测试模式
